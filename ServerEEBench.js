@@ -12,7 +12,7 @@
 */
 
     //Importing the core modules
-    var fs = require('fs');
+//    var fs = require('fs');
 //    var util = require('util');
     var path = require('path');
 
@@ -36,7 +36,7 @@
 	
  var SerialPort = require('serialport').SerialPort;
  var serialPort;	
- var devMan ="";
+ var devMan ="Simulation";
  // port.path manufacturer, pnpId locationId, friendlyName, vendorId, productId	
     SerialPort.list().then(
  //    console.log	   
@@ -44,21 +44,23 @@
            console.log("path: " + port.path);
            console.log("manufacturer: " + port.manufacturer);
            // console.log(port.manufacturer.includes('arduino'));
-           if (port.manufacturer.includes('arduino')) {
+           var manu = port.manufacturer || "";
+		   manu = manu.toLowerCase();
+           if (manu.includes('arduino')) {
 		     devMan = "Arduino";
 			 serialPort = new SerialPort({  //"\\.\COM22"
                 path: port.path,
 	            baudRate: 115200      //  Baud rate befor 19200, 52 us per bit
              });
            }			 
-           if (port.manufacturer.includes('SEGGER')) { // Infineon XMC4700
+           if (manu.includes('segger')) { // Infineon XMC4700
 		     devMan = "XMC4700";                
 			 serialPort = new SerialPort({  //"\\.\COM22"
                 path: port.path,
 	            baudRate: 115200      //  Baud rate befor 19200, 52 us per bit
              });
-           }			 
-           if (port.manufacturer.includes('FTDI')) {
+           };			 
+           if (manu.includes('ftdi') || manu.includes('digilent')) {
 		     devMan = "FPGA FTDI";
 			 serialPort = new SerialPort({  //"\\.\COM22"
                 path: port.path,
@@ -97,11 +99,166 @@ function hexToDec(x) {
    return dec;
 }
 
+// Simulator ==================================================================
+function decToHex(x) {
+   var hexN = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+   var hex = "";
+   var x1 = x;
+   for (var i = 0; i < 4; i++) {    //  4 hex digits
+      hex = hexN[x1 % 16] + hex;
+	  x1 = Math.trunc(x1 / 16); 
+   }
+   return hex;
+}
+
+ var awg1Type = "S";    // Current Waveform1 type S (sine),T (rest)
+ var blockSize = 512;
+ var dacTimeBase = 1E-6;      // DAC time base 
+ var absTimeBase = 1E-6;     // Absolute ADC time base 
+ var ratio = Math.round(absTimeBase/dacTimeBase); // 
+ var currTimeBase = 1E-6;    // Current time base modified with averaging O cmd
+ var mulTime = 1;            // Multiplication of time Base (averaging case, large osc time base)
+ // AWG1 sine
+ var step = 1;               // Step waveform
+ var amplitude = 1024;       // amplitude waveform
+ var offset = 4096;          // offset
+ // AWG1 triangle
+ var startT = 0;               // Step waveform
+ var stopT = 0;               // Step waveform
+ var stepT = 0;               // Step waveform
+ var repeatT = 1;               // Step waveform
+ //
+ var oscData = [];           // sampled data
+ var dataReady = 0;          // data Ready to send?
+ var dataBufX ="";
+
+ function limitData(valX)  {
+    var limitData = Math.round(valX);
+	if (valX < 0 ) limitData = 0;
+ 	if (valX > (64 * 1024 - 1) ) limitData = 64 * 1024 - 1;
+	return limitData;
+ } 
+
+ function genSine(){
+ // Sampling time 1us, mulTime = 1, max step = 2^32,  
+	   oscData = [];
+	   console.log('genSine: ' + offset + "," + amplitude + "," + step + "," + mulTime + "," + blockSize);
+       for (var i = 0; i < blockSize; i ++) {   // only sampling
+	     for (var j = 0; j < ratio * mulTime; j ++) { // generate all points for DAC
+           var timeX = 2 * Math.PI * (i * ratio * mulTime + j) * step / 1024 / 1024 / 1024 / 4 ;
+		   oscData[i * 5] = Math.round(offset + amplitude * Math.sin(timeX)); // Osc4  
+		   oscData[i * 5] = limitData(oscData[i * 5]);
+ 	       oscData[i * 5 + 1] = Math.round(offset +  amplitude * Math.sin(8 * timeX )); // Osc3  
+		   oscData[i * 5 + 1] = limitData(oscData[i * 5 + 1]);
+ 	       oscData[i * 5 + 2] = Math.round(offset + amplitude * Math.sin(4 * timeX )); // Osc2  
+		   oscData[i * 5 + 2] = limitData(oscData[i * 5 + 2]);
+ 	       oscData[i * 5 + 3] = Math.round(offset + amplitude * Math.sin(timeX * 2)); // Osc1  
+		   oscData[i * 5 + 3] = limitData(oscData[i * 5 + 3]);
+ 	       oscData[i * 5 + 4] = Math.round(offset + amplitude * Math.sin(timeX));// AWG
+		   oscData[i * 5 + 4] = limitData(oscData[i * 5 + 4]);
+		 } 
+	   }
+	   // Set dummy index information
+	   oscData[0] = 2; oscData[1] = 2; oscData[2] = 2;oscData[3] = 2;oscData[4] = 2;
+ }
+
+ function genTri(){ // triangle
+	   oscData = [];
+	   console.log('genTriangle: ' + startT + "," + stopT + "," + stepT + "," + repeatT + "," + mulTime);
+	   var deltaX = (stopT - startT);
+	   for (var i = 0; i < blockSize; i ++) {
+	     for (var j = 0; j < mulTime * ratio; j ++) {
+	       var posY = (stepT * Math.trunc( 1/ 16  * (i * mulTime * ratio + j) / repeatT)) % (deltaX * 2); // limit to 2 * deltaX
+		   if (posY > deltaX) { posY = 2 * deltaX - posY; }           // rising or falling
+	       if ( deltaX == stepT) { // pulse
+		      posY = (Math.trunc( (i * mulTime * ratio + j) / 8 / repeatT) % 2) * deltaX; // factor 8 ??
+		   }
+		   posY = Math.round(startT + posY);
+ 	       oscData[i * 5] = 5 * posY; // Osc4  
+		   oscData[i * 5] = limitData(oscData[i * 5]);
+ 	       oscData[i * 5 + 1] = 4 * posY; // Osc3  
+		   oscData[i * 5 + 1] = limitData(oscData[i * 5 + 1]);
+ 	       oscData[i * 5 + 2] = 3 * posY; // Osc2  
+		   oscData[i * 5 + 2] = limitData(oscData[i * 5 + 2]);
+ 	       oscData[i * 5 + 3] = 2 * posY; // Osc1  
+		   oscData[i * 5 + 3] = limitData(oscData[i * 5 + 3]);
+ 	       oscData[i * 5 + 4] = posY;// AWG
+		   oscData[i * 5 + 4] = limitData(oscData[i * 5 + 4]);
+	     }
+	   }
+	   // Set dummy index information
+	   oscData[0] = 2; oscData[1] = 2; oscData[2] = 2;oscData[3] = 2;oscData[4] = 2;
+ }
+ 
+ function simX(cmdName){
+    // X Command
+	// S Command
+	if (cmdName[0]=="S") {
+	   var tT = cmdName.substring(1,9);
+	   awg1Type = "S";
+	   step = hexToDec(tT) ;        // Step
+	   tT = cmdName.substring(9,17);
+       amplitude = Math.round(hexToDec(tT)/256/256);   // amplitude 32 bit to 16
+	   tT = cmdName.substring(17,25);   
+       offset =	Math.round(hexToDec(tT)/256/256);      // offset  32 bit to 16
+	   genSine();
+	}
+	// T Command
+ 	if (cmdName[0]=="T") {
+	   awg1Type = "T";
+	   startT = Math.round(hexToDec(cmdName.substring(1,5)));
+	   stopT = Math.round(hexToDec(cmdName.substring(5,9)));
+	   stepT = Math.round(hexToDec(cmdName.substring(9,13)));
+	   repeatT = Math.round(hexToDec(cmdName.substring(13,17))) * 256 *16 +
+	             Math.round(hexToDec(cmdName.substring(17,20)));
+	   if (repeatT == 0) { repeatT = 1; }
+	   genTri();
+	}
+   // U Command      send data
+	if (cmdName[0]== "U") {
+      if (!serialPort) {
+	    console.log("Write dataBufX");
+	    dataBufX ="";
+	    // get oscData and convert to string 
+	    for (var i = 0; i < blockSize; i ++) {
+ 	      if (i == 0) dataBufX += "U"
+		  else dataBufX += "X";
+		  dataBufX += decToHex(oscData[i * 5]);
+		  dataBufX += decToHex(oscData[i * 5 + 1]);
+		  dataBufX += decToHex(oscData[i * 5 + 2]);
+		  dataBufX += decToHex(oscData[i * 5 + 3]);
+		  dataBufX += decToHex(oscData[i * 5 + 4]);
+		  dataBufX += "Y";
+	    }
+	    dataReady = 1;
+	  }	
+	}
+    // V Command
+    // O Command
+	if (cmdName[0]=="O") {
+	   console.log(cmdName);
+	   var tT =cmdName.substring(1,5);
+	   blockSize = hexToDec(tT);
+	   tT = cmdName.substring(5,9);
+	   mulTime = hexToDec(tT);
+	   if (mulTime > 1) { mulTime -= 1; }
+	   currTimeBase = absTimeBase * mulTime;
+       console.log('Sim block size: ' + blockSize + "x" + mulTime + "x"); 		   
+	   if (awg1Type == "S") {   // update signals
+	     genSine();
+	   }
+	}
+    // R Command
+    // Q Command
+}
+// End Simulator ==============================================================
+
     app.get('/', function(req,res){
-   		fs.readFile(__dirname + '/Projekte/NEEBench.html', 'binary', function(err, data) {
-               if (err) data = "No such file";
-    	       res.send(data);
-            });
+   		res.sendFile(path.join(__dirname,"/Projekte/NEEBench.html"));
+		// fs.readFile(__dirname + '/Projekte/NEEBench.html', 'binary', function(err, data) {
+        //       if (err) data = "No such file";
+    	//       res.send(data);
+        //    });
    	  // res.sendFile(path.join(__dirname + '/WebEditor/WebEditor.html'));
     });
      
@@ -121,17 +278,31 @@ function hexToDec(x) {
         	console.log('cmd: ' + cmdName);
 			if (cmdName[0] == "X"){
                dataBuf = "";
+			   socket.emit('device',{value: devMan});
 			}
     	    if (cmdName[0] == "O"){   // oscilloscope block size next 4 hex values 
                dataMax = hexToDec(cmdName.substring(1,5)); 
 			   console.log('Block size: ' + dataMax + "x" + cmdName.substring(1,5) + "x"); 		   
 			}
-    	    serialPort.write(cmdName);           // hex(cmdName)
+	        if (serialPort) {
+    	       serialPort.write(cmdName);           // hex(cmdName)
+			} else {                                // Simulation
+			   simX(cmdName);
+	           // console.log("Simulation: " + dataReady);
+			   if (dataReady == 1) {                 // send data
+	             // emit string	   
+	             console.log("SimX " + dataBufX.length/22 + "," + dataBufX.length + "," + dataBufX.substring(0,50));     // dataBufX
+		         socket.emit('newData',{value: dataBufX});
+                 dataReady = 0;
+	          }
+			}
 			// insert server action commands
 			// var data= "Test Data:" + cmdName;
     		// socket.emit('newData',{value: data });  // send data to client
         });
 
+	   
+	   if (serialPort) {
 	    serialPort.on('data',
 		  function (data) {
 		    // get buffered data and parse it to an utf-8 string
@@ -144,18 +315,23 @@ function hexToDec(x) {
 			// io.emit('emit_data', data);
 			// send only data starting  
 			if ((dataBuf.length >= 22 * dataMax ) && (con)) {   // complete set
-			 console.log(dataBuf.length/22 + "," + dataBuf.length + "," + dataBuf.substring(0,50));     // dataBuf
+			 console.log("Ser " + dataBuf.length/22 + "," + dataBuf.length + "," + dataBuf.substring(0,50));     // dataBuf
 		     socket.emit('newData',{value: dataBuf});  // send data to client
 			 dataBuf = "";
 			};
 			console.log(data1);
  		 } );
+	} else {
+           console.log("No serial Device detected! Simulation activated! ");
+    }	
  
         socket.on('disconnect', function(data){
     	    console.log('An user is disconnected');
 			con = false;
         });   
-    }); 	
+
+		
+	}); 	
      
     // Server Starting
     // Listening on port 3000

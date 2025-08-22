@@ -3,6 +3,8 @@
   Communication via serial to node.js NEEBench
   Signal generator AWG
   Oscilloscope
+  2025.03.26 with NodeEEBench_V09.zip from
+  https://personalpages.hs-kempten.de/~vollratj/GET2/EI_Projektpraktikum.html
 */
 #include <SPI.h> // Include library
 #include <Wire.h> // call library
@@ -54,11 +56,21 @@
 int bufSize = 2048 * 5;  // Number of values * 5 channels
 uint16_t bufVal[2048 * 5];  // 2048*5 memory 70%
 // lookup for DAC
+uint16_t lookup8[] = {
+  0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,
+  32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,
+  64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,
+  96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,
+  128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,
+  160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,
+  192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,
+  224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255 
+};
 // lookup for ADC
 
 
 char inChar;               // incoming serial char
-char myData[520];          // incoming string Lookup table 256 values 2 hex each
+char myData[1040];          // incoming string Lookup table 256 values 4 hex each
 int cntChar = 0;           // current string position
 
 int expChar = 0;           // number of expected characters
@@ -133,6 +145,7 @@ void setup() {
 
   // ADC PMOD AD2
   Wire.begin(); // initialization of I2C communication
+  Wire.setClock(1600000); // try (40000) 400 kHz 9.7.2025
  Init_AD7991(); // initialisation du module Pmod AD2
 
  // DAC PMOD DA2
@@ -216,8 +229,7 @@ void readAnalogX(){
   bufVal[bufIndex] = analogRead(ADC_OSC3);
   bufIndex++;
   bufVal[bufIndex] = analogRead(ADC_OSC4);
-  bufVal[bufIndex] = readADC();  // PMOD AD2
-  bufIndex++;
+  bufVal[bufIndex] = readADC();             // PMOD AD2
 
 }
 
@@ -309,8 +321,10 @@ void digWrite(uint16_t sineValue){
 int waitSend = 0;
 int awgMode = 0;
 int stepIndex = 0;
-  
+int mulTime = 1;  
+
 void loop() {
+  uint16_t sine8 = 0;
 
   // Serial Interface input
   if (Serial.available() > 0) {
@@ -329,7 +343,7 @@ void loop() {
     if (inChar == 'O') { expChar = 9; posChar = 0; } // cmd 'O' set block size
     if (inChar == 'T') { expChar = 21; posChar = 0; } // cmd 'T' triangle
     if (inChar == 'S') { expChar = 25; posChar = 0; } // cmd 'S' sine
-    if (inChar == 'R') { expChar = 256; posChar = 0; } // cmd 'R' lookup table
+    if (inChar == 'R') { expChar = 256*4 + 1; posChar = 0; } // cmd 'R' lookup table
     
     if (expChar > 0 ) {                              // gather command string
       myData[posChar] = inChar; // Add character
@@ -345,6 +359,7 @@ void loop() {
           bufSize = hexToDec(partString) * 5; //  0x0200 is 512 values * 5 channels each
           partString = myString.substring(5,9);
           timeBase = hexToDec(partString);
+          if (timeBase > 1 ) { timeBase -= 1; }
           Serial.print("Omd: "); Serial.print(bufSize); Serial.print(",");Serial.println(timeBase);
         }
         if (myData[0] == 'T') {
@@ -352,24 +367,29 @@ void loop() {
           startT = hexToDec(partString);                // start Value
           stopT = hexToDec((String)myString.substring(5,9));
           stepT = hexToDec((String)myString.substring(9,13));  
-          repeatT = hexToDec((String)myString.substring(13,17)) * 256 * 16  + hexToDec((String)myString.substring(17,20)) ;
+          repeatT = hexToDec((String)myString.substring(14,18)) * 256 * 16  + hexToDec((String)myString.substring(18,21)) ;
           if (repeatT == 0) { repeatT = 1; }
           Serial.print("Tmd: "); Serial.print(startT); Serial.print(",");Serial.print(stopT); Serial.print(",");
           Serial.print(stepT); Serial.print(","); Serial.println(repeatT);
           awgMode = 1;
         }
         if (myData[0] == 'S') {
-          stepS = hexToDec(myString.substring(2,6)); // 16 bit, 4 hex; from 32 bit value, 8 hex 
+          stepS = hexToDec(myString.substring(1,7)); // 24 bit, 6 hex; from 32 bit value, 8 hex 
           ampS = hexToDec(myString.substring(9,13))/8; // 12 bit, 3 hex; from 32 bit value, 8 hex    
           offS = hexToDec(myString.substring(17,21))/8; // 12 bit, 3 hex; from 32 bit value, 8 hex 
           Serial.print("Smd: "); Serial.print(stepS); Serial.print(",");Serial.print(ampS); Serial.print(",");
           Serial.println(offS);
           awgMode = 2;
         }
+        if (myData[0] == 'R') {  // get lookup table 256 comma separated values
+           for (int i3 = 0; i3 < 256; i3++ ) {
+            lookup8[i3] = hexToDec(myString.substring(1 + i3 * 4, 4 + i3 * 4)); // char 1,2,3 8 bit only
+           }
+        }
         if (myData[0] == 'X') {
           awgMode = 0;
         }
-        Serial.println((String)myData);
+        Serial.println(((String)myData).substring(0,60));  // limited check
         posChar = 0; expChar = 0;
         // Serial.print(bufSize);Serial.print(","); Serial.println(timeBase);
       }
@@ -381,13 +401,17 @@ void loop() {
     timeBegin = micros();  // start measuring time 
   }
   
-  // Generate Analog value sine
-     awgX = (int)(offS) + (int)(ampS) * sin( TWO_PI * stepIndex * stepS / 256 / 256); // 256 * 256 steps per cycle
-  // Generate Analog value Triangle
+  // Generate Analog value sine stepS range integer mapped to 0..1 by / 16 M
+     awgX = (int)(offS) + (int)(ampS) * sin( TWO_PI * stepIndex * stepS / 1024 /1024 / 16 ); 
+ // Generate Analog value Triangle
      int deltaX = (stopT - startT);
-     int posY = ((int)(stepT) * ((stepIndex * 256 * 3 )/ repeatT) ) % ( deltaX * 2); 
+     int posY = ((int)(stepT) * (stepIndex / repeatT) ) % ( deltaX * 2); 
      if (posY > deltaX) posY = 2 * deltaX - posY;
-     awgY = (int)(startT) + posY; // 256 steps per cycle
+     if ( deltaX == stepT){                            // Pulse
+      posY = ((stepIndex * 2 / repeatT) % 2) * deltaX;
+     }
+     awgY = (int)(startT) + posY; // startT plus posY 
+     
   // writing Analog
   // if (awgX > 1024) { awgX = 100; }
   // else { awgX = 1200; }
@@ -399,22 +423,32 @@ void loop() {
   
   writeDAC(awgZ);                  // Write PMOD DA2
   
-  digWrite(awgZ >> 4);                  // 8 Bit
+  sine8 = lookup8[awgZ >> 4];
+  digWrite(sine8);                  // 8 Bit
   
-  bufVal[bufIndex] = awgZ;         // write val in bufVal
+  bufVal[bufIndex] = awgZ;         // write val in bufVal as AWG1
   bufIndex++;
-  stepIndex++;
-  stepIndex = stepIndex % 4096;
 
   readAnalogX();
-  
+
+  if (timeBase <= mulTime) {        // Lower sampling rate for long acquisition time
+    bufIndex++;                     // next index
+    mulTime = 1; 
+    cntV++;
+  } else {                          // same again for timeBase numbers
+    mulTime +=1;
+    bufIndex -=4;
+  }
+  stepIndex++;                        // next value for output
+  // stepIndex = stepIndex % 4096;
+ 
   if (bufIndex >= bufSize) { bufIndex = 0; cntBuf++; } 
-  cntV++;
   if (cntV > bufSize) { 
     cntV = bufSize; 
     if (waitSend == 1) {
       sendData(); 
       waitSend = 0;
+      stepIndex =0;
     } 
   }
  // }

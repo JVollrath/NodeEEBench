@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="description" content="A description of EEBench an open source, open access low cost
+   oscilloscope and arbitrary waveform generator based on FPGA BASYS3 and nodejs JavaScript" />
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<title> INL, DNL measurement (NodeEEBench.html) </title>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+ <style>
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+div.scrollX {
+  width: 400px;
+  height: 200px;
+  overflow: scroll;
+}
+th.norm {
+    background-color: #CCCCCC;
+    color: black;
+} 
+table.norm, th.norm, td.norm {
+   border-collapse: collapse;
+   border: 1px solid black;
+}
+th.clr {
+} 
+</style> 
+
+<!-- Prettify Google -->
+<link href="../google-code-prettify/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../google-code-prettify/src/prettify.js"></script>
+<script type="text/javascript" src="../google-code-prettify/src/lang-vhdl.js"></script>
+<!-- Chart -->
+<SCRIPT SRC="../Chart_2013_03_11/Chart_basic.js"></SCRIPT>
+<!-- JQuery -->
+<script type="text/javascript" src="../scripts/jquery.js"></script>
+<!-- LTSPICE -->
+<SCRIPT SRC="../SPICE_HTML_2018_02/LTSPICE.js"></SCRIPT>
+<!-- QR Code -->
+<script src="../QRCode/jsqr-1.0.2.js" type="text/javascript"></script>
+<!-- Usage Logging -->
+<SCRIPT SRC="../scripts/ToggleLog.js"></SCRIPT>
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}
+  });
+</script>
+<script type="text/javascript" src="../MathJax/MathJax.js"></script>
+
+</head>
+<body>
+<!--
+  BEGIN: Content of extension "ts_mit", plugin "tx_tsmit_pi1"
+ -->
+  <div id="headx">
+  <div id="nheader1" style="background-color:#0067a5;color:#FFFFFF" align="right" >
+     <a href="https://www.hochschule-kempten.de" style="color:#FFFFFF"> Hochschule Kempten &nbsp; &nbsp; &nbsp; </a>
+  </div>
+  <div id="nheader2" style="background-color:#05adb5;color:#FFFFFF" align="right" >
+     <a href="https://www.hs-kempten.de/fakultaet-elektrotechnik/" style="color:#FFFFFF">
+	 Fakultät Elektrotechnik &nbsp; &nbsp; &nbsp;
+  </div>
+  <div id="nheader3" style="background-color:#f18700;color:#FFFFFF" align="right">
+     <a href="../Vollrath_Work.html" style="background-color:#f18700;color:#FFFFFF"> 
+	 Publications &nbsp; &nbsp; &nbsp;</a>
+     <a href="https://www.hs-kempten.de/elektrotechnik/fakultaet/personen-detailansicht/joerg-vollrath?tx_hisconnect_personenlisting%5Bbacklink%5D=607&cHash=effe2c6873f6c8a9f79b55b636d3bde2" style="background-color:#f18700;color:#FFFFFF"> 
+	 Fachgebiet Elektronik, Prof. Vollrath &nbsp; &nbsp; &nbsp;</a>
+  </div>
+  </div>
+<br>
+<div> 
+<table>
+<tr><td style="width:70%">
+  <h1>INL, DNL measurement in NodeEEBench.html</h1>
+
+Jörg Vollrath, University of Applied Science Kempten, Germany, Joerg.vollrath@hs-kempten.de<br>
+August, 2025<br>
+<br>
+<img src="ImagesS/INLDNLChar.png" width="600"><br>
+Figure: Example 3-Bit data converter transfer characteristics with error 
+[<a href="https://personalpages.hs-kempten.de/~vollratj/InEl/2016_10_10_03_InEl_DNL_INL.html" class="blue">
+Data converter INL and DNL Error</a> ]<br>
+
+
+<hr>
+<br>
+
+<h2> Overview</h2><br>
+
+Data converters convert N<sub>Bit</sub> digital codes into analog voltage 
+or analog voltages into difgital codes. Normally only positive voltages with positive
+digital codes are used. Negative voltages are generated or received by an active analog 
+operational amplifier circuit.<br>
+Data converters can have an offset error, a gain error, INL and DNL errors.
+INL and DNL calculate relative code and step size errrors.<br>
+
+NodeEEBench.html provides supplied data converter code and measured data converter code and can directly measure error.<br>
+ADC and DAC error can be measured by replacing the provided ADC or DAC with the DUT.<br>
+As an example a simple R2R DAC will be used. Arduino measurements will be done with C4 AD2 PMOD and C2.<br>
+A triangle waveform is used to minimize settling time errors.<br>
+Measurement is source synchronous, so no jitter will be measured.<br>
+Due to the limited buffer size multiple measurements are needed.<br> 
+
+<h3>To Do List</h3>
+<ul>
+<li>Check FPGA second half of lookup table</li>
+<li>Check FPGA, Simulation operation</li>
+<li>Implement Simulation DAC manipulation: Noise, systematic error</li>
+<li>Check implemented status</li>
+</ul>
+
+
+<h3>Done List</h3>
+<ul>
+<li>Tested Arduino ramp test, lookup buffer, sine with  8-Bit R2R with some error</li>
+<li>Lookup table tab using 'lBufVal'</li>
+<li>Lookup table generation using 'lBufVal' done</li>
+<li>Using and setting 'oBufVal' (lookup buffer size) for the different boards</li>
+<li>Arduino: 8-Bit R2R DAC with voltage divider (3.3V..1V), start 0, step 16, stop 4096 shows correct INL, DNL</li>
+<li>Limit buffer size depending on board done</li>
+<li>user interface with start, stop, step values and Lookup table calculation is provided.</li>
+<li>Setting 'lbufVal' (lookup buffer size) for the different boards</li>
+</ul>
+
+<br>
+<hr>
+<br>
+
+</td><td style="width:30%">  
+<canvas id="thisQR"></canvas></td>
+</tr>
+</table>
+
+<h2>Task</h2><br>
+
+All voltages or codes for the data converter have to be generated. 
+Due to the limited buffer size of the oscilloscope multiple measurements are used.<br>
+The user can select the measurement with 'step','start','end' values.<br>
+From the measurement of ideal and real codes INL, DNL are calculated and displayed in charts<br>
+A lookup table can be calculated to minimze the error.<br>
+
+<h2>Implementation (NEEBench.html)</h2><!------------------------------------------------------------->
+<br>
+There is a HTML and later JavaScript section with INL, DNL functions 
+according to the sequence of tabs.<br>
+The function 'rOp()' activates 'generateRamp()' for initialization of the measurement.
+The correct trigger and time base is needed.
+All measurement steps are done by 'generateRampX()' where the AWG is operated and a 
+'U' command for measurement is initiated.<br>
+The function 'nextRamp()' is controlling the loop after successfull data acquisition
+if the INL,DNL test is active. The measured data are transfered to an 'oscObj' array.
+At the end of the loop the function 'ramp()' is started.<br>
+
+
+<pre>
+function rOp('Run');  // 'Run','Stop'
+  function generateRamp(); // activated with Run
+    function generateRampX(); // activated with generateRamp
+'codesStart', 'codesStop', 'codesEnd'
+"lBufVal" // Lookup buffer size
+'cLook' // checkbox lookup table
+'rampSrc'  // which channel 1,2,3,4,5
+"stepScale" // lookup calculation step modification
+// Output:
+"inlChart","dnlChart","rampChart" // canvas
+"rampX","rampY" // canvas hidden
+"bestL"  // Lookup table display
+function ramp() // change of channel
+</pre>
+
+'ramp()' sorts and averages the data into 'oscObjAvg' array. 
+Ideal codes are calculated using the range and number of array elements.
+This cancels offset and gain errors.<br>
+INL and DNL are calculated according to the picture at the top.<br> 
+This data is displayed in 3 charts.<br>
+<br>
+Finally the section for calculating a lookup table is done.<br>
+<br>
+The maximum step size determines possible step sizes.<br>
+The user can modify this by 'Maximum step scaling' with "stepScale".<br>
+
+
+<hr>
+<h2>Test</h2><br>
+
+
+<h3>Test BASYS3 FPGA</h3>
+
+<br> 
+
+<h3>Test Arduino</h3>
+
+The 8-Bit R2R DAC can be tested.<br>
+From the 12-Bit values only the upper 8 bits are taken for the R2R DAC.<br>
+The R2R DAC has 0.. 3.3V output voltage range.<br>
+C1,C2,C3 have 0..1V input voltage range.<br>
+A voltage divider with 3 series resistances R, R, R gets 1.1V out of 3.3V.<br>
+Better: 1M, 470k; 470k, 220k; 220k, 100k<br> 
+Start = 0, Stop = 4096, Step = 16; <br>
+<br>
+Ramp test gives: INL -0.774..0.577 DNL -1.27..0.0866<br>
+Min: 0 Max: 4048 Step: 17.25 New Codes: 235 New Code Range: 3760<br>
+AWG: Sine 20 Hz, amp 1 V, off 1.7 V<br>
+OSC: Base 50 ms/div; 1024 values<br>
+FFT: AWG1: S = -3dB, N = -73 dB; ENOB = (S-N)/6 = 11 Bit<br>
+FFT: PMOD AD2 C4:  S = -3 dB, N = -46 dB; ENOB = (S-N)/6 = 7 Bit<br>  
+FFT: Arduino ADC C3:  S = -11.6 dB, N = -20.4 dB; ENOB = (S-N)/6 = 1.5 Bit<br>  
+Lookup table upload:<br>
+FFT: PMOD AD2 C4:  S = -2.35 dB, N = -44.9 dB; ENOB = (S-N)/6 = 7 Bit<br>  
+FFT: Arduino ADC C3:  S = -11.48 dB, N = -20.6 dB; ENOB = (S-N)/6 = 1.5 Bit<br> 
+Ramp test gives:  INL -0.805..0.403 DNL -0.313..0.901<br>
+Min: 0 Max: 2870 Step: 32.875 New Codes: 87 New Code Range: 1392<br>
+<br>
+Basically everything is working.<br>
+The INL; DNL error is too small to detect a big change.<br>
+The Arduino ADC is much worse compared to the PMOD ADC.<br>
+<br>
+<h3>Test Simulation</h3><br>
+
+
+ <br><hr>
+ <br>
+ <div id="footer" style="background-color:#0067a5;color:#FFFFFF">
+<br>
+ &nbsp; Hochschule f&uuml;r angewandte Wissenschaften Kempten, J&ouml;rg Vollrath, Bahnhofstra&szlig;e 61 &middot; 87435 Kempten<br>
+ &nbsp; Tel. 0831/25 23-0 &middot; Fax 0831/25 23-104 &middot; E-Mail: joerg.vollrath(at)hs-kempten.de <br>
+ <a href="http://www.hochschule-kempten.de/metanavigation/impressum.html"> 
+  <div style="background-color:#0067a5;color:#FFFFFF"> Impressum </div> </a>
+ </div>
+       <script type="text/javascript"> 
+<!-- Begin
+	   function toggleViewX(obName) {
+	     // alert(obName);
+	     if (document.getElementById(obName).style.display == "block") {
+		   document.getElementById(obName).style.display = "none";
+		 } else {
+		   document.getElementById(obName).style.display = "block";
+		 }
+	   }
+
+
+ //  End -->
+	  </script>
+ </body>
+</html>

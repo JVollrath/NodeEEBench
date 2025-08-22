@@ -1,0 +1,212 @@
+<html lang="en">
+  <head>
+<meta name="description" content="Digital IOs of EEBench an open source, open access low cost
+   oscilloscope and arbitrary waveform generator based on Arduino or FPGA BASYS3 and nodejs JavaScript" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <title>Digital IO Node EEBench</title>
+ <style>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 20px;
+  background: #0067a5;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 20px;
+  background: #0067a5;
+  cursor: pointer;
+}
+
+.nobr { white-space: nowrap }
+
+table.bx { border-collapse: collapse; }
+
+table.bo, tr.bo, th.bo, td.bo {  border: 1px solid black; border-collapse: collapse; padding-left: 10px; 
+padding-right: 10px;
+}
+
+table.bo0, tr.bo0, th.bo0, td.bo0 { border: 3px solid black; border-collapse: collapse;}
+table.bo1, tr.bo1, th.bo1, td.bo1 { border: 3px solid #FF8C00; border-collapse: collapse;}
+table.bo2, tr.bo2, th.bo2, td.bo2 { border: 3px solid #0000FF; border-collapse: collapse;}
+table.bo3, tr.bo3, th.bo3, td.bo3 { border: 3px solid #FF1493; border-collapse: collapse;}
+table.bo4, tr.bo4, th.bo4, td.bo4 { border: 3px solid #008000; border-collapse: collapse;}
+table.bo5, tr.bo5, th.bo5, td.bo5 { border: 3px solid #FF4500; border-collapse: collapse;}
+table.bo6, tr.bo6, th.bo6, td.bo6 { border: 3px solid #4682B4; border-collapse: collapse;}
+table.bo7, tr.bo7, th.bo7, td.bo7 { border: 3px solid #DC143C; border-collapse: collapse;}
+table.bo8, tr.bo8, th.bo8, td.bo8 { border: 3px solid #ABABAB; border-collapse: collapse;}
+
+table.tb, tr.tb, th.tb, td.tb { border: 3px solid black; background: #ABABAB; border-collapse: collapse;}
+table.tbs, tr.tbs, th.tbs, td.tbs { border-top: 3px solid black; border-left: 3px solid black; 
+border-right: 3px solid black; background: white; border-collapse: collapse;}
+td.tbr:last-child { width:100%; border-bottom: 3px solid black; background: white; border-collapse: collapse;}
+td.top {vertical-align: top;}
+
+</style> 
+  </head>
+  
+<!-- load socket.io Google -->
+<script src="../node_modules/socket.io/client-dist/socket.io.js"></script>
+<!-- load JQuery -->
+<SCRIPT SRC="../scripts/jquery.js"> </SCRIPT>
+<!-- load Chart module-->
+   <script type="text/javascript" src="../Chart_2013_03_11/Chart_basic.js"></script>
+<!-- load FFT module-->
+  <script type="text/javascript" src="../FFT/dspFFT.js"></script>
+  <body>
+  <div id="headx" style="display:block">
+  <div id="nheader1" style="background-color:#0067a5;color:#FFFFFF" align="right" >
+     <a href="http://www.hochschule-kempten.de" style="color:#FFFFFF"> Hochschule Kempten &nbsp; &nbsp; &nbsp; </a>
+  </div>
+  <div id="nheader2" style="background-color:#05adb5;color:#FFFFFF" align="right" >
+     <a href="http://www.hochschule-kempten.de/about-kempten-university/faculties/electrical-engineering.html?L=1" style="color:#FFFFFF">
+	 Fakult&auml;t Elektrotechnik &nbsp; &nbsp; &nbsp;
+  </div>
+  <div id="nheader3" style="background-color:#f18700;color:#FFFFFF" align="right">
+     <a href="Elektronik.html" style="background-color:#f18700;color:#FFFFFF"> 
+	 Elektronik &nbsp; &nbsp; &nbsp;</a>
+    <a href="http://www.hochschule-kempten.de/metanavigation/personen/detailansicht.html?typo3state=persons&lsfid=1000430" style="background-color:#f18700;color:#FFFFFF"> 
+	 Fachgebiet Elektronik, Prof. Vollrath &nbsp; &nbsp; &nbsp;</a>
+  </div>
+  </div>
+  <br>
+
+<h1>Digital IOs NodeEEBench</h1>
+
+<h1>Use cases</h1>
+<ol>
+<li>An ADC, sensor is connected via SPI or I2C</li>
+<li>A DAC, actor is connected via SPI or I2C</li>
+<li>SPI, I2C, serial transmit and receive</li>
+<li>Configuring pins as inputs, outpus, bidirectional</li>
+<li>Comparision and pass/fail information</li>
+<li>An 8-bit R2R DAC is connected to 8 outputs</li>
+<li>A serial DAC with one serial data line and 3 clock signals is connected</li>
+<li>A pipeline ADC gives a n-Bit serial input data (gray code) signal and needs 3/4 output clock signals</li>
+<li>A SAR ADC generates one compare input and sets a serial/parallel DAC accordingly</li>
+<li>The AWG output sends binary values to digital outputs using a lookup table</li>
+<li>A serial coded signal is received, passed through a lookup table, a signal processing unit 
+    and displayed with the oscilloscope or fed to the AWG</li>
+</ol>
+<br>
+<h1>Implementation Considerations</h1>
+
+<ol>
+<li>Digital data acquisition should replace analog data at acquisition with a certain block size</li>
+<li>Digital data can be displayed as single bit trace, hex numbers or analog values (coding: binary, gray code, signed)</li>
+<li>It is difficult to configure individual pins with the Arduino.<br>
+    There should be dedicated configurations for input, output, serial, parallel pins.</li>
+<li>Arduino digital IOs:<br> 
+    A4 serial output, A5 serial input, D0..D7 outputs, inputs, half/half<br>
+	I2C: SCL (D12), SDA(D11)<br>
+	SPI: MOSI (D8), MISO(D10), CLK (D9), CS (A6)</li> 
+<li> Example implementation could be <br>
+    (1) R2R,<br> 
+	(2) serial DAC, <br>
+    (3) SAR (cmp signal serial input), SAR algorithmic calculation 
+     with serial DAC (data signal serial output + clk and cntrl pins)<br>
+	 Low pass</li>
+</ol>
+<br>
+<h1>GUI</h1>
+
+<table>
+<tr><td>A4 serial output</td><td>enable</td></tr>
+<tr><td>A5 serial input</td><td>enable</td></tr>
+<tr><td>A6..A13</td><td>8 outputs,4outputs/4inputs,8 inputs</td><td>Burst/single</td></tr>
+<tr><td>SPI: MOSI (D8), MISO(D10), CLK (D9), CS (A6)</td><td>enable</td></tr>
+<tr><td>I2C: SCL (D12), SDA(D11)</td><td>enable</td></tr>
+</table>
+Initialization SPI, I2C, D0..7 Hex codes: <br>
+Picture timing serial DAC, pipeline DAC, SAR ADC<br>
+<br>
+<br>
+
+
+<br>
+	  <div id="footer" style="background-color:#0067a5;color:#FFFFFF">
+<br>
+ &nbsp; Hochschule für angewandte Wissenschaften Kempten, Joerg Vollrath, Bahnhofstraße 61 Â· 87435 Kempten<br>
+ &nbsp; Tel. 0831/25 23-0 · Fax 0831/25 23-104 · E-Mail: joerg.vollrath(at)fh-kempten.de <br>
+ <a href="http://www.hochschule-kempten.de/metanavigation/impressum.html"> 
+  <div style="background-color:#0067a5;color:#FFFFFF"> Impressum </div> </a>
+ </div>
+
+</div>
+       <script type="text/javascript"> 
+<!-- Begin
+	function myQR() {
+			var qr = new JSQR();							// Initialize a new JSQR object.
+			var code = new qr.Code();						// Initialize a new Code object.
+
+			code.encodeMode = code.ENCODE_MODE.BYTE;			// Set the code datatype.
+			code.version = code.DEFAULT;						// Set the code version
+														// (DEFAULT = use the smallest possible version).
+			code.errorCorrection = code.ERROR_CORRECTION.H;		// Set the error correction level (H = High).
+
+			var input = new qr.Input();						// Initialize a new Input object.
+			input.dataType = input.DATA_TYPE.TEXT;			 	// Specify the data type of 'data'.
+														// Here, 'data' contains only text.
+			var stX = window.location.pathname;					// Specify the data which should be encoded.
+            
+			// alert(stX);
+			if (stX.substr(0,3) == "/D:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(27,stX.length-27);
+			} else 	if (stX.substr(0,3) == "/C:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(52,stX.length-52);
+			} else{
+			   stX = "https://personalpages.hs-kempten.de"+stX;
+			}
+			// alert(stX);
+			input.data = stX
+			
+			var matrix = new qr.Matrix(input, code);			// Initialize a new Matrix object using the input
+														// and code, defined above.
+														// At this point, the QR Code get generated.
+
+			matrix.scale = 4;								// Specify the scaling for graphic output.
+			matrix.margin = 2;								// Specify the margin for graphic output.
+
+			var canvas = document.getElementById('thisQR');		// Create a new Canvas element.
+			canvas.setAttribute('width', matrix.pixelWidth);		// Set the canvas width to the size of the QR code.
+			canvas.setAttribute('height', matrix.pixelWidth);		// Set the canvas height to the size of the QR code.
+			canvas.getContext('2d').fillStyle = 'rgb(0,0,0)';		// Set the foreground color of the canvas to black.
+			matrix.draw(canvas, 0, 0);						// Draw the QR code into the canvas
+														// at position 0 (left), 0 (top).
+		};
+        myQR();
+
+        setSlideIndex(0);
+        showSlidesP();
+
+	    updateServerLog("GET2","EI_ProjektPraktikum");
+ //  End -->
+	  </script>
+ 
+</body>
+</html>

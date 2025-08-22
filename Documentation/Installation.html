@@ -94,6 +94,26 @@ td.top {vertical-align: top;}
   </div>
   <br>
 
+Download zip file
+<a href="https://personalpages.hs-kempten.de/~vollratj/InEl/Zip/NodeEEBench.zip" class="blue">NodeEEBench.zip</a><br>
+Unzip file into C:\temp on a Windows PC creating a subdirectory NodeEEBench.<br>
+Change to subdirectory c:\temp\NodeEEBench.<br>
+<br>
+
+<h1>Installation Simulation</h1>
+ 
+<ol>
+<li>Start NodeEEBench.bat by double clicking<br>
+    This starts a node program for a webserver: ServerEEBench.js<br>
+    A command line window opens monitoring the serial communication between server 
+	and web interface. Since no attached Arduino or FPGA is detected Simulation is started.</li>
+<li>Open with the browser 'localhost:3000'<br>
+    This delivers the file 'Projekte/NEEBench.html' with the user interface</li>
+<li> Select the Simulation<br>
+     Start the waveform generator<br>
+	 Start the oscilloscope and look at the waveform</li>
+</ol><br>
+
 <h1>Installation FPGA BASYS 3</h1>
 
 <ol>
@@ -101,7 +121,7 @@ td.top {vertical-align: top;}
 <li>(Download) Open Vivado 19.1 </li>
 <li>Open project in folder Xilinx/EEBench/EEBench.xpr compile and transfer bit file 
     into FPGA or better into Flash memory.</li>
-<li>Edit NodeEEBench.bat and adjust the path according to your installed node.exe </li>
+<li>(Edit NodeEEBench.bat and adjust the path according to your installed node.exe)</li>
 <li>Start NodeEEBench.bat by double clicking<br>
     This starts a node program for a webserver: ServerEEBench.js<br>
     A command line window opens monitoring the serial communication between Arduino 
@@ -119,7 +139,7 @@ td.top {vertical-align: top;}
 <li>Wire and connect the Arduino MKR 1010 Wifi board to your PC</li>
 <li>Open project in folder Arduino/EEBench/EEBench.ino compile and transfer program<br>
     Library Arduino MKR Wifi 1010 for SAMD boards should be installed</li>
-<li>Edit NodeEEBench.bat and adjust the path according to your installed node.exe </li>
+<li>(Edit NodeEEBench.bat and adjust the path according to your installed node.exe)</li>
 <li>Start NodeEEBench.bat by double clicking<br>
     This starts a node program for a webserver: ServerEEBench.js<br>
 	A command line window opens monitoring the serial communication between Arduino 
@@ -128,11 +148,44 @@ td.top {vertical-align: top;}
     This delivers the file 'Projekte/NEEBench.html' with the user interface</li>
 <li> Select the Arduino board<br>
      Start the waveform generator<br>
-	 Start the oscilloscope and look at the waveform<br>
-	 Correct scaling of level and timing is not implemented and tested yet</li>
+	 Start the oscilloscope and look at the waveform</li>
 </ol>
 <br>
 
+<br>
+<h1>Testing and Verification (6.8.2025 NodeEEBenchV20250806.zip)</h1>
+
+FPGA, Arduino and Simulation Sine, Pulse, triangle,staircase was tested with 
+internal and external oscilloscope and FFT. Arduino showed some 
+timing errors and some FFT bleeding. <br>
+
+<br>
+<h1>Testing and Verification (1.4.2025 NodeEEBench_V09.zip)</h1>
+
+<h2>Arduino</h2>
+<br>
+
+<ol>
+<li>AWG1</li>
+<ul>
+<li> Sine signal 20 Hz, Amplitude: 1V, Offset: 1 V, 'Run'<br>
+     Measurement DAC0, Pmod DA2 (20ms/div): 19.8 Hz, Amplitude: 1V, Average 980 mV<br>
+	 Measurement (1ms/div): sample rate 1.3 kHz, 760us</li>
+<li> Sine signal frequency range: 0.2 Hz, 2 Hz, 100 Hz (94 Hz), 200 Hz (186 Hz), <span style="color:red;">500 Hz (124 Hz)</span></li>
+<li> Pulse signal frequency range: 2 Hz (1.86 Hz), 100 Hz (94 Hz), 200 Hz (188 Hz), 500 Hz (470 Hz)</li>
+<li> Triangle signal frequency range: 2 Hz (1.86 Hz), 20 Hz (19.6 Hz), <span style="color:red;">100 Hz (50 Hz), 200 Hz (135 Hz), 500 Hz (beat)</span></li>
+<li> Stair signal frequency range: 2 Hz (1.86 Hz), 20 Hz (18.8 Hz), 100 Hz (93 Hz), <span style="color:red;">200 Hz (70 Hz), 500 Hz (120 Hz)</span></li>
+<li> Range 20 Hz: Amplitude 1.65 V, Offset 1.65 V all waveforms ok<br>
+     <span style="color:red;">Range outside of 0..3.3 V not working, last setting remains<br>
+	 should be cut off with min, max in display and reality</span></li>
+<li>Frequency range sine pulse: maximum: 200 Hz <br>
+    Output voltage range: 0 .. 3.3 V</li>
+</ul>
+<li>Oscilloscope<br>
+    </li>
+</ol>
+
+<br>
 	  <div id="footer" style="background-color:#0067a5;color:#FFFFFF">
 <br>
  &nbsp; Hochschule für angewandte Wissenschaften Kempten, Jörg Vollrath, Bahnhofstraße 61 · 87435 Kempten<br>

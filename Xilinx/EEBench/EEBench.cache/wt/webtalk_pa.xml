@@ -3,7 +3,7 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pa" timeStamp="Fri Nov 10 16:58:57 2023">
+<application name="pa" timeStamp="Thu Apr  3 17:15:18 2025">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="8cc72989c91d4183aae537275c1b4de5" type="ProjectID"/>
 <property name="ProjectIteration" value="128" type="ProjectIteration"/>
@@ -69,7 +69,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="ExpReportTreePanel_EXP_REPORT_TREE_TABLE" value="55" type="GuiHandlerData"/>
 <property name="ExpRunTreePanel_EXP_RUN_TREE_TABLE" value="1" type="GuiHandlerData"/>
 <property name="FPGAChooser_FPGA_TABLE" value="1" type="GuiHandlerData"/>
-<property name="FileSetPanel_FILE_SET_PANEL_TREE" value="516" type="GuiHandlerData"/>
+<property name="FileSetPanel_FILE_SET_PANEL_TREE" value="520" type="GuiHandlerData"/>
 <property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="847" type="GuiHandlerData"/>
 <property name="FlowNavigatorTreePanel_RESET_SYNTHESIS_RUN" value="1" type="GuiHandlerData"/>
 <property name="GettingStartedView_CREATE_NEW_PROJECT" value="1" type="GuiHandlerData"/>
@@ -121,7 +121,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PACommandNames_SIMULATION_RESET_BEHAVIORAL" value="3" type="GuiHandlerData"/>
 <property name="PACommandNames_SIMULATION_RUN" value="2" type="GuiHandlerData"/>
 <property name="PACommandNames_SIMULATION_RUN_BEHAVIORAL" value="104" type="GuiHandlerData"/>
-<property name="PAViews_CODE" value="59" type="GuiHandlerData"/>
+<property name="PAViews_CODE" value="60" type="GuiHandlerData"/>
 <property name="PAViews_DEVICE" value="2" type="GuiHandlerData"/>
 <property name="PAViews_PAR_REPORT" value="12" type="GuiHandlerData"/>
 <property name="PAViews_PROJECT_SUMMARY" value="136" type="GuiHandlerData"/>
@@ -157,9 +157,9 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="XPG_IPSymbol_SHOW_DISABLED_PORTS" value="1" type="GuiHandlerData"/>
 </item>
 <item name="Other">
-<property name="GuiMode" value="38" type="GuiMode"/>
+<property name="GuiMode" value="59" type="GuiMode"/>
 <property name="BatchMode" value="0" type="BatchMode"/>
-<property name="TclMode" value="31" type="TclMode"/>
+<property name="TclMode" value="51" type="TclMode"/>
 </item>
 </section>
 </application>

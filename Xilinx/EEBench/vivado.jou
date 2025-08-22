@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu Apr  3 17:13:13 2025
+# Process ID: 25852
+# Current directory: C:/temp/NodeEEBench/Xilinx/EEBench
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent28640 C:\temp\NodeEEBench\Xilinx\EEBench\EEBench.xpr
+# Log file: C:/temp/NodeEEBench/Xilinx/EEBench/vivado.log
+# Journal file: C:/temp/NodeEEBench/Xilinx/EEBench\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.xpr
+update_compile_order -fileset sources_1
