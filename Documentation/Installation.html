@@ -138,17 +138,23 @@ Change to subdirectory c:\temp\NodeEEBench.<br>
 <ol>
 <li>Wire and connect the Arduino MKR 1010 Wifi board to your PC</li>
 <li>Open project in folder Arduino/EEBench/EEBench.ino compile and transfer program<br>
-    Library Arduino MKR Wifi 1010 for SAMD boards should be installed</li>
+    Library Arduino MKR Wifi 1010 for SAMD boards should be installed. (Tools, Board Manager, SAMD)<br>
+	Select COM Port and Board. (Tools, Port, COMx (Arduino). Upload Sketch</li>
 <li>(Edit NodeEEBench.bat and adjust the path according to your installed node.exe)</li>
 <li>Start NodeEEBench.bat by double clicking<br>
     This starts a node program for a webserver: ServerEEBench.js<br>
 	A command line window opens monitoring the serial communication between Arduino 
-	and web interface</li>
+	and web interface<br>
+	<img src="ImagesS/cmdWindow.jpg" width="500"></li>
 <li>Open with the browser 'localhost:3000'<br>
-    This delivers the file 'Projekte/NEEBench.html' with the user interface</li>
+    This delivers the file 'Projekte/NEEBench.html' with the user interface<br>
+	<img src="ImagesS/NEEBenchUserInterface.jpg" width="500"></li>
 <li> Select the Arduino board<br>
-     Start the waveform generator<br>
-	 Start the oscilloscope and look at the waveform</li>
+     Start the waveform generator AWG1 tab: Frequency 20 Hz, Amplitude 1 V, Offset 1 V, "Run"<br>
+	 In the command interface the S command will be shown.<br>
+	 Start the oscilloscope OSC, change Time Base 20 ms/div, "Run" and look at the waveform<br>
+	 In the command interface the U command and received data are shown</li>
+<li> The Configuration window shows additional resources and all available commands</li>
 </ol>
 <br>
 

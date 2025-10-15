@@ -41,17 +41,17 @@
     SerialPort.list().then(
  //    console.log	   
        ports => ports.forEach(port => {
-           console.log("path: " + port.path);
-           console.log("manufacturer: " + port.manufacturer);
+           console.log("path: " + port.path + " manufacturer: " + port.manufacturer + " productId: " + port.productId + " productId: " + port.vendorId);
            // console.log(port.manufacturer.includes('arduino'));
            var manu = port.manufacturer || "";
 		   manu = manu.toLowerCase();
-           if (manu.includes('arduino')) {
+           if (manu.includes('arduino') || ((port.productId == 8054) & (port.vendorId == 2341))) {
 		     devMan = "Arduino";
 			 serialPort = new SerialPort({  //"\\.\COM22"
                 path: port.path,
 	            baudRate: 115200      //  Baud rate befor 19200, 52 us per bit
              });
+			 // console.log("Arduino detected.");
            }			 
            if (manu.includes('segger')) { // Infineon XMC4700
 		     devMan = "XMC4700";                
@@ -59,6 +59,7 @@
                 path: port.path,
 	            baudRate: 115200      //  Baud rate befor 19200, 52 us per bit
              });
+			 // console.log("XMC4700 detected.");
            };			 
            if (manu.includes('ftdi') || manu.includes('digilent')) {
 		     devMan = "FPGA FTDI";
@@ -66,6 +67,7 @@
                 path: port.path,
 	            baudRate: 230400      //  Baud rate befor 19200, 52 us per bit
              });
+			 // console.log("FPGA FTDI detected.");
            }			 
        }),
        err => console.error(err)
@@ -168,12 +170,12 @@ function decToHex(x) {
 	   var deltaX = (stopT - startT);
 	   for (var i = 0; i < blockSize; i ++) {
 	     for (var j = 0; j < mulTime * ratio; j ++) {
-	       var posY = (stepT * Math.trunc( 1/ 16  * (i * mulTime * ratio + j) / repeatT)) % (deltaX * 2); // limit to 2 * deltaX
+	       var posY = (Math.trunc( stepT * 1/ 1  * (i * mulTime * ratio + j) / repeatT)) % (deltaX * 2); // limit to 2 * deltaX; 1/16 old 16 values per step  
 		   if (posY > deltaX) { posY = 2 * deltaX - posY; }           // rising or falling
 	       if ( deltaX == stepT) { // pulse
 		      posY = (Math.trunc( (i * mulTime * ratio + j) / 8 / repeatT) % 2) * deltaX; // factor 8 ??
 		   }
-		   posY = Math.round(startT + posY);
+		   posY = Math.round(startT + posY); // 
  	       oscData[i * 5] = 5 * posY; // Osc4  
 		   oscData[i * 5] = limitData(oscData[i * 5]);
  	       oscData[i * 5 + 1] = 4 * posY; // Osc3  
@@ -184,7 +186,9 @@ function decToHex(x) {
 		   oscData[i * 5 + 3] = limitData(oscData[i * 5 + 3]);
  	       oscData[i * 5 + 4] = posY;// AWG
 		   oscData[i * 5 + 4] = limitData(oscData[i * 5 + 4]);
-	     }
+	       // console.log(j + "," + oscData[i * 5] + ","+ oscData[i * 5 + 1] + " stepT " 
+		   //              + stepT + " deltaX " + deltaX);
+		 }
 	   }
 	   // Set dummy index information
 	   oscData[0] = 2; oscData[1] = 2; oscData[2] = 2;oscData[3] = 2;oscData[4] = 2;
@@ -192,7 +196,7 @@ function decToHex(x) {
  
  function simX(cmdName){
     // X Command
-	// S Command
+	// S Command sine function
 	if (cmdName[0]=="S") {
 	   var tT = cmdName.substring(1,9);
 	   awg1Type = "S";
@@ -203,19 +207,19 @@ function decToHex(x) {
        offset =	Math.round(hexToDec(tT)/256/256);      // offset  32 bit to 16
 	   genSine();
 	}
-	// T Command
+	// T Command triangle waveform
  	if (cmdName[0]=="T") {
 	   awg1Type = "T";
 	   startT = Math.round(hexToDec(cmdName.substring(1,5)));
 	   stopT = Math.round(hexToDec(cmdName.substring(5,9)));
 	   stepT = Math.round(hexToDec(cmdName.substring(9,13)));
 	   repeatT = Math.round(hexToDec(cmdName.substring(13,17))) * 256 *16 +
-	             Math.round(hexToDec(cmdName.substring(17,20)));
+	             Math.round(hexToDec(cmdName.substring(17,21)));
 	   if (repeatT == 0) { repeatT = 1; }
 	   genTri();
 	}
    // U Command      send data
-	if (cmdName[0]== "U") {
+	if (cmdName[0]== "U") {  
       if (!serialPort) {
 	    console.log("Write dataBufX");
 	    dataBufX ="";
@@ -234,7 +238,7 @@ function decToHex(x) {
 	  }	
 	}
     // V Command
-    // O Command
+    // O Command setup acquisition mode
 	if (cmdName[0]=="O") {
 	   console.log(cmdName);
 	   var tT =cmdName.substring(1,5);
@@ -303,6 +307,7 @@ function decToHex(x) {
 
 	   
 	   if (serialPort) {
+        console.log(devMan + " serial Device detected!");
 	    serialPort.on('data',
 		  function (data) {
 		    // get buffered data and parse it to an utf-8 string

@@ -113,7 +113,7 @@ td.top {vertical-align: top;}
 
 <!---------------------- Configuration ------------------------------------------->
 <div id="tab0" class="tabX" style="display:block">
-  <h2> Configuration (Version: NodeEEBenchV20250806.zip)</h2>
+  <h2> Configuration (Version: NodeEEBenchV20251015.zip)</h2>
   <br>
   <table>
   <tr>
@@ -2440,16 +2440,18 @@ function generateRamp() { // start Ramp
   startCode = parseInt(document.getElementById("codesStart").value);  // Start of code values + offsetStart for looping
   var endCode = Math.trunc(parseInt(document.getElementById("codesEnd").value)) ;  // End of code values
   oBuf = document.getElementById("oBufVal").value;
+  // alert(oBuf);
   // Check how many points necessary > 4k?
-  runs = Math.trunc(((endCode - startCode)/stepCode) / oBuf ) + 1;  // How many obuf blocks 4 samples each 
+  runs = Math.trunc(((endCode - startCode)/stepCode) * 4 / oBuf ) + 1;  // How many obuf blocks 4 samples each 
   offsetStep = Math.trunc( Math.trunc((endCode - startCode)/runs) / stepCode ) * stepCode;  // Next step for startCode
-  runs = Math.ceil((endCode - startCode) / offsetStep );
   // alert(startCode + "," + endCode + "," + stepCode + "," + oBuf + "," + runs + "," + offsetStep);
+  runs = Math.ceil((endCode - startCode) / offsetStep ) + 1;
   
   // Set OSC timeBase = ADC sampling time * oBuf / 20
   var timeSampling = unitToValue(document.getElementById("timeSampling").value);
   document.getElementById("baseVal").value = valueToUnit(timeSampling * oBuf / 20) + "s";			 	 
   
+  updateOSC();
   // Set OSC trigger channel AWG1 and condition rising 
    
   generateRampX();
@@ -2458,17 +2460,31 @@ function generateRamp() { // start Ramp
 function generateRampX() {
 
   var endCode = startCode + offsetStep; // Calculate endCode
- 
-    // Calculate trigger OSC level
+  var endCode1 = Math.trunc(parseInt(document.getElementById("codesEnd").value)) ;  // End of code values
+  if (endCode > endCode1) endCode = endCode1;
+  
+    // Configure oscilloscope with highest sample rate and 8k buffer
+    document.getElementById("dataMax").value = oBuf;
+    cmdText ="O" + decToHex(oBuf,4) + "0001"; // every sample         
+    // sendCmd "O"
+    document.getElementById("cmd").innerHTML = cmdText;
+    sendCmd();
+
+    // Calculate trigger OSC level to get right amount of data
+    
 	
-	
+    // alert(startCode + "," + endCode + "," + stepCode + "," + oBuf + "," + runs + "," + offsetStep);
     // Make triangle waveform
     // Repeat 832 because DAC 100MHz, ADC 8.32us
-	var repeat = 4; // FPGA
+	var repeat = 4; // Default
     var boardX = parseInt(document.getElementById("board").value);
     if (boardX == 0) { // FPGA
        repeat = 4 * 832;  
-	} 
+	} else  if (boardX == 1) { // Simulation
+	   repeat = 1;
+	} else  if (boardX == 2) { // Simulation
+	   repeat = 2;
+	}
     cmdText = "T" + decToHex(startCode,4) + decToHex(endCode,4)
                   + decToHex(stepCode,4) + decToHex((repeat),8);    // 832, 416,208  4 samples 4*832    
     // sendCmd "T"
@@ -2476,23 +2492,18 @@ function generateRampX() {
     var tText =cmdText;
 	sendCmd(); 
 	// alert(startCode + "," + endCode + "," + stepCode + "," + repeat);
-    // calculate new startCode for next step 
-    startCode = startCode + offsetStep; 
 	
-    // Configure oscilloscope with highest sample rate and 8k buffer
-    document.getElementById("dataMax").value = oBuf;
-    cmdText ="O" + decToHex(oBuf,4) + "0001"; // every sample         
-    // sendCmd "O"
-    document.getElementById("cmd").innerHTML = cmdText;
-    sendCmd();
     // sendCmd "U" acquiring data
     document.getElementById("cmd").innerHTML = "U";
     sendCmd();
     finished = false;
 
 	document.getElementById("inlResult").innerHTML = "<img src='../ImagesS/1LBN.gif' width='32' height='32'>" 
-                                                    + " Measurement ongoing. Run " + runX + " of " + (runs + 0)
-													+ "  " + tText; 
+                                                    + " Measurement ongoing. Run " + runX + " of " + (runs + -1)
+													+ "  start " + startCode + "  stop " + endCode + " " + tText; 
+    // calculate new startCode for next step 
+    startCode = startCode + offsetStep; 
+
     runX = runX + 1;
 }
 
