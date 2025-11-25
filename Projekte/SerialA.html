@@ -2222,14 +2222,16 @@ function ramp() {
 	if (stepCode <= 0) { stepCode = 1; }
 	var startCode = parseInt(document.getElementById("codesStart").value);  // number of code values
     var endCode = parseInt(document.getElementById("codesEnd").value);  // number of code values
-    var rampSrc = parseInt(document.getElementById("rampSrc").value);  // number of code values
-	var avgNr =  Math.round(dataMax2 / (endCode - startCode + 1) / 4); // dataMax2 / 256 / 4;  
+    var rampSrc = parseInt(document.getElementById("rampSrc").value);  // Selected Channel
+//	var avgNr =  Math.round(dataMax2 / (endCode - startCode + 1) / 4); // dataMax2 / 256 / 4;  
+	var avgNr =  Math.round(dataMax2 / (endCode - startCode + 1) / 4 * 
+	             (endCode - startCode + 1) / 256 ); // dataMax2 / 256 / 4;  
 	var nrError = Math.trunc((endCode - startCode + 1)/stepCode);
     nrCodes = Math.trunc((endCode - startCode) / stepCode) + 1; // for graph bins
 	
-	/* alert(nrCodes + "," + stepCode + "," + startCode + "," 
-	    + endCode + "," +avgNr + "," + nrError);
-    */
+//	 alert(nrCodes + "," + stepCode + "," + startCode + "," 
+//	    + endCode + "," +avgNr + "," + nrError);
+    
 	
     var channelsA =[];
 

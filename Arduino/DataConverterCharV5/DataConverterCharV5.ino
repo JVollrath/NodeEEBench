@@ -14,7 +14,9 @@
     OSC4: AIN[5], PA05, A4, D19  
     OSC5: PMOD AD2 Digilent
   Transfers 16k values to serial port.
-      
+
+  Serial CDAC with CD4053 and MCOP6022 used with    
+  SerialAx.bat   
   This example code is in the public domain.
 
   Written 9 Sep 2020 by Joerg Vollrath
@@ -38,7 +40,7 @@
 #define DAC_D7          13
 */
 
-/* C serial  */
+/* C serial  CD4053  and MCP6022 */
 #define DAC_INH          0
 #define DAC_C12          1
 #define DAC_Dx           2
@@ -284,7 +286,7 @@ void digWrite(uint16_t sineValue){
 }
 */
 
-int activeS   =      20; // 1 tested Time switches are closed for charge redistribution 1 makes 30/2048 error at 10 pF 
+int activeS   =      120; // 1 tested Time switches are closed for charge redistribution 1 makes 30/2048 error at 10 pF 
 int nBits = 9;     // number of send bits
 
 /* C serial digitalw rite */
