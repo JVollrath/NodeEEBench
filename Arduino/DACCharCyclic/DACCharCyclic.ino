@@ -2,22 +2,13 @@
 
 /*
   Target board Arduino MKR WIFI 1010
-  This sketch generates a sine signal with 
-     DAC: DAC0, AIN[0], PA02, A0, D15
-     PWL: AIN[7],PA07,A6,D21
-     Digital: PA22,23,10,11,PB10,11,PA20, PA21
-     PMOD DA2 Digilent
-  This sketch samples:
-    OSC1: AIN[10], PB02, A1, D16 
-    OSC2: AIN[11], PB03, A2, D17
-    OSC3: AIN[4], PA04, A3, D18 
-    OSC4: AIN[5], PA05, A4, D19  
-    OSC5: PMOD AD2 Digilent
-  Transfers 16k values to serial port.
-      
+  A cyclic R2R DAC is realized
+  Details:
+  https://personalpages.hs-kempten.de/~vollratj/InEl/2025_V03_R2R_DAC_Analysis.html
+
   This example code is in the public domain.
 
-  Written 9 Sep 2020 by Joerg Vollrath
+  Modified 26 Nov 2025 by Joerg Vollrath
 */
 #include <SPI.h> // Include library
 #include <Wire.h> // call library
@@ -30,10 +21,16 @@
 #define DAC_D1          1
 #define DAC_D2          2
 #define DAC_D3          3
+/*
 #define DAC_D4          4
 #define DAC_D5          5
 #define DAC_D6          6
 #define DAC_D7          13
+*/
+#define DAC_C          6     // switch samplex  active low
+#define DAC_B          5     // switch sampley  active low
+#define DAC_A          4     // switch sample   active low
+
 
 #define DAC_PWM          7
 
@@ -132,7 +129,7 @@ uint16_t lookup8[] = {
 };
   //  uint16_t osc[10*1024] ;
     
-    uint16_t bitsX[] = {1,2,4,8,16,32,64,128};
+    uint16_t bitsX[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768};
     uint16_t sineX =0;
 
     int baseFreq = 0;        // ramp or sine
@@ -163,10 +160,14 @@ void setup() {
   pinMode(DAC_D1, OUTPUT);
   pinMode(DAC_D2, OUTPUT);
   pinMode(DAC_D3, OUTPUT);
-  pinMode(DAC_D4, OUTPUT);
-  pinMode(DAC_D5, OUTPUT);
-  pinMode(DAC_D6, OUTPUT);
-  pinMode(DAC_D7, OUTPUT);
+  
+  pinMode(DAC_C, OUTPUT);
+  pinMode(DAC_B, OUTPUT);
+  pinMode(DAC_A, OUTPUT);
+ // pinMode(DAC_D4, OUTPUT);
+ // pinMode(DAC_D5, OUTPUT);
+ // pinMode(DAC_D6, OUTPUT);
+ // pinMode(DAC_D7, OUTPUT);
  
  // initialize serial communication at 115200
  Serial.begin(115200);
@@ -232,6 +233,7 @@ void digWrite(uint16_t sineValue){
   } else {
     digitalWrite(DAC_D3, LOW);    
   }
+  /*
   if ((sineValue & bitsX[4]) == bitsX[4] ) {
     digitalWrite(DAC_D4, HIGH);
   } else {
@@ -252,9 +254,112 @@ void digWrite(uint16_t sineValue){
   } else {
     digitalWrite(DAC_D7, LOW);    
   }
-  
+  */
 }
 
+int activeS   =      4; // 5 charge redistribution pulse 
+int offS   =      0;     // 1 time between sampling 
+
+void r2rWrite(uint16_t sineValue){
+  digitalWrite(DAC_A, HIGH);    
+  digitalWrite(DAC_B, HIGH);
+  digitalWrite(DAC_C, HIGH);
+  // Apply first 4 bits
+  if ((sineValue & bitsX[0]) == bitsX[0] ) {
+    digitalWrite(DAC_D0, HIGH);
+  } else {
+    digitalWrite(DAC_D0, LOW);    
+  }
+  if ((sineValue & bitsX[1]) == bitsX[1] ) {
+    digitalWrite(DAC_D1, HIGH);
+  } else {
+    digitalWrite(DAC_D1, LOW);    
+  }
+  if ((sineValue & bitsX[2]) == bitsX[2] ) {
+    digitalWrite(DAC_D2, HIGH);
+  } else {
+    digitalWrite(DAC_D2, LOW);    
+  }
+  if ((sineValue & bitsX[3]) == bitsX[3] ) {
+    digitalWrite(DAC_D3, HIGH);
+  } else {
+    digitalWrite(DAC_D3, LOW);    
+  }
+  // cycle result
+  digitalWrite(DAC_B, LOW);
+  delayMicroseconds(activeS*5);   
+  digitalWrite(DAC_B, HIGH);
+  delayMicroseconds(offS*5);   
+  digitalWrite(DAC_C, LOW);
+  delayMicroseconds(activeS*5);   
+  digitalWrite(DAC_C, HIGH);
+  delayMicroseconds(offS*5);   
+ 
+  if ((sineValue & bitsX[4]) == bitsX[4] ) {
+    digitalWrite(DAC_D0, HIGH);
+  } else {
+    digitalWrite(DAC_D0, LOW);    
+  }
+  if ((sineValue & bitsX[5]) == bitsX[5] ) {
+    digitalWrite(DAC_D1, HIGH);
+  } else {
+    digitalWrite(DAC_D1, LOW);    
+  }
+  if ((sineValue & bitsX[6]) == bitsX[6] ) {
+    digitalWrite(DAC_D2, HIGH);
+  } else {
+    digitalWrite(DAC_D2, LOW);    
+  }
+  if ((sineValue & bitsX[7]) == bitsX[7] ) {
+    digitalWrite(DAC_D3, HIGH);
+  } else {
+    digitalWrite(DAC_D3, LOW);    
+  }
+  
+  // cycle result
+  digitalWrite(DAC_B, LOW);
+  delayMicroseconds(activeS*5);   
+  digitalWrite(DAC_B, HIGH);
+  delayMicroseconds(offS*5);   
+  digitalWrite(DAC_C, LOW);
+  delayMicroseconds(activeS*5);   
+  digitalWrite(DAC_C, HIGH);
+  delayMicroseconds(offS*5);   
+
+  if ((sineValue & bitsX[8]) == bitsX[8] ) {
+    digitalWrite(DAC_D0, HIGH);
+  } else {
+    digitalWrite(DAC_D0, LOW);    
+  }
+  if ((sineValue & bitsX[9]) == bitsX[9] ) {
+    digitalWrite(DAC_D1, HIGH);
+  } else {
+    digitalWrite(DAC_D1, LOW);    
+  }
+  if ((sineValue & bitsX[10]) == bitsX[10] ) {
+    digitalWrite(DAC_D2, HIGH);
+  } else {
+    digitalWrite(DAC_D2, LOW);    
+  }
+  if ((sineValue & bitsX[11]) == bitsX[11] ) {
+    digitalWrite(DAC_D3, HIGH);
+  } else {
+    digitalWrite(DAC_D3, LOW);    
+  }
+
+  // finish update output
+  digitalWrite(DAC_B, LOW);
+  delayMicroseconds(activeS*5);   
+  digitalWrite(DAC_B, HIGH);
+  delayMicroseconds(offS*5);   
+  //digitalWrite(DAC_C, LOW);     // update output
+  digitalWrite(DAC_A, LOW);
+  delayMicroseconds(activeS*5);   
+  //digitalWrite(DAC_C, HIGH);
+  digitalWrite(DAC_A, HIGH);
+  delayMicroseconds(offS*5);   
+
+}
 
 void loop() {
   // put your main code here, to run repeatedly:
@@ -264,7 +369,6 @@ void loop() {
   int bufIndex = 0;
   uint16_t oscX = 0;
   int indexL = 0;
-  
   
         // oscConfig  4     3   2        1 
         // operation  OSC1  AD2 AD2,OSC1 AD2,OSC1,OSC2,OSC3,OSC4
@@ -393,7 +497,8 @@ void loop() {
         // writing PWM
         analogWrite(DAC_PWM, sine8);
         // writing digital
-        digWrite(sine8);       
+        // digWrite(sine8);       
+        r2rWrite(sine12);  // cyclic R2R       
         writeDAC(sine12);
         
         Serial.print(i1);             // print index
@@ -428,11 +533,11 @@ void loop() {
            Serial.print(" , ADC(OSC1) = ");
            Serial.print(oscX);
         } else if (oscConfig == 1) { // 4k samples ADC_OSC1, ADC_OSC2, ADC:OSC3, PMOD AD2 
-           oscX = 0;
            for (int iAvg = 0; iAvg < avg; iAvg++) { // Read ADC averaging times
              oscX += readADC();
            }
            oscX = oscX / avg;
+           // oscX = readADC();
            Serial.print(" , ADC(AD2) = ");
            Serial.print(oscX);
            oscX = analogRead(ADC_OSC1);

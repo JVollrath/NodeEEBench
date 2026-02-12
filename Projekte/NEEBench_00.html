@@ -4,7 +4,7 @@
    oscilloscope and arbitrary waveform generator based on FPGA BASYS3 and nodejs JavaScript" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
-    <title>Serial A</title>
+    <title>Node EEBench</title>
  <style>
 .slidecontainer {
   width: 100%;
@@ -102,71 +102,95 @@ td.top {vertical-align: top;}
 	<td class="tb" onclick="tabAct(4)">&nbsp;&nbsp;Histogram&nbsp;&nbsp;</td>
 	<td class="tb" onclick="tabAct(5)">&nbsp;&nbsp;Ramp&nbsp;Test&nbsp;INL,&nbsp;DNL&nbsp;&nbsp;</td>
 	<td class="tb" onclick="tabAct(6)">&nbsp;&nbsp;Lookup&nbsp;Table&nbsp;&nbsp;</td>
+	<td class="tb" onclick="tabAct(7)">&nbsp;&nbsp;Settling&nbsp;Time&nbsp;&nbsp;</td>
+	<td class="tb" onclick="tabAct(8)">&nbsp;&nbsp;Power&nbsp;Supply&nbsp;&nbsp;</td>
+	<td class="tb" onclick="tabAct(9)">&nbsp;&nbsp;Bodeplot&nbsp;&nbsp;</td>
+	<td class="tb" onclick="tabAct(10)">&nbsp;&nbsp;Digital&nbsp;I/O&nbsp;&nbsp;</td>
+	<td class="tb" onclick="tabAct(11)">&nbsp;&nbsp;Applications&nbsp;&nbsp;</td>
+	<td class="tb" onclick="tabAct(12)">&nbsp;&nbsp;Test Flow&nbsp;&nbsp;</td>
 	<td class="tbr"> &nbsp; &nbsp; </td></tr>
 </table>
 
 <!---------------------- Configuration ------------------------------------------->
 <div id="tab0" class="tabX" style="display:block">
-  <h2> Configuration </h2>
+  <h2> Configuration (Version: NodeEEBenchV20251015.zip)</h2>
   <br>
   <table>
   <tr>
-  <td> System:  Arduino MKR WIFI1010</td>
+  <td> System: </td>
+    <td>Board:</td>
+	<td id="boardT">
+	 <select name="board" id="board" onchange="selectBoard()">
+      <option value="0"> BASYS 3 </option>
+      <option value="1"> Simulation </option>
+      <option value="2"> Arduino MKR Wifi 1010</option>
+      <option value="3"> Raspberry Pi not working yet</option>
+      <option value="4"> Infineon XMC4700 Relax Kit not working yet</option>
+      </select>
+    </td>
   </tr>
   <tr>
   <td> System: </td>
     <td>Communication:</td>
-	<td id="com">Serial over USB (Serial NodeJs, StartServerAx.bat, ServerAx.bat)</td>
+	<td id="com">Serial over USB (Serial NodeJs, LAN over USB?, WLAN?)</td>
+  </tr>
+  </table>
+  <table>
+  <tr id="fpgaADC" style="display:block"><td>FPGA:</td>
+    <td>OSC1:</td><td> XADC1 (12 Bit, 1 MSps / 8)</td>
+    <td>OSC2:</td><td> XADC2 (12 Bit, 1 MSps / 8)</td>
+    <td>OSC3:</td><td> XADC3 (12 Bit, 1 MSps / 8)</td>
+    <td>OSC4:</td><td> XADC4 (12 Bit, 1 MSps / 8)</td>
+  </tr>
+  <tr id="ardADC" style="display:block"><td>Arduino:</td>
+    <td>OSC1:</td><td> ADC0 (12 Bit, 200 kSps)</td>
+    <td>OSC2:</td><td> ADC1 (12 Bit, 200 kSps)</td>
+    <td>OSC3:</td><td> ADC2 (12 Bit, 200 kSps)</td>
+    <td>OSC4:</td><td> PMOD AD2 (12 Bit, 200 kSps)</td>
   </tr>
   </table>
   <table>
   <tr>
-    <td>OSC1:</td>
-	<td>
-	  <select name="o1Config" id="o1Config" onchange="setConf()">
-      <option value="0"> PMOD AD2</option>
-     </select>
-	</td>
-    <td>OSC2:</td><td> Arduino pin A1</td>
-    <td>OSC3:</td><td> Arduino pin A2</td>
-    <td>OSC4:</td><td> Arduino pin A3</td>
-  </tr>
-  <tr>
-    <td colspan="2">Averaging PMOD ADC</td>
-	<td> 
-	  <select name="avgADC" id="avgADC" onchange="setAvg()">
-      <option value="1" selected>1</option>
-      <option value="4">4</option>
-      <option value="16">16</option>
-     </select>
-	</td>
     <td colspan="2">OSC Sampling time: </td>
-	<td> <span id="timeSampling">1.3..4 ms</span>
+	<td> <input type="text" value="8.32 us" size="7" id="timeSampling" onkeyup="selectBoard()"/> 
+    </td>
+    <td colspan="2">OSC maximum buffer size: </td>
+	<td> <input type="text" value="8192" size="5" id="oBufVal" onkeyup=""/>
     </td>
   </tr>
-  <tr>
-    <td>AWG1: Arduino A0</td>
-	<td>
-	  <select name="a10Config" id="a10Config" onchange="setConf()">
-      <option value="0" selected>R2R</option>
-      <option value="1">C serial</option>
-     </select>
-	  <select name="a11Config" id="a10Config" onchange="setConf()">
-      <option value="0">None</option>
-      <option value="3" selected>PMOD DA2</option>
-     </select>
-    </td>
+  </table>
+  <table>
+  <tr id="fpgaDAC" style="display:block">
+    <td>FPGA:</td><td>AWG1:</td><td> R2R (16 Bit)</td>
     <td>AWG2:</td><td> None</td>
   </tr>
+  <tr id="ardDAC" style="display:block">
+    <td>Arduino:</td><td>AWG1:</td><td> DAC0 (12 Bit), R2R (8 Bit),<br> PMOD DA2 (12 Bit)</td>
+    <td>AWG2:</td><td> None</td>
+  </tr>
+  </table>
+  <table>
   <tr>
   <td> AWG1: </td>
     <td>Minimum voltage:</td>
 	<td id="AWG1MinV"><input type="text" value="0 V" size="5" id="AWG1MinVVal" onkeyup=""/></td>
     <td>Maximum voltage:</td><td id="AWG1MaxV"><input type="text" value="3.3 V" size="5" id="AWG1MaxVVal" onkeyup=""/></td>
-    <td>Resolution:</td><td id="AWG1Res"><input type="text" value="8" size="5" id="AWG1ResVal" onkeyup=""/> Bits</td>
+    <td>Resolution (Bits):</td><td id="AWG1Res"><input type="text" value="16" size="5" id="AWG1ResVal" onkeyup=""/></td>
   </tr>
   <tr>
-  <td colspan="7"> <img src="../ImagesS/Arduino_MKR_WIFI_1010_ADCDAC.png" width="400"</td>
+  <td colspan="2"> AWG1 sampling time: </td>
+  <td id="AWG1ts"><input type="text" value="10 ns" size="5" id="AWG1tsVal" onkeyup=""/></td>
+  </tr>
+  <tr>
+  <td colspan="2"> Lookup buffer size: </td>
+  <td id="lBuf"><input type="text" value="8192" size="5" id="lBufVal" onkeyup=""/></td>
+  </tr>
+  
+  <tr>
+  <td colspan="7"> 
+   <span  id="board0" style="display:block"><img src="../ImagesS/BASYS3_V04_01.png" width="400"></span>
+   <span  id="board2" style="display:block"><img src="../ImagesS/Arduino_MKR_WIFI_1010_ADCDAC.png" width="400"></span>
+  </td>
   </tr>
   </table>
 
@@ -176,103 +200,93 @@ td.top {vertical-align: top;}
   <br>
   <hr>
   <br>
-<div id="dataX" style="display:block"></div>
-  <br>
-  <hr>
-<div id="dataXYZ" style="display:block"></div>
-  <br>
-  <hr>
-  <br>
+<a href="https://github.com/JVollrath/NodeEEBench" class="blue">Github NodeEEBench</a><br>
+<a href="https://personalpages.hs-kempten.de/~vollratj/GET2/EI_Projektpraktikum.html" class="blue">EI Projektpraktikum</a><br>
+<a href="https://personalpages.hs-kempten.de/~vollratj/Projekte/2023_ResearchSummary.html" class="blue">Research Summary</a><br>
+<a href="https://personalpages.hs-kempten.de/~vollratj/InEl/Zip/NodeEEBench.zip" class="blue">NodeEEBench.zip</a><br>
+<a href="../Documentation/Installation.html" class="blue">Installation Notes</a><br>
 
-Implemented commands with command example values according to Arduino DataConverterCharV6.ino sketch and 
-StartServerAx.bat starting ServerAx.js:<br>
+<h4>Implemented commands with command example values according to (FPGA BASYS 3, Arduino) board:</h4><br>
+<table>
+<tr><td>"X"</td><td> (length = 1) initialize</td></tr>
+<tr><td style="vertical-align:top">"S"</td>
+    <td> (length = 25) sine signal, followed by 24-hex numbers: step, amplitude, offset each 32 bit<br>
+    <br>
+     Example f = 1 kHz, amp = 1 V, offset = 1 V as shown in AWG1: S0000A7C526C9B26C26C9B26C<br>
+    <br>
+     step = 0000A7C5, amplitude = 26C9B26C, offset = 26C9B26C<br>
+    <br>
+     Sine for FFT for BASY3:<br>
+     FFT looks good for Oscilloscope up to 1 ms/div.<br>
+     3 cycles, 1.40851 kHZ, 196608 = 3*64*1024      S000300001364D9361364D936<br>
+     11 cycles, 5.16452 kHz, 720896 = 11* 64 *1024            S000B00001364D9361364D936<br>
+     101 cycles, 47.419625 kHz, 6619136 = 101 * 64 * 1024	     S006500001364D9361364D936<br>
+    </td></tr>
+<tr><td style="vertical-align:top">"T"</td>
+    <td> (length = 21) triangle signal, followed by 20-hex numbers: start, stop, step (16-bit each), repeat (32 bit)<br>
+      <br>
+       Example pulse f = 1 kHz, amp = 1 V, offset = 1 V as shown in AWG1: T00004D924D920000C350<br>
+      <br>
+       start = 0000, stop = 4D92, step = 4D92, repeat = 0000C350<br> 
+      <br>
+       Example triangle f = 1 kHz, amp = 1 V, offset = 1 V as shown in AWG1: T00004D8A001900000040<br>
+      <br>
+       Example stair f = 1 kHz, amp = 1 V, offset = 1 V as shown in AWG1: T00004D8F0F8300002710<br>
+      <br>
+	  </td></tr>
+<tr><td style="vertical-align:top">"U"</td>
+    <td> (length = 1) start sending data: chunks of block of data are sent: 
+     AWG (aW), OSC1 (o1), OSC2 (o2), OSC3 (o3), OSC4 (o4); 16 bit each; 20 hex values <br>
+     The first transmission has the current index (cP) stored. One extra transmission, 
+	 because there can be an ongoing conversion at the current index.<br>	
+     "U01230123012301230123YX01230123012301230123Y..."<br>
+      U(o4)(o3)(cP)(o1)(AW)YX(o4)(o3)(o2)(o1)(AW)Y...<br>
+    </td></tr>	  
+<tr><td>"V"</td><td> Connect switches to output.</td></tr>
+<tr><td style="vertical-align:top">"O"</td>
+    <td> (length = 9) Oscilloscope block size 16 bit and sampling rate 16 Bit (V_06)<br>
+      Command: O02000000 : Block size x0200 = 512; timeBase 0000 8.32 us (BASYS 3 XADC)</td></tr>
+<tr><td style="vertical-align:top">"R"</td>
+    <td> command transfers 8k data 16 bit hex data to lookup table for digital IOs<br>
+     R0000..FFFF</td></tr>
+<tr><td>"Q"</td><td> command activates the lookup table</td></tr>	 
+</table>
 <br>
-quiet: Disables console output of data sent to client<br> 
-log: Enables console output of data sent to client<br> 
-f&lt;nr&gt;: waveform<br>
-     nr &lt;100 rectangle min code,max code<br>
-     100 &lt;= nr &lt;200 ramp<br>
-     200 &lt;=nr &lt;400 1 period sine<br>
-     400 &lt;=nr &lt;600 11 period sine<br>
-     600 &lt;=nr &lt;800 101 period sine<br>
-     1001 period sine<br>
-b sends correction table for binary weighted DAC 12 comma separated values (16 bit)<br>
-     b256,34,8,0,0,0,0,0,0,0<br>
-c sends 8 numbers vor osc1,2,3,4,awg10,11,awg20,21<br>
-     c00001000 : the '1' activates serial DAC<br>
-     c00000000 : the '0' activates R2R DAC<br>
-t sends lookup table<br>
-r sends range for AWG<br>
-a send repeat averaging for MOD ADC<br> 
-<br>
-<br>
-07.02.2025 Implemented serial DAC option and binary correction DataConverterCharV6.ino<br>
-29.11.2023 Implemented Ramp test INL, DNL and lookup table transfer 
-with DataConverterCharV4.ino<br>
-Arduino acquisition is as fast as possible.<br> 
+
+ 
 </div>
 
 <!---------------------- Arbitrary Waveform Generator 1 ------------------------------------------->
 <div id="tab1" class="tabX" style="display:none">
-  <h2> Arbitrary Waveform Generator</h2>
- <table>
- <tr style="display:block"><td class="bo" colspan="2">
+  <h2> Arbitrary Waveform Generator 1</h2>
+ <table >
+ <tr><td class="bo" colspan="2">
      <span id="aRun"  style="display:block" onclick="aOp('Run')"><img src="ImagesS/Run.png" width="16"> Run  </span>
 	 <span id="aStop" style="display:none"  onclick="aOp('Stop')"><img src="ImagesS/Stop.png" width="16"> Stop </span> </td>
  </tr>
  <tr>
-   <td class="bo" align="center" bgcolor="#99e6ff" onclick="setWave(0);" id="dc" style="display:none"><img src="ImagesS/DC.png" width="32"><br>DC</td>
-   <td class="bo" align="center" bgcolor="#FFFFFF"  onclick="setWave(3);" id="triangle"><img src="ImagesS/Triangle.png" width="32"><br>Triangle</td>
+   <td class="bo" align="center" bgcolor="#99e6ff" onclick="setWave(0);" id="dc"><img src="ImagesS/DC.png" width="32"><br>DC</td>
    <td class="bo" align="center" bgcolor="#FFFFFF" onclick="setWave(1);" id="sine"><img src="ImagesS/Sine.png" width="32"><br>Sine</td>
    <td class="bo" align="center" bgcolor="#FFFFFF" onclick="setWave(2);" id="rect"><img src="ImagesS/Rect.png" width="32"><br>Pulse</td>
-   <td class="bo" align="center" bgcolor="#FFFFFF"  onclick="setWave(4);" id="stair" style="display:none"><img src="ImagesS/Stair1.png" width="32"><br>Stair</td>
-   <td rowspan="4" style="display:none"> <canvas id="Ausgangssignal" width="400" height="300">   </canvas></td>
+   <td class="bo" align="center" bgcolor="#FFFFFF"  onclick="setWave(3);" id="triangle"><img src="ImagesS/Triangle.png" width="32"><br>Triangle</td>
+   <td class="bo" align="center" bgcolor="#FFFFFF"  onclick="setWave(4);" id="stair"><img src="ImagesS/Stair1.png" width="32"><br>Stair</td>
+   <td rowspan="4"> <canvas id="Ausgangssignal" width="400" height="300">   </canvas></td>
  </tr>
 
-<tr><td colspan="5">
-<h3>Sine Frequency</h3>
-<br>
-     <select name="fxx" id="fxx" onchange="setWave(1)">
-      <option value="300" selected> 1 period sine</option>
-      <option value="500"> 11 period sine</option>
-      <option value="1012"> 12 period sine</option>
-      <option value="1015"> 15 period sine</option>
-      <option value="1016"> 16 period sine</option>
-      <option value="700"> 101 period sine</option>
-      <option value="1256"> 256 period sine</option>
-      <option value="900"> 1001 period sine</option>
-      <option value="1000"> 8009 period sine</option>
-     </select>
-<br>
-</td></tr>
-
- <tr style="display:none"><td colspan="5">
+ <tr><td colspan="5">
   <div id="frequency" class="sliderE">
   </div>
  </td>
  </tr>
 
- <tr style="display:block"><td colspan="5">
-       <h4>Number of Codes</h4>                         <!--- name --->
- </td></tr>
-</tr>
-	 <tr><td colspan="3">  
-	    <input type="range" min="1" max="255" step="1" value="255" class="slider" id="rangeSlider" width="300"
-		  oninput="rangeVal.value = parseInt(rangeSlider.value)">
-	 </td></tr>
-	 <tr><td>Min</td><td align="center">Value </td><td align="right">Max</td></tr>
-	 <tr><td>1</td><td align="center">
-	    <input type="number" id="rangeVal" value="255" min="1" max="255"
-		oninput="rangeSlider.value = parseInt(rangeVal.value)"></input> </td><td align="right">255</td></tr>
-
- <tr style="display:none"><td colspan="5">
+ <tr><td colspan="5">
   <div id="amplitude" class="sliderE">
   </div>
  </td></tr>
 
- <tr style="display:none"><td colspan="5">
+ <tr><td colspan="5">
   <div id="offset1" class="sliderE">
-  <table style="display:none">       <!-- Slider --->
+  <table>       <!-- Slider --->
   <tr>
    <td colspan="5">
      <div id="off1" class="slidecontainer">
@@ -285,7 +299,7 @@ Arduino acquisition is as fast as possible.<br>
   <tr>
    <td>
    <div id="offset1MinCT" style="display:block">
-   <input type="text" value="1 V" size="5" id="offset1Min" onkeyup="readCR(e,'offset1','V')"/>  
+   <input type="text" value="0 V" size="5" id="offset1Min" onkeyup="readCR(e,'offset1','V')"/>  
    <img src="ImagesS/SelectListA.png" width="16" height="16" onclick="comboBox('offset1','Min','CB',1,'V')"><br>
    </div>
    <div id="offset1MinCB" style="display:none">
@@ -345,10 +359,11 @@ Arduino acquisition is as fast as possible.<br>
 </tr>
 
 </table>
-<br>
 <div id="cmd"></div>
 <div id="step"></div>
 <br><br><br><br><br><br><br><br><br><br><br>
+Make change from V to code possible<br>
+Number of periods per 64k? samples instead of frequency<br>
 </div>
 
 <!---------------------- Oscilloscope ------------------------------------------->
@@ -359,24 +374,17 @@ Arduino acquisition is as fast as possible.<br>
      <span id="oRun"  style="display:block" onclick="oOp('Run')"><img src="ImagesS/Run.png" width="16"> Run  </span>
 	 <span id="oStop" style="display:none"  onclick="oOp('Stop')"><img src="ImagesS/Stop.png" width="16"> Stop </span> </td>
  </tr>
- <tr><td class="bo">Acquisition </td><td class="bo">Average C1: 
-	 	<select id="avgC1" onclick="avgC1();">
-	     <option selected value="1"> 1</option>
-	     <option value="4"> 4</option>
-	     <option value="16"> 16</option>
-        </select>
-    </td>
+ <tr><td class="bo">Acquisition </td><td class="bo">Average: 1</td>
      <td class="bo">Number of samples: 
 	 	   <select id="dataMax" onclick="confOsc();">
    <!--   <option value="1" > 1</option> <option value="2"> 2</option>
-      <option value="4" > 4</option> <option value="8"> 8</option>
+      <option value="4" > 4</option> <option value="8"> 8</option> -->
       <option value="16" > 8 of 16</option>
 	  <option selected value="512"> 256 of 512</option>
       <option value="1024" > 512 of 1024</option> 
 	  <option value="2048"> 1024 of 2048</option>
       <option value="4096" >2048 of 4096</option> 
-	  <option value="8192"> 4096 of 8192</option> -->
-	  <option value="32768"> 16384</option>
+	  <option value="8192"> 4096 of 8192</option>
      </select>
      </td>
      <td class="bo"> xy  x-axis
@@ -391,12 +399,12 @@ Arduino acquisition is as fast as possible.<br>
 	 </td>
      <td class="bo"> Unit:
       <select id="currUnit" onchange="changeUnit()">
-       <option value="0" selected> Code </option> 
-       <option value="1"> Voltage </option>
+       <option value="0"> Code </option> 
+       <option value="1" selected> Voltage </option>
 	  </select>
 	 </td>
  </tr>
- <tr style="display:none">
+ <tr>
    <td class="bo">Trigger</td>
    <td class="bo">Source &nbsp; 
       <select name="trgSrc" id="trgSrc">
@@ -443,7 +451,7 @@ Arduino acquisition is as fast as possible.<br>
           <select id="posValS" onchange="comboBox('pos','Val','CT',2,'s')"></select>
 		  </div>
 		  </td></tr>
-		  <tr><td>Base: </td><td><input type="text" value="200 us/div" size="5" id="baseVal" onkeyup="readCRX(e,'base','s/div')"></td><td> 
+		  <tr><td>Base: </td><td><input type="text" value="2 ms/div" size="5" id="baseVal" onkeyup="readCRX(e,'base','s/div')"></td><td> 
 		  <img id="baseValCT" style="display:block" src="ImagesS/SelectListA.png" width="16" height="16" onclick="comboBox('base','Val','CB',2,'s')">
           <div id="baseValCB" style="display:none">
           <select id="baseValS" onchange="comboBox('base','Val','CT',2,'s')"></select>
@@ -495,7 +503,6 @@ Arduino acquisition is as fast as possible.<br>
 <span style="background-color:#cce6ff;" onclick="generateData()">Load data</span>&nbsp;&nbsp; 
 <span style="background-color:#cce6ff;" onclick="saveData()">Save data</span><br>
 <br>
-C1 PMOD ADC, C2 A1 Arduino, C3 A2 Arduino R2R, C4 A3 Arduino PMOD DAC <br>
 Offset, range list<br>
 connect input to chart<br>
 X,Y Cursors<br>
@@ -523,21 +530,6 @@ Math function, Fit function<br>
    </td>
   </tr>
   <tr>
-   <td class="bo">FFT point reduction &nbsp; 
-      <select name="fftPts" id="fftPts" onclick="generateFFT()">
-       <option value="1"> 1 </option>
-       <option value="2"> 2 </option>
-       <option value="4"> 4 </option>
-       <option value="8"> 8 </option>
-       <option value="16"> 16 </option>
-       <option value="32"> 32 </option>
-       <option value="64"> 64 </option>
-       <option value="128"> 128 </option>
-       <option value="256"> 256 </option>
-	  </select>
-   </td>
-  </tr>
-  <tr>
   <td class="top"><div id="fftList">
      <table><tbody><tr><td>Magnitude List Channel: </td><td class="bo2">C1</td></tr></tbody></table>  
      <table border="1"><tbody><tr><td class="bo">Index</td><td class="bo">f in Hz</td><td class="bo"> signal<br> magnitude<br> dB</td><td class="bo"> Total<br> noise<br> magnitude<br> dB </td></tr>
@@ -547,7 +539,8 @@ Math function, Fit function<br>
   </td>
   </tr>
 </table>
-
+<div id="infoX">
+</div>
 </div>
 
 <!---------------------- Histogram --------------------------------------------------------->
@@ -582,7 +575,9 @@ Math function, Fit function<br>
 <div id="tab5" class="tabX" style="display:none">
 <h2>Ramp Test INL and DNL</h2>
 <br>
-Assuming first 4k data are a ramp.<br>
+BASYS3 has 16 bit R2R 3.3 V DAC and 4k lookup table.<br>
+For 1 V maximum input range the maximum end code value is: 19858<br>
+Therefore step size is 19858/4096 = 5<br>
 <br>
 <table class="bx">
  <tr><td class="bo" colspan="2">
@@ -591,15 +586,15 @@ Assuming first 4k data are a ramp.<br>
  </tr>
   <tr>
   <td class="bo">
-  Step (Default 1):</td><td>
-     <input type="text" value="1" size="6" id="codesStep"/>  </td>
+  Step (Default 5):</td><td>
+     <input type="text" value="5" size="6" id="codesStep"/>  </td>
     </tr>
   <tr><td class="bo">
     Start Code (Default 0): </td><td><input type="text" value="0" size="6" id="codesStart"/>  <br>
   </td>
   </tr>
   <tr><td class="bo">
-    End Code (Default 255):</td><td><input type="text" value="255" size="6" id="codesEnd"/>  <br>
+    End Code (Default 19858):</td><td><input type="text" value="19858" size="6" id="codesEnd"/>  <br>
   </td>
   </tr>
   <tr>   <td class="bo">
@@ -627,68 +622,53 @@ Assuming first 4k data are a ramp.<br>
   </tr>
 </table>  
 <div id="bestL"></div><br>
+<br>
+<hr>
 </div>
 
 <!---------------------- Lookup Table --------------------------------------------------------->
 <div id="tab6" class="tabX" style="display:none">
 <h2>Lookup Table</h2>
 <br> 
-There should be 256 comma separated values in the text input field.<br>
+There should be 256 8 Bit (Arduino), 8k 16 Bit values (BASYS3) comma 
+separated values in the text input field.<br>
 <br>
 <textarea id="lookupX" name="lookupX" rows="8" cols="128">
-0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,
-32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,
-64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,
-96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,
-128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,
-160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,
-192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,
-224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255 
 </textarea><br>
 <input type="submit" value="Submit" onclick="sendLookup();"></input>
 <br>
-<input type="submit" value="Reset table" onclick="resetLookup();"></input><br>
+<input type="submit" value="Reset table" onclick="defaultLookup(0);"></input><br>
+<input type="submit" value="Reverse table" onclick="defaultLookup(1);"></input><br>
+<input type="submit" value="Rounded" onclick="defaultLookup(3);"></input><br>
 <br>
-<div style="display:none">
-<h3>Example tables</h3>
-Linear:<br>
-<div id="linearT">0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,<br>
-32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,<br>
-64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,<br>
-96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,<br>
-128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,<br>
-160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,<br>
-192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,<br>
-224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255</div>
+<input type="submit" value="Activate" onclick="activateLookup();"></input>
 <br>
-Scrambled:<br>
-0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,<br>
-64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,<br>
-128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,<br>
-192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,<br>
-224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255, <br>
-160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,<br>
-96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,<br>
-32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63<br>
+<input type="submit" value="Deactivate" onclick="deactivateLookup();"></input>
 <br>
-MyLookup:<br>
-<div id="myLookup"></div>
-</div>
+  Fixed value:</td><td>
+     <input type="text" value="1" size="6" id="lookupVal"/><br>
+<input type="submit" value="Fixed value" onclick="defaultLookup(2);"></input>
+<br>
 </div>
 
 <div id="tab7" class="tabX" style="display:none">
-<h2>Power supply</h2>
+<h2>Settling time</h2>
 </div>
 
 <div id="tab8" class="tabX" style="display:none">
-<h2>Bodeplot</h2>
+<h2>Power supply</h2>
 </div>
 
 <div id="tab9" class="tabX" style="display:none">
-<h2>Digital I/O</h2>
+<h2>Bodeplot</h2>
 </div>
 
 <div id="tab10" class="tabX" style="display:none">
+<h2>Digital I/O</h2>
+</div>
+
+<!------ Application ----------------->
+<div id="tab11" class="tabX" style="display:none">
 <h2>Applications</h2>
 
 IV curves: R, Diode, transistor, opamp, inverter<br>
@@ -702,6 +682,81 @@ Microprocessors<br>
 Digital signal processing and control loops<br>
 </div>
 
+<!------ Test Flow ----------------->
+<div id="tab12" class="tabX" style="display:none">
+<h2>Test Flow</h2>
+
+     <span id="tRun"  style="display:block" onclick="tOp('Run')"><img src="ImagesS/Run.png" width="16"> Run  </span>
+	 <span id="tStop" style="display:none"  onclick="tOp('Stop')"><img src="ImagesS/Stop.png" width="16"> Stop </span> </td>
+
+FPGA Test Flow:<br>
+<!------ Test commands ----------------->
+<textarea id="testT" name="lookupX" rows="20" cols="80">
+_tabAct=1; AWG1 tab
+_setWave=1; AWG1; Sine
+#amplitudeVal=0.4 V; AWG1; Amplitude
+#offset1Val=0.5 V; AWG1; Offset 
+;sloop #baseval=('5 ms/div','200 us/div'); OSC; Time Base
+#baseVal=5 ms/div, OSC, Time Base
+;floop #frequencyVal=('40 Hz','500 Hz'); AWG1; Frequency 
+#frequencyVal=40 Hz; AWG1; Frequency
+_tabAct=1; AWG1 tab
+_aOp=Run; AWG1; Run (continous)
+_tabAct=2; OSC tab
+_oOp=Run; OSC; Run (once)
+- Measurement: avg=0.5V, amp=0.4V, frequency=40Hz<br> 
+#oAWG1Avg; OSC; Measure; AWG1 average
+- ,    
+#oAWG1Amp; OSC; Measure; AWG1 amplitude   
+- , 
+#oAWG1f; OSC; Measure; AWG1 frequency   
+- <br> 
+#oC1Avg; OSC; Measure; AWG1 average   
+- , 
+#oC1Amp; OSC; Measure; AWG1 amplitude   
+- , 
+- <br> 
+#oC1f; OSC; Measure; AWG1 frequency   
+_oOp=Stop; OSC; Run (once)
+_fOp=Run; FFT tab
+#fftSrc=1; FFT select AWG1
+_cHarm; FFT calculate harmonics 
+#fftTable; FFT table
+- Index: 
+#fftIndex0; FFT Measure   
+- Frequency: 
+#fftfreq0; FFT Measure   
+- Signal magnitude: 
+#fftSM0; Signal magnitude FFT Measure   
+- Noise magnitude: 
+#fftNM0; FFT Noise magnitude Measure   
+- <br> 
+#fftSrc=3; FFT select C2
+_cHarm; FFT calculate harmonics 
+#fftTable; FFT table
+_tabAct=12; Test flow tab
+_tOp=Stop; Test flow stop
+;eloop
+</textarea>
+<!------ Test results ----------------->
+<div id="testR">
+</div>
+<br>
+First character determines command<br>
+# Reading values: #&lt;id&gt;<br>
+# Writing values: #&lt;id&gt;='value'<br>
+_Executing actions/functions: _&lt;name&gt;='arguments'<br> 
+; starts comment<br>
+-print function<br>
+<br>
+Commands have to implemented in runFlow() funciton.<br>
+<h3>ToDo</h3>
+Looping values: sloop #&lt;id&gt;=('value1','value2',...)<br>
+Tracking value: sloop #&lt;id&gt;=('value','value2',...)<br>
+End of Loop: eloop<br>
+
+</div>
+
 <script>
 
  var srcX = ["AWG","OSC4", "OSC3","OSC2","OSC1"];
@@ -709,26 +764,26 @@ Digital signal processing and control loops<br>
  var dataIndex = 1;
 
 var curveTyp = 1;
-var e;      // event
-var aXY = [];   // x y values AWG
-var aGrN = 64;  // number of xy values AWG
+var e;                // event
+var aXY = [];         // x y values AWG
+var aGrN = 64;        // number of xy values AWG
 var aState = "Stop";  // awg1 state
 var oState = "Stop";  // oscilloscope state
 var fState = "Stop";  // FFT state
 var hState = "Stop";  // histogram state
 var rState = "Stop";  // ramp test INl, DNL state
-var lookupT = 0;      // Variable will be set when custom lookup table is sent.
 var busy = 0;
 var timeBase = 0; // timeBase 0 every cycle, 1 every second cycle sampling cms send via sendCmdC cmdTxT.value
 var trgPos = -1;  // Trigger position
+var testflow = 0;  // testflow active = 1 otherwise 0
 
 // range
 var voltRange = ["5 V","4 V","3 V","2 V","1 V","900 mV", "800 mV", "700 mV", "600 mV",
                  "500 mV","400 mV","300 mV","200 mV","100 mV","80 mV","60 mV","50 mV","0 V",
 				 "-50 mV","-60 mV","-80 mV","-100 mV","-200 mV","-300 mV","-400 mV","-500 mV",
 				 "-600 mV","-700 mV","-800 mV","-900mV","-1 V","-2 V","-3 V","-4 V","-5 V"];
-var voltDivRange = ["5 V/div","4 V/div","3 V/div","2 V/div","1 V/div","500 mV/div", "100 mV/div",
-                 "50 mV/div","10 mV/div","5 mV/div","1 mV/div","500 uV/div","100 uV/div"];
+var voltDivRange = ["5 V/div","4 V/div","3 V/div","2 V/div","1 V/div","500 mV/div", "200 mV/div", "100 mV/div",
+                 "50 mV/div","10 mV/div","5 mV/div","2 mV/div","1 mV/div","500 uV/div","100 uV/div"];
 var timeRange = ["-1 s", "-500 ms", "-200 ms", "-100 ms", "-50 ms", "-20 ms","-10 ms", "-5 ms", 
                  "-2 ms", "-1 ms", "-500 us",  "-200 us", "-100 us", "-50 us",  "-10 us", "-5 us",
 				 "0 s", "5 us", "10 us", "50 us", "100 us", "500 us", "1 ms", "5 ms", "10 ms",
@@ -740,7 +795,7 @@ var frequencyRange = ["5 MHz","2 MHz","1 MHz","500 kHz","200 kHz","100 kHz", "50
                  "5 kHz","2 kHz","1 kHz","500 Hz","200 Hz","100 Hz","50 Hz","20 Hz","10 Hz",
 				 "5 Hz","2 Hz","1 Hz","500 mHz","200 mHz","100 mHz","50 mHz","20 mHz",
 				 "10 mHz","5 mHz","2 mHz","1mHz","500 uHz","200 uHz","100 uHz"];
-var codeRange = [16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072];
+var codeRange = [1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072];
 var codePos = [-16,-32,-64,-128,-256,-512,-1024,-2048,-4096,-8192,-16384,-32768,-65536,-131072];
 
 function tabAct(x) { // show only active tab
@@ -763,17 +818,38 @@ function tabAct(x) { // show only active tab
 
 }
 
-function setAvg() {  // set averaging
-    var repeatX = parseInt(document.getElementById("avgPMOD").value);
-	document.getElementById("cmd").innerHTML = "a" + awg1;
-	sendCmd();        // send command
-}
-
-function setConf() {  // send configuration
-    var txt ="c0000100000";
-    var awg1 = parseInt(document.getElementById("a10Config").value);
-	document.getElementById("cmd").innerHTML = "c0000" + awg1 + "000";
-	sendCmd();        // send command
+function selectBoard() {
+  // 0 FPGA 1 Simulation 2 Arduino 3 RaspberryPi 4 Infineon
+  var boardX = document.getElementById("board").value;
+  document.getElementById("board0").style.display = "none";
+  document.getElementById("board2").style.display = "none";
+  document.getElementById("fpgaADC").style.display = "none";
+  document.getElementById("fpgaDAC").style.display = "none";
+  document.getElementById("ardADC").style.display = "none";
+  document.getElementById("ardDAC").style.display = "none";
+  if (boardX == 0) { 
+    document.getElementById("board0").style.display = "block";
+    document.getElementById("fpgaADC").style.display = "block";
+    document.getElementById("fpgaDAC").style.display = "block";
+    document.getElementById("timeSampling").value = valueToUnit(8.32E-6) + "s";
+    document.getElementById("AWG1tsVal").value = valueToUnit(10E-9) + "s";
+    document.getElementById("oBufVal").value = 8192;  // Lookup buffer value
+    document.getElementById("lBufVal").value = 4096;  // Lookup buffer value
+  } else if (boardX == 1) {
+    document.getElementById("timeSampling").value = valueToUnit(1E-6) + "s";
+    document.getElementById("AWG1tsVal").value = valueToUnit(1E-6) + "s";
+    document.getElementById("oBufVal").value = 8192;  // Lookup buffer value
+    document.getElementById("lBufVal").value = 0;  // not done yet
+  }else if (boardX == 2) {  
+    document.getElementById("board2").style.display = "block";
+    document.getElementById("ardADC").style.display = "block";
+    document.getElementById("ardDAC").style.display = "block";
+    // document.getElementById("timeSampling").value = valueToUnit(380E-6) + "s"; //
+    document.getElementById("timeSampling").value = valueToUnit(430E-6) + "s"; // 2025.7.24 Latest version
+    document.getElementById("AWG1tsVal").value = valueToUnit(430E-6) + "s";
+    document.getElementById("oBufVal").value = 2048; // Arduino.ino bufVal[2048*5]
+    document.getElementById("lBufVal").value = 256;  // not yet done
+	}
 }
 
 function aOp(cmd) {  // AWG operation
@@ -832,7 +908,7 @@ function oOp(cmd) {  // oscilloscope reading
   document.getElementById("cmd").innerHTML = cmdTemp;
 }
 
-function fOp(cmd) {  // oscilloscope reading
+function fOp(cmd) {  // FFT activation
   if (cmd == "Run") {
     document.getElementById("fStop").style.display="block";
     document.getElementById("fRun").style.display="none";
@@ -845,11 +921,11 @@ function fOp(cmd) {  // oscilloscope reading
   }
 }
 
-function hOp(cmd) {  // oscilloscope reading
+function hOp(cmd) {  // histogram activation
   if (cmd == "Run") {
-    document.getElementById("hStop").style.display="block";
-    document.getElementById("hRun").style.display="none";
-    hState="Run";
+    // document.getElementById("hStop").style.display="block";
+    // document.getElementById("hRun").style.display="none";
+    // hState="Run";
 	generateHisto();
   } else {
     document.getElementById("hStop").style.display="none";
@@ -858,17 +934,29 @@ function hOp(cmd) {  // oscilloscope reading
   }
 }
 
-function rOp(cmd) {  // oscilloscope reading
+function rOp(cmd) {  // activate ramp test
   if (cmd == "Run") {
     document.getElementById("rStop").style.display="block";
     document.getElementById("rRun").style.display="none";
-    // hState="Run";
-	// generateHisto();
     rState="Run";
+	generateRamp();
   } else {
     document.getElementById("rStop").style.display="none";
     document.getElementById("rRun").style.display="block";
     rState="Stop";
+  }
+}
+
+function tOp(cmd) {  // activate ramp test
+  if (cmd == "Run") {
+    document.getElementById("tStop").style.display = "block";
+    document.getElementById("tRun").style.display = "none";
+    testflow = 1;
+	startFlow();
+  } else {
+    document.getElementById("tStop").style.display = "none";
+    document.getElementById("tRun").style.display = "block";
+    testflow = 0;
   }
 }
 
@@ -895,7 +983,6 @@ function setWave(nr) {
   }
   // Missing disable Frequency Amplitude for DC
   plotAWG();
-  genCmdAWG();
 }
 
 
@@ -925,14 +1012,16 @@ function comboBox(id,minmax,nr,slider,unit) {
   if (slider == 3) { generateHisto(); }
 }
 
-function unitToValue(txtV) {
+// Example: txtV = "200 ms/div" txtV = "1 uV"
+// return           2E-4                1E-6
+function unitToValue(txtV) { 
   var text = txtV.split(" ");  // number and unit
   // alert("x" + txtV + "x");
   var scale = 1;
   if (text.length == 0) {
     text[0] = "0";
   } else if (text.length > 1) {
-    var unit = text[1].substring(0,1); // get unit
+    var unit = text[1].substring(0,1); // get unit scaling 
     if (unit == "T") { scale = 1E12; }
     else if (unit == "G") { scale = 1E9; }
     else if (unit == "M") { scale = 1E6; }
@@ -1110,11 +1199,11 @@ function decToHex(x,d) {
    var num = Math.round(x);
    var div;
    var rest;
-   for (var i = 0; i < d; i++) {    //  8 hex digits
+   for (var i = 0; i < d; i++) {    //  d hex digits
        div = Math.trunc(num/16);
 	   rest = num % 16;
 	   // alert(num +"x" + div + "x" + rest);
-	   hex = hexN[rest] + hex;
+	   hex = hexN[rest] + hex;  // LSB...MSB
 	   num = div;
    }
    return hex;
@@ -1136,81 +1225,172 @@ function hexToDec(x) {
    return dec;
 }
 
-function genCmdAWG() {  // generate serial command for Arduino
+function isPrime (n) {
+   if (n===1){
+      return false;
+   }else if(n === 2){
+      return true;
+   }else{
+      for(let x = 2; x < n; x++){
+         if(n % x === 0){
+            return false;
+         }
+      }
+      return true;
+   };
+};
+
+function nearestPrime(num) {
+   var numX = Math.round(num);
+   while(!isPrime(++numX)){};
+   return numX;
+};
+
+
+//----------------------------------------------------------------------------------//
+//-------------------- AWG   -------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+function genCmdAWG() {  // generate serial command
   var cmd = "";
   var maxV = 3.3;
   var maxC = 32767;
-  var fCalc = 1E8; // 100 MHz update of calculation
-  var frequency = unitToValue(document.getElementById("frequencyVal").value);
-  var amp = parseInt(rangeVal.value) * 16; // amp 12 bit value arduino unitToValue(document.getElementById("amplitudeVal").value);
+  var fCalc = 1E8; // 100 MHz update of calculation sample rate generator
+  var frequency = unitToValue(document.getElementById("frequencyVal").value); // AWG frequency
+  var amp = unitToValue(document.getElementById("amplitudeVal").value);
   var off = unitToValue(document.getElementById("offset1Val").value);
-  var fxx = document.getElementById("fxx").value;
- 
+  var dataMax = parseInt(document.getElementById("dataMax").value);           // OSC buffer size
+  var ts = unitToValue(document.getElementById("timeSampling").value);        // ADC/OSC sampling time
+  var tsDAC = unitToValue(document.getElementById("AWG1tsVal").value);        // DAC sampling time
   var start;   // Triangle parameters
   var stop;
   var step;
   var repeat;
   var ampC;
   var offC;
+  var nCycle;
+  var frequency1 = frequency;
+  var infoX ="";
+  infoX = "Frequency: " + valueToUnit(frequency) ;
+  var nSample = 13 * 128;    // absolute ratio between ADC and DAC sampling rate nsampling = tsADC/tsDAC
+  // board management
+  var boardX = parseInt(document.getElementById("board").value);
+  // alert(boardX);
+  if (boardX == 0) { // FPGA
+         // document.getElementById("timeSampling").value = 8.32E-6;
+	     nSample = 13 * 128; // 1664  = 8.32us / 10 ns * 2 FPGA = Math.trunc(8.32E-6/10E-9*2) 
+		 maxC = 32767;       // 15 Bit
+  } else if (boardX == 1) { // Simulation
+         maxC = 32767;          // Maximum code 15 Bit
+         fCalc = 1 / tsDAC;     //  		 
+  } else if (boardX == 2) { // Arduino
+         maxC = 4095;         // Maximum code 12 Bit 
+		 // timeBase = 1;        // OSC Time needs slower sampling 
+		 fCalc = 1 / tsDAC;   
+  }
+  console.log("ADC sampling time " + ts + ", DAC sampling time " + tsDAC);
+
 	if (curveTyp == 0) {  // DC
-	   cmd = "T"; // triangle 
+	   cmd = "T";         // triangle as DC with start = stop
 	   start = Math.trunc(maxC / maxV * off);
        cmd = cmd + 	decToHex(start,4);   
        cmd = cmd + 	decToHex(start,4);  // stop =start DC   
-       cmd = cmd + 	"0001";     
+       cmd = cmd + 	"0000";       // before 0000 FPGA working??     
        cmd = cmd +  "00020000";  // doesn't matter
+	   stop = start; step = 0; repeat = 512;
 	} else if (curveTyp == 1) {  // Sine
-	   cmd = "f"; // Sine
-	   ampC = Math.trunc( (2*1024*1024*1024-1) / maxV * amp);
+	   cmd = "S"; // Sine
+	   ampC = Math.trunc( (2*1024*1024*1024-1) / maxV * amp); // Range 0.. 2^30
        offC = Math.trunc( (2*1024*1024*1024-1) / maxV * off);
        if (offC >= 2*1024*1024*1024) { offC = 2*1024*1024*1024-1; }
 	   if ((offC + ampC) >= 2*1024*1024*1024) { ampC = 2*1024*1024*1024-1-offC; } 	   
 	   if ((offC - ampC) < 0) { ampC = offC; }
-	   start = 0;
-	   stop = 4095;
-	   step = Math.trunc(1024*1024*1024/(fCalc/13/frequency));
-	   // step = 100900;
-	   cmd = cmd + 	decToHex(step,8);   // amplitude
+	   // correct step with better frequency for good fft
+	   // timeBase = 4 fft good 256 samples, 1 ms/div time base oscilloscope
+	   var timeX = (timeBase + 1)/4;     // For slow timeBase sampling gets slower  
+	   // fix nCycle to odd (prime)
+	   // Measurement Time: Buffer size(dataMax) * sample time OSC(1/fCalc) * sample frequency(timeX,timeBase) 
+	   //                         * nSample(Dac outputs per OSC sample)
+       // Cycle Time: 1/frequency	   
+	   nCycle = dataMax / fCalc * timeX * nSample * frequency; // number of cycles
+	   if (nCycle > 1) {   // Can only fix frequencies with more than 1 cycle
+	     nCycle = Math.round(nCycle);
+	     if ((nCycle % 2) == 0) { nCycle = nCycle + 1; }
+	     frequency1 = nCycle * fCalc / dataMax / timeX / nSample; // odd corrected frequency
+	     frequency1 = nearestPrime(nCycle) * fCalc / dataMax / timeX / nSample; // prime corrected frequency	   
+	   }
+	   // end correct step size
+	   step = Math.trunc(1024 * 1024 * 8 / fCalc * nSample * frequency1) ;
+       if ((boardX == 1) || (boardX == 2)) { // Simulation & Arduino ============
+	      var timeBaseX = timeBase;
+		  if (timeBaseX == 0) timeBaseX += 1;
+          var tm = ts * timeBaseX * dataMax / 2 ;             // displayed measurement time tm    
+		  nCycle =  tm * frequency;                           //  
+          if ( nCycle >= 1) { 
+		     nCycle = Math.round(nCycle);
+			 if (nCycle % 2 == 0) nCycle = nCycle + 1;
+		  }
+		  frequency1 = nCycle / tm;   // fix integer cycles
+		  step = Math.trunc( tsDAC *  frequency1 * 1024 * 1024 * 1024 * 4 ); // range 0..1
+       }	 
+        infoX = infoX + " is mapped to " + valueToUnit(frequency1) 
+	           + " prime " + valueToUnit(frequency) + " <br>\n"
+			   + " Cycles " + nCycle + "<br> Np: " + nearestPrime(nCycle) + " fCalc: " + fCalc
+			   + " dataMax: " + dataMax + " timeX: " + timeX + " nSample: " + nSample
+			   + " timeBase: " + timeBase;
+	   cmd = cmd + 	decToHex(step,8);   // step makes frequency 32 Bit
        cmd = cmd + 	decToHex(ampC,8);   // amplitude
-       cmd = cmd + 	decToHex(offC,8);  // offset
-       cmd = "f" + fxx + "_r" + amp;                // overwrite	   
+       cmd = cmd + 	decToHex(offC,8);  // offset  
+       start = offC - ampC; stop = offC + ampC; repeat = 0;	   
 	} else if (curveTyp == 2) {  // Pulse
-	   cmd = "f"; // PULSE
+	   cmd = "T";                // triangle as pulse 
 	   start = Math.trunc(maxC / maxV * (off-amp));  // start voltage to code
 	   stop = Math.trunc(maxC / maxV * (off+amp));   // stop voltage to code
 	   if (start < 0) start = 0;                     // no negative code
 	   if (stop > maxC) stop = maxC;                 // stop limited by maximum code
-	   step = stop - start;                          // adjust step to difference
-	   repeat = Math.trunc(1 / frequency / 2 * fCalc);    // 1E8 fFPGA 
+       if ((boardX == 1) || (boardX ==2)) {          // Simulation and Arduino ============
+         step = (stop - start);
+		 repeat = Math.round(1 / tsDAC / frequency);
+	   } else {
+	     step = stop - start;                          // adjust step to difference
+	     repeat = Math.trunc(1 / frequency / 2 * fCalc);    // 1E8 fFPGA 
+	   }
+	   // alert(repeat);
        cmd = cmd + 	decToHex(start,4);   
        cmd = cmd + 	decToHex(stop,4);  // stop =start DC   
        cmd = cmd + 	decToHex(step,4);     
-       cmd = cmd +  decToHex(repeat,8);  // frequency
-       cmd = "f50" + "_r" + amp;                // overwrite	   
+       cmd = cmd +  decToHex(repeat,8);  // frequency, repeat
    	} else if (curveTyp == 3) {  // Triangle 
 	   var repMax = 64;          // When does step change from 1 to another number
-	   cmd = "t"; // triangle 
+	   cmd = "T"; // triangle 
 	   start = Math.trunc(maxC / maxV * (off-amp));
 	   stop = Math.trunc(maxC / maxV * (off+amp));
-	   if (start < 0) start = 0;
+       if (start < 0) start = 0;
 	   if (stop > maxC) stop = maxC;
-	   repeat = 1 / frequency / (stop-start) / 2 * fCalc;    // 1E8 fFPGA 
-	   // alert(repeat);
-	   if (repeat >= repMax) { 
-	      repeat = Math.trunc(repeat); 
-	      step = 1;
-	   } else {	   
-	      step = Math.trunc(repMax / repeat);
-		  stop = Math.trunc((stop-start)/step)*step + start;
-		  repeat = repMax;
-	   }	  
+       if ((boardX == 1) || (boardX == 2)) { // Simulation & Arduino ============
+         step = (stop - start) * frequency * 2 * tsDAC;
+		 repeat = 1;
+		 // Coarseness 16
+		 var coarse = 16;
+		 if (step < coarse) { repeat =  Math.round(coarse / step); }		 
+		 step = Math.round(step * repeat);
+	   } else {
+	     repeat = 1 / frequency / (stop-start) / 2 * fCalc;    // 1E8 fFPGA 
+	     // alert(repeat);
+	     if (repeat >= repMax) { 
+	        repeat = Math.trunc(repeat); 
+	        step = 1;
+	     } else {	   
+	        step = Math.trunc(repMax / repeat);
+		    stop = Math.trunc((stop-start)/step)*step + start;
+		    repeat = repMax;
+	     }
+       }		 
 	   cmd = cmd + 	decToHex(start,4);   
        cmd = cmd + 	decToHex(stop,4);  // stop =start DC   
        cmd = cmd + 	decToHex(step,4);     
        cmd = cmd +  decToHex(repeat,8);  // frequency
-       cmd = "f100" + "_r" + amp;                // overwrite	   
 	} else if (curveTyp == 4) {  // Stair   
-	   cmd = "x"; // triangle 
+	   cmd = "T"; // triangle 
 	   start = Math.trunc(maxC / maxV * (off-amp));
 	   stop = Math.trunc(maxC / maxV * (off+amp));
 	   if (start < 0) start = 0;
@@ -1227,6 +1407,7 @@ function genCmdAWG() {  // generate serial command for Arduino
        cmd = cmd + 	decToHex(step,4);     
        cmd = cmd +  decToHex(repeat,8);  // frequency
 	}
+	document.getElementById("infoX").innerHTML = infoX;
 	document.getElementById("cmd").innerHTML = cmd;
 	document.getElementById("step").innerHTML = "Start: " + start + " Stop: " + stop
 	   + " Step: " + step + " Repeat: " + repeat;
@@ -1292,7 +1473,7 @@ function plotAWG() {
 			  "Amplitude","lin","auto","Fine");
    genCmdAWG();
    if (aState == "Run") {
-	  sendCmd();
+	sendCmd();
    }
 }
 
@@ -1392,26 +1573,30 @@ function addTimeList(){
 
 window.addEventListener("load",addTimeList());
 
-function avgC1() {
-          var avgC1 = 1;
-          var cmdO = "a";
-		  avgC1 = parseInt(document.getElementById("avgC1").value); // Average 0,1,4,16
-		  cmdO += decToHex(dataMax,4);           // Block size first
-		  // update command field
-		  document.getElementById("cmdTxt").value = cmdO;
-		  sendCmdC();                           // send OSC configuration  		  
-}
-
 function confOsc() {
           var cmdO = "O";
 		  // alert(document.getElementById("dataMax").value);
 		  dataMax = parseInt(document.getElementById("dataMax").value); // 512: 0200
+          var boardX = parseInt(document.getElementById("board").value);
 		  cmdO += decToHex(dataMax,4);           // Block size first
-		  timeBase = Math.round(unitToValue(document.getElementById("baseVal").value)/200E-6);
+		  if (currUnit == 0) { // code 
+		    timeBase = Math.round(unitToValue(document.getElementById("baseVal").value));
+		  } else { // time  200E-6:  200us/div gets timeBase 1
+		    timeBase = Math.round(unitToValue(document.getElementById("baseVal").value)/200E-6);  // 200E-6 200us/div gets timeBase 1
+		    if ((boardX == 1) || (boardX == 2)) { // Simulation
+              timeBase = Math.round(unitToValue(document.getElementById("baseVal").value) * 20 
+			             / dataMax / unitToValue(document.getElementById("timeSampling").value));  			 
+		    }
+		  }
 		  cmdO += decToHex((timeBase + 1),4);   // Sampling next FPGA 0 and 1 same! 
 		  // update command field
 		  document.getElementById("cmdTxt").value = cmdO;
 		  sendCmdC();                           // send OSC configuration  
+		  // update synchronized sine function
+          genCmdAWG();
+          if (aState == "Run") {
+	        sendCmd();
+          }
 }
 
 function updateOSC(){
@@ -1432,32 +1617,31 @@ function readCRX(key,id,unit) {
 function chanStats() {
   for (var i = 0; i < channels.length; i++) { // all channels
      var min;
-	 if (currUnit == 0) min = 1.0 * dataOSC3[i*dataMax/2];
+	 if (currUnit == 0) min = dataOSC3[i*dataMax/2];
 	 else min = dataOSC2[i*dataMax/2];
      var max = min;
 	 var avg = min;
      for (var i1 = 1; i1 < dataMax/2; i1++) {
        var point;
-	   if (currUnit == 0) point = 1.0 * dataOSC3[i*dataMax/2 + i1];
+	   if (currUnit == 0) point = dataOSC3[i*dataMax/2 + i1];
        else point = dataOSC2[i*dataMax/2 + i1];	   
 	   if ( point < min) min = point; 
 	   if ( point > max) max = point; 
 	   avg = avg + point;
-	   // if (isNaN(point)) alert(i1 +" , " + currUnit + " , " + dataOSC3[i*dataMax/2 + i1] + " , " + dataMax);
      }
 	 channels[i].min = min;
 	 channels[i].max = max;
- 	 avg = avg / dataMax * 2;
+ 	 avg = avg/dataMax*2;
 	 channels[i].average = avg;
      channels[i].amplitude = (max - min)/2;
 	 // period and frequency
 	 var t = new Array;
 	 for (var i1 = 1; i1 < dataMax/2; i1++) {
        var point1;
-	   if (currUnit == 0) point1 = 1.0 * dataOSC3[i*dataMax/2 + i1];
+	   if (currUnit == 0) point1 = dataOSC3[i*dataMax/2 + i1];
        else point1 = dataOSC2[i*dataMax/2 + i1]; 	   
 	   var point2;
-	   if (currUnit == 0) point2 = 1.0 * dataOSC3[i*dataMax/2 + i1 - 1];
+	   if (currUnit == 0) point2 = dataOSC3[i*dataMax/2 + i1 - 1];
        else point2 = dataOSC2[i*dataMax/2 + i1 - 1]; 	   
 	   var point3 = point1;
 	   if (point1 > point2) { point1 = point2; point2 = point3; }
@@ -1474,7 +1658,7 @@ function chanStats() {
 	 for (var i1 = 1; i1 < tx.length; i1++) {
 	    periodAvg += (t[i1]-t[i1-1]);  
 	 }
-	 if (currUnit == 0) periodAvg = periodAvg / (tx.length-1) * (1.0 * dataOSC3[1] - 1.0 * dataOSC3[0]) * 2;
+	 if (currUnit == 0) periodAvg = periodAvg / (tx.length-1) * (dataOSC3[1] - dataOSC3[0]) * 2;
 	 else periodAvg = periodAvg / (tx.length-1) * (dataOSC2[1] - dataOSC2[0]) * 2;
 	 channels[i].period = periodAvg;
 	 channels[i].frequency = 1/periodAvg;
@@ -1486,13 +1670,19 @@ function chanStats() {
 	var tUnit ="s"; 
 	var fUnit="Hz";
 	if (currUnit == 0) { xUnit = ""; tUnit=""; fUnit="";}
-    chanTxt += "<tr><td class='bo" + i +"'>"; 
-	chanTxt += channels[i].name + " Min: " + valueToUnit(channels[i].min)  + xUnit + "<br>"
-    chanTxt += channels[i].name + " Max: " + valueToUnit(channels[i].max) + xUnit + "<br>"
-    chanTxt += channels[i].name + " Avg: " + valueToUnit(channels[i].average) + xUnit + "<br>"
-    chanTxt += channels[i].name + " Amp: " + valueToUnit(channels[i].amplitude) + xUnit + "<br>"
-    chanTxt += channels[i].name + " T: " + valueToUnit(channels[i].period) + tUnit +" <br>"
-  	chanTxt += channels[i].name + " f: " + valueToUnit(channels[i].frequency) + fUnit + " <br>"
+    chanTxt += "<tr><td class='bo" + i +"' + id='o" + channels[i].name + "All'>"; 
+	chanTxt += "<span id='o" + channels[i].name + "Min'" + ">" 
+	            + channels[i].name + " Min: " + valueToUnit(channels[i].min)  + xUnit + "</span><br>"
+    chanTxt += "<span id='o" + channels[i].name + "Max'" + ">" 
+	            + channels[i].name + " Max: " + valueToUnit(channels[i].max) + xUnit + "</span><br>"
+    chanTxt += "<span id='o" + channels[i].name + "Avg'" + ">" 
+	            + channels[i].name + " Avg: " + valueToUnit(channels[i].average) + xUnit + "</span><br>"
+    chanTxt += "<span id='o" + channels[i].name + "Amp'" + ">" 
+	            + channels[i].name + " Amp: " + valueToUnit(channels[i].amplitude) + xUnit + "</span><br>"
+    chanTxt += "<span id='o" + channels[i].name + "T'" + ">" 
+	            + channels[i].name + " T: " + valueToUnit(channels[i].period) + tUnit +"</span><br>"
+  	chanTxt += "<span id='o" + channels[i].name + "f'" + ">" 
+	            + channels[i].name + " f: " + valueToUnit(channels[i].frequency) + fUnit + "</span><br>"
 	chanTxt += "</td></tr>";
    }	
   }
@@ -1528,9 +1718,9 @@ channels.push(objChan);
 
 createChannel("AWG1", "checked",1,0);
 createChannel("C1", "checked",2,0);
-createChannel("C2", "checked",3,0);
-createChannel("C3", "checked",4,0);
-createChannel("C4", "checked",5,0);
+createChannel("C2", "",3,0);
+createChannel("C3", "",4,0);
+createChannel("C4", "",5,0);
 // createChannel("M1", "",6);
 var cList = ["Time","AWG1","C1","C2","C3","C4"];
 
@@ -1597,7 +1787,7 @@ window.addEventListener("load",drawGrid('fftChart'));
 //  
  var currCon = 0;      // current Position of acquisition there the curve starts and ends
  var currUnit = 1;     // Unit voltage or code
- var dataMax = 32*1024;
+ var dataMax = 512;
  var dataOSC1 =[];    // all sorted data
  var dataOSC2 =[];    // final oscilloscope data voltage extracted with trigger 
  var dataOSC3 =[];    // final oscilloscope data code extracted with trigger 
@@ -1624,7 +1814,7 @@ function listenCanvas(event) { // event listener for canvas How to add?
       if (mouseX == 1) {   // x - axis right left canvas area? 
         mouseCurrX = Math.round(event.clientX - rect.left);
         mouseCurrY = Math.round(event.clientY - rect.top);
-	    channels[xAxisIndex].offset = offsetStart - Math.trunc((mouseCurrX - mouseStartX) / widthX * 100)/10 * channels[xAxisIndex].range;
+	    channels[xAxisIndex].offset = offsetStart + Math.trunc((mouseCurrX - mouseStartX) / widthX * 100)/10 * channels[xAxisIndex].range;
         document.getElementById("mouse").innerHTML = "Move " + mouseCurrX + "," + mouseCurrY + "," + mouseX;		
 	    updatePlot();
 		document.getElementById(lines[xAxisIndex]+"Val").value = valueToUnit(channels[xAxisIndex].offset) + channels[xAxisIndex].unit;
@@ -1765,7 +1955,7 @@ function generateData() {
 	
     var factor = 1/(4*16*1024-1); // 1 V range XADC, 64k range
     var offset = 0;
-    var timeSampling = unitToValue(document.getElementById("timeSampling").innerHTML);
+    var timeSampling = unitToValue(document.getElementById("timeSampling").value);
     var timestep = timeSampling * (timeBase + 0);     // XADC 10ns * 8 * 104 cycles conversion +1?
     var dataMax2 = Math.round(dataMax/2);
     for (var i = 0; i < dataMax2; i++) {
@@ -1804,7 +1994,7 @@ function generateData() {
 function genAWGData() {
   dataMax = parseInt(document.getElementById("dataMax").value); // 512: 0200
   var dataMax2 = dataMax/2;
-  // var timeSampling = unitToValue(document.getElementById("timeSampling").innerHTML);
+  // var timeSampling = unitToValue(document.getElementById("timeSampling").value);
   // var timestep = timeSampling * (timeBase + 1);     // XADC 10ns * 8 * 104 cycles conversion
 				 
   var cmd =	document.getElementById("cmd").innerHTML;
@@ -1816,7 +2006,7 @@ function genAWGData() {
 	var step = hexToDec(cmd.substring(9,13));   // 16 Bit
 	var repeat = hexToDec(cmd.substring(13,21)); // 32 Bit
 	if (repeat < 1) { repeat = 1; }
-//	alert(start + "," + step + "," + stop + "," + repeat);
+	// alert(start + "," + step + "," + stop + "," + repeat);
 	// T26C9745C4D930000C350
 	//  starstopstep
 	// 9929,19859,29788,50000
@@ -1875,37 +2065,40 @@ function genAWGData() {
 function changeUnit() {
   // set currUnit
   currUnit = document.getElementById("currUnit").value;
-  if (currUnit == 1) {  // voltage, time 
+  // strategy changing unit save old scaling activate new scaling
+  if (currUnit == 0) {  // code 
+	// set time
+		addSelectList("pos", codePos, "");
+		addSelectList("base", codeRange, "");
+		channels[0].rangeB = channels[0].range;
+		channels[0].offsetB = channels[0].offset;
+		document.getElementById("posVal").value = "-" + dataMax/4;
+		document.getElementById("baseVal").value = dataMax/16;
+	    // all channels restore rangeVal and offVal 
+		for (var j = 1; j < channels.length; j++) {
+		    addSelectList("range" + channels[j].name, codeRange, "");
+		    addSelectList("off" + channels[j].name, codeRange, "");
+			channels[j].rangeB = channels[j].range;
+			channels[j].offsetB = channels[j].offset;
+			channels[j].range = 512*16; // 
+			channels[j].offset = -256*16*8; //
+			document.getElementById("range" + channels[j].name +"Val").value = channels[j].range;
+			document.getElementById("off" + channels[j].name +"Val").value = channels[j].offset;
+		}
+  } else {   // activate voltage time 
     // set time 
 		addSelectList("pos", timeRange, "s");
 		addSelectList("base", timeBaseRange, "s");
 	    // all channels restore rangeVal and offVal 
-		document.getElementById("posVal").value = channels[0].offsetB;
-		document.getElementById("baseVal").value = channels[0].rangeB;
+		document.getElementById("posVal").value = valueToUnit(channels[0].offsetB) + "s";
+		document.getElementById("baseVal").value = valueToUnit(channels[0].rangeB) + "s";
 		for (var j = 1; j < channels.length; j++) {
 		    addSelectList("range" + channels[j].name, voltRange, "V");
 		    addSelectList("off" + channels[j].name, voltRange, "V");
 			channels[j].range = channels[j].rangeB;                   // get original range, offset from backup B
 			channels[j].offset = channels[j].offsetB;
-			document.getElementById("range" + channels[j].name +"Val").value = channels[j].range + " V";
-			document.getElementById("off" + channels[j].name +"Val").value = channels[j].offset + " V";
-		}
-  } else {   // activate Code 
-	// set time
-		addSelectList("pos", codePos, "");
-		addSelectList("base", codeRange, "");
-	    // all channels restore rangeVal and offVal 
-		document.getElementById("posVal").value = "-" + dataMax/4;
-		document.getElementById("baseVal").value = dataMax/16;
-		for (var j = 1; j < channels.length; j++) {
-		    addSelectList("range" + channels[j].name, codeRange, "");
-		    addSelectList("off" + channels[j].name, codePos, "");
-			channels[j].rangeB = channels[j].range;
-			channels[j].offsetB = channels[j].offset;
-			channels[j].range = 512;
-			channels[j].offset = -2048;
-			document.getElementById("range" + channels[j].name +"Val").value = channels[j].range;
-			document.getElementById("off" + channels[j].name +"Val").value = channels[j].offset;
+			document.getElementById("range" + channels[j].name +"Val").value = valueToUnit(channels[j].range) + " V";
+			document.getElementById("off" + channels[j].name +"Val").value = valueToUnit(channels[j].offset) + " V";
 		}
   }     
   // update
@@ -1967,6 +2160,7 @@ function changeUnit() {
 function calcHarmonics() {
    // which channel
    var actChan = document.getElementById("fftSrc").value;   
+   var boardX = parseInt(document.getElementById("board").value);
    var gr1 = Math.round(nPair / 2) - 1;
    var betragA = [];
    // transfer data to FFT array
@@ -1977,8 +2171,11 @@ function calcHarmonics() {
 	var signal = betrag[0 + gr1 * j];
 	for(var i = 0; i < gr1; i++)  // transfer to object array
       {
-        var timeSampling = unitToValue(document.getElementById("timeSampling").innerHTML);
+        var timeSampling = unitToValue(document.getElementById("timeSampling").value);
 	    var timestep = timeSampling * (timeBase + 1);     // XADC 10ns * 8 * 104 cycles conversion
+        if ((boardX == 1) || (boardX == 2)){ // Simulation and Arduino
+		   if (timeBase > 0) timestep = timeSampling * timeBase;
+        } 		
         if (currUnit == 0) timestep = 1 / nPair;
 	    var objx = {
 		             key: betrag[i + gr1 * j], // square of magnitude
@@ -2006,31 +2203,32 @@ function calcHarmonics() {
 	   var totalNoise = Math.round(20 * Math.log(Math.sqrt(noiseA))/Math.LN10 * 100)/100;
 	   for(i = 0; i < maxLength + 1; i++)
        {
-	     snrText = "<tr><td class='bo'>" + (betragA[maxLength - i].index + 1) +"</td><td class='bo'>" 
-		           + valueToUnit(betragA[maxLength - i].freq) + "</td><td class='bo'>" // frequency 
-		           + Math.round(20 * Math.log(Math.sqrt(betragA[maxLength - i].key))/Math.LN10*100)/100 + "</td><td class='bo'>" // signal
+	     snrText = "<tr><td class='bo' id='fftIndex" + (maxLength-i) + "'>" + (betragA[maxLength - i].index + 1) 
+		           +"</td><td class='bo' id='fftfreq" + (maxLength-i) + "'>" 
+		           + valueToUnit(betragA[maxLength - i].freq)  // frequency
+				   + "</td><td class='bo' id='fftSM" + (maxLength-i) + "'>"  
+		           + Math.round(20 * Math.log(Math.sqrt(betragA[maxLength - i].key))/Math.LN10*100)/100  // signal
+				   + "</td><td class='bo' id='fftNM" + (maxLength-i) + "'>" 
 		           + Math.round(20 * Math.log(Math.sqrt(noiseA))/Math.LN10 * 100)/100
 				   + "</td></tr>" + snrText;
 	     noiseA += betragA[maxLength - i].key; // sum of squares				   
 	   }
 	   var unitX= "in Hz";
 	   if (currUnit == 0) unitX = "";
-	   snrText = "<table><tr><td>Magnitude List Channel: </td><td class='bo" + actChan + "'>" + cList[actChan] + "</td></tr></table><br>" +
+	   snrText = "<span id='fftTable'><table><tr><td>Magnitude List Channel: </td><td class='bo" + actChan + "'>" + cList[actChan] + "</td></tr></table><br>" +
 	             "<table border='1'>" +
-	             "<tr><td class='bo'>" + cList[actChan] + "<br>Index</td><td class='bo'>f " + unitX +"</td>" +
+	             "<tr><td class='bo'>Index</td><td class='bo'>f " + unitX +"</td>" +
 	             "<td class='bo'> signal<br> magnitude<br> dB</td>" +
-	             "<td class='bo'> Total<br> noise<br> magnitude<br> dB </td></tr>"+ snrText + "</table>";
+	             "<td class='bo'> Total<br> noise<br> magnitude<br> dB </td></tr>"+ snrText + "</table></span>";
        document.getElementById('fftList').innerHTML = snrText;
 }
 
-   var nPair = 16 * 4 * 256; // 16k samples
+   var nPair = 256;
    var betrag =[];
 
 function generateFFT() {
    // which channel
    var actChan = document.getElementById("fftSrc").value;
-   var fftPts = parseInt(document.getElementById("fftPts").value);
-   
    // transfer data to FFT array
    var ind = +1; // +1 forward fft -1 reverse fft
    var aR = [];  // real values 
@@ -2040,10 +2238,10 @@ function generateFFT() {
    var channelsA =[];
    var maxG = 0;
    var minG = 1;
+   var first = 0;
 
    currUnit = document.getElementById("currUnit").value;
-   nPair = dataMax / 2 / fftPts;  // Arduino otherwise /2
-   // alert( currUnit + "," + nPair); // 16384
+   nPair = dataMax/2;
    
    for (var j = 0; j < channels.length; j++) { // all channels
 	 channelsA[j] = Object.assign({}, channels[j]);
@@ -2053,26 +2251,24 @@ function generateFFT() {
    
    for (var i = 0; i < nPair; i++) {
       // aR[i] = dataOSC2[i + actChan * nPair];
-	  if (currUnit == 1) {  // voltage, time
-	     aR[i] = dataOSC2[i * fftPts + (j + 1) * nPair * fftPts];
-	  } else {              // code
-	     aR[i] = 1E-6 * dataOSC3[i *fftPts + (j + 1) * nPair * fftPts];
+      if (currUnit == 0) {  // code 
+	     aR[i] = dataOSC3[i + (j + 1) * nPair];
+	  } else {              // voltage, time
+	     aR[i] = dataOSC2[i + (j + 1) * nPair];
 	  }
 	  aI[i] = 0;
    }
-   
    fft(ind, nPair, aR, aI);  //  FFT
   
    // Calculate Magnitude
    var gr1 = Math.round(nPair / 2) - 1;
    for(var i = 0; i < gr1; i++) {   // all buckets, no DC
-     var timeSampling = unitToValue(document.getElementById("timeSampling").innerHTML);
-	 var timestep = timeSampling * (timeBase + 1) * fftPts;     // XADC 10ns * 8 * 104 cycles conversion
+     var timeSampling = unitToValue(document.getElementById("timeSampling").value);
+	 var timestep = timeSampling * (timeBase + 1);     // XADC 10ns * 8 * 104 cycles conversion
 	 if (currUnit == 0) timestep = 1 / nPair;
 	 //	 var timestep = 8.32E-6;
 	 betragdB[i] = (i + 1) / timestep / nPair;           // scaled with acquistion time 8 cycle2 1MSps, 256 samples
 	 betrag[i] = (i + 1) / timestep / nPair;
-	 if ( isNaN(aR[i + 1]) || isNaN(aR[i + 1]) ) alert(i + "," + aR[i + 1] + "," + aI[i + 1]);  
 	 betrag[i + gr1 * (j + 1)] = 2 * (aR[i + 1] * aR[i + 1] + aI[i + 1] * aI[i + 1]);
      // alert(i + "," + gr1 + "," + j + "," + betrag[i + gr1 * (j + 1)]);
    }	 
@@ -2080,17 +2276,20 @@ function generateFFT() {
    // fix betrag = 0 for log operation
    var min = betrag[0 + gr1 * (j + 1)];
    var max = betrag[0 + gr1 * (j + 1)];
+	if ((channelsA[j].selected == 1)  && (first == 0))  { // should be done once
+	  first = 1;
+	  minG = min;
+	  maxG = max;
+	}  
    for(var i = 1; i < gr1; i++) {   
-	 if ((betrag[i + gr1 * (j + 1)] < min) && (betrag[i + gr1 * (j + 1)] > 0)) { // set min
+	 if ((betrag[i + gr1 * (j + 1)] < min) && (betrag[i + gr1 * (j + 1)] > 0)) { // prepare betrag = 0 for log operation 
 	   min = betrag[i + gr1 * (j + 1)];
 	 }
-	 if ((betrag[i + gr1 * (j + 1)] > max)) max = betrag[i + gr1 * (j + 1)];   // set max
+	 if ((betrag[i + gr1 * (j + 1)] > max)) max = betrag[i + gr1 * (j + 1)];
 	 if ((betrag[i + gr1 * (j + 1)] < 0)) alert("negativ");
    }
    // alert(min + "," + (10 * Math.log(min) / Math.LN10));
    // Convert to dB 
-   if (min == 0) min = 1E-3; // prevent log(0)
-   
    for(var i = 0; i < gr1; i++) {   // all buckets, no DC
      if (betrag[i + gr1 * (j + 1)] == 0) {
 		  betragdB[i + gr1 * (j + 1)] = 10 * Math.log(min) / Math.LN10; // 10 because of sqrt;
@@ -2098,26 +2297,28 @@ function generateFFT() {
 		   betragdB[i + gr1 * (j + 1)] = 10 * Math.log(betrag[i + gr1 * (j + 1)]) / Math.LN10; // 10 because of sqrt
 	 }
     }
-	 
-	
-	if (channelsA[j].selected == 1) {
+	if (channelsA[j].selected == 1){
 	  if (min < minG) { minG = min; }
 	  if (max > maxG) { maxG = max; }
 	}  
    }
    // set y axis
+   // alert("0 Max:" + maxG + ", Min:" + minG + "x");
+   if (maxG == 0) maxG = minG;
+   if (minG == 0) minG = maxG/1E5; // range 50 dB
    maxG = 10 * Math.log(maxG) / Math.LN10;
    minG = 10 * Math.log(minG) / Math.LN10;
-   // if (!isFinite(MinG)) { minG = 1E-3;}  
-   // scale_lin_max_min (maxG,minG,"auto"); // it is not yet clear what the axis settings are!!
-   // alert("Max:" + maxG + ", Min:" + minG + "x");
+   // alert("1 Max:" + maxG + ", Min:" + minG + "x");
+   scale_lin_max_min (maxG,minG,"auto0");
    maxG = oMax;
    minG = oMin;
+   // alert("2 Max:" + maxG + ", Min:" + minG + "x" + oMax);
    var range = (maxG - minG) / 10;
-   range = 20;
+   // range = 20;  // set fixed range from 10 to -190
    var offset = - (maxG + minG) / 2;
-   offset = 90;
-   for (var j = 1; j < channelsA.length; j++) { // all channels
+   // offset = 90; // set fixed offset from 10 to -190
+   // alert("Range " + range + " offset: " + offset); 
+  for (var j = 1; j < channelsA.length; j++) { // all channels, not AWG?
     channelsA[j].range = range;
     channelsA[j].offset = offset;
    }
@@ -2125,10 +2326,9 @@ function generateFFT() {
    // alert(0 + "," + 127 + "," + 3 + "," + betrag[0 + 127 * (3 + 1)]);
    // Graphics
    // FFT Chart
-	// ScatterPlotO takes range from above   betragdB
-	ScatterPlotO("fftChart",((gr1+1) + " points FFT"),betragdB,gr1,
+	ScatterPlotO("fftChart",(gr1 + " FFT points of " + (2 * gr1 + 2 ) + " data points"),betragdB,gr1,
 	              "Frequency","log","auto",
-				  "Magnitude [dB]","lin","minmax","Fine"  //Grid auto0
+				  "Magnitude [dB]","linO","auto0","Grid"  //"Grid"/"Fine"
 				  ,0, activeIndex, channelsA
 				 );
 				 
@@ -2195,12 +2395,7 @@ function generateHisto(){
 	// alert(dataMax2);
 	for (var i = 0; i < dataMax2; i++) {
 	  for (var j = 1; j < 6; j++) { 	// all channels
-	  	  var index;
-		  if (currUnit == 1) {  // voltage, time
-             index = Math.round((dataOSC2[i+j*dataMax2] - channels[j].min)/step[j]);
-	      } else {              // code
-	         index = Math.round((dataOSC3[i+j*dataMax2] - channels[j].min)/step[j]);
-	      }
+	  	  var index = Math.round((dataOSC2[i+j*dataMax2] - channels[j].min)/step[j]);
 		  if (currUnit == 0) index = Math.round((dataOSC3[i+j*dataMax2] - channels[j].min)/step[j]);
 		  dataBins[index + j * nrBins] += 1; // add to bucket
 	  }	  
@@ -2221,121 +2416,249 @@ function generateHisto(){
 
 window.addEventListener("load",generateData());
 
-
 //----------------------------------------------------------------------------------//
 //-------------------- Ramp Test INL and DNL ---------------------------------------//
 //----------------------------------------------------------------------------------//
 
+var finshed = true;
+var oscObj = [];
+var runs = 1;
+var runX = 1;
+var offsetStep = 0;  // Start code for offset
+var startCode = 0;
+var stepCode = 1;
+var lBuf = 256;
+var oBuf = 2048;
+
+function generateRamp() { // start Ramp
+   oscObj = [];           // Empty data object
+   offsetStart = 0;
+   runX = 1;
+  // startCode, endCode, stepCode makes number of runs and offsetStart
+  stepCode = Math.trunc(parseInt(document.getElementById("codesStep").value));  // number of code values
+  if (stepCode <= 0) { stepCode = 1; }
+  startCode = parseInt(document.getElementById("codesStart").value);  // Start of code values + offsetStart for looping
+  var endCode = Math.trunc(parseInt(document.getElementById("codesEnd").value)) ;  // End of code values
+  oBuf = document.getElementById("oBufVal").value;
+  // alert(oBuf);
+  // Check how many points necessary > 4k?
+  runs = Math.trunc(((endCode - startCode)/stepCode) * 4 / oBuf ) + 1;  // How many obuf blocks 4 samples each 
+  offsetStep = Math.trunc( Math.trunc((endCode - startCode)/runs) / stepCode ) * stepCode;  // Next step for startCode
+  // alert(startCode + "," + endCode + "," + stepCode + "," + oBuf + "," + runs + "," + offsetStep);
+  runs = Math.ceil((endCode - startCode) / offsetStep ) + 1;
+  
+  // Set OSC timeBase = ADC sampling time * oBuf / 20
+  var timeSampling = unitToValue(document.getElementById("timeSampling").value);
+  document.getElementById("baseVal").value = valueToUnit(timeSampling * oBuf / 20) + "s";			 	 
+  
+  updateOSC();
+  // Set OSC trigger channel AWG1 and condition rising 
+   
+  generateRampX();
+}
+
+function generateRampX() {
+
+  var endCode = startCode + offsetStep; // Calculate endCode
+  var endCode1 = Math.trunc(parseInt(document.getElementById("codesEnd").value)) ;  // End of code values
+  if (endCode > endCode1) endCode = endCode1;
+  
+    // Configure oscilloscope with highest sample rate and 8k buffer
+    document.getElementById("dataMax").value = oBuf;
+    cmdText ="O" + decToHex(oBuf,4) + "0001"; // every sample         
+    // sendCmd "O"
+    document.getElementById("cmd").innerHTML = cmdText;
+    sendCmd();
+
+    // Calculate trigger OSC level to get right amount of data
+    
+	
+    // alert(startCode + "," + endCode + "," + stepCode + "," + oBuf + "," + runs + "," + offsetStep);
+    // Make triangle waveform
+    // Repeat 832 because DAC 100MHz, ADC 8.32us
+	var repeat = 4; // Default
+    var boardX = parseInt(document.getElementById("board").value);
+    if (boardX == 0) { // FPGA
+       repeat = 4 * 832;  
+	} else  if (boardX == 1) { // Simulation
+	   repeat = 1;
+	} else  if (boardX == 2) { // Simulation
+	   repeat = 2;
+	}
+    cmdText = "T" + decToHex(startCode,4) + decToHex(endCode,4)
+                  + decToHex(stepCode,4) + decToHex((repeat),8);    // 832, 416,208  4 samples 4*832    
+    // sendCmd "T"
+    document.getElementById("cmd").innerHTML = cmdText;
+    var tText =cmdText;
+	sendCmd(); 
+	// alert(startCode + "," + endCode + "," + stepCode + "," + repeat);
+	
+    // sendCmd "U" acquiring data
+    document.getElementById("cmd").innerHTML = "U";
+    sendCmd();
+    finished = false;
+
+	document.getElementById("inlResult").innerHTML = "<img src='../ImagesS/1LBN.gif' width='32' height='32'>" 
+                                                    + " Measurement ongoing. Run " + runX + " of " + (runs + -1)
+													+ "  start " + startCode + "  stop " + endCode + " " + tText; 
+    // calculate new startCode for next step 
+    startCode = startCode + offsetStep; 
+
+    runX = runX + 1;
+}
+
+function nextRamp() {
+  var dataMax2 = Math.round(dataMax/2);
+  // Selected channel 
+  var rampSrc = parseInt(document.getElementById("rampSrc").value);  // Which channel?
+
+	// make object array with values
+      for (var i = 0; i < dataMax2; i++) {              // number of codes loop  
+        var point = {  
+		  codeAWG : dataOSC3[i +   1 * dataMax2],           // AWG code
+          codeOSC : dataOSC3[i +  rampSrc * dataMax2],  // Selected Channel for processing
+          codeOSC1 : dataOSC3[i +  2 * dataMax2],  // all channels raw source data
+          codeOSC2 : dataOSC3[i +  3 * dataMax2],  // all channels raw source data
+          codeOSC3 : dataOSC3[i +  4 * dataMax2],  // all channels raw source data
+          codeOSC4 : dataOSC3[i +  5 * dataMax2]   // all channels raw source data
+
+	    }
+		oscObj.push(point);
+	  }	  
+  
+    // check if finished
+  if (runX >= runs) {
+    finished = true;
+    document.getElementById("rStop").style.display="none";
+    document.getElementById("rRun").style.display="block";
+    rState="Stop";
+    ramp();
+  } else { // sent ramp command and acquire next block of data
+    generateRampX()
+  }
+}
+
+// Function analyze ramp() for INL, DNL
 function ramp() {
-    var dataMax2 = Math.round(dataMax/2); // number of points 16k
-	var avgVal = [];
+    var avgVal = [];
 	var idealVal =[];
 	var dataINL = [];
 	var dataDNL = [];
-	var LSB =[];
-    var nrCodes; // = parseInt(document.getElementById("codesVal").value);  // number of code values
-    // alert(nrCodes + "," + document.getElementById("codesVal").value);
-    var stepCode = parseInt(document.getElementById("codesStep").value);  // number of code values
-	if (stepCode <= 0) { stepCode = 1; }
-	var startCode = parseInt(document.getElementById("codesStart").value);  // number of code values
-    var endCode = parseInt(document.getElementById("codesEnd").value);  // number of code values
-    var rampSrc = parseInt(document.getElementById("rampSrc").value);  // Selected Channel
-//	var avgNr =  Math.round(dataMax2 / (endCode - startCode + 1) / 4); // dataMax2 / 256 / 4;  
-	var avgNr =  Math.round(dataMax2 / (endCode - startCode + 1) / 4 * 
-	             (endCode - startCode + 1) / 256 ); // dataMax2 / 256 / 4;  
-	var nrError = Math.trunc((endCode - startCode + 1)/stepCode);
-    nrCodes = Math.trunc((endCode - startCode) / stepCode) + 1; // for graph bins
-	
-//	 alert(nrCodes + "," + stepCode + "," + startCode + "," 
-//	    + endCode + "," +avgNr + "," + nrError);
-    
-	
-    var channelsA =[];
+    var nrCodes;  // number of code values
+    var dataMax2 = Math.round(dataMax/2);
 
-    for (var j = 0; j < channels.length; j++) { // Copy all channels
-	   channelsA[j] = Object.assign({}, channels[j]);
-	   channelsA[j].selected = "0";
-    }
-	channelsA[0].offset = - (nrCodes-1)/2;
-	channelsA[0].range = (nrCodes-1)/10;
-    channelsA[rampSrc].selected = "1";
-    
+	// Selected channel 
+    var rampSrc = parseInt(document.getElementById("rampSrc").value);  // Channel number for analysis
 	
-	// make array with average value avgVal	which will be analyzed for INL, DNL
-	// fill INL, DNL
-	// dataOSC3 first column output code AWG
-    for (var j = 0; j < nrCodes; j++) { 	            // set codes (x values) in avgVal
-      avgVal[j] = j;
+	for (var j = 0; j < oscObj.length; j++) { 	   // Copy correct channel to codeOSC
+       if (rampSrc == 1) oscObj[j].codeOSC = oscObj[j].codeAWG;
+       if (rampSrc == 2) oscObj[j].codeOSC = oscObj[j].codeOSC1;
+       if (rampSrc == 3) oscObj[j].codeOSC = oscObj[j].codeOSC2;
+       if (rampSrc == 4) oscObj[j].codeOSC = oscObj[j].codeOSC3;
+       if (rampSrc == 5) oscObj[j].codeOSC = oscObj[j].codeOSC4;
 	}
 	
-    for (var j = rampSrc; j < rampSrc+1; j++) { 	   // channel rampSrc average measurement data to nrCodes
-      for (var i = 0; i < nrCodes; i++) {              // number of codes loop  
-	    var avgX = 0;
-		for (var k = 0; k < avgNr; k++) {              // averaging loop  
-           avgX += dataOSC3[(i * stepCode + startCode) * avgNr + j * dataMax2 + k];
-	    }	  
-        avgVal[nrCodes + i] = avgX / avgNr;            // 
-	  }	  
+	// sort oscObj for averaging into avgVal array and then oscObjAvg array
+    oscObj.sort(function(a,b) { // sort for codeAWG
+	  if ( a.codeAWG < b.codeAWG )
+	    return -1;
+	  if ( a.codeAWG > b.codeAWG )
+	    return 1;
+	  return 0;
+    });
+	
+    var samplesX = oscObj.length;     	
+	
+    // for (var i = 0; i < samplesX; i++) {               // number of codes loop  
+	//  avgVal[i] = i;                                   // integer position
+	//  avgVal[i + samplesX] = oscObj[i].codeAWG;        // AWG1
+	//  avgVal[i + 2 * samplesX] = oscObj[i].codeOSC;    //
+	//}	  
+	
+    var oscObjAvg = [];
+    var codeAWGNow = oscObj[0].codeAWG; 
+	oscObjAvg[0] = { 
+	    codeAWG : oscObj[0].codeAWG,
+	    codeOSC : oscObj[0].codeOSC,
+		n : 1
 	}
+	var nAvg = 0;
+	for (var j = 1; j < oscObj.length; j++) { 	   // Averaging
+        if (oscObj[j].codeAWG == codeAWGNow) {
+		   oscObjAvg[nAvg].codeOSC += oscObj[j].codeOSC;
+           oscObjAvg[nAvg].n += 1;		   
+		} else {
+		  var pointX = {
+	         codeAWG : oscObj[j].codeAWG,
+	         codeOSC : oscObj[j].codeOSC,
+		     n : 1
+		  }
+		  codeAWGNow = oscObj[j].codeAWG;
+		  oscObjAvg.push(pointX);
+		  nAvg = nAvg + 1;
+		}
+	}
+	nrCodes = oscObjAvg.length; // Number of unique codes
+	for (var j = 0; j < nrCodes; j++) { 	   // Averaging
+	  oscObjAvg[j].codeOSC = oscObjAvg[j].codeOSC / oscObjAvg[j].n;
+	}
+	// Finished averaging
+	
+	// min, max OSC AWG
+	var minAWG = oscObjAvg[0].codeAWG;
+	var maxAWG = oscObjAvg[0].codeAWG;
+	var minOSC = oscObjAvg[0].codeOSC;
+	var maxOSC = oscObjAvg[0].codeOSC;
+	for (var j = 1; j < nrCodes; j++) { 	   // Get minimum and maximum Codes
+	  if (oscObjAvg[j].codeOSC < minOSC) minOSC = oscObjAvg[j].codeOSC;
+	  if (oscObjAvg[j].codeOSC > maxOSC) maxOSC = oscObjAvg[j].codeOSC;
+	  if (oscObjAvg[j].codeAWG < minAWG) minAWG = oscObjAvg[j].codeAWG;
+	  if (oscObjAvg[j].codeAWG > maxAWG) maxAWG = oscObjAvg[j].codeAWG;
+	}
+	for (var j = 0; j < nrCodes; j++) { 	   // Get values for display
+	  avgVal[j] = oscObjAvg[j].codeAWG;              // x axis AWG1
+	  avgVal[j + nrCodes] = oscObjAvg[j].codeOSC;    // y axis OSC
+	}
+	
+	var rangeAWG = maxAWG - minAWG;
+	var rangeOSC = maxOSC - minOSC;
+	var bins = nrCodes;
+    var lsb = rangeOSC / (nrCodes-1);
+	// alert(lsb);
 	
 	// make array with ideal values
-    for (var j = 0; j < nrCodes; j++) { 	            // set codes in avgVal
-      idealVal[j] = j;
-	}
-    for (var j = rampSrc; j < rampSrc + 1; j++) { 	  // channel rampSrc LSB calculation and ideal copy
-	  var startVal = avgVal[nrCodes];
-	  var endVal = avgVal[2 * nrCodes - 1];
-	  var delta = (endVal - startVal) / (nrError-1);
-	  LSB[j] = delta;
-	  for (var i = 0; i < nrCodes; i++) {              // number of codes loop  
-        idealVal[ nrCodes + i] = startVal + delta * i;  // one channel only
-	    avgVal[2 * nrCodes + i] = idealVal[nrCodes + i];       // copy ideal to avgVal
-	  }	  
+    for (var j = 0; j < nrCodes; j++) { 	            //  calculate INL, DNL
+      idealVal[j] = minOSC + (oscObjAvg[j].codeAWG - minAWG) * rangeOSC/rangeAWG;
+	  dataINL[j] = oscObjAvg[j].codeAWG;                // x -axis INL
+	  dataDNL[j] = oscObjAvg[j].codeAWG;                // x - axis DNL
 	}
     
-	// make array with INL, DNL
-    for (var j = 0; j < nrCodes; j++) { 	            // set codes in avgVal
-      dataINL[j] = j * stepCode + startCode;
-      dataDNL[j] = j * stepCode + startCode;
-	}
     var inlMin = 0;
     var inlMax = 0;
     var dnlMin = 0;
     var dnlMax = 0;
-	var inlTotal = 0;
-    for (var j = rampSrc; j < rampSrc+1; j++) { 	// channel rampSrc INL, DNL analysis
-      dataINL[nrCodes] = 0; // INL
-      dataDNL[nrCodes] = 0; // DNL
-	  avgVal[3 * nrCodes] = 0;
-	  avgVal[4 * nrCodes] = 0;
-	  for (var i = 1; i < nrCodes; i++) {              // number of codes loop  
-        var inlX = (avgVal[nrCodes+i] -  idealVal[nrCodes+i])/LSB[j] ;
-		var dnlX = (avgVal[nrCodes+i] -  avgVal[nrCodes+i -1] - LSB[j])/LSB[j] ;
+	dataINL[nrCodes] = 0; // INL
+    dataDNL[nrCodes] = 0; // DNL
+    for (var i = 1; i < nrCodes; i++) {              // number of codes loop  
+        var inlX = (oscObjAvg[i].codeOSC - idealVal[i])/lsb;
+		var dnlX = (oscObjAvg[i].codeOSC - oscObjAvg[i-1].codeOSC - lsb)/lsb;
 		dataINL[nrCodes + i] = inlX; // INL
         dataDNL[nrCodes + i] = dnlX; // DNL
-   	    avgVal[3 * nrCodes + i] = inlX;
-   	    avgVal[4 * nrCodes + i] = dnlX;
-		inlTotal += inlX * inlX; 
 		if (inlX > inlMax) inlMax = inlX;
 		if (inlX < inlMin) inlMin = inlX;
 		if (dnlX > dnlMax) dnlMax = dnlX;
 		if (dnlX < dnlMin) dnlMin = dnlX;
-	  }	  
 	}
-	inlTotal = Math.sqrt(inlTotal/nrCodes);   // INLrms = sqrt( 1/nrCodes int (inl^2) )
-	var inldB = 20 * Math.log(inlTotal) / Math.LN10;
-	var snrX = 20 * Math.log(nrCodes/2/Math.sqrt(2)) / Math.LN10 - inldB;
+
     document.getElementById("inlResult").innerHTML = "INL " + inlMin.toPrecision(3) 
-	   + ".." + inlMax.toPrecision(3) + " DNL " + dnlMin.toPrecision(3) + ".." + dnlMax.toPrecision(3)
-	   + " INLrms: " + inlTotal.toPrecision(3) + "  " + inldB.toPrecision(3) 
-	   + " dB  SNR = " + snrX.toPrecision(3);
+	   + ".." + inlMax.toPrecision(3) + " DNL " + dnlMin.toPrecision(3) + ".." + dnlMax.toPrecision(3);
    
     let now = new Date();
     let nowTxt = now.getFullYear() + "/" + (now.getMonth()+1)
                    + "/" + now.getDate() + " " + now.getHours()
 				   + ":" + now.getMinutes() + ":" + now.getSeconds()+ "." + now.getMilliseconds();			
-		nowTxt += " INL DNL from " + (dataMax2 / 4) + " points generated from " 
-		          + startCode + " up to " + endCode + " in " + stepCode + " steps";
+		nowTxt += " INL DNL from " + (samplesX) + " points generated from " 
+		          + oscObjAvg[0].codeAWG + " to " + oscObjAvg[nrCodes-1].codeAWG + " in " + nrCodes + " steps";
 
     // alert(activeIndex);
 	
@@ -2345,91 +2668,88 @@ function ramp() {
     ScatterPlot("inlChart",nowTxt,dataINL,nrCodes,
 	              "Code","lin","minmax",
 				  "INL","lin","auto","Grid"  //Grid
-				//  ,0, activeIndex, channelsA   // axis proper scaling difficult use with  ScatterPlotO only works with one data array per channel
 				 );
     ScatterPlot("dnlChart",nowTxt,dataDNL,nrCodes,
 	              "Code","lin","minmax",
 				  "DNL","lin","auto","Grid"  //Grid
-				//  ,0, activeIndex, channelsA   // axis proper scaling difficult use with  ScatterPlotO only works with one data array per channel
 				 );
-
-// show data for one channel: code, real, ideal, INL, DNL
-    setLegend("Real,Ideal,INL,DNL");
+    // show data for one channel: code, real, ideal, INL, DNL
+    // setLegend("Real,Ideal,INL,DNL");
     ScatterPlotX("rampChart",nowTxt,avgVal,nrCodes,
 	              "Code","lin","minmax",
-				  "Value, INL, DNL","lin","minmax","Grid"  //Grid
+				  "Value, INL, DNL","lin","minmax","Fine"  //Grid
 				 );
-// -------------------------------------------
-// Missing binary error list
-// Assumption power of 2 values
-// -------------------------------------------
-// What size power of 2?
-// Loop over power of 2
-// {   Difference 2^i and 2^i-1 }
-// save results in section id="??" 
-// button for transfer to Arduino
-// option for averaging at arduino??
+				 
+  //----------------------LOOKUP---------------------------------				 
+  // Make a lookup table (lookupList) with this data (oscObjAvg) 
+  // Working with step size != 1??
 
-// make lookup table
-// cLook checked
-// sort real values and get maximum step maxStep
-  var cList = new Array();
-  for (var i = 0; i < nrCodes; i++) {              // number of codes loop  
-    var curveObj = {
-				       code : avgVal[i],
-	                   out : avgVal[i + nrCodes]    
-				   }				   
-    cList.push(curveObj);
-  }
-  cList.sort(function(a,b) { // sort output values
-         if ( a.out < b.out )
+	// sort oscObjAvg with OSC codes
+    oscObjAvg.sort(function(a,b) { // sort for codeAWG
+         if ( a.codeOSC < b.codeOSC )
              return -1;
-         if ( a.out > b.out )
+         if ( a.codeOSC > b.codeOSC )
              return 1;
          return 0;
     });
-  var maxStep = cList[1].out - cList[0].out;	
-  for (var i = 2; i < nrCodes; i++) {              // get maximum step  
-    var stepM = cList[i].out - cList[i-1].out;
-	if (stepM > maxStep) { maxStep = stepM; }
-  }   	
-// maximum step = 1.0..1.5 LSB
+  
+  var maxStep = 0;	
+  if (nrCodes > 2) {  
+	// get maximum step size
+    maxStep = oscObjAvg[1].codeOSC - oscObjAvg[0].codeOSC;	
+	var minOSC = oscObjAvg[0].codeOSC;
+	var maxOSC = oscObjAvg[oscObjAvg.length - 1].codeOSC;
+	for (var j = 2; j < nrCodes; j++) { 	   // Get maximum step size
+      var stepOSCX = oscObjAvg[j].codeOSC - oscObjAvg[j-1].codeOSC;	
+	  if (stepOSCX > maxStep) maxStep = stepOSCX;
+	}
+  }	
+// make ideal curve lookup table
+// maximum step = 0.5..1.5 LSB
   var stepScale = parseFloat(document.getElementById("stepScale").value);  // number of code values
     maxStep = stepScale * maxStep;
   if (maxStep == 0 ) { alert("maxStep = 0"); }
-  else {
-   var maxCodes = (cList[nrCodes - 1].out - cList[0].out) / maxStep;
+  else {  // maxStep not 0
+   var maxCodes = (maxOSC - minOSC) / maxStep;
 // Look for suitable values going through sorted array
    var lookupList = [];
-   lookupList[0] = cList[0].code;
-   var nextVal = cList[0].out + maxStep;
+   lookupList[0] = oscObjAvg[0].codeAWG;
+   var nextVal = oscObjAvg[0].codeOSC + maxStep;
    var indexL = 1;
-   lookupList[indexL] = cList[1].code;
-   var errorL = Math.abs(cList[1].out - nextVal);
+   lookupList[indexL] = oscObjAvg[1].codeAWG;
+   var errorL = Math.abs(oscObjAvg[1].codeOSC - nextVal);
    for (var i = 2; i < nrCodes; i++) {   // get lookup list 
-     var errorN = cList[i].out - nextVal;
+     var errorN = oscObjAvg[i].codeOSC - nextVal;
      if (errorN > 0.5 * maxStep) { // next value
 	    indexL = indexL +1;
 		nextVal = nextVal + maxStep;
-		errorN = cList[i].out - nextVal;
+		errorN = oscObjAvg[i].codeOSC - nextVal;
 		errorL = Math.abs(errorN);
-        lookupList[indexL] = cList[i].code;
+        lookupList[indexL] = oscObjAvg[i].codeAWG;
      }	 
 	 if (Math.abs(errorN) < errorL) {   // absolute error better
-        lookupList[indexL] = cList[i].code;
+        lookupList[indexL] = oscObjAvg[i].codeAWG;
 		errorL = Math.abs(errorN);
 	 }
    }				
    var rangeN = indexL;   
-   for (var i = indexL + 1; i < nrCodes; i++) {   // fill up rest 
-      lookupList[i] = cList[nrCodes-1].code;
+   lBuf = document.getElementById("lBufVal").value;
+   
+   for (var i = indexL + 1; i < lBuf; i++) {   // fill up rest until 8k 
+      lookupList[i] = oscObjAvg[nrCodes-1].codeAWG;
    }
-   var lText = "Min: " + cList[0].out + " Max: " + cList[nrCodes-1].out 
-              + " Step: " + maxStep + " New Codes: " + rangeN + "<br>\n";
+ // OLd for FPGA???
+   // for (var i = 0; i < lBuf/2; i++) {   // copy lower 4k to upper 4k: 8k 
+   //   lookupList[i + lBuf/2] = lookupList[i];
+   // }
+
+   var lText = "Min: " + oscObjAvg[0].codeOSC + " Max: " + oscObjAvg[nrCodes-1].codeOSC 
+              + " Step: " + maxStep + " New Codes: " + rangeN 
+			  + " New Code Range: " + (rangeN * 16) + "<br>\n";
    lText += "Lookup Table: <br>\n";
    var xText = lText;  
-   for (var i = 0; i < 16; i++) {   // fill up rest 
-      for (var j = 0; j < 16; j++) {   // fill up rest 
+   for (var i = 0; i < lBuf/16; i++) {   // all values out 
+      for (var j = 0; j < 16; j++) {   // 16 values per line 
          lText += lookupList[i * 16 + j] + ",";
 		 xText += lookupList[i * 16 + j] + ",";
       }
@@ -2437,14 +2757,11 @@ function ramp() {
 	  xText = xText +"\n";
    }
    xText = xText.substring(0, xText.length-2);
-   if (lookupT == 0) { // if no lookup table send then generate text
-     document.getElementById("bestL").innerHTML = lText;
-     document.getElementById("lookupX").value = xText;
-   }
+   document.getElementById("bestL").innerHTML = lText;
+   document.getElementById("lookupX").value = xText;
    // calculate new INL, DNL and redo with different maxStep if necessary
   
-  }
-  
+  } // End maxStep not 0
 }
 
 //----------------------------------------------------------------------------------//
@@ -2452,41 +2769,147 @@ function ramp() {
 //----------------------------------------------------------------------------------//
 
 function sendLookup() {
- var lookupText = lookupX.value;
- // remove carriage return line break
-  document.getElementById("cmd").innerHTML = "t" + lookupText.replace(/(\r\n|\n|\r)/gm,"");
+ var nrVal = document.getElementById("lBufVal").value;
+ deactivateLookup();  // address multiplexing between AWG and UART ??
+ var lookupText = lookupX.value; // get string
+ // convert string to hex values
+ var cmdText = "";
+ lookupText = lookupText.replace(/(\r\n|\n|\r)/gm,""); // remove carriage return
+ lookupText = lookupText.replace(/" "/gm,"");          // remove spaces
+ var lookupArr = lookupText.split(",");                // make array
+ while (lookupArr.length < nrVal) {  // fill up to 8k values
+     lookupArr.push(0);
+ }
+ for (var i = 0; i < nrVal; i++) { 	// convert all values to hex
+   cmdText = cmdText + decToHex(parseInt(lookupArr[i]),4);
+ } 
+
+  cmdText = "R" + cmdText; //
+ // sendCmd "R" data
+  document.getElementById("cmd").innerHTML = cmdText;
   sendCmd();
-  lookupT = 1;
-  document.getElementById("bestL").innerHTML = "Lookup active";
-  
 }
 
-function myLookup() {
- var seqx = [7,8,11,15];
- var lookupText = "Range: 64<br>\n";
- // remove carriage return line break
-  var lSize = 0; 
- for (var j = 0; j < 16 * 4; j++) { //  
-   for (var j1 = 0; j1 < 4; j1++) { //
-     lSize++;
-	 var zz = seqx[j1] + j * 16;
-	 if ( zz > 255) zz = 255;
-	 lookupText = lookupText + zz + ",";
-	 if (lSize % 32 == 0) lookupText = lookupText + "<br>\n";
-   }
-  }
-  document.getElementById("myLookup").innerHTML = lookupText;
-}  
-
-function resetLookup() {
-  var lookupText;
-  lookupX.value = document.getElementById("linearT").innerHTML.replace(/<br>/gm,"");
-  lookupText = document.getElementById("linearT").innerHTML.replace(/<br>/gm,"");
- // remove carriage return line break
-  document.getElementById("cmd").innerHTML = "t" + lookupText.replace(/(\r\n|\n|\r)/gm,"");
+function defaultLookup(md) {
+ var nrVal = document.getElementById("lBufVal").value;;
+ deactivateLookup(); // address multiplexing between AWG and UART ??
+ // convert string to hex values
+ var cmdText = "";
+ var lookupText = "";
+ var fixed = parseInt(document.getElementById("lookupVal").value);
+ for (var i = 0; i < nrVal; i++) { 	// convert all values to hex
+   var k = i * 16;                   // upscale to 64 k 
+   if (md == 1) k = nrVal * 16 - 1 - i * 16; // reverse 
+   if (md == 2) k = fixed;                 
+   if (md == 3) k = Math.trunc(i / 128) * 128 * 16; // 128 gives 32 levels                 
+   k = k % (64 * 1024);                  // maximum 16 bit
+   cmdText = cmdText + decToHex(k,4);
+   lookupText = lookupText + k + ",";
+ } 
+ lookupX.value = lookupText;
+ // sendCmd "R" data
+  cmdText = "R" + cmdText; // Some problems with VHDL?! .substring(1)
+  document.getElementById("cmd").innerHTML = cmdText;
   sendCmd();
-  lookupT = 0;
-  document.getElementById("bestL").innerHTML = "Lookup reset";
+}
+
+function activateLookup() {
+ // send X command
+  document.getElementById("cmd").innerHTML = "Q";
+  sendCmd();
+}
+
+function deactivateLookup() {
+ // send X command
+function rOp(cmd) {  // activate ramp test
+  if (cmd == "Run") {
+    document.getElementById("rStop").style.display="block";
+    document.getElementById("rRun").style.display="none";
+    rState="Run";
+	generateRamp();
+  } else {
+    document.getElementById("rStop").style.display="none";
+    document.getElementById("rRun").style.display="block";
+    rState="Stop";
+  }
+}
+  sendCmd();
+  if (aState == "Run") { // Keep AWG running 
+	// Action 
+    genCmdAWG();      // update command
+	// check simulation?
+	sendCmd();        // send command
+  }
+}
+
+//----------------------------------------------------------------------------------//
+//-------------------- Test flow  ---------------------------------------------//
+//----------------------------------------------------------------------------------//
+// Get command text and execute: textarea id="testT"
+// Update Result: div id="testR"
+// Variables: testflow=0/1;
+// Functions: tOp('run'/'Stop'); runFlow 
+
+var cmds = [];
+var cmdIndex = 0;
+var meas = 0;
+
+function startFlow(){
+// get commands and process line by line
+  var flowText = document.getElementById("testT").value;
+  document.getElementById("testR").innerHTML = "";
+  cmds = [];    
+  cmds = flowText.split('\n');    // line by line
+  cmdIndex = 0;
+  testflow = 1;
+  meas = 0;
+  // alert(flowText + "," + cmds.length + "," + cmds[0]);
+ let now = new Date();
+ let nowTxt = now.getFullYear() + "/" + (now.getMonth()+1)
+              + "/" + now.getDate() + " " + now.getHours()
+  		      + ":" + now.getMinutes() + ":" + now.getSeconds()+ "." + now.getMilliseconds();			
+  document.getElementById("testR").innerHTML = "Run Test started " + nowTxt + "<br>\n";
+  runFlow();  
+}
+
+function runFlow(){
+   var cmdX = cmds[cmdIndex];
+   // process lines until 'U' measurement command (meas=1;) or end
+   while ((cmdIndex < cmds.length) && (meas == 0)) {
+     // string from 1 up to ';'
+	 var cmdX1 = cmdX.split(';');
+	 // look for '='
+     var cmdX2 = cmdX1[0].split('=');
+	 var idX = cmdX2[0].substring(1);
+	 if (cmdX[0] == '#') {  // set or read value of field with id
+       // alert(cmdX + "," + idX);
+	   if (document.getElementById(idX)) {
+         if (cmdX2.length > 1 ) { //setting value
+	       document.getElementById(idX).value = cmdX2[1];
+         } else { // read value and remove ids
+           document.getElementById("testR").innerHTML +=  document.getElementById(idX).innerHTML.replace(/id=/,"kid=");
+	     }
+       } else { // No valid id
+           document.getElementById("testR").innerHTML +=  "Error: no valid id " + idX + "<br>\n";
+       }	   
+	 } else if  (cmdX[0] == '_') { // execute function
+        measure = 0; 	 
+	    if (idX =='tabAct') { tabAct(cmdX2[1]); 
+		} else if (idX =='setWave') { setWave(cmdX2[1])
+		} else if (idX =='aOp') { aOp(cmdX2[1])
+		} else if (idX =='tOp') { tOp(cmdX2[1]);
+		} else if (idX =='fOp') { fOp(cmdX2[1]);
+		} else if (idX =='cHarm') { calcHarmonics();
+		} else if (idX =='oOp') { oOp(cmdX2[1]);
+		  if (cmdX2[1] == 'Run') { meas = 1;  }
+		}
+     } else if  (cmdX[0] == '-') { // print line
+       	 document.getElementById("testR").innerHTML +=  cmdX.substring(1,cmdX.length-1);
+     }	 
+     cmdIndex++;
+	 cmdX = cmds[cmdIndex]; // next line
+   }
+   if (cmdIndex >= cmds.length) { testflow = 0; } 
 }
 
 //----------------------------------------------------------------------------------//
@@ -2496,66 +2919,189 @@ function resetLookup() {
 var socket = io.connect();
  
 var fullDataT = "";
-var maxXi = 0; 
  
+        socket.on('device', function (data) {                  // get from server detected device
+		   if (data.value == "Simulation") {
+		     document.getElementById("board").value = 1;
+		   } else if (data.value == "Arduino") {
+   		     document.getElementById("board").value = 2;
+		   } else if (data.value == "Raspi") {                //Raspberry Pi as hardware
+   		     document.getElementById("board").value = 3;
+		   } else if (data.value == "XMC4700") {
+   		     document.getElementById("board").value = 4;
+		   } else if (data.value == "FPGA FTDI") {
+		     document.getElementById("board").value = 0;
+		   } 
+		   console.log(data.value);
+		   selectBoard();                                      // activate all correct values
+        });
+		
         socket.on('newData', function (data) {                  // get from server all data
+            var rVal="";
+			var dataX = "";
 			var dataY = data.value;
-			if (dataY[0] == 'f') document.getElementById("dataXYZ").innerHTML = dataY + "<br>";
-			document.getElementById("dataX").innerHTML = dataY + "<br>";
-            // Example
-			// run, index   curve 
-			//         type    val    PMOD ADC   val     Pin A1            Pin A2            Pin A3           Pin A4
-			// 0, 13755 , Sine = 2810 , ADC(AD2) = 2791 , ADC(OSC1) = 701 , ADC(OSC2) = 702 , ADC(OSC3) = 706 , ADC(OSC4) = 702
-            // some channels could be ommitted
-            // split line 
-			var pairs = dataY.split(",");
-			// Fill Oscilloscope array
-			//  check first element is a number
-            var dataMax2 = Math.round(dataMax/2);
-			var indexX = parseInt(pairs[1]);
-			
-			   document.getElementById("mouse").innerHTML = indexX + "<br>";
-			
-			if (!isNaN(indexX)) {		
-			   if (indexX > maxXi) maxXi = indexX;
-               dataOSC2[indexX] = indexX;			
-			   // get integers
-			   var proc = indexX + ",";
-			   for (var jx1 = 2; jx1 < 7; jx1++) { // pairs.length
- 			     var valX1 = pairs[jx1].split("=");    
-			     dataOSC3[indexX + (jx1 - 1) * dataMax2] = parseInt(valX1[1]); 
-				 proc = proc + valX1[1] + ",";
-			   }
-			   if (oState == "Run") {
-                   document.getElementById("mouse").innerHTML = proc + "<br>";
-			   }	   
-			   // Display takes some time so update only every 100 value
-			   // if Run is active
-			   if (((indexX + 1) % 1024 == 0) && (oState == "Run")) {
-			      updatePlot();
-   		          chanStats();
+			dataOSC = [];
+			dataOSC1 = [];
+			dataOSC2 = [];
+			dataOSC3 = [];
+			document.getElementById("data").innerHTML = dataY + "<br>" + hexToDec(dataX.substring(1+2*4,5+2*4));
+			  // example dataY: U4710FF0F471000000000Y   dataY:X0000000000000000D119Y
+			  dataX = dataY;  // fixed in uart_TX
+			  //for (var i = dataY.length - 1; i >= 0 ; i--) { // bring in right order addr 4,3,2,1,0 awg,c4,c3,c2,c1
+			  //    dataX += dataY.substring(i,i+1);
+			  //}
+			// alert(dataY[0]);  
+			if  (dataY[0] == "U") { // current acquisition position stored first ok??
+			   currCon = hexToDec(dataX.substring(1+2*4,5+2*4));
+			   currCon = currCon % dataMax; 
+			   dataIndex = 1;
+			   currCon = currCon + 1;
+			   // alert(currCon);
+            } 
+			// dataOSC = [];
+			// dataOSC.length = (dataMax -1) * 5; 
+			for (var j = 1; j < dataMax ;j ++) { // length:dataMax-1 starting 0..511	
+			  dataOSC[dataIndex - 1] = dataIndex - 1;
+			  // fullDataT += dataY;
+			  for (var i = 0; i < 5; i++) {
+			     var sVal = dataX.substring(j * 22 + 1+(4-i)*4,j * 22 + 5+(4-i)*4);  // indexStart, indexEnd	
+                 // alert(sVal);			   
+			     rVal += sVal +"," + hexToDec(sVal) + ","; // ;
+				 // store scaled data
+				 dataOSC[dataIndex - 1 + (dataMax -1) * (i+1)] = Math.trunc(hexToDec(sVal)); // store data in array
+			  }
+			  // document.getElementById("data").innerHTML = currCon + "," + dataIndex + "," + dataY.length + "," + 
+			  //  dataX.length + "," + dataX + ": " + rVal;
+			  dataIndex += 1;                                   // next set
+	        }		
+			  // Array dataOSC: 0,1,2..(dataMax-2) AWG1 0,1,2..(dataMax-2) OSC1 ..
+			  dataOSC1 = [];
+			  if (dataIndex == dataMax) {  // received dataMax data
+			     // alert(fullDataT);
+				 // sort data into dataOSC1 from currCon til end and start until currCon
+				 // To Do: Individual Scale with ADC range and offset
+				 for (var i = 0; i < (dataMax - 1); i++) {  // 512 Data block  size: samples, 0..510 (-first,-currCon)
+			       if (i + currCon  + 1 < dataMax - 1) {
+				    dataOSC1[i] = i;
+				    dataOSC1[i + (dataMax-2)] = dataOSC[i + currCon + 1 + (dataMax-1)]; 
+				    dataOSC1[i + 2 * (dataMax-2)] = dataOSC[i + currCon + 1 + 2 * (dataMax-1)];
+				    dataOSC1[i + 3 * (dataMax-2)] = dataOSC[i + currCon + 1 + 3 * (dataMax-1)];
+				    dataOSC1[i + 4 * (dataMax-2)] = dataOSC[i + currCon + 1 + 4 * (dataMax-1)];
+				    dataOSC1[i + 5 * (dataMax-2)] = dataOSC[i + currCon + 1 + 5 * (dataMax-1)];
+				   } else {
+				     dataOSC1[i] = i ;
+				     dataOSC1[i + (dataMax-2)] = dataOSC[i + currCon + 1 ];  // AWG 3.3V
+				     dataOSC1[i + 2 * (dataMax-2)] = dataOSC[i + currCon + 1 + 1 * (dataMax-1)];
+				     dataOSC1[i + 3 * (dataMax-2)] = dataOSC[i + currCon + 1 + 2 * (dataMax-1)];
+				     dataOSC1[i + 4 * (dataMax-2)] = dataOSC[i + currCon + 1 + 3 * (dataMax-1)];
+				     dataOSC1[i + 5 * (dataMax-2)] = dataOSC[i + currCon + 1 + 4 * (dataMax-1)];
+                   }				   
+				 }
+				 // dataOSC1 0.. (dataMax-3)  dataMax-2 values
+				 // Look for trigger 
+				 var trg = parseInt(document.getElementById("trgSrc").value);       // Channel
+				 var trgEdge = parseInt(document.getElementById("trgEdge").value);  // Edge
+				 var trgLevel = unitToValue(document.getElementById("trigLevelVal").value); // Level
+				 var factor = 1/(4*16*1024-1); // 1 V range XADC, 64k range
+				 //
+                 var boardX = parseInt(document.getElementById("board").value);
+                 if (boardX == 2) { // Arduino
+                   factor = 1/(4*1024-1);  // 12 Bit 3.3V??
+				 }
+				 
+				 var offset = 0;
+				 trgPos = -1;
+				 var minVal = dataOSC1[Math.round(dataMax/4) + 4 + dataMax * trg]; // Start Position
+				 for (var i = Math.round(dataMax/4) + 4; i < Math.round(3*dataMax/4) - 4; i++) { // prevent overflow
+			       var val1 = dataOSC1[i + dataMax * trg] * factor + offset; 
+				   var val2 = dataOSC1[i - 1 + dataMax * trg] * factor + offset; 
+				   if (trg == 1) {
+				       val1 = dataOSC1[i + dataMax * trg] * factor * 3.3 + offset; 
+				       val2 = dataOSC1[i - 1 + dataMax * trg] * factor * 3.3 + offset; 
+				   }
+				   if  (trgEdge == 1) {       // rising
+				      if ((val1 > val2) && (val1 >= trgLevel) && (trgLevel >= val2)) trgPos = i;
+                   } else if (trgEdge == 2) { // falling
+				      if ((val1 < val2) && (val1 <= trgLevel) && (trgLevel <= val2)) trgPos = i; 	
+				   } else if (trgEdge == 3) { // ramp
+				      if ((val1 <= minVal) && ( i < dataMax/2 - 1)) {
+					    minVal = val1;
+						trgPos = i + Math.round(dataMax/4);
+                        // set correct trigger level in Volts
+						document.getElementById("trigLevelVal").value = valueToUnit(dataOSC1[trgPos + dataMax * trg]);
+					  }
+                   }				   
+				   // alert(val1 + "," + val2 + "," + trgLevel + "," + factor + "," + offset);
+				 }
+				 // alert(trgPos + "," + trgEdge + "," + trg + "," + (dataMax/4) + "," + factor + "," + offset);
+				 // transfer triggered data
+				 var triggered = "triggered";
+				 if (trgPos < dataMax/4) {
+				    trgPos = Math.round(dataMax/2);
+				    triggered = "not triggered";
+				 }
+				 trgPos = trgPos - Math.round(dataMax/4);  // was /3 ??
+				 var dataMax2 = Math.round(dataMax/2);
+				 
+				 var timeSampling = unitToValue(document.getElementById("timeSampling").value);
+				 
+				 var timestep = timeSampling * (timeBase + 1);     // XADC 10ns * 8 * 104 cycles conversion
+				 
+				 // voltage range AWG, OSC1, OSC2, OSC3, OSC4
+				 var factorX = [3.3, 1.0, 1.0, 1.0, 1.0]; // FPGA Range
+				 // if (currUnit == 0) { timestep = 1} 
+                 if (boardX == 2) { // Arduino
+                   factorX = [3.3, 1.65, 1.65, 1.65, 3.3];  // Arduino range with PMOD AD2
+				   if (timeBase == 0) { timestep = timeSampling * (timeBase + 1);  //
+                   } else {timestep = timeSampling * timeBase; } 				   
+				   // timestep = timestep / 2;
+				 } if (boardX == 1) { // Simulation
+                   factorX = [6.6, 6.6, 6.6, 6.6, 6.6]; 
+				   if (timeBase == 0) { timestep = timeSampling * (timeBase + 1);  //
+                   } else {timestep = timeSampling * timeBase; } 				   
+				 }
+				 for (var i=0; i<factorX.length; i++) {
+				    factorX[i] = factorX[i] * factor; 
+				 }
+				 // alert(timestep + "," + boardX + "," + timeSampling + "," + timeBase);
+			     for (var i = 0; i < dataMax2; i++) {
+					dataOSC3[i] = i;
+					dataOSC2[i] = (i - dataMax/4) * timestep;
+			        dataOSC3[i + dataMax2] = dataOSC1[ i + trgPos + (dataMax - 2)];                         // AWG code
+			        dataOSC2[i + dataMax2] = dataOSC1[ i + trgPos + (dataMax - 2)] * factorX[0] + offset; // AWG 3.3V
+			        dataOSC3[i + 2 * dataMax2] = dataOSC1[ i + trgPos + 2 * (dataMax - 2)];
+			        dataOSC2[i + 2 * dataMax2] = dataOSC1[ i + trgPos + 2 * (dataMax - 2)] * factorX[1] + offset; // C1
+			        dataOSC3[i + 3 * dataMax2] = dataOSC1[ i + trgPos + 3 * (dataMax - 2)];
+			        dataOSC2[i + 3 * dataMax2] = dataOSC1[ i + trgPos + 3 * (dataMax - 2)] * factorX[2] + offset; // C2
+			        dataOSC3[i + 4 * dataMax2] = dataOSC1[ i + trgPos + 4 * (dataMax - 2)];
+			        dataOSC2[i + 4 * dataMax2] = dataOSC1[ i + trgPos + 4 * (dataMax - 2)] * factorX[3] + offset; // C3
+			        dataOSC3[i + 5 * dataMax2] = dataOSC1[ i + trgPos + 5 * (dataMax - 2)];
+			        dataOSC2[i + 5 * dataMax2] = dataOSC1[ i + trgPos + 5 * (dataMax - 2)] * factorX[4] + offset; // C4
+				 }
+				 // ready to plot
+                 // ScatterPlot("OSC","Oscilloscope",dataOSC2,dataMax2,
+		         //            "time","lin","Minmax",
+			     //            "Amplitude","lin","auto","Fine");
+				 updatePlot();
+   		         chanStats();
 
-				  let now = new Date();
-                  let nowTxt = now.getFullYear() + "/" + (now.getMonth()+1)
-                             + "/" + now.getDate() + " " + now.getHours()
-					         + ":" + now.getMinutes() + ":" + now.getSeconds()+ "." + now.getMilliseconds();			
-				  // 1 Msps 8 samples per point 1E6/8						
-				  document.getElementById("statusOSC").innerHTML = nowTxt + " " + dataMax2 + " samples at " 
-				     + valueToUnit(1E6/8) + "Hz/" + valueToUnit(8/1E6) + "s " + maxXi;
-			   }
-            }
-            // sine FFT  sine selected , oscilloscope running
-			if (((indexX + 1) % (8 * 1024) == 0) && (curveTyp == 1) && (oState == "Run")) {
-			   // alert("FFT");
-			   generateFFT();
-			}
-			// ramp DAC INL, DNL
-			if (((indexX + 1) % (4 * 1024) == 0) && (oState == "Run")) {
-			   // INL, DNL graph
-			   ramp();
-			}
-			// (ramp ADC)
-			
+				let now = new Date();
+                let nowTxt = now.getFullYear() + "/" + (now.getMonth()+1)
+                           + "/" + now.getDate() + " " + now.getHours()
+						   + ":" + now.getMinutes() + ":" + now.getSeconds()+ "." + now.getMilliseconds();			
+				// 1 Msps 8 samples per point 1E6/8						
+				document.getElementById("statusOSC").innerHTML = triggered + " " + nowTxt + " " + dataMax2 + " samples at " 
+				   + valueToUnit(1/timestep) + "Hz/" + valueToUnit(timestep) + "s";
+				dataIndex = 0;	
+				
+				if (fState == "Run") {  generateFFT();  }  // do FFT
+				
+				if (rState == "Run") {  nextRamp();     }  // do INL DNL
+				
+				if (meas == 1) {  meas = 0;  runFlow(); }  // do test flow
+				
+			   } //---------------------- End of received data processing ------------------>
+			   busyOsc = 0;
         });
         
         function sendCmd()   // filename fName send to server
@@ -2578,10 +3124,14 @@ var maxXi = 0;
 			document.getElementById("lCmd").innerHTML = "Sent command: " + cmd + " at " + nowTxt;
         }
 
-window.addEventListener("load",changeUnit());
+function initAll() {
+   changeUnit();
+   document.getElementById("cmdTxt").value = "X";
+   sendCmdC();
+}
+
 window.addEventListener("load",confOsc());
-window.addEventListener("load",myLookup());
-// window.addEventListener("load",sendCmd());
+window.addEventListener("load",initAll());
 
 		// Will pop up regularly
 		// socket.on("connect_error", (error) => {

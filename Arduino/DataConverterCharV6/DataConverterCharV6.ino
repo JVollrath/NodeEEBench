@@ -476,7 +476,7 @@ void loop() {
           // writing PWM
           analogWrite(DAC_PWM, sine8);
           // writing digital  
-          writeDAC(sine12);          
+          writeDAC(sine8);          
           // if (dacType[4] == 1) {
           //  digWriteS(sine12);
           //} else {

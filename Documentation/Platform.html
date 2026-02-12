@@ -73,9 +73,11 @@ th.clr {
 	 Fakultät Elektrotechnik &nbsp; &nbsp; &nbsp;
   </div>
   <div id="nheader3" style="background-color:#f18700;color:#FFFFFF" align="right">
-     <a href="../Vollrath_Work.html" style="background-color:#f18700;color:#FFFFFF"> 
+     <a href="https://personalpages.hs-kempten.de/~vollratj/Publications/Vollrath_Work.html" style="background-color:#f18700;color:#FFFFFF"> 
 	 Publications &nbsp; &nbsp; &nbsp;</a>
-     <a href="https://www.hs-kempten.de/elektrotechnik/fakultaet/personen-detailansicht/joerg-vollrath?tx_hisconnect_personenlisting%5Bbacklink%5D=607&cHash=effe2c6873f6c8a9f79b55b636d3bde2" style="background-color:#f18700;color:#FFFFFF"> 
+     <a href="https://personalpages.hs-kempten.de/~vollratj/Elektronik/Elektronik.html" style="background-color:#f18700;color:#FFFFFF"> 
+	 Elektronik &nbsp; &nbsp; &nbsp;</a>
+    <a href="https://www.hs-kempten.de/personen/joerg-vollrath" style="background-color:#f18700;color:#FFFFFF"> 
 	 Fachgebiet Elektronik, Prof. Vollrath &nbsp; &nbsp; &nbsp;</a>
   </div>
   </div>
@@ -152,77 +154,120 @@ April, 2024<br>
 
 <h2> Table</h3><br>
 <table border="1">
-<tr><td>Feature</td><td>BASYS3</td><td>Arduino<br> MKR WIFI1010</td><td>Raspi Zero W</td>
+<tr><td>Feature<br>Link</td><td>Date<br> last<br> modification</td><td>Simulator<br>Server</td><td>BASYS3</td>
+    <td>Arduino<br> MKR WIFI1010</td><td>Raspi Zero W</td>
     <td>XMC4700<br>Relax Kit</td><td>NUCLEO-F302R8<br>STMicroelectronics</td>
 	<td>MSP-EXP430F5529LP<br>Texas Instruments </td></tr>
-<tr><td>Cost</td>
+<tr><td>Cost</td><td></td><td></td>
     <td>140.-</td><td>34.- (04/2024)</td><td>38.- (04/2024)</td><td>15.-/33.- (04/2024)</td>
 	<td>10.- (04/2024)</td><td>16.- (04/2024)</td></tr>
-<tr><td>Motivation</td><td>Low Cost FPGA</td><td>Arduino IDE<br> First semester programming</td>
+<tr><td>Motivation</td><td></td><td></td><td>Low Cost FPGA</td><td>Arduino IDE<br> First semester programming</td>
      <td>Simulate LAN connection with server</td>
     <td>Trade Fair<br>Arduino IDE<br>Germany based</td><td>Low cost motor control board</td>
 	<td>Control system and microprocessor laboratory </td></tr>
-<tr><td>BLDC Motor Kit</td><td></td><td><br></td><td></td>
+<tr><td>BLDC Motor Kit</td><td></td><td></td><td></td><td><br></td><td></td>
     <td>BLDC-SHIELD_IFX007T</td><td>X-NUCLEO-IHM07M1</td><td></td></tr>
-<tr><td>Cost</td>
+<tr><td>Cost</td><td></td><td></td>
     <td></td><td></td><td></td><td> 40.- (04/2024)</td>
 	<td>15.- (04/2024)</td><td></td></tr>
-<tr><td>Base Program<br>Analog Read ADC<br>Analog Write DAC</td>
+<tr><td>Base Program<br>Analog Read ADC, OSC 4 channel<br>Analog Write DAC, AWG1</td><td></td><td></td>
     <td>VHDL</td><td>Arduino IDE</td><td>(Node.js)</td><td>Arduino IDE</td><td>Arduino IDE</td>
 	<td>Arduino IDE</td></tr>
-<tr><td>Sample buffer</td>
-    <td>8k</td><td>512</td><td></td><td></td></tr>
-<tr><td>Read lookup buffer</td>
-    <td></td><td>2k</td><td></td><td></td></tr>
-<tr><td>Write lookup buffer</td>
+<tr><td>Sampling rate, Bandwidth, Resolution</td><td></td><td></td>
+    <!--- BASYS--->  <td>DAC 100MSps, 10ns, 16 Bit<br> ADC 128kSps</td>
+	<!-- Arduino --> <td>DAC = ADC 1kSps, 12 Bit</td><td></td><td></td>
+	<td></td><td></td></tr>
+<tr><td>Sample buffer</td><td></td><td></td>
+    <td>8k</td><td>512</td><td></td><td></td>
+	<td></td><td></td></tr>
+<tr><td>Read lookup buffer</td><td></td>
+    <td></td><td>2k</td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>Write lookup buffer</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>SPI (single/multiple)</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td><td></td>
+	<td></td><td></td></tr>
+<tr><td>I2C (single/multiple)</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>Digital signal processing</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>Digital IO</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>Power supply</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>AWG output buffer hardware</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>ADC, DAC Hardware</td><td>TBD</td>
+    <td></td><td></td><td>PMOD AD2 20.-<br>PMOD DA2 21.-</td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td>Oscilloscope input buffer hardware</td><td>TBD</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
+<tr><td colspan="9" style="text-align:center">Server Node.js</td></tr>
+<tr><td>Server Node.js</td><td></td><td></td>
+    <td>ServerEEBench.js</td><td>ServerEEBench.js<br>ServerAx.js</td>
+	<td></td><td></td><td></td><td></td></tr>
+<tr><td>UART auto detect</td><td>yes</td><td>yes</td><td></td><td></td>
     <td></td><td></td><td></td><td></td></tr>
-<tr><td>SPI (single/multiple)</td>
+<tr><td>Program version and hardware auto detect</td><td>yes</td><td>yes</td><td></td><td></td>
     <td></td><td></td><td></td><td></td></tr>
-<tr><td>I2C (single/multiple)</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td>Digital signal processing</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td>Digital IO</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td>Power supply</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td>AWG output buffer</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td>Oscilloscope input buffer</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td colspan="7" style="text-align:center">Server Node.js</td></tr>
-<tr><td>Server Node.js</td>
-    <td>ServerEEBench.js</td><td>ServerAx.js</td><td></td><td></td></tr>
-<tr><td>UART auto detect</td><td>yes</td><td>yes</td><td></td><td></td></tr>
-<tr><td colspan="7" style="text-align:center">HTML</td></tr>
+<tr><td colspan="9" style="text-align:center">HTML</td></tr>
 <tr><td>Configuration</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td>AWG</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
+<tr><td>AWG1</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
+<tr><td>AWG2</td>
+    <td>TBD</td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Oscilloscope</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Cursor</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Math function</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>FFT</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Histogram</td>
-    <td></td><td></td><td></td><td></td></tr>
-<tr><td>Ramp Test</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
+<tr><td>Ramp Test INL, DNL</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Write Lookup</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Read Lookup</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Power supply</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Digital IO</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 <tr><td>Bode Plot</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
+<tr><td>Application</td><td>Diode<br>MOSFET<br>Opamp<br>Band pass<br>
+    ADC<br>DAC<br>Source<br>MOTOR<br>Solar cell<br>Audio Amp</td>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td></tr>
 <tr><td>DSP<br>Application</td>
-    <td></td><td></td><td></td><td></td></tr>
+    <td></td><td></td><td></td><td></td>
+	<td></td><td></td><td></td><td></td></tr>
 </table>
 <hr>
 
@@ -247,6 +292,8 @@ FFT, Ramp, lookup<br>
 <br>
 
 <ul>
+<li> MAX5216PMB 21.- DAC 16-Bit 14us 50kSps</li>
+<li> MAX11205PMB 50.- 16-Bit 80ms</li>
 <li>Design power supply (USB-C) -10 V, +10 V</li>
 <li>Design OSC Input buffer -10 V, +10 V</li>
 <li>Design AWG Ouput buffer -10 V, +10 V</li>

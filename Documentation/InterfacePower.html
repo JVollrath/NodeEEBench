@@ -1,0 +1,357 @@
+<html lang="en">
+  <head>
+<meta name="description" content="Digital IOs of EEBench an open source, open access low cost
+   oscilloscope and arbitrary waveform generator based on Arduino or FPGA BASYS3 and nodejs JavaScript" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <title>Interface and Power Node EEBench</title>
+ <style>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 20px;
+  background: #0067a5;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 20px;
+  background: #0067a5;
+  cursor: pointer;
+}
+
+.nobr { white-space: nowrap }
+
+table.bx { border-collapse: collapse; }
+
+table.bo, tr.bo, th.bo, td.bo {  border: 1px solid black; border-collapse: collapse; padding-left: 10px; 
+padding-right: 10px;
+}
+
+table.bo0, tr.bo0, th.bo0, td.bo0 { border: 3px solid black; border-collapse: collapse;}
+table.bo1, tr.bo1, th.bo1, td.bo1 { border: 3px solid #FF8C00; border-collapse: collapse;}
+table.bo2, tr.bo2, th.bo2, td.bo2 { border: 3px solid #0000FF; border-collapse: collapse;}
+table.bo3, tr.bo3, th.bo3, td.bo3 { border: 3px solid #FF1493; border-collapse: collapse;}
+table.bo4, tr.bo4, th.bo4, td.bo4 { border: 3px solid #008000; border-collapse: collapse;}
+table.bo5, tr.bo5, th.bo5, td.bo5 { border: 3px solid #FF4500; border-collapse: collapse;}
+table.bo6, tr.bo6, th.bo6, td.bo6 { border: 3px solid #4682B4; border-collapse: collapse;}
+table.bo7, tr.bo7, th.bo7, td.bo7 { border: 3px solid #DC143C; border-collapse: collapse;}
+table.bo8, tr.bo8, th.bo8, td.bo8 { border: 3px solid #ABABAB; border-collapse: collapse;}
+
+table.tb, tr.tb, th.tb, td.tb { border: 3px solid black; background: #ABABAB; border-collapse: collapse;}
+table.tbs, tr.tbs, th.tbs, td.tbs { border-top: 3px solid black; border-left: 3px solid black; 
+border-right: 3px solid black; background: white; border-collapse: collapse;}
+td.tbr:last-child { width:100%; border-bottom: 3px solid black; background: white; border-collapse: collapse;}
+td.top {vertical-align: top;}
+
+</style> 
+  </head>
+  
+<!-- load socket.io Google -->
+<script src="../node_modules/socket.io/client-dist/socket.io.js"></script>
+<!-- load JQuery -->
+<SCRIPT SRC="../scripts/jquery.js"> </SCRIPT>
+<!-- load Chart module-->
+   <script type="text/javascript" src="../Chart_2013_03_11/Chart_basic.js"></script>
+<!-- load FFT module-->
+  <script type="text/javascript" src="../FFT/dspFFT.js"></script>
+  <body>
+  <div id="headx" style="display:block">
+  <div id="nheader1" style="background-color:#0067a5;color:#FFFFFF" align="right" >
+     <a href="http://www.hochschule-kempten.de" style="color:#FFFFFF"> Hochschule Kempten &nbsp; &nbsp; &nbsp; </a>
+  </div>
+  <div id="nheader2" style="background-color:#05adb5;color:#FFFFFF" align="right" >
+     <a href="http://www.hochschule-kempten.de/about-kempten-university/faculties/electrical-engineering.html?L=1" style="color:#FFFFFF">
+	 Fakult&auml;t Elektrotechnik &nbsp; &nbsp; &nbsp;
+  </div>
+  <div id="nheader3" style="background-color:#f18700;color:#FFFFFF" align="right">
+     <a href="https://personalpages.hs-kempten.de/~vollratj/Elektronik/Elektronik.html" style="background-color:#f18700;color:#FFFFFF"> 
+	 Elektronik &nbsp; &nbsp; &nbsp;</a>
+    <a href="https://www.hs-kempten.de/personen/joerg-vollrath" style="background-color:#f18700;color:#FFFFFF"> 
+	 Fachgebiet Elektronik, Prof. Vollrath &nbsp; &nbsp; &nbsp;</a>
+  </div>
+  </div>
+  <br>
+
+<h1>Interface and Power NodeEEBench</h1>
+
+<h1>Components</h1>
+
+<table border="1">
+<tr><td>Number</td><td>Component</td><td>Total Price Euro</td><td>Commment</td></tr>
+<tr><td>1</td><td>TL7660</td><td>0.7</td><td>Charge pump, 70 Ohm, 20 mA</td></tr>
+<tr><td>1</td><td>MCP4728</td><td>6.00</td><td>4 Channnel DAC </td></tr>
+<tr><td>4</td><td>MCP6022</td><td>1.40</td><td>2 OpAmp </td></tr>
+<tr><td>2</td><td>10 uF Cap</td><td></td><td>Buffer capacitance</td></tr>
+<tr><td>6</td><td>1 MOhm</td><td></td><td></td></tr>
+<tr><td>10</td><td>470 kOhm</td><td></td><td></td></tr>
+<tr><td>6</td><td>220 kOhm</td><td></td><td></td></tr>
+<tr><td>1</td><td>100 kOhm</td><td></td><td></td></tr>
+</table>
+<br>
+
+<h1>Oscilloscope input circuit</h1>
+
+The Arduino ADCs have an input range from 0V .. 3.3V.<br>
+The BASYS3 Artix FPGA supports an input range from 0V to 1 V.<br>
+The input range should be from -5 V.. 5V. (-10 V .. + 10 V)<br>
+<img src="ImagesS/VoltageDiv.jpg" width="300"><br>
+Vout2 = Vinx / (1 + R5/R7+ R5/R6) + V33 /(1 + R6/R7 + R6/R5)<br>
+Vout2 = Vinx / (1 + 1 + 1/0.69) + V33 /(1 + 0.69 + 0.69) = 0.29 Vinx + 0.437 V33<br>
+Vout2(Vinx=-5V,V33=3.3V) = -0.00853 V<br>
+Vout2(Vinx=5V,V33=3.3V) = 2.8906 V<br>
+R<sub>Vinx2</sub> = R5 + R6*R7/(R6+R7) = 1.4 MOhm<br>
+Vout3 = Vinx / (1 + 10 + 1/0.69) + V33 /(1 + 6.9 + 0.69) = 0.0803 Vinx + 0.116 V33<br>
+Vout3(Vinx=-5V,V33=3.3V) = -0.01746 V<br>
+Vout3(Vinx=5V,V33=3.3V) = 0.785 V<br>
+R<sub>Vinx3</sub> = R8 + R9*R10/(R9+R10) = 1.087 MOhm<br>
+<br>
+Next available resistor value to 660kOhm is 470kOhm + 220kOhm = 690kOhm<br>
+To achieve frequency independent transfer characteristic capacitances have to be added.<br> 
+<br>
+<hr>
+<br>
+<h1>Power supply DAC</h1>
+
+The voltages VA..VD are generated by a 4 channel MCP4728 DAC.<br>
+<table>
+<tr><td><img src="ImagesS/GY-MCP4728Back.jpg" width="100"><br></td>
+<td>
+V VDD<br>
+G GND = 0 V<br>
+CL SCL <br>
+DA SDA <br>
+A Output A powerA<br>
+B Output B powerB<br>
+C Output C powerB<br>
+D Output D powerB<br>
+</td>
+</tr>
+</table>
+<h2>GUI</h2>
+The 'Power Supply' implements 4 sliders with a comboBox and a range of -5V..5V
+map to 0..4095.<br>
+id = "powerAVal", "powerBVal", "powerCVal", "powerDVal"<br>
+<br>
+<h2>Websocket communication</h2><br>
+The websocket uses the following P command to set voltages.<br>
+<table>
+<tr><td style="vertical-align:top">"P"</td>
+    <td> command sets power supplies MCP4728<br>
+     P&lt;VA&gt;&lt;IA&gt;&lt;VB&gt;&lt;IB&gt;&lt;VC&gt;&lt;IC&gt;&lt;VD&gt;&lt;ID&gt; 
+	 Each value 16 Bit, 4 Hex numbers = 32 Hex numbers total<br>
+	 P00001001200230034004500560067007</td></tr>
+</table>
+<h2>Arduino I2C SDA, SCL</h2><br>
+Library: (MCP4728,) Adafruit_MCP4728<br>
+This uses the default speed of 100kHz: 10us pulse width SCL:<br> 
+<pre>
+  Wire.setClock(100000); 
+</pre>
+The Wire module is also used by the PMOD AD2 with the following statement to speed up 
+acquisition to ts = 430us sample time. 700ns pulse width SCL<br>
+<pre>
+  Wire.setClock(1600000); // to keep 430us cycle
+</pre>
+<hr>
+<br>
+<h1>Output range conversion</h1>
+<br>
+A power supply for AWG and DAC, VA = V+, VB = V-, VC = V1, VD = V2 for conversion of
+0V..3.3V range to a range of +5V to -5V is needed.<br>
+An inverting rail-to-rail amplifer MCP6022 will convert the range.<br> 
+<img src="ImagesS/LevelConvert01.jpg" width="300"><br>
+The resistor values are based on available parts.<br>
+V = - 5 V, Vout = 0..3.3V<br>
+Vout1 = - R4 (V-/R3 + Vout (1/R1 + 1/R2) ) = - V- + 3.13 Vout<br>
+Vout1(Vout = 0 V) = 5 V<br>
+Vout1(Vout = 3.3 V) = - 5.3 V<br>
+R12=1/(1/R1+1/R2) = 150 kOhm<br>
+<img src="ImagesS/MCP6022.jpg" width="200"><br> 
+2 chips are used for 4 output level converters.<br>  
+<br>
+<hr>
+<br>
+<!------------------ Power supply --->
+<h1>Power supply</h1>
+<br>
+A VDD = 5 V USB power supply should generate a V- = -5 V voltage.<br>
+<br>
+An 8 pin TC7660 charge pump with a DIL package for the breadboard is used.<br>
+<img src="ImagesS/TC7660S.jpg" width="300"><br>
+Pin 1 open, Pin2 C1+, Pin 3 GND, Pin4 C1-, 
+Pin 5 Vout C2-, Pin & open, Pin 7 open, Pin 8 VDD.<br>
+C1, C2 = 10 uF<br>
+Rout = 70 Ohm; I = -10mA gives -4.3 V<br>
+1/5kHz/C1 &lt; 70 Ohm<br>
+C1 &gt; 1 uF<br> 
+<br> 
+For higher loads a more negative voltage and a feedback circuit could be used.<br>
+2 separate circuits for OpAmps and for user should be used.<br> 
+<br>
+<hr>
+<br>
+<!------------------ Breadboard --->
+<h1>Breadboard Realization</h1>
+<br>
+Input: 5V, 3.3V, GND, SCL, SDA, Vinx2, Vinx3<br>
+Output: Power -5V<br>
+Output: Power/Signals 4 x DAC 0..3.3V to -5V..5V Vout1A,B,C,D<br> 
+Output: Level shifted signals, Vout2 (-5V..5V to 0..3.3V), Vout3 (-5V..5V to 0..1V)<br>
+<br>
+<img src="ImagesS/InterfacePower.png" width="600"><br>
+R12: 100 k&Omega; (150)<br>
+R3, R4: 470 k&Omega;<br>
+R5, R7, R8: 1 M&Omega;<br>
+R6, R9: 470 k&Omega; (660)<br>
+R10: 100 k&Omega;<br>
+C1,C2: 10uF<br>
+<br>
+<!------------------ Test --->
+<h1>Test</h1>
+Tester: Electronic Explorer<br>
+Test setup connections:<br>
+V- = -5 V, VMTR1 = -4.9 V<br>
+PowerA, VoutA, Vinx2, Vout2, C1<br>
+PowerB, Vout1B, C2 <br>
+PowerC, Vout1C, C3 <br>
+PowerD, Vout1D, Vinx3, Vout3, C4<br>
+<br>
+<table border="1">
+<tr><td>GUI slider / V</td><td>C1 / V</td><td>C2 / V</td><td>C3 / V</td><td>C4 / V</td></tr>
+<tr><td>-3</td><td>2.12</td><td>2.66</td><td>1.94</td><td>0.6</td></tr>
+<tr><td>-2</td><td>1.78</td><td>0.24</td><td>0.46</td><td>0.48</td></tr>
+<tr><td>-1</td><td>1.44</td><td>-1.28</td><td>-1.04</td><td>0.36</td></tr>
+<tr><td> 0</td><td>1.08</td><td>-2.82</td><td>-2.54</td><td>0.24</td></tr>
+<tr><td> 1</td><td>0.74</td><td>-4.34</td><td>-4.04</td><td>0.12</td></tr>
+<tr><td> 2</td><td>0.52</td><td>-4.88</td><td>-4.9</td><td>0.08</td></tr>
+</table>
+<br>
+<h2>Testflow</h2><br>
+
+Connecting the output to oscilloscope channels 1,2,3,4 can enable 
+running a testflow.<br>
+<pre>
+#powerAVal=-2V; Power supply
+#powerBVal=-2V; Power supply
+#powerCVal=-2V; Power supply
+#powerDVal=-2V; Power supply
+#oC1Avg; OSC measure C1 PowerA supply
+- ,
+#oC2Avg; OSC measure C1 PowerA supply
+- ,
+#oC3Avg; OSC measure C1 PowerA supply
+- ,
+#oC4Avg; OSC measure C1 PowerA supply
+- ,
+#powerAVal=-3V; Power supply
+#powerBVal=-3V; Power supply
+#powerCVal=-3V; Power supply
+#powerDVal=-3V; Power supply
+#oC1Avg; OSC measure C1 PowerA supply
+- ,
+#oC2Avg; OSC measure C1 PowerA supply
+- ,
+#oC3Avg; OSC measure C1 PowerA supply
+- ,
+#oC4Avg; OSC measure C1 PowerA supply
+- ,
+#powerAVal=-4V; Power supply
+#powerBVal=-4V; Power supply
+#powerCVal=-4V; Power supply
+#powerDVal=-4V; Power supply
+#oC1Avg; OSC measure C1 PowerA supply
+- ,
+#oC2Avg; OSC measure C1 PowerA supply
+- ,
+#oC3Avg; OSC measure C1 PowerA supply
+- ,
+#oC4Avg; OSC measure C1 PowerA supply
+- ,
+</pre>
+<br>
+
+	  <div id="footer" style="background-color:#0067a5;color:#FFFFFF">
+<br>
+ &nbsp; Hochschule für angewandte Wissenschaften Kempten, Joerg Vollrath, Bahnhofstraße 61 Â· 87435 Kempten<br>
+ &nbsp; Tel. 0831/25 23-0 · Fax 0831/25 23-104 · E-Mail: joerg.vollrath(at)fh-kempten.de <br>
+ <a href="http://www.hochschule-kempten.de/metanavigation/impressum.html"> 
+  <div style="background-color:#0067a5;color:#FFFFFF"> Impressum </div> </a>
+ </div>
+
+</div>
+       <script type="text/javascript"> 
+<!-- Begin
+	function myQR() {
+			var qr = new JSQR();							// Initialize a new JSQR object.
+			var code = new qr.Code();						// Initialize a new Code object.
+
+			code.encodeMode = code.ENCODE_MODE.BYTE;			// Set the code datatype.
+			code.version = code.DEFAULT;						// Set the code version
+														// (DEFAULT = use the smallest possible version).
+			code.errorCorrection = code.ERROR_CORRECTION.H;		// Set the error correction level (H = High).
+
+			var input = new qr.Input();						// Initialize a new Input object.
+			input.dataType = input.DATA_TYPE.TEXT;			 	// Specify the data type of 'data'.
+														// Here, 'data' contains only text.
+			var stX = window.location.pathname;					// Specify the data which should be encoded.
+            
+			// alert(stX);
+			if (stX.substr(0,3) == "/D:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(27,stX.length-27);
+			} else 	if (stX.substr(0,3) == "/C:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(52,stX.length-52);
+			} else{
+			   stX = "https://personalpages.hs-kempten.de"+stX;
+			}
+			// alert(stX);
+			input.data = stX
+			
+			var matrix = new qr.Matrix(input, code);			// Initialize a new Matrix object using the input
+														// and code, defined above.
+														// At this point, the QR Code get generated.
+
+			matrix.scale = 4;								// Specify the scaling for graphic output.
+			matrix.margin = 2;								// Specify the margin for graphic output.
+
+			var canvas = document.getElementById('thisQR');		// Create a new Canvas element.
+			canvas.setAttribute('width', matrix.pixelWidth);		// Set the canvas width to the size of the QR code.
+			canvas.setAttribute('height', matrix.pixelWidth);		// Set the canvas height to the size of the QR code.
+			canvas.getContext('2d').fillStyle = 'rgb(0,0,0)';		// Set the foreground color of the canvas to black.
+			matrix.draw(canvas, 0, 0);						// Draw the QR code into the canvas
+														// at position 0 (left), 0 (top).
+		};
+        myQR();
+
+        setSlideIndex(0);
+        showSlidesP();
+
+	    updateServerLog("GET2","EI_ProjektPraktikum");
+ //  End -->
+	  </script>
+ 
+</body>
+</html>

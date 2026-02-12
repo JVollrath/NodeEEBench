@@ -7,7 +7,9 @@
   https://personalpages.hs-kempten.de/~vollratj/GET2/EI_Projektpraktikum.html
 */
 #include <SPI.h> // Include library
-#include <Wire.h> // call library
+#include <Adafruit_MCP4728.h> // MCP4728 for power V+, V-, V1, V2 samüplin reduced from 460us to 820us
+// #include <MCP4728.h> // MCP4728 for power V+, V-, V1, V2
+#include <Wire.h> // call library MCP4728 by hideakitai
 #define AD7991_Adresse 0x28 // I2C adress of the Pmod AD2 module
 
 #define CS A6           // CS pin for PMOD DA2 I2C, 8: MOSI, 9:SCK
@@ -30,6 +32,7 @@
 #define DAC_C12          1
 #define DAC_Dx           2
 #define DAC_C3           3
+
 
 // R2R DAC XMC4700
 /*
@@ -54,6 +57,9 @@
 // const int DAC = 48; // Analog output pin P14.8
 // const int DAC1 = 53; // Analog output pin P14.9
 // P0.13 I2C SCL, P3.15 I2C: SDA, P3.9 SPI: SCK, P3.8 SPI MOSI, P3.10 SPI: SS
+
+Adafruit_MCP4728 mcp;
+// MCP4728 mcp;
 
 // buffer for values
 
@@ -151,7 +157,7 @@ void setup() {
   // ADC PMOD AD2
   Wire.begin(); // initialization of I2C communication
   Wire.setClock(1600000); // try (40000) 400 kHz 9.7.2025
- Init_AD7991(); // initialisation du module Pmod AD2
+  Init_AD7991(); // initialisation du module Pmod AD2
 
  // DAC PMOD DA2
  SPI.begin(); // initialization of SPI port
@@ -172,16 +178,40 @@ void setup() {
   // C Serial DAC CD4053
   /*  C serial control lines */
 
-  pinMode(DAC_INH, OUTPUT);
-  pinMode(DAC_C12, OUTPUT);
-  pinMode(DAC_Dx, OUTPUT);
-  pinMode(DAC_C3, OUTPUT);
+  // pinMode(DAC_INH, OUTPUT);
+  // pinMode(DAC_C12, OUTPUT);
+  // pinMode(DAC_Dx, OUTPUT);
+  // pinMode(DAC_C3, OUTPUT);
 
-  digitalWrite(DAC_INH, LOW); // INH low activates switches
-  digitalWrite(DAC_C12, LOW); // CLK12 coonnects Dx with C3
-  digitalWrite(DAC_Dx, LOW); // Data line low
-  digitalWrite(DAC_C3, HIGH); // output disconnected from Voutx1
+  // digitalWrite(DAC_INH, LOW); // INH low activates switches
+  // digitalWrite(DAC_C12, LOW); // CLK12 coonnects Dx with C3
+  // digitalWrite(DAC_Dx, LOW); // Data line low
+  // digitalWrite(DAC_C3, HIGH); // output disconnected from Voutx1
 
+  // End C Serial
+
+//xxx 
+ /**/
+ if (!mcp.begin()) {  // I2C address !mcp.begin(0x64) default 0x00 can be rewritten
+    Serial.println("Failed to find MCP4728 chip");
+    while (1) {
+      delay(10);
+    }
+  } 
+   Wire.setClock(1600000); // to keep 430us cycle?
+  /**/
+ /*
+    mcp.readRegisters();
+    mcp.selectVref(MCP4728::VREF::VDD, MCP4728::VREF::VDD, MCP4728::VREF::INTERNAL_2_8V, MCP4728::VREF::INTERNAL_2_8V);
+    mcp.selectPowerDown(MCP4728::PWR_DOWN::GND_100KOHM, MCP4728::PWR_DOWN::GND_100KOHM, MCP4728::PWR_DOWN::GND_500KOHM, MCP4728::PWR_DOWN::GND_500KOHM);
+    mcp.selectGain(MCP4728::GAIN::X1, MCP4728::GAIN::X1, MCP4728::GAIN::X2, MCP4728::GAIN::X2);
+    mcp.analogWrite(MCP4728::DAC_CH::A, 111);
+    mcp.analogWrite(MCP4728::DAC_CH::B, 222);
+    mcp.analogWrite(MCP4728::DAC_CH::C, 333);
+    mcp.analogWrite(MCP4728::DAC_CH::D, 444);
+
+    mcp.enable(true);
+ */
 }
 
 
@@ -393,11 +423,12 @@ void loop() {
         waitSend = 1;
       }
     } 
-    if (inChar == 'X') { expChar = 1; posChar = 0; } // cmd 'O' set block size
+    if (inChar == 'X') { expChar = 1; posChar = 0; } // cmd 'X' reset
     if (inChar == 'O') { expChar = 9; posChar = 0; } // cmd 'O' set block size
     if (inChar == 'T') { expChar = 21; posChar = 0; } // cmd 'T' triangle
     if (inChar == 'S') { expChar = 25; posChar = 0; } // cmd 'S' sine
     if (inChar == 'R') { expChar = 256*4 + 1; posChar = 0; } // cmd 'R' lookup table
+    if (inChar == 'P') { expChar = 33; posChar = 0; } // cmd 'P' power 32 values
     
     if (expChar > 0 ) {                              // gather command string
       myData[posChar] = inChar; // Add character
@@ -434,11 +465,23 @@ void loop() {
           Serial.print("Smd: "); Serial.print(stepS); Serial.print(",");Serial.print(ampS); Serial.print(",");
           Serial.println(offS);
           awgMode = 2;
-        }
+        } 
         if (myData[0] == 'R') {  // get lookup table 256 comma separated values
            for (int i3 = 0; i3 < 256; i3++ ) {
             lookup8[i3] = hexToDec(myString.substring(1 + i3 * 4, 4 + i3 * 4)); // char 1,2,3 8 bit only
            }
+        }
+        if (myData[0] == 'P') {  // power set DAC MCP4728
+          Wire.setClock(100000);     // MCP4728 working also with high speed?
+          uint16_t valP = hexToDec((String)myString.substring(1,5));
+          mcp.setChannelValue(MCP4728_CHANNEL_A, valP);
+          valP = hexToDec((String)myString.substring(9,13));
+          mcp.setChannelValue(MCP4728_CHANNEL_B, valP);
+          valP = hexToDec((String)myString.substring(17,21));
+          mcp.setChannelValue(MCP4728_CHANNEL_C, valP);
+          valP = hexToDec((String)myString.substring(25,29));
+          mcp.setChannelValue(MCP4728_CHANNEL_D, valP);
+          Wire.setClock(1600000);
         }
         if (myData[0] == 'X') {
           awgMode = 0;
@@ -478,7 +521,7 @@ void loop() {
   writeDAC(awgZ);                  // Write PMOD DA2
   
   sine8 = lookup8[awgZ >> 4];
-  digWrite(sine8);                  // 8 Bit
+  digWrite(sine8);                  // 8 Bit R2R
   
   bufVal[bufIndex] = awgZ;         // write val in bufVal as AWG1
   bufIndex++;

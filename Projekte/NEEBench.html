@@ -246,6 +246,11 @@ td.top {vertical-align: top;}
 <tr><td style="vertical-align:top">"O"</td>
     <td> (length = 9) Oscilloscope block size 16 bit and sampling rate 16 Bit (V_06)<br>
       Command: O02000000 : Block size x0200 = 512; timeBase 0000 8.32 us (BASYS 3 XADC)</td></tr>
+<tr><td style="vertical-align:top">"P"</td>
+    <td> command sets power supplies MCP4728<br>
+     P&lt;VA&gt;&lt;IA&gt;&lt;VB&gt;&lt;IB&gt;&lt;VC&gt;&lt;IC&gt;&lt;VD&gt;&lt;ID&gt; 
+	 Each value 16 Bit, 4 Hex numbers = 32 Hex numbers total<br>
+	 P00001001200230034004500560067007</td></tr>
 <tr><td style="vertical-align:top">"R"</td>
     <td> command transfers 8k data 16 bit hex data to lookup table for digital IOs<br>
      R0000..FFFF</td></tr>
@@ -451,7 +456,7 @@ Number of periods per 64k? samples instead of frequency<br>
           <select id="posValS" onchange="comboBox('pos','Val','CT',2,'s')"></select>
 		  </div>
 		  </td></tr>
-		  <tr><td>Base: </td><td><input type="text" value="200 us/div" size="5" id="baseVal" onkeyup="readCRX(e,'base','s/div')"></td><td> 
+		  <tr><td>Base: </td><td><input type="text" value="2 ms/div" size="5" id="baseVal" onkeyup="readCRX(e,'base','s/div')"></td><td> 
 		  <img id="baseValCT" style="display:block" src="ImagesS/SelectListA.png" width="16" height="16" onclick="comboBox('base','Val','CB',2,'s')">
           <div id="baseValCB" style="display:none">
           <select id="baseValS" onchange="comboBox('base','Val','CT',2,'s')"></select>
@@ -657,6 +662,15 @@ separated values in the text input field.<br>
 
 <div id="tab8" class="tabX" style="display:none">
 <h2>Power supply</h2>
+  <div id="powerA" class="sliderE"></div>
+  
+  <div id="powerB" class="sliderE"></div>
+  
+  <div id="powerC" class="sliderE"></div>
+  
+  <div id="powerD" class="sliderE"></div>
+
+ +5V..-5V range mapped to 0..4095 to 0..3.3V DAC and +-5V with OpAmp.<br>
 </div>
 
 <div id="tab9" class="tabX" style="display:none">
@@ -1098,22 +1112,32 @@ function updateSlider(id,unit) { // From Min Value Max list limit Value
 	document.getElementById(id + "Slider").value = val;
 	document.getElementById(id + "Val").value = valueToUnit(val) + unit;
 	// update curve
-	plotAWG();
+	if (id.substring(0,5) == "power") {  // update sends command
+	   console.log("setPower");
+	   setPower();
+	} else {
+	  plotAWG();
+	}  
 }
 
-function slider(id,unit) {
+function slider(id,unit) {                  // attach action to update value etc to slider
 var dslider = document.getElementById(id+"Slider");		//Slider
 var d = document.getElementById(id + "Val");
   d.value = valueToUnit(dslider.value) + unit;          // update Value
+  console.log("Slider: "+id);
   dslider.oninput = function(){
 	d.value = valueToUnit(this.value) + unit;
-	// update graph
-    plotAWG();
+	if (id.substring(0,5) == "power") {  // update sends command
+	   // console.log("setPower");
+	   setPower();	
+	} else {  // update graph
+      plotAWG();
+	}
   }
 }
 
 
-function createSlider(id,range,unit) { // Misisng unit V HZ and range name function comboBox readCR
+function createSlider(id,range,unit) { // Misisng unit V HZ and range name functions: comboBox, readCR
 var xList = ["Min","Val","Max"];
 var nSlider = document.getElementById(id);		// create Slider with min, value max
 var innerTxt = "<table>\n"      
@@ -1191,6 +1215,16 @@ window.addEventListener("load",updateSlider('amplitude','V'));
 window.addEventListener("load",slider('frequency','Hz'));
 window.addEventListener("load",updateSlider('frequency','Hz'));
 window.addEventListener("load",setWave(1));
+
+// Power sliders
+window.addEventListener("load",createSlider('powerA',voltRange,'V'));
+window.addEventListener("load",slider('powerA','V'));                   // connect slider to combobox
+window.addEventListener("load",createSlider('powerB',voltRange,'V'));
+window.addEventListener("load",slider('powerB','V'));
+window.addEventListener("load",createSlider('powerC',voltRange,'V'));
+window.addEventListener("load",slider('powerC','V'));
+window.addEventListener("load",createSlider('powerD',voltRange,'V'));
+window.addEventListener("load",slider('powerD','V'));
 
 // window.addEventListener("load",alert(findNextOption('offset1ValS','100 mV')));
 function decToHex(x,d) {
@@ -1888,12 +1922,12 @@ function changeXAxis() {
 
 function updatePlot(){
    if (currUnit == 0) {  // code
-      ScatterPlotO("OSC","Oszilloskop",dataOSC3,dataMax/2,
+      ScatterPlotO("OSC","Oscilloscope",dataOSC3,dataMax/2,
 		                     "time","linO","Minmax",
 			                 "Amplitude","linO","auto","Grid",
 							 xAxisIndex, activeIndex, channels);
    } else {  // voltage
-      ScatterPlotO("OSC","Oszilloskop",dataOSC2,dataMax/2,
+      ScatterPlotO("OSC","Oscilloscope",dataOSC2,dataMax/2,
 		                     "time","linO","Minmax",
 			                 "Amplitude","linO","auto","Grid",
 							 xAxisIndex, activeIndex, channels);
@@ -2841,6 +2875,26 @@ function rOp(cmd) {  // activate ramp test
 	sendCmd();        // send command
   }
 }
+//-------------------------------------------------------------------------
+//   Power supply
+//-------------------------------------------------------------------------
+
+function mapPower(id) {
+  var valX = unitToValue(document.getElementById(id).value);
+  // Map range from -5..5 to 0.. 3.3V to 12-Bit 4096
+  return decToHex(Math.round((valX + 5)*4096/10),4);
+}
+
+function setPower() {
+    var cmdText = "P";
+    // get value in volt, remove unit, convert to hex fill currents 0000
+    cmdText += mapPower("powerAVal") + "0000";
+    cmdText += mapPower("powerBVal") + "0000";
+    cmdText += mapPower("powerCVal") + "0000";
+    cmdText += mapPower("powerDVal") + "0000";
+    document.getElementById("cmd").innerHTML = cmdText;
+	sendCmd();        // send command
+}
 
 //----------------------------------------------------------------------------------//
 //-------------------- Test flow  ---------------------------------------------//
@@ -3079,7 +3133,7 @@ var fullDataT = "";
 			        dataOSC2[i + 5 * dataMax2] = dataOSC1[ i + trgPos + 5 * (dataMax - 2)] * factorX[4] + offset; // C4
 				 }
 				 // ready to plot
-                 // ScatterPlot("OSC","Oszilloskop",dataOSC2,dataMax2,
+                 // ScatterPlot("OSC","Oscilloscope",dataOSC2,dataMax2,
 		         //            "time","lin","Minmax",
 			     //            "Amplitude","lin","auto","Fine");
 				 updatePlot();
