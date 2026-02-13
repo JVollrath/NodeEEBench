@@ -113,7 +113,7 @@ td.top {vertical-align: top;}
 
 <!---------------------- Configuration ------------------------------------------->
 <div id="tab0" class="tabX" style="display:block">
-  <h2> Configuration (Version: NodeEEBenchV20251015.zip)</h2>
+  <h2> Configuration (Version: NodeEEBenchV20260213.zip)</h2>
   <br>
   <table>
   <tr>
@@ -152,7 +152,7 @@ td.top {vertical-align: top;}
   <table>
   <tr>
     <td colspan="2">OSC Sampling time: </td>
-	<td> <input type="text" value="8.32 us" size="7" id="timeSampling" onkeyup="selectBoard()"/> 
+	<td> <input type="text" value="8.32 us" size="7" id="timeSampling" onkeyup=""/> //  selectBoard()
     </td>
     <td colspan="2">OSC maximum buffer size: </td>
 	<td> <input type="text" value="8192" size="5" id="oBufVal" onkeyup=""/>
@@ -2963,7 +2963,7 @@ function runFlow(){
      cmdIndex++;
 	 cmdX = cmds[cmdIndex]; // next line
    }
-   if (cmdIndex >= cmds.length) { testflow = 0; } 
+   if (cmdIndex >= cmds.length) { testflow = 0; tOp('Stop'); } 
 }
 
 //----------------------------------------------------------------------------------//
