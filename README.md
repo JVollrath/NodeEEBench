@@ -7,9 +7,13 @@ browser interface on different hardware platforms using JavaScript and NodeJS.
 # Installation
 
 Copy the contents of this repository to C:\temp\NodeEEBench on a Windows PC.
+
 Connect hardware and configure the hardware (see subdirectory Documentation/Installion.html) or use simulation.
+
 Start: NodeEEBench.bat
+
 Open the Browser: http:\localhost:3000
+
 Play with waveform generator and oscilloscope.
 
 # Status
