@@ -1,7 +1,18 @@
 # NodeEEBench
+# Oscilloscope and Waveform Generator
 
 This project implements an oscilloscope, arbitrary waveform generator, power supply and digital IOs with a 
 browser interface on different hardware platforms using JavaScript and NodeJS.
+
+# Installation
+
+Copy the contents of this repository to C:\temp\NodeEEBench on a Windows PC.
+Connect hardware and configure the hardware (see subdirectory Documentation/Installion.html) or use simulation.
+Start: NodeEEBench.bat
+Open the Browser: http:\localhost:3000
+Play with waveform generator and oscilloscope.
+
+# Status
 So far a BASYS3 board, Arduino Maker WIFI 1010 and a RaspberryPi Zero with Digilent AD2, DA2 PMODs are the target hardware systems.
 
 ![Arduino ADC DAC Setup](ImagesS/Arduino_MKR_WIFI_1010_ADCDAC.png "Arduino ADC DAC")
