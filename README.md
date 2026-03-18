@@ -18,6 +18,12 @@ Open the Browser: http:\localhost:3000
 Play with waveform generator and oscilloscope.
 
 # Status
+
+The current non responsive GUI is shown here:
+https://htmlpreview.github.io/?https://github.com/JVollrath/NodeEEBench/blob/master/Projekte/NEEBench.html
+
+![System block diagram](ImagesS/System_V04.png "System Block diagram")
+
 So far a BASYS3 board, Arduino Maker WIFI 1010 and a RaspberryPi Zero with Digilent AD2, DA2 PMODs are the target hardware systems.
 
 ![Arduino ADC DAC Setup](ImagesS/Arduino_MKR_WIFI_1010_ADCDAC.png "Arduino ADC DAC")
