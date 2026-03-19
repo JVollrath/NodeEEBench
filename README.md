@@ -33,11 +33,8 @@ So far a BASYS3 board, Arduino Maker WIFI 1010 and a RaspberryPi Zero with Digil
 ![Browser User Interface](ImagesS/NodeEEBenchUI01.png "NodeEEBench User Interface")
 
 Subdirectory Xilinx contains the bit file and all sources for the BASYS3 Board.
-Subdirectory Arduino contains sketches for Arduino Maker WiFi 1010 and R2R DAC and Serial C DAC.
 
-After configuration of the hardware (FPGA, Arduino) a node server on a Windows PC can be started using 
-   NodeEEBench.bat for Digilent BASYS3 board
-   StartServerAx.bat for Arduino board
+Subdirectory Arduino contains sketches for Arduino Maker WiFi 1010 and R2R DAC and Serial C DAC.
 
 More documentation can be found at:
 BASYS3 FPGA: [2023 Research Summary] 
