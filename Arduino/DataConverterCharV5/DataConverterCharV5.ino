@@ -286,7 +286,7 @@ void digWrite(uint16_t sineValue){
 }
 */
 
-int activeS   =      120; // 1 tested Time switches are closed for charge redistribution 1 makes 30/2048 error at 10 pF 
+int activeS   =      60; // 1 tested Time switches are closed for charge redistribution 1 makes 30/2048 error at 10 pF 
 int nBits = 9;     // number of send bits
 
 /* C serial digitalw rite */

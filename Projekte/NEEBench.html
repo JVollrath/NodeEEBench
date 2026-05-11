@@ -113,7 +113,7 @@ td.top {vertical-align: top;}
 
 <!---------------------- Configuration ------------------------------------------->
 <div id="tab0" class="tabX" style="display:block">
-  <h2> Configuration (Version: NodeEEBenchV20260213.zip)</h2>
+  <h2> Configuration (Version: NodeEEBenchV20260511.zip)</h2>
   <br>
   <table>
   <tr>
@@ -152,7 +152,7 @@ td.top {vertical-align: top;}
   <table>
   <tr>
     <td colspan="2">OSC Sampling time: </td>
-	<td> <input type="text" value="8.32 us" size="7" id="timeSampling" onkeyup=""/> //  selectBoard()
+	<td> <input type="text" value="8.32 us" size="7" id="timeSampling" onkeyup=""/> <!--  selectBoard() -->
     </td>
     <td colspan="2">OSC maximum buffer size: </td>
 	<td> <input type="text" value="8192" size="5" id="oBufVal" onkeyup=""/>
@@ -394,13 +394,15 @@ Number of periods per 64k? samples instead of frequency<br>
      </td>
      <td class="bo"> xy  x-axis
       <select name="xyAxis" id="xyAxis" onchange="changeXAxis()">
-       <option value="0" selected> Time </option>
-       <option value="1"> AWG1 </option>
-       <option value="2"> C1 </option>
-       <option value="3"> C2 </option>
-       <option value="4"> C3 </option>
-       <option value="5"> C4 </option>
-	  </select>
+  <option value="0" selected> Time </option>
+  <option value="1"> AWG1 </option>
+  <option value="2"> C1 </option>
+  <option value="3"> C2 </option>
+  <option value="4"> C3 </option>
+  <option value="5"> C4 </option>
+  <option value="6"> M1 </option>
+  <option value="7"> M2 </option>
+</select>
 	 </td>
      <td class="bo"> Unit:
       <select id="currUnit" onchange="changeUnit()">
@@ -485,18 +487,35 @@ Number of periods per 64k? samples instead of frequency<br>
  <tr> <td class="bo6" id="M1">
         <input type="checkbox" id="cM1" value="value">
 	      M1</td></tr>
+<tr> <td class="bo7" id="M2">
+        <input type="checkbox" id="cM2" value="value">
+	      M2</td></tr>
  </table>
 </td> 
    <td class="top" rowspan="6"> 
    <table>
-   <tr><td class="bo1" onclick="activeChan(1)">AWG</td><td class="bo2" onclick="activeChan(2)">C1</td>
-       <td class="bo3" onclick="activeChan(3)">C2</td><td class="bo4" onclick="activeChan(4)">C3</td>
-	   <td class="bo5" onclick="activeChan(5)">C4</td><td class="bo6" onclick="activeChan(6)"> M1</td>
+   <tr><td class="bo1" onclick="activeChan(1)">AWG</td>
+       <td class="bo2" onclick="activeChan(2)">C1</td>
+       <td class="bo3" onclick="activeChan(3)">C2</td>
+       <td class="bo4" onclick="activeChan(4)">C3</td>
+	     <td class="bo5" onclick="activeChan(5)">C4</td>
+       <td class="bo6" onclick="activeChan(6)"> M1</td>
+       <td class="bo7" onclick="activeChan(7)"> M2</td>
 	   <td> <div id="statusOSC"></div></td>
    </tr>
    </table>
             <canvas id="OSC" width="600" height="350"></canvas><br>
 			<span id="mouse">Mouse</span>
+&nbsp;&nbsp;
+<span style="background-color:#cce6ff; padding:2px 6px; cursor:pointer;" onclick="hideVerticalCursor()">
+  Hide cursor
+</span>
+<br>
+
+<div id="cursorTable" style="margin-top:6px;">
+  Cursor: click and drag inside the plot area
+</div>
+
 			<span id="dataXY">Data XY</span>
 			</td>
 <td class="top">
@@ -792,12 +811,35 @@ var trgPos = -1;  // Trigger position
 var testflow = 0;  // testflow active = 1 otherwise 0
 
 // range
-var voltRange = ["5 V","4 V","3 V","2 V","1 V","900 mV", "800 mV", "700 mV", "600 mV",
-                 "500 mV","400 mV","300 mV","200 mV","100 mV","80 mV","60 mV","50 mV","0 V",
-				 "-50 mV","-60 mV","-80 mV","-100 mV","-200 mV","-300 mV","-400 mV","-500 mV",
-				 "-600 mV","-700 mV","-800 mV","-900mV","-1 V","-2 V","-3 V","-4 V","-5 V"];
-var voltDivRange = ["5 V/div","4 V/div","3 V/div","2 V/div","1 V/div","500 mV/div", "200 mV/div", "100 mV/div",
-                 "50 mV/div","10 mV/div","5 mV/div","2 mV/div","1 mV/div","500 uV/div","100 uV/div"];
+var voltRange = ["5 V","4 V","3 V","2 V","1 V","900 mV", "800 mV", "700 mV", "600 mV","500 mV","400 mV","300 mV","200 mV",
+"100 mV","80 mV","60 mV","50 mV","20 mV","10 mV","5 mV","2 mV","1 mV","500 uV","200 uV","100 uV","50 uV","20 uV","10 uV",
+"5 uV","2 uV","1 uV","500 nV","200 nV","100 nV","50 nV","20 nV","10 nV","5 nV","2 nV","1 nV","500 pV","200 pV","100 pV",
+"50 pV","20 pV","10 pV","5 pV","2 pV","1 pV","0 V","-1 pV","-2 pV","-5 pV","-10 pV","-20 pV","-50 pV","-100 pV","-200 pV",
+"-500 pV","-1 nV","-2 nV","-5 nV","-10 nV","-20 nV","-50 nV","-100 nV","-200 nV","-500 nV","-1 uV","-2 uV","-5 uV","-10 uV",
+"-20 uV","-50 uV","-100 uV","-200 uV","-500 uV","-1 mV","-2 mV","-5 mV","-10 mV","-20 mV","-50 mV","-60 mV","-80 mV","-100 mV",
+"-200 mV","-300 mV","-400 mV","-500 mV","-600 mV","-700 mV","-800 mV","-900mV","-1 V","-2 V","-3 V","-4 V","-5 V"];
+var voltDivRange = ["5 V/div","4 V/div","3 V/div","2 V/div","1 V/div",
+  "500 mV/div","200 mV/div","100 mV/div","50 mV/div","20 mV/div","10 mV/div","5 mV/div","2 mV/div","1 mV/div",
+  "500 uV/div","200 uV/div","100 uV/div","50 uV/div","20 uV/div","10 uV/div","5 uV/div","2 uV/div","1 uV/div",
+  "500 nV/div","200 nV/div","100 nV/div","50 nV/div","20 nV/div","10 nV/div","5 nV/div","2 nV/div","1 nV/div",
+  "500 pV/div","200 pV/div","100 pV/div","50 pV/div","20 pV/div","10 pV/div","5 pV/div","2 pV/div","1 pV/div"];
+var ampRange = [
+  "5 A","4 A","3 A","2 A","1 A","500 mA","200 mA","100 mA","50 mA","20 mA","10 mA","5 mA","2 mA","1 mA","500 uA",
+  "200 uA","100 uA","50 uA","20 uA","10 uA","5 uA","2 uA","1 uA","500 nA","200 nA","100 nA","50 nA","20 nA",
+  "10 nA","5 nA","2 nA","1 nA","500 pA","200 pA","100 pA","50 pA","20 pA","10 pA","5 pA","2 pA","1 pA","0 A",
+  "-1 pA","-2 pA","-5 pA","-10 pA","-20 pA","-50 pA","-100 pA","-200 pA","-500 pA","-1 nA","-2 nA","-5 nA","-10 nA",
+  "-20 nA","-50 nA","-100 nA","-200 nA","-500 nA","-1 uA","-2 uA","-5 uA","-10 uA","-20 uA","-50 uA","-100 uA",
+  "-200 uA","-500 uA","-1 mA","-2 mA","-5 mA","-10 mA","-20 mA","-50 mA","-100 mA","-200 mA","-500 mA","-1 A","-2 A",
+  "-3 A","-4 A","-5 A"
+];
+
+var ampDivRange = [
+  "5 A/div","4 A/div","3 A/div","2 A/div","1 A/div","500 mA/div","200 mA/div","100 mA/div","50 mA/div","20 mA/div",
+  "10 mA/div","5 mA/div","2 mA/div","1 mA/div","500 uA/div","200 uA/div","100 uA/div","50 uA/div","20 uA/div",
+  "10 uA/div","5 uA/div","2 uA/div","1 uA/div","500 nA/div","200 nA/div","100 nA/div","50 nA/div","20 nA/div",
+  "10 nA/div","5 nA/div","2 nA/div","1 nA/div","500 pA/div","200 pA/div","100 pA/div","50 pA/div","20 pA/div",
+  "10 pA/div","5 pA/div","2 pA/div","1 pA/div"
+];
 var timeRange = ["-1 s", "-500 ms", "-200 ms", "-100 ms", "-50 ms", "-20 ms","-10 ms", "-5 ms", 
                  "-2 ms", "-1 ms", "-500 us",  "-200 us", "-100 us", "-50 us",  "-10 us", "-5 us",
 				 "0 s", "5 us", "10 us", "50 us", "100 us", "500 us", "1 ms", "5 ms", "10 ms",
@@ -1120,7 +1162,7 @@ function updateSlider(id,unit) { // From Min Value Max list limit Value
 	}  
 }
 
-function slider(id,unit) {                  // attach action to update value etc to slider
+function slider(id,unit) {   // attach action to update value etc to slider
 var dslider = document.getElementById(id+"Slider");		//Slider
 var d = document.getElementById(id + "Val");
   d.value = valueToUnit(dslider.value) + unit;          // update Value
@@ -1523,6 +1565,11 @@ var channels = new Array();
 // creates HTML entries for C1, C2, C3, C4, M1
 function createChannel(baseId, checked, index, unit) {
    var sel = 1;
+   var isCurrentMath = (baseId == "M1" || baseId == "M2");
+var offDefault = isCurrentMath ? "0 A" : "0 V";
+var rangeDefault = isCurrentMath ? "1 mA/div" : "1 V/div";
+var unitLabel = isCurrentMath ? "A" : "V";
+var divUnitLabel = isCurrentMath ? "A/div" : "V/div";
 	var objTxt  ='<input type="checkbox" id="c' + baseId +'" value="value" ' + checked 
 	            + ' onclick="toggleCheck(' + "'" + baseId + "'" + ',' + index + ')">';
 	   objTxt += baseId; 
@@ -1542,32 +1589,45 @@ function createChannel(baseId, checked, index, unit) {
 	  objTxt += '<table id="tab' + baseId +'" style="display:none"><tr><td>';
 	  sel = 0;
 	}  
-	   objTxt += 'Offset: </td><td><input type="text" value="0 V" size="5" id="off' + baseId +'Val" onkeyup="readCRX(e,' + "'off" + baseId + "','s')" + '"></td><td>'; // missing onkeyup 
+	   objTxt += 'Offset: </td><td><input type="text" value="' + offDefault + '" size="5" id="off' + baseId +'Val" onkeyup="readCRX(e,' 
+            + "'off" + baseId + "','" + unitLabel + "')" + '"></td><td>';
 	   objTxt += '<img id="off' + baseId + 'ValCT" style="display:block" src="ImagesS/SelectListA.png" width="16" height="16"' 
-	           + 'onclick="comboBox('+ "'off" + baseId + "','Val','" + 'CB' + "',2,'V')" +'">';
-       objTxt += '<div id="off'  + baseId + 'ValCB" style="display:none">';
-       objTxt += '<select id="off'  + baseId + 'ValS" onchange="comboBox('+ "'off" + baseId + "','Val','"
-		        + 'CT' + "',2,'V')" +'"></select>';
+            + 'onclick="comboBox('+ "'off" + baseId + "','Val','" + 'CB' + "',2,'" + unitLabel + "')" +'">';
+    objTxt += '<div id="off'  + baseId + 'ValCB" style="display:none">';
+    objTxt += '<select id="off'  + baseId + 'ValS" onchange="comboBox('+ "'off" + baseId + "','Val','"
+           + 'CT' + "',2,'" + unitLabel + "')" +'"></select>';
 	   objTxt += '</div>';
 	   objTxt += '</td></tr>';
-	   objTxt += ' <tr><td>Range: </td><td><input type="text" value="1 V/div" size="5" id="range' + baseId + 'Val" onkeyup="readCRX(e,' + "'range" + baseId + "','s')" + '"></td><td>';; // missing onkeyup
+	   objTxt += ' <tr><td>Range: </td><td><input type="text" value="' + rangeDefault + '" size="7" id="range' 
+            + baseId + 'Val" onkeyup="readCRX(e,' + "'range" + baseId + "','" + divUnitLabel + "')" + '"></td><td>';
 	   objTxt += '  <img id="range' + baseId +'ValCT" style="display:block" src="ImagesS/SelectListA.png" width="16" height="16"'
-                + 'onclick="comboBox('+ "'range" + baseId + "','Val','" + 'CB' + "',2,'V/div')" +'">';
+            + 'onclick="comboBox('+ "'range" + baseId + "','Val','" + 'CB' + "',2,'" + divUnitLabel + "')" +'">';
        objTxt += '<div id="range'  + baseId + 'ValCB" style="display:none">';
        objTxt += '<select id="range'  + baseId + 'ValS" onchange="comboBox('+ "'range" + baseId + "','Val','"
-		        + 'CT' + "',2,'V/div')" +'"></select>';
+              + 'CT' + "',2,'" + divUnitLabel + "')" +'"></select>';
 	   objTxt += '</div>';
         objTxt += '  </td></tr>';
+        // --- M1 Math extras (R + equation preview) ---
+if (baseId == 'M1') {
+  objTxt += '<tr><td>R (Ohm):</td><td><input type="text" value="1000" size="6" id="m1RVal"></td><td></td></tr>';
+  objTxt += '<tr><td>Eq:</td><td colspan="2"><input type="text" value="(C1 - C2) / R" size="18" id="m1EqVal" readonly></td></tr>';
+}
+// --- M2 Math extras (R2 + equation preview) ---
+if (baseId == 'M2') {
+  objTxt += '<tr><td>R2 (Ohm):</td><td><input type="text" value="1000" size="6" id="m2RVal"></td><td></td></tr>';
+  objTxt += '<tr><td>Eq:</td><td colspan="2"><input type="text" value="(C3 - C4) / R2" size="18" id="m2EqVal" readonly></td></tr>';
+}
+
 		objTxt += '  </table>';
 	document.getElementById(baseId).innerHTML = objTxt;	  
     var objChan = {
 	           name: baseId,
                selected: sel,
-			   unit: "V",
-			   offset: 0,
-			   range: 1,
-			   offsetB: 0,  // Backup offset
-			   rangeB: 1,   // Backup range if switched to code
+			   unit: isCurrentMath ? "A" : "V",
+        offset: 0,
+        range: isCurrentMath ? 1e-3 : 1,
+        offsetB: 0,
+        rangeB: isCurrentMath ? 1e-3 : 1,
 			   factor: 1,
 			   offScale: 0,
 			   min: 0,
@@ -1579,16 +1639,20 @@ function createChannel(baseId, checked, index, unit) {
               } 
 	channels.push(objChan);
 	// populate select lists
-	var list1 = "";
-    for (var i = 0; i < voltRange.length; i++) {
-         list1 +='<option value="' + voltRange[i] + '">' + voltRange[i] + '</option>';
-    }			 
-    document.getElementById("off" + baseId + "ValS").innerHTML = list1;	  
-	list1 = "";
-    for (var i = 0; i < voltDivRange.length; i++) {
-         list1 +='<option value="' + voltDivRange[i] + '">' + voltDivRange[i] + '</option>';
-    }			 
-    document.getElementById("range" + baseId + "ValS").innerHTML = list1;	  
+var offList = isCurrentMath ? ampRange : voltRange;
+var rangeList = isCurrentMath ? ampDivRange : voltDivRange;
+
+var list1 = "";
+for (var i = 0; i < offList.length; i++) {
+  list1 += '<option value="' + offList[i] + '">' + offList[i] + '</option>';
+}
+document.getElementById("off" + baseId + "ValS").innerHTML = list1;
+
+list1 = "";
+for (var i = 0; i < rangeList.length; i++) {
+  list1 += '<option value="' + rangeList[i] + '">' + rangeList[i] + '</option>';
+}
+document.getElementById("range" + baseId + "ValS").innerHTML = list1;
 }		  
 
 // for time id= pos base baseId: Time, range timeRange, timeBaseRange
@@ -1636,8 +1700,132 @@ function confOsc() {
 function updateOSC(){
 	   // update value field
        updateChanFields();
+       updateMathM1();
 	   updatePlot();
        confOsc();	   
+}
+// M1 = (C1 - C2) / R  (interpreted as current through series resistor)
+// Uses voltage arrays: dataOSC2
+// Math channels:
+// M1 = (C1 - C2) / R
+// M2 = (C3 - C4) / R2
+// C1-C4 are voltage signals, R/R2 are resistor values in Ohm.
+// Therefore M1 and M2 are current values in Ampere.
+function readResistanceValue(txt) {
+  if (!txt) return NaN;
+
+  txt = txt.trim();
+
+  // Remove common resistance unit words/symbols
+  txt = txt.replace(/ohm/gi, "");
+  txt = txt.replace(/Ω/g, "");
+  txt = txt.replace(/K/g, "k");
+
+  // Convert "1k" to "1 k", "-1k" to "-1 k", "4.7k" to "4.7 k"
+  txt = txt.replace(/^(-?[0-9.]+)\s*([kMmunp])$/, "$1 $2");
+
+  return unitToValue(txt);
+}
+// Math channels:
+// M1 = (C1 - C2) / R
+// M2 = (C3 - C4) / R2
+// No offset is used in the real calculation.
+function updateMathM1() {
+  try {
+    var dataMax2 = Math.round(dataMax / 2);
+    if (!dataMax2 || dataMax2 <= 0) return;
+
+    // ---------- M1 calculation ----------
+    if (document.getElementById("cM1")) {
+      var R = 1000.0;
+      var rEl = document.getElementById("m1RVal");
+
+      if (rEl) {
+        var tmp = readResistanceValue(rEl.value);
+
+        // Allow positive and negative resistance.
+        // Zero is handled separately below.
+        if (!isNaN(tmp)) {
+          R = tmp;
+        }
+      }
+
+      for (var i = 0; i < dataMax2; i++) {
+        var c1 = dataOSC2[i + 2 * dataMax2]; // C1 voltage
+        var c2 = dataOSC2[i + 3 * dataMax2]; // C2 voltage
+        var vR = c1 - c2;                     // voltage across resistor
+
+        if (R === 0) {
+          // Mathematically: nonzero voltage / 0 = infinity
+          if (vR > 0) {
+            dataOSC2[i + 6 * dataMax2] = Infinity;
+          } else if (vR < 0) {
+            dataOSC2[i + 6 * dataMax2] = -Infinity;
+          } else {
+            // 0 / 0 is undefined, not infinity
+            dataOSC2[i + 6 * dataMax2] = NaN;
+          }
+        } else {
+          // Correct physical current in Ampere
+          dataOSC2[i + 6 * dataMax2] = vR / R;
+        }
+
+        // Code-like value for code table
+        if (isFinite(dataOSC2[i + 6 * dataMax2])) {
+          dataOSC3[i + 6 * dataMax2] = Math.round(dataOSC2[i + 6 * dataMax2] * 1000);
+        } else {
+          dataOSC3[i + 6 * dataMax2] = dataOSC2[i + 6 * dataMax2];
+        }
+      }
+    }
+
+    // ---------- M2 calculation ----------
+    if (document.getElementById("cM2")) {
+      var R2 = 1000.0;
+      var r2El = document.getElementById("m2RVal");
+
+      if (r2El) {
+        var tmp2 = readResistanceValue(r2El.value);
+
+        // Allow positive and negative resistance.
+        // Zero is handled separately below.
+        if (!isNaN(tmp2)) {
+          R2 = tmp2;
+        }
+      }
+
+      for (var j = 0; j < dataMax2; j++) {
+        var c3 = dataOSC2[j + 4 * dataMax2]; // C3 voltage
+        var c4 = dataOSC2[j + 5 * dataMax2]; // C4 voltage
+        var vR2 = c3 - c4;                    // voltage across resistor R2
+
+        if (R2 === 0) {
+          // Mathematically: nonzero voltage / 0 = infinity
+          if (vR2 > 0) {
+            dataOSC2[j + 7 * dataMax2] = Infinity;
+          } else if (vR2 < 0) {
+            dataOSC2[j + 7 * dataMax2] = -Infinity;
+          } else {
+            // 0 / 0 is undefined, not infinity
+            dataOSC2[j + 7 * dataMax2] = NaN;
+          }
+        } else {
+          // Correct physical current in Ampere
+          dataOSC2[j + 7 * dataMax2] = vR2 / R2;
+        }
+
+        // Code-like value for code table
+        if (isFinite(dataOSC2[j + 7 * dataMax2])) {
+          dataOSC3[j + 7 * dataMax2] = Math.round(dataOSC2[j + 7 * dataMax2] * 1000);
+        } else {
+          dataOSC3[j + 7 * dataMax2] = dataOSC2[j + 7 * dataMax2];
+        }
+      }
+    }
+
+  } catch (e) {
+    console.error("Math channel error:", e);
+  }
 }
 
 function readCRX(key,id,unit) {
@@ -1755,8 +1943,14 @@ createChannel("C1", "checked",2,0);
 createChannel("C2", "",3,0);
 createChannel("C3", "",4,0);
 createChannel("C4", "",5,0);
-// createChannel("M1", "",6);
-var cList = ["Time","AWG1","C1","C2","C3","C4"];
+// createChannel("M2", "",7);
+createChannel("M1", "",6,1);  // Active Math Function M1
+channels[6].unit = "A";       //showing M1 unit in Amp(A)
+// createChannel("M2", "",7);
+
+createChannel("M2", "",7,1);  // Active Math Function M2
+channels[7].unit = "A";       //showing M2 unit in Amp(A)
+var cList = ["Time","AWG1","C1","C2","C3","C4","M1","M2"];
 
 function updateChanFields() {
   // Time
@@ -1834,39 +2028,339 @@ var mouseCurrX = 0;
 var mouseCurrY = 0;
 var offsetStart;
 var widthX, heightY;
-var lines = new Array("pos","offAWG1","offC1","offC2","offC3","offC4","offM1");
+// ---------- Vertical cursor state ----------
+var vCursor = {
+  enabled: true,
+  visible: false,
+  dragging: false,
+  px: 0,       // cursor x-position in canvas pixel
+  index: 0     // nearest data sample index
+};
+var lines = new Array("pos","offAWG1","offC1","offC2","offC3","offC4","offM1","offM2");
 var sprites = new Array();  // trigger pos, level, active curve 0, x1, x2 cursor, y1,y2 cursor
 // each sprite has: lower left, upper right position; curve color;  type x,x2,y1,y2,filled triangle right, left top, bottom TR,TL,TT, TB
 // each sprite has a callback fnction
 
 // Trigger triangle: source, level -> position, color?
 
-function listenCanvas(event) { // event listener for canvas How to add?
-      var canv_obj=document.getElementById("OSC");
+function listenCanvas(event) { // event listener for canvas
+      var canv_obj = document.getElementById("OSC");
       var rect = canv_obj.getBoundingClientRect();
-      // mouse and touchscreen
-      if (mouseX == 1) {   // x - axis right left canvas area? 
-        mouseCurrX = Math.round(event.clientX - rect.left);
-        mouseCurrY = Math.round(event.clientY - rect.top);
-	    channels[xAxisIndex].offset = offsetStart + Math.trunc((mouseCurrX - mouseStartX) / widthX * 100)/10 * channels[xAxisIndex].range;
-        document.getElementById("mouse").innerHTML = "Move " + mouseCurrX + "," + mouseCurrY + "," + mouseX;		
-	    updatePlot();
-		document.getElementById(lines[xAxisIndex]+"Val").value = valueToUnit(channels[xAxisIndex].offset) + channels[xAxisIndex].unit;
-		// update range entry!!
-      } else if 	(mouseX == 2) { // y axis up down canvas area?
-        mouseCurrX = Math.round(event.clientX - rect.left);
-        mouseCurrY = Math.round(event.clientY - rect.top);
-	    channels[activeIndex].offset = offsetStart - Math.trunc((mouseCurrY - mouseStartY) / heightY * 100) / 10 * channels[activeIndex].range;
-        document.getElementById("mouse").innerHTML = "Move " + mouseCurrX + "," + mouseCurrY + "," + mouseX;		
-	    updatePlot();
-		document.getElementById(lines[activeIndex]+"Val").value = valueToUnit(channels[activeIndex].offset) + channels[activeIndex].unit;
-      }
-      
+      mouseCurrX = Math.round(event.clientX - rect.left);
+      mouseCurrY = Math.round(event.clientY - rect.top);
+
+      if (mouseX == 1) {   // x-axis drag
+        channels[xAxisIndex].offset = offsetStart + Math.trunc((mouseCurrX - mouseStartX) / widthX * 100) / 10 * channels[xAxisIndex].range;
+        refreshVerticalCursorIndexFromPixel();
+        document.getElementById("mouse").innerHTML = "Move " + mouseCurrX + "," + mouseCurrY + "," + mouseX;
+        updatePlot();
+        document.getElementById(lines[xAxisIndex] + "Val").value = valueToUnit(channels[xAxisIndex].offset) + channels[xAxisIndex].unit;
+      } else if (mouseX == 2) { // y-axis drag
+        channels[activeIndex].offset = offsetStart - Math.trunc((mouseCurrY - mouseStartY) / heightY * 100) / 10 * channels[activeIndex].range;
+        document.getElementById("mouse").innerHTML = "Move " + mouseCurrX + "," + mouseCurrY + "," + mouseX;
+        updatePlot();
+        document.getElementById(lines[activeIndex] + "Val").value = valueToUnit(channels[activeIndex].offset) + channels[activeIndex].unit;
+      } else if (mouseX == 3) { // vertical cursor drag inside plot area
+  var r = getOscPlotRect();
+
+  // Keep cursor inside plot area and inside actual data span
+  mouseCurrX = clampCursorPixelToData(mouseCurrX);
+
+  // Store cursor screen position
+  vCursor.px = mouseCurrX;
+
+  // Find nearest sample under cursor
+  vCursor.index = cursorPixelToIndex(vCursor.px);
+
+  document.getElementById("mouse").innerHTML =
+    "Cursor index " + vCursor.index;
+
+  updatePlot();
+}
+
       // x1, x2 cursor vertical column canvas area?
       // y1, y2 cursor row canvas area?
       // marker for channels and trigger canvas area?
 }
+// Return the real oscilloscope plot area inside the canvas
+function getOscPlotRect() {
+  var canv = document.getElementById("OSC");
 
+  // Fallback values protect the page if perSizeX/perSizeY are not available yet.
+  var psx = (typeof perSizeX !== "undefined") ? perSizeX : 0.64;
+  var psy = (typeof perSizeY !== "undefined") ? perSizeY : 0.80;
+
+  return {
+    xll: 0.18 * canv.width,
+    xur: (0.18 + psx) * canv.width,
+    yll: 0.10 * canv.height,
+    yur: (0.10 + psy) * canv.height
+  };
+}
+
+// Convert mouse/canvas x-position to nearest sample index
+function getAxisDataValue(sampleIndex, axisIndex) {
+  var n = Math.round(dataMax / 2);
+  axisIndex = parseInt(axisIndex);
+
+  if (axisIndex === 0) {
+    return dataOSC2[sampleIndex]; // time
+  }
+
+  return dataOSC2[sampleIndex + axisIndex * n]; // AWG1/C1/C2/C3/C4/M1/M2
+}
+
+function getAxisUnit(axisIndex) {
+  axisIndex = parseInt(axisIndex);
+
+  if (axisIndex === 0) {
+    return "s";
+  }
+
+  if (channels[axisIndex] && channels[axisIndex].unit) {
+    return channels[axisIndex].unit;
+  }
+
+  return "V";
+}
+
+function getAxisName(axisIndex) {
+  axisIndex = parseInt(axisIndex);
+
+  if (axisIndex === 0) {
+    return "time";
+  }
+
+  if (channels[axisIndex] && channels[axisIndex].name) {
+    return channels[axisIndex].name;
+  }
+
+  return "X";
+}
+
+function getVisibleXAxisRange(axisIndex) {
+  axisIndex = parseInt(axisIndex);
+
+  var xRange = channels[axisIndex].range;
+
+  // Important correction:
+  // In this plotting system, moving the X Position uses the opposite sign on screen.
+  // Example: Position = -170 ms makes the visible graph center about +170 ms.
+  var xCenter = -channels[axisIndex].offset;
+
+  return {
+    min: xCenter - 5 * xRange,
+    max: xCenter + 5 * xRange
+  };
+}
+
+function getXAxisDataLimits(axisIndex) {
+  var n = Math.round(dataMax / 2);
+  axisIndex = parseInt(axisIndex);
+
+  if (!n || n < 2 || dataOSC2.length < n) {
+    return null;
+  }
+
+  var first = getAxisDataValue(0, axisIndex);
+  var minVal = first;
+  var maxVal = first;
+
+  for (var i = 1; i < n; i++) {
+    var xVal = getAxisDataValue(i, axisIndex);
+    if (!isFinite(xVal)) continue;
+    if (xVal < minVal) minVal = xVal;
+    if (xVal > maxVal) maxVal = xVal;
+  }
+
+  return { min: minVal, max: maxVal };
+}
+
+function xValueToPixel(xVal, axisIndex) {
+  var r = getOscPlotRect();
+  var xRangeObj = getVisibleXAxisRange(axisIndex);
+  var denom = xRangeObj.max - xRangeObj.min;
+
+  if (!denom || !isFinite(denom)) return r.xll;
+
+  var frac = (xVal - xRangeObj.min) / denom;
+  return r.xll + frac * (r.xur - r.xll);
+}
+
+function getXAxisDataPixelLimits(axisIndex) {
+  var r = getOscPlotRect();
+  var lim = getXAxisDataLimits(axisIndex);
+
+  if (!lim) {
+    return { left: r.xll, right: r.xur };
+  }
+
+  var p1 = xValueToPixel(lim.min, axisIndex);
+  var p2 = xValueToPixel(lim.max, axisIndex);
+
+  var left = Math.min(p1, p2);
+  var right = Math.max(p1, p2);
+
+  // Also keep the cursor inside the visible plot rectangle.
+  if (left < r.xll) left = r.xll;
+  if (right > r.xur) right = r.xur;
+
+  // If the whole signal is outside the visible area, use the nearest plot edge.
+  if (right < r.xll) return { left: r.xll, right: r.xll };
+  if (left > r.xur) return { left: r.xur, right: r.xur };
+
+  return { left: left, right: right };
+}
+
+function clampCursorPixelToData(px) {
+  var r = getOscPlotRect();
+  var axisIndex = parseInt(xAxisIndex);
+
+  if (px < r.xll) px = r.xll;
+  if (px > r.xur) px = r.xur;
+
+  var lim = getXAxisDataPixelLimits(axisIndex);
+
+  if (px < lim.left) px = lim.left;
+  if (px > lim.right) px = lim.right;
+
+  return px;
+}
+
+function cursorPixelToIndex(px) {
+  var n = Math.round(dataMax / 2);
+  if (!n || n < 2) return 0;
+
+  var r = getOscPlotRect();
+
+  // Keep cursor inside the plot area and inside the real data span.
+  px = clampCursorPixelToData(px);
+
+  var frac = (px - r.xll) / (r.xur - r.xll);
+  var axisIndex = parseInt(xAxisIndex);
+
+  // Use the real visible X-axis range, including the sign convention of Position.
+  var xRangeObj = getVisibleXAxisRange(axisIndex);
+  var targetX = xRangeObj.min + frac * (xRangeObj.max - xRangeObj.min);
+
+  // Find nearest sample based on selected X-axis value.
+  var bestIndex = 0;
+  var bestDiff = Infinity;
+
+  for (var i = 0; i < n; i++) {
+    var xVal = getAxisDataValue(i, axisIndex);
+    var diff = Math.abs(xVal - targetX);
+
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestIndex = i;
+    }
+  }
+
+  return bestIndex;
+}
+
+// Convert sample index back to pixel position
+function cursorIndexToPixel(idx) {
+  var n = Math.round(dataMax / 2);
+  var r = getOscPlotRect();
+
+  if (!n || n < 2) return r.xll;
+
+  var axisIndex = parseInt(xAxisIndex);
+  var xRangeObj = getVisibleXAxisRange(axisIndex);
+  var xVal = getAxisDataValue(idx, axisIndex);
+
+  var frac = (xVal - xRangeObj.min) / (xRangeObj.max - xRangeObj.min);
+
+  if (frac < 0) frac = 0;
+  if (frac > 1) frac = 1;
+
+  return r.xll + frac * (r.xur - r.xll);
+}
+function refreshVerticalCursorIndexFromPixel() {
+  if (!vCursor.visible) return;
+
+  // Keep the cursor line at its screen position,
+  // but never allow it to sit before the first data point or after the last data point.
+  vCursor.px = clampCursorPixelToData(vCursor.px);
+
+  // Recalculate which data sample is now under it.
+  vCursor.index = cursorPixelToIndex(vCursor.px);
+}
+
+// Check if a channel checkbox is selected
+function isChannelChecked(channelName) {
+  var el = document.getElementById("c" + channelName);
+  return el && el.checked;
+}
+
+// Update cursor table with all selected channel values
+function updateVerticalCursorTable() {
+  var out = document.getElementById("cursorTable");
+  if (!out) return;
+
+  var n = Math.round(dataMax / 2);
+
+  if (!vCursor.visible || !n || dataOSC2.length < n) {
+    out.innerHTML = "Cursor: click and drag inside the plot area";
+    return;
+  }
+
+  var i = vCursor.index;
+  var axisIndex = parseInt(xAxisIndex);
+
+  var xName = getAxisName(axisIndex);
+  var xUnit = getAxisUnit(axisIndex);
+
+  // X-axis value comes from the selected X-axis data: time, AWG1, C1, C2, M1, M2, etc.
+  var xVal = getAxisDataValue(i, axisIndex);
+
+  var html = "<table border='1' style='border-collapse:collapse; font-size:13px; margin-top:4px;'>";
+  html += "<tr>";
+  html += "<th>X: " + xName + "</th>";
+
+  // Header: selected channels only.
+  for (var ch = 1; ch < channels.length; ch++) {
+    if (isChannelChecked(channels[ch].name)) {
+      html += "<th class='bo" + ch + "'>" + channels[ch].name + "</th>";
+    }
+  }
+
+  html += "</tr><tr>";
+  html += "<td>" + valueToUnit(xVal) + xUnit + "</td>";
+
+  // Values row.
+  for (var ch = 1; ch < channels.length; ch++) {
+    if (isChannelChecked(channels[ch].name)) {
+      // Raw measured/calculated value.
+      var rawVal = dataOSC2[i + ch * n];
+
+      // Display value follows the visible shifted curve when the user moves it up/down.
+      // This does not change the real M1/M2 equations. It only updates cursor readout display.
+      var displayVal = rawVal + channels[ch].offset;
+
+      var unit = channels[ch].unit || "V";
+      html += "<td>" + valueToUnit(displayVal) + unit + "</td>";
+    }
+  }
+
+  html += "</tr></table>";
+
+  out.innerHTML = html;
+}
+function hideVerticalCursor() {
+  vCursor.visible = false;
+  vCursor.dragging = false;
+  mouseX = 0;
+
+  var out = document.getElementById("cursorTable");
+  if (out) {
+    out.innerHTML = "Cursor: click and drag inside the plot area";
+  }
+
+  updatePlot();
+}
 function addCanvasEvent(){
    var canv_obj=document.getElementById("OSC");
    var xll=0.18*canv_obj.width;
@@ -1878,24 +2372,44 @@ function addCanvasEvent(){
    var xb = canv_obj.width*0.05;
    var yb = canv_obj.height*0.05;
 	
-   canv_obj.addEventListener('mouseup', function(event){ mouseX = 0;}, false);  // attach event listener to canvas
+   //canv_obj.addEventListener('mouseup', function(event){ mouseX = 0;}, false);  // attach event listener to canvas
+   canv_obj.addEventListener('mouseup', function(event){
+  mouseX = 0;
+  vCursor.dragging = false;
+}, false);
    canv_obj.addEventListener('mousedown', function(event){ 
         var canv_obj=document.getElementById("OSC");
 		var rect = canv_obj.getBoundingClientRect();
 		mouseStartX = Math.round(event.clientX - rect.left);
 		mouseStartY = Math.round(event.clientY - rect.top);
-		// x-axis offset
+        // x-axis offset
 		if   ((mouseStartX < xur) && (mouseStartX > xll)
-          && (mouseStartY < yur + yb) && (mouseStartY > yur)) {
-          mouseX = 1;
-          offsetStart = channels[xAxisIndex].offset;		  
-		} else 
-		// y-axis
-		if  ((mouseStartX < xll) && (mouseStartX > xll - xb)
-          && (mouseStartY < yur) && (mouseStartY > yll)) {
-          mouseX = 2; 
-          offsetStart = channels[activeIndex].offset;		  
-		} 		
+  && (mouseStartY < yur + yb) && (mouseStartY > yur)) {
+  mouseX = 1;
+  offsetStart = channels[xAxisIndex].offset;		  
+} else 
+// y-axis
+if  ((mouseStartX < xll) && (mouseStartX > xll - xb)
+  && (mouseStartY < yur) && (mouseStartY > yll)) {
+  mouseX = 2; 
+  offsetStart = channels[activeIndex].offset;		  
+} else
+// vertical cursor inside plot area
+if ((mouseStartX >= xll) && (mouseStartX <= xur)
+  && (mouseStartY >= yll) && (mouseStartY <= yur)) {
+
+  mouseX = 3;
+  vCursor.visible = true;
+  vCursor.dragging = true;
+
+  // Store the actual screen position of the cursor, limited to the actual data span
+  vCursor.px = clampCursorPixelToData(mouseStartX);
+
+  // Find the nearest data point under this cursor position
+  vCursor.index = cursorPixelToIndex(vCursor.px);
+
+  updatePlot();
+}
         // x1,x2,y1,y2 cursor
         // awg1, c1, c2,c3,c4, xaxis, level triangle 
         document.getElementById("mouse").innerHTML = "Down " + mouseStartX + "," + mouseStartY + "," + mouseX;		
@@ -1915,23 +2429,66 @@ function activeChan(x) {
 }
 
 function changeXAxis() {
-   xAxisIndex = document.getElementById("xyAxis").value; 
-   // if (channels[xAxisIndex].selected == 0) { channels[xAxisIndex].selected = 1; } // make active
+   xAxisIndex = parseInt(document.getElementById("xyAxis").value);
+
+   // When X-axis changes, keep cursor visible but recalculate its pixel position
+   if (vCursor.visible) {
+     vCursor.px = cursorIndexToPixel(vCursor.index);
+   }
+
    updatePlot();
 }
-
 function updatePlot(){
+   var xLabel = getAxisName(xAxisIndex);
+
    if (currUnit == 0) {  // code
-      ScatterPlotO("OSC","Oscilloscope",dataOSC3,dataMax/2,
-		                     "time","linO","Minmax",
+      ScatterPlotO("OSC","Oszilloscope",dataOSC3,dataMax/2,
+		                     xLabel,"linO","Minmax",
 			                 "Amplitude","linO","auto","Grid",
 							 xAxisIndex, activeIndex, channels);
-   } else {  // voltage
-      ScatterPlotO("OSC","Oscilloscope",dataOSC2,dataMax/2,
-		                     "time","linO","Minmax",
+   } else {  // voltage/current
+      ScatterPlotO("OSC","Oszilloscope",dataOSC2,dataMax/2,
+		                     xLabel,"linO","Minmax",
 			                 "Amplitude","linO","auto","Grid",
 							 xAxisIndex, activeIndex, channels);
    }
+
+   refreshVerticalCursorIndexFromPixel();
+   drawVerticalCursor();
+   updateVerticalCursorTable();
+}
+function drawVerticalCursor() {
+  if (!vCursor.visible) return;
+
+  var canv = document.getElementById("OSC");
+  if (!canv) return;
+
+  var ctx = canv.getContext("2d");
+  var r = getOscPlotRect();
+
+  // Keep cursor line at its stored screen position.
+  // Do not overwrite vCursor.px from the sample index, otherwise graph movement breaks the readout.
+  var x = clampCursorPixelToData(vCursor.px);
+  vCursor.px = x;
+
+  ctx.save();
+
+  ctx.beginPath();
+  ctx.setLineDash([5, 4]);
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = "#000000";
+  ctx.moveTo(x, r.yll);
+  ctx.lineTo(x, r.yur);
+  ctx.stroke();
+
+  // small top marker
+  ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.arc(x, r.yll + 8, 4, 0, 2 * Math.PI);
+  ctx.fillStyle = "#000000";
+  ctx.fill();
+
+  ctx.restore();
 }
 
 function saveData() {
@@ -1943,6 +2500,8 @@ function saveData() {
 	var cC2 = document.getElementById("cC2").checked;
 	var cC3 = document.getElementById("cC3").checked;
 	var cC4 = document.getElementById("cC4").checked;
+  var cM1 = document.getElementById("cM1").checked;
+  var cM2 = document.getElementById("cM2").checked;
     // Lables
 	   tabTxt += "<tr>";
 	   tabTxt += "<td> time / s </td>"; 
@@ -1951,12 +2510,16 @@ function saveData() {
 	   if (cC2) { tabTxt += "<td> OSC2 / V</td>"; }
 	   if (cC3) { tabTxt += "<td> OSC3 / V</td>"; }
 	   if (cC4) { tabTxt += "<td> OSC4 / V</td>"; }
+     if (cM1) { tabTxt += "<td> M1 / " + (channels[6] ? channels[6].unit : "V") + "</td>"; }
+     if (cM2) { tabTxt += "<td> M2 / " + (channels[7] ? channels[7].unit : "A") + "</td>"; }
 	   tabTxt += "<td> time code</td>"; 
 	   if (cAWG1) { tabTxt += "<td> AWG1 code </td>"; }
 	   if (cC1) { tabTxt += "<td> OSC1 code</td>"; }
 	   if (cC2) { tabTxt += "<td> OSC2 code</td>"; }
 	   if (cC3) { tabTxt += "<td> OSC3 code</td>"; }
 	   if (cC4) { tabTxt += "<td> OSC4 code</td>"; }
+     if (cM1) { tabTxt += "<td> M1 code</td>"; }
+     if (cM2) { tabTxt += "<td> M2 code</td>"; }
 	   tabTxt += "</tr>"; 
     // values
 	for (var i = 0; i < dataMax/2; i++) {
@@ -1967,12 +2530,16 @@ function saveData() {
 	   if (cC2) { tabTxt += "<td>" + dataOSC2[i + 3 * dataMax2].toPrecision(6) + "</td>"; }
 	   if (cC3) { tabTxt += "<td>" + dataOSC2[i + 4 * dataMax2].toPrecision(6) + "</td>"; }
 	   if (cC4) { tabTxt += "<td>" + dataOSC2[i + 5 * dataMax2].toPrecision(6) + "</td>"; }
+     if (cM1) { tabTxt += "<td>" + dataOSC2[i + 6 * dataMax2].toPrecision(6) + "</td>"; }
+     if (cM2) { tabTxt += "<td>" + dataOSC2[i + 7 * dataMax2].toPrecision(6) + "</td>"; }
 	   tabTxt += "<td>" + dataOSC3[i] + "</td>"; 
 	   if (cAWG1) { tabTxt += "<td>" + dataOSC3[i + dataMax2] + "</td>"; }
 	   if (cC1) { tabTxt += "<td>" + dataOSC3[i + 2 * dataMax2] + "</td>"; }
 	   if (cC2) { tabTxt += "<td>" + dataOSC3[i + 3 * dataMax2] + "</td>"; }
 	   if (cC3) { tabTxt += "<td>" + dataOSC3[i + 4 * dataMax2] + "</td>"; }
 	   if (cC4) { tabTxt += "<td>" + dataOSC3[i + 5 * dataMax2] + "</td>"; }
+     if (cM1) { tabTxt += "<td>" + dataOSC3[i + 6 * dataMax2] + "</td>"; }
+     if (cM2) { tabTxt += "<td>" + dataOSC3[i + 7 * dataMax2] + "</td>"; }
 	   tabTxt += "</tr>"; 
 	}
 	   tabTxt += "</table>"; 
@@ -2009,6 +2576,7 @@ function generateData() {
        dataOSC3[i + 4 * dataMax2] = Math.round((1+Math.sin(5*i*2*Math.PI/dataMax2)) * 2048);
        dataOSC3[i + 5 * dataMax2] = Math.round((1+Math.sin(3*i*2*Math.PI/dataMax2)) * 64 *1024);
     }
+    updateMathM1();
     updatePlot();
 	let now = new Date();
     let nowTxt = now.getFullYear() + "/" + (now.getMonth()+1)
@@ -2127,12 +2695,19 @@ function changeUnit() {
 		document.getElementById("posVal").value = valueToUnit(channels[0].offsetB) + "s";
 		document.getElementById("baseVal").value = valueToUnit(channels[0].rangeB) + "s";
 		for (var j = 1; j < channels.length; j++) {
-		    addSelectList("range" + channels[j].name, voltRange, "V");
-		    addSelectList("off" + channels[j].name, voltRange, "V");
+      var isCurrentMath = (channels[j].name == "M1" || channels[j].name == "M2");
+
+addSelectList("range" + channels[j].name, isCurrentMath ? ampDivRange : voltDivRange, isCurrentMath ? "A/div" : "V/div");
+addSelectList("off" + channels[j].name, isCurrentMath ? ampRange : voltRange, isCurrentMath ? "A" : "V");
+		    //addSelectList("range" + channels[j].name, voltRange, "V");
+		    //addSelectList("off" + channels[j].name, voltRange, "V");
 			channels[j].range = channels[j].rangeB;                   // get original range, offset from backup B
 			channels[j].offset = channels[j].offsetB;
-			document.getElementById("range" + channels[j].name +"Val").value = valueToUnit(channels[j].range) + " V";
-			document.getElementById("off" + channels[j].name +"Val").value = valueToUnit(channels[j].offset) + " V";
+			document.getElementById("range" + channels[j].name +"Val").value =
+  valueToUnit(channels[j].range) + (isCurrentMath ? " A/div" : " V/div");
+
+document.getElementById("off" + channels[j].name +"Val").value =
+  valueToUnit(channels[j].offset) + (isCurrentMath ? " A" : " V");
 		}
   }     
   // update
@@ -2895,7 +3470,6 @@ function setPower() {
     document.getElementById("cmd").innerHTML = cmdText;
 	sendCmd();        // send command
 }
-
 //----------------------------------------------------------------------------------//
 //-------------------- Test flow  ---------------------------------------------//
 //----------------------------------------------------------------------------------//
@@ -3105,6 +3679,7 @@ var fullDataT = "";
 				 var factorX = [3.3, 1.0, 1.0, 1.0, 1.0]; // FPGA Range
 				 // if (currUnit == 0) { timestep = 1} 
                  if (boardX == 2) { // Arduino
+				    //                 .ino x1 1.65; DIV2 then 3.3
                    factorX = [3.3, 1.65, 1.65, 1.65, 3.3];  // Arduino range with PMOD AD2
 				   if (timeBase == 0) { timestep = timeSampling * (timeBase + 1);  //
                    } else {timestep = timeSampling * timeBase; } 				   
@@ -3136,6 +3711,7 @@ var fullDataT = "";
                  // ScatterPlot("OSC","Oscilloscope",dataOSC2,dataMax2,
 		         //            "time","lin","Minmax",
 			     //            "Amplitude","lin","auto","Fine");
+                 updateMathM1();
 				 updatePlot();
    		         chanStats();
 

@@ -1,0 +1,1170 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Wed Mar 25 13:18:37 2026
+# Process ID: 5132
+# Current directory: C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1
+# Command line: vivado.exe -log EEBench.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source EEBench.tcl
+# Log file: C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/EEBench.vds
+# Journal file: C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source EEBench.tcl -notrace
+Command: synth_design -top EEBench -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 14448 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 739.930 ; gain = 177.254
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'EEBench' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:45]
+	Parameter ADDR_WIDTH bound to: 16 - type: integer 
+	Parameter DATA_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myBuf' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:266]
+INFO: [Synth 8-638] synthesizing module 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
+	Parameter ADDR_WIDTH bound to: 16 - type: integer 
+	Parameter DATA_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'One_port_ram' (1#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:277]
+	Parameter ADDR_WIDTH bound to: 12 - type: integer 
+	Parameter DATA_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myLut1' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:284]
+INFO: [Synth 8-638] synthesizing module 'One_port_ram__parameterized1' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
+	Parameter ADDR_WIDTH bound to: 12 - type: integer 
+	Parameter DATA_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'One_port_ram__parameterized1' (1#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:299]
+	Parameter ADDR_WIDTH bound to: 12 - type: integer 
+	Parameter DATA_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myLut2' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:303]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:344]
+INFO: [Synth 8-3491] module 'SevenSegDH' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:24' bound to instance 'Inst_sevensegDH' of component 'SevenSegDH' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:361]
+INFO: [Synth 8-638] synthesizing module 'SevenSegDH' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:37]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:63]
+INFO: [Synth 8-256] done synthesizing module 'SevenSegDH' (2#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:37]
+INFO: [Synth 8-3491] module 'ButtonD' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:23' bound to instance 'Inst_btn_debounce' of component 'ButtonD' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:379]
+INFO: [Synth 8-638] synthesizing module 'ButtonD' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:31]
+	Parameter DEBNC_CLOCKS bound to: 65536 - type: integer 
+	Parameter PORT_WIDTH bound to: 5 - type: integer 
+INFO: [Synth 8-3491] module 'debouncer' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/debouncer.vhd:42' bound to instance 'Inst_btn_debounce' of component 'debouncer' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:52]
+INFO: [Synth 8-638] synthesizing module 'debouncer' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/debouncer.vhd:50]
+	Parameter DEBNC_CLOCKS bound to: 65536 - type: integer 
+	Parameter PORT_WIDTH bound to: 5 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'debouncer' (3#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/debouncer.vhd:50]
+INFO: [Synth 8-256] done synthesizing module 'ButtonD' (4#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:31]
+INFO: [Synth 8-3491] module 'XADC_EE' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/.Xil/Vivado-5132-EL-NB-T219-JVO2/realtime/XADC_EE_stub.vhdl:5' bound to instance 'my_adc' of component 'XADC_EE' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:487]
+INFO: [Synth 8-638] synthesizing module 'XADC_EE' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/.Xil/Vivado-5132-EL-NB-T219-JVO2/realtime/XADC_EE_stub.vhdl:34]
+	Parameter DVSR bound to: 27 - type: integer 
+	Parameter DVSR_BIT bound to: 10 - type: integer 
+	Parameter DBIT bound to: 8 - type: integer 
+	Parameter SB_TICK bound to: 16 - type: integer 
+	Parameter TX_SIZE bound to: 65536 - type: integer 
+	Parameter RX_SIZE bound to: 512 - type: integer 
+INFO: [Synth 8-3491] module 'uart_mem' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:8' bound to instance 'uart_unit' of component 'uart_mem' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:523]
+INFO: [Synth 8-638] synthesizing module 'uart_mem' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:37]
+	Parameter DVSR bound to: 27 - type: integer 
+	Parameter DVSR_BIT bound to: 10 - type: integer 
+	Parameter DBIT bound to: 8 - type: integer 
+	Parameter SB_TICK bound to: 16 - type: integer 
+	Parameter TX_SIZE bound to: 65536 - type: integer 
+	Parameter RX_SIZE bound to: 512 - type: integer 
+	Parameter N bound to: 10 - type: integer 
+	Parameter M bound to: 27 - type: integer 
+INFO: [Synth 8-3491] module 'mod_m_counter' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/mod_m_counter.vhd:5' bound to instance 'baud_gen_unit' of component 'mod_m_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:151]
+INFO: [Synth 8-638] synthesizing module 'mod_m_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/mod_m_counter.vhd:17]
+	Parameter N bound to: 10 - type: integer 
+	Parameter M bound to: 27 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'mod_m_counter' (5#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/mod_m_counter.vhd:17]
+	Parameter DBIT bound to: 8 - type: integer 
+	Parameter SB_TICK bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'uart_rx' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_rx.vhd:5' bound to instance 'uart_rx_unit' of component 'uart_rx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:156]
+INFO: [Synth 8-638] synthesizing module 'uart_rx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_rx.vhd:19]
+	Parameter DBIT bound to: 8 - type: integer 
+	Parameter SB_TICK bound to: 16 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'uart_rx' (6#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_rx.vhd:19]
+	Parameter DBIT bound to: 8 - type: integer 
+	Parameter SB_TICK bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'uart_tx' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_tx.vhd:5' bound to instance 'uart_tx_unit' of component 'uart_tx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'uart_tx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_tx.vhd:20]
+	Parameter DBIT bound to: 8 - type: integer 
+	Parameter SB_TICK bound to: 16 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'uart_tx' (7#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_tx.vhd:20]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:276]
+WARNING: [Synth 8-614] signal 'dtx' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:268]
+WARNING: [Synth 8-6014] Unused sequential element ucount_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:255]
+INFO: [Synth 8-256] done synthesizing module 'uart_mem' (8#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:37]
+	Parameter N bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'tri_counter' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:5' bound to instance 'tri_unit' of component 'tri_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:546]
+INFO: [Synth 8-638] synthesizing module 'tri_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:17]
+	Parameter N bound to: 16 - type: integer 
+WARNING: [Synth 8-614] signal 'en' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:47]
+INFO: [Synth 8-256] done synthesizing module 'tri_counter' (9#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:17]
+INFO: [Synth 8-3491] module 'sineX' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:26' bound to instance 'sine_unit' of component 'sineX' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:580]
+INFO: [Synth 8-638] synthesizing module 'sineX' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:37]
+INFO: [Synth 8-3491] module 'phi_export' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd:10' bound to instance 'phi1' of component 'phi_export' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:97]
+INFO: [Synth 8-638] synthesizing module 'phi_export' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd:19]
+INFO: [Synth 8-256] done synthesizing module 'phi_export' (10#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd:19]
+INFO: [Synth 8-3491] module 'mul_com' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:27' bound to instance 'mul1' of component 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:105]
+INFO: [Synth 8-638] synthesizing module 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:40]
+	Parameter width bound to: 26 - type: integer 
+	Parameter width_plus bound to: 6 - type: integer 
+INFO: [Synth 8-3491] module 'pipe_mul' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:7' bound to instance 'pipe_mul1' of component 'pipe_mul' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:65]
+INFO: [Synth 8-638] synthesizing module 'pipe_mul' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:20]
+	Parameter width bound to: 26 - type: integer 
+	Parameter width_plus bound to: 6 - type: integer 
+WARNING: [Synth 8-6014] Unused sequential element A_upper_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:50]
+WARNING: [Synth 8-6014] Unused sequential element A_lower_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:51]
+WARNING: [Synth 8-6014] Unused sequential element B_upper_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:52]
+WARNING: [Synth 8-6014] Unused sequential element B_lower_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:53]
+WARNING: [Synth 8-6014] Unused sequential element multi_1_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element multi_2_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:55]
+WARNING: [Synth 8-6014] Unused sequential element multi_3_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:56]
+WARNING: [Synth 8-6014] Unused sequential element multi_4_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:57]
+WARNING: [Synth 8-6014] Unused sequential element add_4_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:61]
+INFO: [Synth 8-256] done synthesizing module 'pipe_mul' (11#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:20]
+	Parameter width bound to: 26 - type: integer 
+	Parameter width_plus bound to: 6 - type: integer 
+INFO: [Synth 8-3491] module 'pipe_mul' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:7' bound to instance 'pipe_mul2' of component 'pipe_mul' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:73]
+	Parameter width bound to: 26 - type: integer 
+	Parameter width_plus bound to: 6 - type: integer 
+INFO: [Synth 8-3491] module 'pipe_mul' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:7' bound to instance 'pipe_mul3' of component 'pipe_mul' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:81]
+	Parameter width bound to: 26 - type: integer 
+	Parameter width_plus bound to: 6 - type: integer 
+INFO: [Synth 8-3491] module 'pipe_mul' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:7' bound to instance 'pipe_mul4' of component 'pipe_mul' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:89]
+WARNING: [Synth 8-6014] Unused sequential element multi_1t_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:110]
+WARNING: [Synth 8-6014] Unused sequential element multi_1r_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:114]
+WARNING: [Synth 8-6014] Unused sequential element multi_2t_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:118]
+WARNING: [Synth 8-6014] Unused sequential element multi_2r_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:122]
+WARNING: [Synth 8-6014] Unused sequential element multi_3t_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:126]
+WARNING: [Synth 8-6014] Unused sequential element multi_3r_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:130]
+WARNING: [Synth 8-6014] Unused sequential element multi_4t_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:134]
+WARNING: [Synth 8-6014] Unused sequential element multi_4r_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:138]
+WARNING: [Synth 8-6014] Unused sequential element multi_Re_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:140]
+WARNING: [Synth 8-6014] Unused sequential element multi_Im_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:141]
+WARNING: [Synth 8-6014] Unused sequential element multi_Re_STD_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:143]
+WARNING: [Synth 8-6014] Unused sequential element multi_Im_STD_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:144]
+INFO: [Synth 8-256] done synthesizing module 'mul_com' (12#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:40]
+INFO: [Synth 8-3491] module 'mul_com' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:27' bound to instance 'mul2' of component 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:117]
+INFO: [Synth 8-3491] module 'mul_com' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:27' bound to instance 'mul3' of component 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:129]
+WARNING: [Synth 8-614] signal 'stepX' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:153]
+	Parameter width bound to: 26 - type: integer 
+	Parameter width_plus bound to: 6 - type: integer 
+INFO: [Synth 8-3491] module 'pipe_mul' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:7' bound to instance 'myScale' of component 'pipe_mul' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:238]
+WARNING: [Synth 8-614] signal 'scale_multi' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:247]
+WARNING: [Synth 8-614] signal 'scale_trunc' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:247]
+WARNING: [Synth 8-614] signal 'offset' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:247]
+WARNING: [Synth 8-6014] Unused sequential element en_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:147]
+INFO: [Synth 8-256] done synthesizing module 'sineX' (13#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:37]
+INFO: [Synth 8-3491] module 'CLK_DIV' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:33' bound to instance 'CLKDIV0' of component 'CLK_DIV' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:604]
+INFO: [Synth 8-638] synthesizing module 'CLK_DIV' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:48]
+INFO: [Synth 8-256] done synthesizing module 'CLK_DIV' (14#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:48]
+WARNING: [Synth 8-3848] Net addr02 in module/entity EEBench does not have driver. [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:225]
+INFO: [Synth 8-256] done synthesizing module 'EEBench' (15#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:45]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 829.137 ; gain = 266.461
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 839.586 ; gain = 276.910
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 839.586 ; gain = 276.910
+---------------------------------------------------------------------------------
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/ip/XADC_EE/XADC_EE/XADC_EE_in_context.xdc] for cell 'my_adc'
+Finished Parsing XDC File [c:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/ip/XADC_EE/XADC_EE/XADC_EE_in_context.xdc] for cell 'my_adc'
+Parsing XDC File [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/constrs_1/imports/V03/Basys3_Master.xdc]
+Finished Parsing XDC File [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/constrs_1/imports/V03/Basys3_Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/constrs_1/imports/V03/Basys3_Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/EEBench_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/EEBench_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 985.801 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 985.801 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 985.801 ; gain = 423.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 985.801 ; gain = 423.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property DONT_TOUCH = true for my_adc. (constraint file  auto generated constraint, line ).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 985.801 ; gain = 423.125
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'ani_reg' in module 'SevenSegDH'
+INFO: [Synth 8-5544] ROM "ani" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg_reg' in module 'uart_rx'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg_reg' in module 'uart_tx'
+INFO: [Synth 8-4471] merging register 'tx_on_reg' into 'tx_active_reg' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:288]
+INFO: [Synth 8-5587] ROM size for "rn_data_out" is below threshold of ROM address width. It will be mapped to LUTs
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                               00 |                             1110
+                 iSTATE0 |                               01 |                             1101
+                 iSTATE1 |                               10 |                             1011
+                 iSTATE2 |                               11 |                             0111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ani_reg' using encoding 'sequential' in module 'SevenSegDH'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                               00 |                               00
+                   start |                               01 |                               01
+                    data |                               10 |                               10
+                    stop |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg_reg' using encoding 'sequential' in module 'uart_rx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                               00 |                               00
+                   start |                               01 |                               01
+                    data |                               10 |                               10
+                    stop |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg_reg' using encoding 'sequential' in module 'uart_tx'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 985.801 ; gain = 423.125
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   4 Input     64 Bit       Adders := 13    
+	   3 Input     32 Bit       Adders := 3     
+	   2 Input     32 Bit       Adders := 7     
+	   2 Input     31 Bit       Adders := 1     
+	   2 Input     30 Bit       Adders := 1     
+	   3 Input     20 Bit       Adders := 3     
+	   2 Input     20 Bit       Adders := 1     
+	   2 Input     19 Bit       Adders := 1     
+	   2 Input     18 Bit       Adders := 2     
+	   2 Input     16 Bit       Adders := 8     
+	   2 Input     10 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      5 Bit       Adders := 3     
+	   2 Input      4 Bit       Adders := 2     
+	   2 Input      3 Bit       Adders := 3     
++---XORs : 
+	   2 Input      1 Bit         XORs := 5     
++---Registers : 
+	              512 Bit    Registers := 1     
+	               64 Bit    Registers := 26    
+	               49 Bit    Registers := 26    
+	               32 Bit    Registers := 13    
+	               31 Bit    Registers := 1     
+	               30 Bit    Registers := 2     
+	               20 Bit    Registers := 1     
+	               18 Bit    Registers := 2     
+	               16 Bit    Registers := 11    
+	               12 Bit    Registers := 2     
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 4     
+	                5 Bit    Registers := 5     
+	                4 Bit    Registers := 3     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 19    
++---RAMs : 
+	            1024K Bit         RAMs := 1     
+	              64K Bit         RAMs := 2     
++---Muxes : 
+	   2 Input    512 Bit        Muxes := 10    
+	   9 Input    512 Bit        Muxes := 2     
+	   2 Input     32 Bit        Muxes := 7     
+	   8 Input     32 Bit        Muxes := 2     
+	   2 Input     31 Bit        Muxes := 3     
+	   3 Input     31 Bit        Muxes := 1     
+	   2 Input     30 Bit        Muxes := 2     
+	   2 Input     20 Bit        Muxes := 6     
+	   2 Input     18 Bit        Muxes := 3     
+	   9 Input     18 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 10    
+	   9 Input     16 Bit        Muxes := 1     
+	   2 Input     12 Bit        Muxes := 1     
+	   4 Input      8 Bit        Muxes := 3     
+	   2 Input      8 Bit        Muxes := 3     
+	   3 Input      7 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 2     
+	   2 Input      5 Bit        Muxes := 8     
+	   3 Input      5 Bit        Muxes := 2     
+	   5 Input      5 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 5     
+	   2 Input      4 Bit        Muxes := 4     
+	  17 Input      4 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 2     
+	   4 Input      2 Bit        Muxes := 3     
+	   2 Input      2 Bit        Muxes := 4     
+	   4 Input      1 Bit        Muxes := 13    
+	   2 Input      1 Bit        Muxes := 52    
+	   3 Input      1 Bit        Muxes := 6     
+	   9 Input      1 Bit        Muxes := 9     
+	   8 Input      1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module EEBench 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 3     
+	   2 Input     16 Bit       Adders := 5     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               16 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 3     
+	   8 Input     32 Bit        Muxes := 2     
+	   2 Input     16 Bit        Muxes := 4     
+	   2 Input     12 Bit        Muxes := 1     
+	   4 Input      8 Bit        Muxes := 2     
+	   2 Input      8 Bit        Muxes := 2     
+	   5 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 2     
+	   8 Input      1 Bit        Muxes := 2     
+Module One_port_ram 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	            1024K Bit         RAMs := 1     
+Module One_port_ram__parameterized1 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	              64K Bit         RAMs := 1     
+Module SevenSegDH 
+Detailed RTL Component Info : 
++---Registers : 
+	                4 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   4 Input      4 Bit        Muxes := 2     
+	   4 Input      2 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 1     
+Module debouncer 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 5     
++---Registers : 
+	                5 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 5     
+Module ButtonD 
+Detailed RTL Component Info : 
++---Registers : 
+	                5 Bit    Registers := 1     
+Module mod_m_counter 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 1     
+Module uart_rx 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      4 Bit        Muxes := 2     
+	   4 Input      4 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 3     
+	   3 Input      1 Bit        Muxes := 2     
+	   4 Input      1 Bit        Muxes := 5     
+Module uart_tx 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   4 Input      8 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 2     
+	   3 Input      1 Bit        Muxes := 2     
+	   4 Input      1 Bit        Muxes := 6     
+Module uart_mem 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     19 Bit       Adders := 1     
+	   2 Input     18 Bit       Adders := 2     
+	   2 Input     16 Bit       Adders := 3     
++---Registers : 
+	              512 Bit    Registers := 1     
+	               18 Bit    Registers := 2     
+	               16 Bit    Registers := 6     
+	               12 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input    512 Bit        Muxes := 10    
+	   9 Input    512 Bit        Muxes := 2     
+	   2 Input     18 Bit        Muxes := 3     
+	   9 Input     18 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 6     
+	   9 Input     16 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   3 Input      7 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 2     
+	  17 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 25    
+	   9 Input      1 Bit        Muxes := 9     
+Module tri_counter 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     20 Bit       Adders := 3     
+	   2 Input     20 Bit       Adders := 1     
++---Registers : 
+	               20 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     20 Bit        Muxes := 6     
+	   2 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 3     
+	   4 Input      1 Bit        Muxes := 1     
+Module phi_export 
+Detailed RTL Component Info : 
++---Registers : 
+	               31 Bit    Registers := 1     
+	               30 Bit    Registers := 1     
+Module pipe_mul 
+Detailed RTL Component Info : 
++---Adders : 
+	   4 Input     64 Bit       Adders := 1     
++---Registers : 
+	               64 Bit    Registers := 2     
+	               49 Bit    Registers := 2     
+Module mul_com 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     32 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 2     
+Module sineX 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input     31 Bit       Adders := 1     
+	   2 Input     30 Bit       Adders := 1     
+	   2 Input      5 Bit       Adders := 3     
++---Registers : 
+	               32 Bit    Registers := 6     
+	               30 Bit    Registers := 1     
+	                5 Bit    Registers := 3     
+	                2 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input     31 Bit        Muxes := 3     
+	   3 Input     31 Bit        Muxes := 1     
+	   2 Input     30 Bit        Muxes := 2     
+	   2 Input      5 Bit        Muxes := 8     
+	   3 Input      5 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 5     
+	   3 Input      1 Bit        Muxes := 2     
+Module CLK_DIV 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 7     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5587] ROM size for "rn_data_out" is below threshold of ROM address width. It will be mapped to LUTs
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP multOp, operation Mode is: A*B.
+DSP Report: operator multOp is absorbed into DSP multOp.
+DSP Report: Generating DSP myScale/multOp, operation Mode is: A*B.
+DSP Report: operator myScale/multOp is absorbed into DSP myScale/multOp.
+DSP Report: Generating DSP myScale/multOp, operation Mode is: A*B.
+DSP Report: operator myScale/multOp is absorbed into DSP myScale/multOp.
+DSP Report: Generating DSP myScale/multOp, operation Mode is: A*B.
+DSP Report: operator myScale/multOp is absorbed into DSP myScale/multOp.
+DSP Report: Generating DSP myScale/multOp, operation Mode is: A*B.
+DSP Report: operator myScale/multOp is absorbed into DSP myScale/multOp.
+WARNING: [Synth 8-6014] Unused sequential element myLut2/ram_reg was removed. 
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[12] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[12] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[12] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[13] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[13] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[13] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[14] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[14] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[14] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[15] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[15] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_3_reg[15] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[16] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[17] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[18] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[19] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[20] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[21] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[22] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[23] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[24] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[25] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[26] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[27] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[28] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[29] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[30] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_1_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[11] )
+INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'uart_unit/tn_data_in_reg[7]' (FDCE) to 'uart_unit/tn_data_in_reg[5]'
+INFO: [Synth 8-3886] merging instance 'uart_unit/tn_data_in_reg[6]' (FDCE) to 'uart_unit/tn_data_in_reg[4]'
+WARNING: [Synth 8-3332] Sequential element (tri_unit/flag_reg[1]_C) is unused and will be removed from module EEBench.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 985.801 ; gain = 423.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+ROM:
++------------+---------------------+---------------+----------------+
+|Module Name | RTL Object          | Depth x Width | Implemented As | 
++------------+---------------------+---------------+----------------+
+|phi_export  | ROM_stepReX[0]      | 32x30         | LUT            | 
+|sineX       | phi1/ROM_stepReX[0] | 32x30         | LUT            | 
++------------+---------------------+---------------+----------------+
+
+
+Block RAM: Preliminary Mapping  Report (see note below)
++------------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name                   | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|One_port_ram:                 | ram_reg    | 64 K x 16(READ_FIRST)  | W | R |                        |   |   | Port A           | 0      | 32     | 
+|One_port_ram__parameterized1: | ram_reg    | 4 K x 16(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 2      | 
++------------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+DSP: Preliminary Mapping  Report (see note below)
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 16     | -      | -      | 33     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 17     | 17     | -      | -      | 34     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|pipe_mul    | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_13 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_1/myBuf/ram_reg_1_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_2/myLut1/ram_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance i_2/myLut1/ram_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 988.273 ; gain = 425.598
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 1009.152 ; gain = 446.477
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping  Report
++------------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name                   | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|One_port_ram:                 | ram_reg    | 64 K x 16(READ_FIRST)  | W | R |                        |   |   | Port A           | 0      | 32     | 
+|One_port_ram__parameterized1: | ram_reg    | 4 K x 16(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 2      | 
++------------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:110]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:122]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:133]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:134]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:177]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:177]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:177]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:121]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:177]
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_13 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myLut1/ram_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-6837] The timing for the instance myLut1/ram_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1081.926 ; gain = 519.250
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6064] Net we_reg_rep_n_0 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
+INFO: [Synth 8-6064] Net we_reg_rep__0_n_0 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
+INFO: [Synth 8-6064] Net we_reg_rep__1_n_0 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1083.734 ; gain = 521.059
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1083.734 ; gain = 521.059
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.734 ; gain = 521.059
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.734 ; gain = 521.059
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |XADC_EE       |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+---------------+------+
+|      |Cell           |Count |
++------+---------------+------+
+|1     |XADC_EE_bbox_0 |     1|
+|2     |BUFG           |     1|
+|3     |CARRY4         |   362|
+|4     |DSP48E1        |    28|
+|5     |DSP48E1_1      |    16|
+|6     |DSP48E1_2      |     8|
+|7     |LUT1           |    74|
+|8     |LUT2           |   872|
+|9     |LUT3           |   589|
+|10    |LUT4           |   324|
+|11    |LUT5           |   887|
+|12    |LUT6           |  1058|
+|13    |MUXF7          |     6|
+|14    |MUXF8          |     3|
+|15    |RAMB36E1       |    16|
+|16    |RAMB36E1_1     |    16|
+|17    |RAMB36E1_2     |     2|
+|18    |FDCE           |   814|
+|19    |FDPE           |    53|
+|20    |FDRE           |   690|
+|21    |LDC            |    42|
+|22    |IBUF           |    30|
+|23    |OBUF           |    53|
++------+---------------+------+
+
+Report Instance Areas: 
++------+------------------+-----------------------------+------+
+|      |Instance          |Module                       |Cells |
++------+------------------+-----------------------------+------+
+|1     |top               |                             |  5970|
+|2     |  Inst_sevensegDH |SevenSegDH                   |    63|
+|3     |  myBuf           |One_port_ram                 |    36|
+|4     |  myLut1          |One_port_ram__parameterized1 |     2|
+|5     |  sine_unit       |sineX                        |  3531|
+|6     |    mul1          |mul_com                      |   876|
+|7     |      pipe_mul1   |pipe_mul_10                  |   223|
+|8     |      pipe_mul2   |pipe_mul_11                  |   183|
+|9     |      pipe_mul3   |pipe_mul_12                  |   183|
+|10    |      pipe_mul4   |pipe_mul_13                  |   183|
+|11    |    mul2          |mul_com_0                    |   940|
+|12    |      pipe_mul1   |pipe_mul_6                   |   223|
+|13    |      pipe_mul2   |pipe_mul_7                   |   183|
+|14    |      pipe_mul3   |pipe_mul_8                   |   183|
+|15    |      pipe_mul4   |pipe_mul_9                   |   183|
+|16    |    mul3          |mul_com_1                    |   970|
+|17    |      pipe_mul1   |pipe_mul_2                   |   223|
+|18    |      pipe_mul2   |pipe_mul_3                   |   183|
+|19    |      pipe_mul3   |pipe_mul_4                   |   183|
+|20    |      pipe_mul4   |pipe_mul_5                   |   213|
+|21    |    myScale       |pipe_mul                     |   181|
+|22    |    phi1          |phi_export                   |    47|
+|23    |  tri_unit        |tri_counter                  |   368|
+|24    |  uart_unit       |uart_mem                     |  1416|
+|25    |    baud_gen_unit |mod_m_counter                |    27|
+|26    |    uart_rx_unit  |uart_rx                      |   432|
+|27    |    uart_tx_unit  |uart_tx                      |    51|
++------+------------------+-----------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:33 ; elapsed = 00:00:38 . Memory (MB): peak = 1083.762 ; gain = 374.871
+Synthesis Optimization Complete : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 499 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1083.762 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 42 instances were transformed.
+  LDC => LDCE: 42 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+301 Infos, 32 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:42 ; elapsed = 00:00:45 . Memory (MB): peak = 1083.762 ; gain = 763.539
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1083.762 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/EEBench.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file EEBench_utilization_synth.rpt -pb EEBench_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Mar 25 13:19:26 2026...

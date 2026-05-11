@@ -47,8 +47,8 @@ architecture Behavioral of EEBench is
 -- Debounced Button signal
 component ButtonD
 Port(
-		BTN 			: in  STD_LOGIC_VECTOR (4 downto 0);
-		CLK : in std_logic;          
+		BTN 		 : in  STD_LOGIC_VECTOR (4 downto 0);
+		CLK          : in std_logic;          
 		btnDeBnc     : out STD_LOGIC_VECTOR (4 downto 0);
 		btnDetect    : out STD_LOGIC
      );
@@ -262,6 +262,11 @@ begin
 
 ----------------------------------------------------------
 ------      acquisition  memory                    -------
+--                  myBuf(One_port_ram)
+--              CLK clk............dout dout
+--   tx_busy|    we we.................
+-- addrUart \_ addr addre..............
+-- addrGen  /   din din................
 ----------------------------------------------------------
 myBuf: One_port_ram
    port map (

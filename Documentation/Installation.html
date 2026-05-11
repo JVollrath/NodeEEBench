@@ -113,8 +113,14 @@ td.top {vertical-align: top;}
 
 Download zip file
 <a href="https://personalpages.hs-kempten.de/~vollratj/InEl/Zip/NodeEEBench.zip" class="blue">NodeEEBench.zip</a><br>
+<h3>Windows</h3>
 Unzip file into C:\temp on a Windows PC creating a subdirectory NodeEEBench.<br>
 Change to subdirectory c:\temp\NodeEEBench.<br>
+<h3>Linux</h3>
+Unzip file into a directory<br>
+Install node.js<br>
+Follow instructions and start in a shell: node ServerEEBench.js<br>
+instead of the .bat file.<br>
 <br>
 
 <h1>Installation Simulation</h1>
@@ -137,8 +143,10 @@ Change to subdirectory c:\temp\NodeEEBench.<br>
 <li>Wire and connect BASYS3 FPGA board to your PC</li>
 <li>(Download) Open Vivado 19.1 </li>
 <li>Open project in folder Xilinx/EEBench/EEBench.xpr compile and transfer bit file 
-    into FPGA or better into Flash memory.</li>
-<li>(Edit NodeEEBench.bat and adjust the path according to your installed node.exe)</li>
+    into FPGA or better into Flash memory.<br>
+	<a href="https://digilent.com/reference/learn/programmable-logic/tutorials/basys-3-programming-guide/start" class="blue">
+    The Basys 3 Programming Guide </a> can be used to do the Flash programming.<br>
+   </li>
 <li>Start NodeEEBench.bat by double clicking<br>
     This starts a node program for a webserver: ServerEEBench.js<br>
     A command line window opens monitoring the serial communication between Arduino 
@@ -156,16 +164,18 @@ Change to subdirectory c:\temp\NodeEEBench.<br>
 <li>Wire and connect the Arduino MKR 1010 Wifi board to your PC</li>
 <li>Open project in folder Arduino/EEBench/EEBench.ino compile and transfer program<br>
     Library Arduino MKR Wifi 1010 for SAMD boards should be installed. (Tools, Board Manager, SAMD)<br>
+    Manage Libraries, "adafruit mcp4728"  (Tools, Manage Library, Adafruit)<br>
 	Select COM Port and Board. (Tools, Port, COMx (Arduino). Upload Sketch</li>
 <li>(Edit NodeEEBench.bat and adjust the path according to your installed node.exe)</li>
 <li>Start NodeEEBench.bat by double clicking<br>
     This starts a node program for a webserver: ServerEEBench.js<br>
 	A command line window opens monitoring the serial communication between Arduino 
-	and web interface<br>
-	<img src="ImagesS/cmdWindow.jpg" width="500"></li>
+	and web interface<br><br>
+	<img src="ImagesS/cmdWindow.jpg" width="500"><br><br></li>
 <li>Open with the browser 'localhost:3000'<br>
     This delivers the file 'Projekte/NEEBench.html' with the user interface<br>
-	<img src="ImagesS/NEEBenchUserInterface.jpg" width="500"></li>
+	<br>
+	<img src="ImagesS/NEEBenchUserInterface.jpg" width="500"><br><br></li>
 <li> Select the Arduino board<br>
      Start the waveform generator AWG1 tab: Frequency 20 Hz, Amplitude 1 V, Offset 1 V, "Run"<br>
 	 In the command interface the S command will be shown.<br>

@@ -1,0 +1,14 @@
+===================================
+Configuration Memory information
+===================================
+File Format        BIN
+Interface          SPIX4
+Size               4M
+Start Address      0x00000000
+End Address        0x003FFFFF
+Checksum           0x318DE885
+Fill Value         0xFF
+
+Addr1         Addr2         Date                    File(s)                                           Checksum
+0x00000000    0x000ECE57    Dec 14 12:52:02 2022    C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.bit    0x008D722D
+File Checksum Total                                                                                   0x008D722D
