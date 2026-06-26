@@ -249,7 +249,7 @@ unsigned int hexToDec(String hexString) {
 
 
 // send all buffer values in Hex
-void sendData() {
+void sendData() { // send all buffer values in Hex
   // get current time
   timeEnd = micros();
   unsigned long totalDuration = (timeEnd - timeBegin)/cntBuf;
@@ -411,7 +411,7 @@ void loop() {
   uint16_t sine8 = 0;
 
   // Serial Interface input
-  if (Serial.available() > 0) {
+  if (Serial.available() > 0) { // process received serial data 
     // get incoming byte:
     inChar = Serial.read();
     if (inChar == 'U') { // cmd 'U' send data 

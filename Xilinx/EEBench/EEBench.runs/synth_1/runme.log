@@ -15,36 +15,36 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 14448 
+INFO: Helper process launched with PID 22480 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 739.930 ; gain = 177.254
+Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 739.340 ; gain = 176.609
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'EEBench' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:45]
+INFO: [Synth 8-638] synthesizing module 'EEBench' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:47]
 	Parameter ADDR_WIDTH bound to: 16 - type: integer 
 	Parameter DATA_WIDTH bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myBuf' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:266]
+INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myBuf' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:373]
 INFO: [Synth 8-638] synthesizing module 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
 	Parameter ADDR_WIDTH bound to: 16 - type: integer 
 	Parameter DATA_WIDTH bound to: 16 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'One_port_ram' (1#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
-INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:277]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:384]
 	Parameter ADDR_WIDTH bound to: 12 - type: integer 
 	Parameter DATA_WIDTH bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myLut1' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:284]
+INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myLut1' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:391]
 INFO: [Synth 8-638] synthesizing module 'One_port_ram__parameterized1' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
 	Parameter ADDR_WIDTH bound to: 12 - type: integer 
 	Parameter DATA_WIDTH bound to: 16 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'One_port_ram__parameterized1' (1#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:41]
-INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:299]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:406]
 	Parameter ADDR_WIDTH bound to: 12 - type: integer 
 	Parameter DATA_WIDTH bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myLut2' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:303]
-INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:344]
-INFO: [Synth 8-3491] module 'SevenSegDH' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:24' bound to instance 'Inst_sevensegDH' of component 'SevenSegDH' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:361]
+INFO: [Synth 8-3491] module 'One_port_ram' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd:24' bound to instance 'myLut2' of component 'One_port_ram' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:410]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:451]
+INFO: [Synth 8-3491] module 'SevenSegDH' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:24' bound to instance 'Inst_sevensegDH' of component 'SevenSegDH' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:477]
 INFO: [Synth 8-638] synthesizing module 'SevenSegDH' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:37]
 INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:63]
 INFO: [Synth 8-256] done synthesizing module 'SevenSegDH' (2#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd:37]
-INFO: [Synth 8-3491] module 'ButtonD' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:23' bound to instance 'Inst_btn_debounce' of component 'ButtonD' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:379]
+INFO: [Synth 8-3491] module 'ButtonD' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:23' bound to instance 'Inst_btn_debounce' of component 'ButtonD' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:495]
 INFO: [Synth 8-638] synthesizing module 'ButtonD' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:31]
 	Parameter DEBNC_CLOCKS bound to: 65536 - type: integer 
 	Parameter PORT_WIDTH bound to: 5 - type: integer 
@@ -54,15 +54,28 @@ INFO: [Synth 8-638] synthesizing module 'debouncer' [C:/temp/NodeEEBench/Xilinx/
 	Parameter PORT_WIDTH bound to: 5 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'debouncer' (3#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/debouncer.vhd:50]
 INFO: [Synth 8-256] done synthesizing module 'ButtonD' (4#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd:31]
-INFO: [Synth 8-3491] module 'XADC_EE' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/.Xil/Vivado-5132-EL-NB-T219-JVO2/realtime/XADC_EE_stub.vhdl:5' bound to instance 'my_adc' of component 'XADC_EE' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:487]
-INFO: [Synth 8-638] synthesizing module 'XADC_EE' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/.Xil/Vivado-5132-EL-NB-T219-JVO2/realtime/XADC_EE_stub.vhdl:34]
+INFO: [Synth 8-3491] module 'XADC_EE' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/.Xil/Vivado-24588-EL-NB-T219-JVO2/realtime/XADC_EE_stub.vhdl:5' bound to instance 'my_adc' of component 'XADC_EE' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:624]
+INFO: [Synth 8-638] synthesizing module 'XADC_EE' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/.Xil/Vivado-24588-EL-NB-T219-JVO2/realtime/XADC_EE_stub.vhdl:34]
+INFO: [Synth 8-3491] module 'pmod_adc_ad7991' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/pmod_adc_ad7991.vhd:26' bound to instance 'PmodAD2' of component 'pmod_adc_ad7991' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:651]
+INFO: [Synth 8-638] synthesizing module 'pmod_adc_ad7991' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/pmod_adc_ad7991.vhd:42]
+	Parameter sys_clk_freq bound to: 100000000 - type: integer 
+	Parameter input_clk bound to: 100000000 - type: integer 
+	Parameter bus_clk bound to: 1000000 - type: integer 
+INFO: [Synth 8-3491] module 'i2c_master' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/i2c_master.vhd:36' bound to instance 'i2c_master_0' of component 'i2c_master' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/pmod_adc_ad7991.vhd:79]
+INFO: [Synth 8-638] synthesizing module 'i2c_master' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/i2c_master.vhd:54]
+	Parameter input_clk bound to: 100000000 - type: integer 
+	Parameter bus_clk bound to: 1000000 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'i2c_master' (5#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/i2c_master.vhd:54]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/pmod_adc_ad7991.vhd:173]
+WARNING: [Synth 8-3848] Net i2c_data_wr in module/entity pmod_adc_ad7991 does not have driver. [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/pmod_adc_ad7991.vhd:49]
+INFO: [Synth 8-256] done synthesizing module 'pmod_adc_ad7991' (6#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/pmod_adc_ad7991.vhd:42]
 	Parameter DVSR bound to: 27 - type: integer 
 	Parameter DVSR_BIT bound to: 10 - type: integer 
 	Parameter DBIT bound to: 8 - type: integer 
 	Parameter SB_TICK bound to: 16 - type: integer 
 	Parameter TX_SIZE bound to: 65536 - type: integer 
 	Parameter RX_SIZE bound to: 512 - type: integer 
-INFO: [Synth 8-3491] module 'uart_mem' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:8' bound to instance 'uart_unit' of component 'uart_mem' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:523]
+INFO: [Synth 8-3491] module 'uart_mem' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:8' bound to instance 'uart_unit' of component 'uart_mem' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:675]
 INFO: [Synth 8-638] synthesizing module 'uart_mem' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:37]
 	Parameter DVSR bound to: 27 - type: integer 
 	Parameter DVSR_BIT bound to: 10 - type: integer 
@@ -76,36 +89,47 @@ INFO: [Synth 8-3491] module 'mod_m_counter' declared at 'C:/temp/NodeEEBench/Xil
 INFO: [Synth 8-638] synthesizing module 'mod_m_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/mod_m_counter.vhd:17]
 	Parameter N bound to: 10 - type: integer 
 	Parameter M bound to: 27 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'mod_m_counter' (5#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/mod_m_counter.vhd:17]
+INFO: [Synth 8-256] done synthesizing module 'mod_m_counter' (7#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/mod_m_counter.vhd:17]
 	Parameter DBIT bound to: 8 - type: integer 
 	Parameter SB_TICK bound to: 16 - type: integer 
 INFO: [Synth 8-3491] module 'uart_rx' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_rx.vhd:5' bound to instance 'uart_rx_unit' of component 'uart_rx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:156]
 INFO: [Synth 8-638] synthesizing module 'uart_rx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_rx.vhd:19]
 	Parameter DBIT bound to: 8 - type: integer 
 	Parameter SB_TICK bound to: 16 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'uart_rx' (6#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_rx.vhd:19]
+INFO: [Synth 8-256] done synthesizing module 'uart_rx' (8#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_rx.vhd:19]
 	Parameter DBIT bound to: 8 - type: integer 
 	Parameter SB_TICK bound to: 16 - type: integer 
 INFO: [Synth 8-3491] module 'uart_tx' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_tx.vhd:5' bound to instance 'uart_tx_unit' of component 'uart_tx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:162]
 INFO: [Synth 8-638] synthesizing module 'uart_tx' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_tx.vhd:20]
 	Parameter DBIT bound to: 8 - type: integer 
 	Parameter SB_TICK bound to: 16 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'uart_tx' (7#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_tx.vhd:20]
-INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:276]
-WARNING: [Synth 8-614] signal 'dtx' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:268]
-WARNING: [Synth 8-6014] Unused sequential element ucount_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:255]
-INFO: [Synth 8-256] done synthesizing module 'uart_mem' (8#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:37]
+INFO: [Synth 8-256] done synthesizing module 'uart_tx' (9#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_tx.vhd:20]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:280]
+WARNING: [Synth 8-614] signal 'dtx' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:272]
+WARNING: [Synth 8-6014] Unused sequential element ucount_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:259]
+INFO: [Synth 8-256] done synthesizing module 'uart_mem' (10#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:37]
+INFO: [Synth 8-3491] module 'Int_Pmod_DA2' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/XilinsSrc/Int_Pmod_DA2.vhd:27' bound to instance 'Int_Pmod_DA2_unit' of component 'Int_Pmod_DA2' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:697]
+INFO: [Synth 8-638] synthesizing module 'Int_Pmod_DA2' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/XilinsSrc/Int_Pmod_DA2.vhd:39]
+INFO: [Synth 8-226] default block is never used [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/XilinsSrc/Int_Pmod_DA2.vhd:51]
+INFO: [Synth 8-256] done synthesizing module 'Int_Pmod_DA2' (11#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/XilinsSrc/Int_Pmod_DA2.vhd:39]
+	Parameter input_clk bound to: 100000000 - type: integer 
+	Parameter bus_clk bound to: 400000 - type: integer 
+INFO: [Synth 8-3491] module 'i2c_master' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/i2c_master.vhd:36' bound to instance 'i2c_unit' of component 'i2c_master' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:731]
+INFO: [Synth 8-638] synthesizing module 'i2c_master__parameterized1' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/i2c_master.vhd:54]
+	Parameter input_clk bound to: 100000000 - type: integer 
+	Parameter bus_clk bound to: 400000 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'i2c_master__parameterized1' (11#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/i2c_master.vhd:54]
 	Parameter N bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'tri_counter' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:5' bound to instance 'tri_unit' of component 'tri_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:546]
+INFO: [Synth 8-3491] module 'tri_counter' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:5' bound to instance 'tri_unit' of component 'tri_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:870]
 INFO: [Synth 8-638] synthesizing module 'tri_counter' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:17]
 	Parameter N bound to: 16 - type: integer 
 WARNING: [Synth 8-614] signal 'en' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:47]
-INFO: [Synth 8-256] done synthesizing module 'tri_counter' (9#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:17]
-INFO: [Synth 8-3491] module 'sineX' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:26' bound to instance 'sine_unit' of component 'sineX' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:580]
+INFO: [Synth 8-256] done synthesizing module 'tri_counter' (12#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd:17]
+INFO: [Synth 8-3491] module 'sineX' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:26' bound to instance 'sine_unit' of component 'sineX' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:904]
 INFO: [Synth 8-638] synthesizing module 'sineX' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:37]
 INFO: [Synth 8-3491] module 'phi_export' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd:10' bound to instance 'phi1' of component 'phi_export' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:97]
 INFO: [Synth 8-638] synthesizing module 'phi_export' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd:19]
-INFO: [Synth 8-256] done synthesizing module 'phi_export' (10#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd:19]
+INFO: [Synth 8-256] done synthesizing module 'phi_export' (13#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd:19]
 INFO: [Synth 8-3491] module 'mul_com' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:27' bound to instance 'mul1' of component 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:105]
 INFO: [Synth 8-638] synthesizing module 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:40]
 	Parameter width bound to: 26 - type: integer 
@@ -123,7 +147,7 @@ WARNING: [Synth 8-6014] Unused sequential element multi_2_reg was removed.  [C:/
 WARNING: [Synth 8-6014] Unused sequential element multi_3_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:56]
 WARNING: [Synth 8-6014] Unused sequential element multi_4_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:57]
 WARNING: [Synth 8-6014] Unused sequential element add_4_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:61]
-INFO: [Synth 8-256] done synthesizing module 'pipe_mul' (11#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'pipe_mul' (14#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:20]
 	Parameter width bound to: 26 - type: integer 
 	Parameter width_plus bound to: 6 - type: integer 
 INFO: [Synth 8-3491] module 'pipe_mul' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd:7' bound to instance 'pipe_mul2' of component 'pipe_mul' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:73]
@@ -145,7 +169,7 @@ WARNING: [Synth 8-6014] Unused sequential element multi_Re_reg was removed.  [C:
 WARNING: [Synth 8-6014] Unused sequential element multi_Im_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:141]
 WARNING: [Synth 8-6014] Unused sequential element multi_Re_STD_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:143]
 WARNING: [Synth 8-6014] Unused sequential element multi_Im_STD_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:144]
-INFO: [Synth 8-256] done synthesizing module 'mul_com' (12#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:40]
+INFO: [Synth 8-256] done synthesizing module 'mul_com' (15#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:40]
 INFO: [Synth 8-3491] module 'mul_com' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:27' bound to instance 'mul2' of component 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:117]
 INFO: [Synth 8-3491] module 'mul_com' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd:27' bound to instance 'mul3' of component 'mul_com' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:129]
 WARNING: [Synth 8-614] signal 'stepX' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:153]
@@ -156,14 +180,18 @@ WARNING: [Synth 8-614] signal 'scale_multi' is read in the process but is not in
 WARNING: [Synth 8-614] signal 'scale_trunc' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:247]
 WARNING: [Synth 8-614] signal 'offset' is read in the process but is not in the sensitivity list [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:247]
 WARNING: [Synth 8-6014] Unused sequential element en_reg was removed.  [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:147]
-INFO: [Synth 8-256] done synthesizing module 'sineX' (13#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:37]
-INFO: [Synth 8-3491] module 'CLK_DIV' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:33' bound to instance 'CLKDIV0' of component 'CLK_DIV' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:604]
+INFO: [Synth 8-256] done synthesizing module 'sineX' (16#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:37]
+INFO: [Synth 8-3491] module 'CLK_DIV' declared at 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:33' bound to instance 'CLKDIV0' of component 'CLK_DIV' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:928]
 INFO: [Synth 8-638] synthesizing module 'CLK_DIV' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:48]
-INFO: [Synth 8-256] done synthesizing module 'CLK_DIV' (14#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:48]
-WARNING: [Synth 8-3848] Net addr02 in module/entity EEBench does not have driver. [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:225]
-INFO: [Synth 8-256] done synthesizing module 'EEBench' (15#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:45]
+INFO: [Synth 8-256] done synthesizing module 'CLK_DIV' (17#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd:48]
+WARNING: [Synth 8-3848] Net LDAC in module/entity EEBench does not have driver. [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:345]
+WARNING: [Synth 8-3848] Net RDY in module/entity EEBench does not have driver. [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:344]
+WARNING: [Synth 8-3848] Net addr02 in module/entity EEBench does not have driver. [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:307]
+INFO: [Synth 8-256] done synthesizing module 'EEBench' (18#1) [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd:47]
+WARNING: [Synth 8-3331] design EEBench has unconnected port JC[1]
+WARNING: [Synth 8-3331] design EEBench has unconnected port JC[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 829.137 ; gain = 266.461
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 838.355 ; gain = 275.625
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -176,10 +204,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 839.586 ; gain = 276.910
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 838.355 ; gain = 275.625
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 839.586 ; gain = 276.910
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 838.355 ; gain = 275.625
 ---------------------------------------------------------------------------------
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
@@ -193,34 +221,40 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/EEBench_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 985.801 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 991.887 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 985.801 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.037 . Memory (MB): peak = 991.887 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 985.801 ; gain = 423.125
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 991.887 ; gain = 429.156
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 985.801 ; gain = 423.125
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 991.887 ; gain = 429.156
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 Applied set_property DONT_TOUCH = true for my_adc. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 985.801 ; gain = 423.125
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 991.887 ; gain = 429.156
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'ani_reg' in module 'SevenSegDH'
 INFO: [Synth 8-5544] ROM "ani" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'i2c_master'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'pmod_adc_ad7991'
+INFO: [Synth 8-5544] ROM "adc_ch0_data" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg_reg' in module 'uart_rx'
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg_reg' in module 'uart_tx'
-INFO: [Synth 8-4471] merging register 'tx_on_reg' into 'tx_active_reg' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:288]
+INFO: [Synth 8-4471] merging register 'tx_on_reg' into 'tx_active_reg' [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd:292]
 INFO: [Synth 8-5587] ROM size for "rn_data_out" is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5546] ROM "tx_enable" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'i2c_master__parameterized1'
+INFO: [Synth 8-802] inferred FSM for state register 'i2c_state_reg' in module 'EEBench'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -230,6 +264,28 @@ INFO: [Synth 8-5587] ROM size for "rn_data_out" is below threshold of ROM addres
                  iSTATE2 |                               11 |                             0111
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'ani_reg' using encoding 'sequential' in module 'SevenSegDH'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   ready |                        000000001 |                             0000
+                   start |                        000000010 |                             0001
+                 command |                        000000100 |                             0010
+                slv_ack1 |                        000001000 |                             0011
+                      wr |                        000010000 |                             0100
+                slv_ack2 |                        000100000 |                             0110
+                      rd |                        001000000 |                             0101
+                mstr_ack |                        010000000 |                             0111
+                    stop |                        100000000 |                             1000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'i2c_master'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   start |                              001 |                               00
+               read_data |                              010 |                               01
+           output_result |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'pmod_adc_ad7991'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -248,8 +304,46 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg_reg' using encod
                     stop |                               11 |                               11
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg_reg' using encoding 'sequential' in module 'uart_tx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   ready |                        000000001 |                             0000
+                   start |                        000000010 |                             0001
+                 command |                        000000100 |                             0010
+                slv_ack1 |                        000001000 |                             0011
+                      wr |                        000010000 |                             0100
+                slv_ack2 |                        000100000 |                             0110
+                      rd |                        001000000 |                             0101
+                mstr_ack |                        010000000 |                             0111
+                    stop |                        100000000 |                             1000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'i2c_master__parameterized1'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |              0000000000000000001 |                            00000
+              send_byte2 |              0000000000000000010 |                            00001
+              wait_byte2 |              0000000000000000100 |                            00010
+              send_byte3 |              0000000000000001000 |                            00011
+              wait_byte3 |              0000000000000010000 |                            00100
+              send_byte4 |              0000000000000100000 |                            00101
+              wait_byte4 |              0000000000001000000 |                            00110
+              send_byte5 |              0000000000010000000 |                            00111
+              wait_byte5 |              0000000000100000000 |                            01000
+              send_byte6 |              0000000001000000000 |                            01001
+              wait_byte6 |              0000000010000000000 |                            01010
+              send_byte7 |              0000000100000000000 |                            01011
+              wait_byte7 |              0000001000000000000 |                            01100
+              send_byte8 |              0000010000000000000 |                            01101
+              wait_byte8 |              0000100000000000000 |                            01110
+              send_byte9 |              0001000000000000000 |                            01111
+              wait_byte9 |              0010000000000000000 |                            10000
+                    done |              0100000000000000000 |                            10001
+                  iSTATE |              1000000000000000000 |                            11111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'i2c_state_reg' using encoding 'one-hot' in module 'EEBench'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 985.801 ; gain = 423.125
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 991.887 ; gain = 429.156
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -271,12 +365,14 @@ Detailed RTL Component Info :
 	   2 Input     20 Bit       Adders := 1     
 	   2 Input     19 Bit       Adders := 1     
 	   2 Input     18 Bit       Adders := 2     
+	   2 Input     17 Bit       Adders := 1     
 	   2 Input     16 Bit       Adders := 8     
 	   2 Input     10 Bit       Adders := 1     
-	   2 Input      8 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 3     
+	   2 Input      7 Bit       Adders := 1     
 	   2 Input      5 Bit       Adders := 3     
-	   2 Input      4 Bit       Adders := 2     
-	   2 Input      3 Bit       Adders := 3     
+	   2 Input      4 Bit       Adders := 5     
+	   2 Input      3 Bit       Adders := 5     
 +---XORs : 
 	   2 Input      1 Bit         XORs := 5     
 +---Registers : 
@@ -288,49 +384,66 @@ Detailed RTL Component Info :
 	               30 Bit    Registers := 2     
 	               20 Bit    Registers := 1     
 	               18 Bit    Registers := 2     
-	               16 Bit    Registers := 11    
-	               12 Bit    Registers := 2     
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 19    
+	               12 Bit    Registers := 6     
 	               10 Bit    Registers := 1     
-	                8 Bit    Registers := 4     
+	                8 Bit    Registers := 15    
+	                7 Bit    Registers := 2     
 	                5 Bit    Registers := 5     
-	                4 Bit    Registers := 3     
-	                3 Bit    Registers := 3     
+	                4 Bit    Registers := 4     
+	                3 Bit    Registers := 5     
 	                2 Bit    Registers := 2     
-	                1 Bit    Registers := 19    
+	                1 Bit    Registers := 44    
 +---RAMs : 
 	            1024K Bit         RAMs := 1     
 	              64K Bit         RAMs := 2     
 +---Muxes : 
 	   2 Input    512 Bit        Muxes := 10    
-	   9 Input    512 Bit        Muxes := 2     
+	  10 Input    512 Bit        Muxes := 2     
 	   2 Input     32 Bit        Muxes := 7     
 	   8 Input     32 Bit        Muxes := 2     
 	   2 Input     31 Bit        Muxes := 3     
 	   3 Input     31 Bit        Muxes := 1     
 	   2 Input     30 Bit        Muxes := 2     
 	   2 Input     20 Bit        Muxes := 6     
+	  18 Input     19 Bit        Muxes := 1     
+	   2 Input     19 Bit        Muxes := 1     
 	   2 Input     18 Bit        Muxes := 3     
-	   9 Input     18 Bit        Muxes := 1     
-	   2 Input     16 Bit        Muxes := 10    
-	   9 Input     16 Bit        Muxes := 1     
+	  10 Input     18 Bit        Muxes := 1     
+	  10 Input     16 Bit        Muxes := 5     
+	   3 Input     16 Bit        Muxes := 4     
+	   2 Input     16 Bit        Muxes := 14    
+	   2 Input     14 Bit        Muxes := 1     
+	   4 Input     12 Bit        Muxes := 4     
 	   2 Input     12 Bit        Muxes := 1     
+	   9 Input      9 Bit        Muxes := 2     
+	   2 Input      9 Bit        Muxes := 18    
+	   6 Input      8 Bit        Muxes := 2     
+	   2 Input      8 Bit        Muxes := 10    
 	   4 Input      8 Bit        Muxes := 3     
-	   2 Input      8 Bit        Muxes := 3     
+	  19 Input      8 Bit        Muxes := 1     
 	   3 Input      7 Bit        Muxes := 1     
 	   2 Input      7 Bit        Muxes := 2     
 	   2 Input      5 Bit        Muxes := 8     
 	   3 Input      5 Bit        Muxes := 2     
 	   5 Input      5 Bit        Muxes := 1     
 	   4 Input      4 Bit        Muxes := 5     
-	   2 Input      4 Bit        Muxes := 4     
+	  10 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 5     
 	  17 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	   3 Input      3 Bit        Muxes := 1     
 	   4 Input      3 Bit        Muxes := 2     
 	   4 Input      2 Bit        Muxes := 3     
 	   2 Input      2 Bit        Muxes := 4     
-	   4 Input      1 Bit        Muxes := 13    
-	   2 Input      1 Bit        Muxes := 52    
-	   3 Input      1 Bit        Muxes := 6     
-	   9 Input      1 Bit        Muxes := 9     
+	   4 Input      1 Bit        Muxes := 19    
+	   2 Input      1 Bit        Muxes := 65    
+	   3 Input      1 Bit        Muxes := 12    
+	   9 Input      1 Bit        Muxes := 14    
+	   6 Input      1 Bit        Muxes := 6     
+	  10 Input      1 Bit        Muxes := 13    
+	  19 Input      1 Bit        Muxes := 3     
 	   8 Input      1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -343,22 +456,31 @@ Module EEBench
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input     32 Bit       Adders := 3     
+	   2 Input     17 Bit       Adders := 1     
 	   2 Input     16 Bit       Adders := 5     
 	   2 Input      3 Bit       Adders := 1     
 +---Registers : 
 	               32 Bit    Registers := 1     
+	               17 Bit    Registers := 1     
 	               16 Bit    Registers := 2     
+	               12 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
-	                1 Bit    Registers := 2     
+	                1 Bit    Registers := 5     
 +---Muxes : 
 	   2 Input     32 Bit        Muxes := 3     
 	   8 Input     32 Bit        Muxes := 2     
+	  18 Input     19 Bit        Muxes := 1     
+	   2 Input     19 Bit        Muxes := 1     
 	   2 Input     16 Bit        Muxes := 4     
+	   2 Input     14 Bit        Muxes := 1     
 	   2 Input     12 Bit        Muxes := 1     
 	   4 Input      8 Bit        Muxes := 2     
 	   2 Input      8 Bit        Muxes := 2     
+	  19 Input      8 Bit        Muxes := 1     
 	   5 Input      5 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 3     
+	  19 Input      1 Bit        Muxes := 3     
 	   8 Input      1 Bit        Muxes := 2     
 Module One_port_ram 
 Detailed RTL Component Info : 
@@ -393,6 +515,47 @@ Module ButtonD
 Detailed RTL Component Info : 
 +---Registers : 
 	                5 Bit    Registers := 1     
+Module i2c_master 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      7 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 4     
+	                7 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   9 Input      9 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 9     
+	   6 Input      8 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 3     
+	   2 Input      3 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 4     
+	   3 Input      1 Bit        Muxes := 1     
+	   9 Input      1 Bit        Muxes := 7     
+	   6 Input      1 Bit        Muxes := 3     
+Module pmod_adc_ad7991 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 1     
++---Registers : 
+	               16 Bit    Registers := 8     
+	                7 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
++---Muxes : 
+	  10 Input     16 Bit        Muxes := 4     
+	   3 Input     16 Bit        Muxes := 4     
+	   2 Input     16 Bit        Muxes := 4     
+	   4 Input     12 Bit        Muxes := 4     
+	  10 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   3 Input      3 Bit        Muxes := 1     
+	  10 Input      1 Bit        Muxes := 4     
+	   3 Input      1 Bit        Muxes := 4     
 Module mod_m_counter 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -452,11 +615,11 @@ Detailed RTL Component Info :
 	                1 Bit    Registers := 6     
 +---Muxes : 
 	   2 Input    512 Bit        Muxes := 10    
-	   9 Input    512 Bit        Muxes := 2     
+	  10 Input    512 Bit        Muxes := 2     
 	   2 Input     18 Bit        Muxes := 3     
-	   9 Input     18 Bit        Muxes := 1     
+	  10 Input     18 Bit        Muxes := 1     
 	   2 Input     16 Bit        Muxes := 6     
-	   9 Input     16 Bit        Muxes := 1     
+	  10 Input     16 Bit        Muxes := 1     
 	   2 Input      8 Bit        Muxes := 1     
 	   3 Input      7 Bit        Muxes := 1     
 	   2 Input      7 Bit        Muxes := 2     
@@ -464,7 +627,38 @@ Detailed RTL Component Info :
 	   2 Input      4 Bit        Muxes := 1     
 	   4 Input      4 Bit        Muxes := 1     
 	   2 Input      1 Bit        Muxes := 25    
-	   9 Input      1 Bit        Muxes := 9     
+	  10 Input      1 Bit        Muxes := 9     
+Module Int_Pmod_DA2 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	               12 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 4     
+Module i2c_master__parameterized1 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 5     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   9 Input      9 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 9     
+	   2 Input      8 Bit        Muxes := 4     
+	   6 Input      8 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 4     
+	   3 Input      1 Bit        Muxes := 1     
+	   9 Input      1 Bit        Muxes := 7     
+	   6 Input      1 Bit        Muxes := 3     
 Module tri_counter 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -649,6 +843,9 @@ DSP Report: Generating DSP myScale/multOp, operation Mode is: A*B.
 DSP Report: operator myScale/multOp is absorbed into DSP myScale/multOp.
 DSP Report: Generating DSP myScale/multOp, operation Mode is: A*B.
 DSP Report: operator myScale/multOp is absorbed into DSP myScale/multOp.
+WARNING: [Synth 8-3331] design EEBench has unconnected port JC[1]
+WARNING: [Synth 8-3331] design EEBench has unconnected port JC[0]
+INFO: [Synth 8-5784] Optimized 0 bits of RAM "myBuf/ram_reg" due to constant propagation. Old ram width 16 bits, new ram width 16 bits.
 WARNING: [Synth 8-6014] Unused sequential element myLut2/ram_reg was removed. 
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_1_reg[0] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul3/add_2_reg[0] )
@@ -751,11 +948,44 @@ INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_2_reg[11] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (mul_com:/\pipe_mul4/add_3_reg[11] )
 INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch0_data_reg[0]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch1_data_reg[0]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch2_data_reg[0]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch3_data_reg[0]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch0_data_reg[1]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch1_data_reg[1]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch2_data_reg[1]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch3_data_reg[1]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch0_data_reg[2]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch1_data_reg[2]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch2_data_reg[2]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch3_data_reg[2]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch0_data_reg[3]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch1_data_reg[3]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/adc_ch2_data_reg[3]' (FDCE) to 'PmodAD2/adc_ch3_data_reg[3]'
 INFO: [Synth 8-3886] merging instance 'uart_unit/tn_data_in_reg[7]' (FDCE) to 'uart_unit/tn_data_in_reg[5]'
 INFO: [Synth 8-3886] merging instance 'uart_unit/tn_data_in_reg[6]' (FDCE) to 'uart_unit/tn_data_in_reg[4]'
+INFO: [Synth 8-3886] merging instance 'i2c_unit/addr_rw_reg[6]' (FDE) to 'i2c_unit/addr_rw_reg[7]'
+INFO: [Synth 8-3886] merging instance 'i2c_unit/addr_rw_reg[0]' (FDE) to 'i2c_unit/addr_rw_reg[1]'
+INFO: [Synth 8-3886] merging instance 'i2c_unit/addr_rw_reg[1]' (FDE) to 'i2c_unit/addr_rw_reg[2]'
+INFO: [Synth 8-3886] merging instance 'i2c_unit/addr_rw_reg[2]' (FDE) to 'i2c_unit/addr_rw_reg[3]'
+INFO: [Synth 8-3886] merging instance 'i2c_unit/addr_rw_reg[3]' (FDE) to 'i2c_unit/addr_rw_reg[4]'
+INFO: [Synth 8-3886] merging instance 'i2c_unit/addr_rw_reg[4]' (FDE) to 'i2c_unit/addr_rw_reg[5]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_addr_reg[5]' (FDE) to 'PmodAD2/i2c_addr_reg[3]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_master_0/addr_rw_reg[6]' (FDE) to 'PmodAD2/i2c_master_0/addr_rw_reg[4]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_addr_reg[6]' (FDE) to 'PmodAD2/i2c_addr_reg[4]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_master_0/addr_rw_reg[7]' (FDE) to 'PmodAD2/i2c_master_0/addr_rw_reg[5]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_addr_reg[0]' (FDE) to 'PmodAD2/i2c_addr_reg[4]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_master_0/addr_rw_reg[1]' (FDE) to 'PmodAD2/i2c_master_0/addr_rw_reg[5]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_addr_reg[1]' (FDE) to 'PmodAD2/i2c_addr_reg[4]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_master_0/addr_rw_reg[2]' (FDE) to 'PmodAD2/i2c_master_0/addr_rw_reg[5]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_addr_reg[2]' (FDE) to 'PmodAD2/i2c_addr_reg[4]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_master_0/addr_rw_reg[3]' (FDE) to 'PmodAD2/i2c_master_0/addr_rw_reg[5]'
+INFO: [Synth 8-3886] merging instance 'PmodAD2/i2c_master_0/addr_rw_reg[4]' (FDE) to 'PmodAD2/i2c_master_0/addr_rw_reg[0]'
+WARNING: [Synth 8-3332] Sequential element (FSM_onehot_i2c_state_reg[18]) is unused and will be removed from module EEBench.
 WARNING: [Synth 8-3332] Sequential element (tri_unit/flag_reg[1]_C) is unused and will be removed from module EEBench.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 985.801 ; gain = 423.125
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 991.887 ; gain = 429.156
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -874,13 +1104,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 988.273 ; gain = 425.598
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 996.270 ; gain = 433.539
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 1009.152 ; gain = 446.477
+Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:34 . Memory (MB): peak = 1018.117 ; gain = 455.387
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -906,6 +1136,10 @@ Report RTL Partitions:
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
+WARNING: [Synth 8-3332] Sequential element (PmodAD2/i2c_master_0/FSM_onehot_state_reg[5]) is unused and will be removed from module EEBench.
+WARNING: [Synth 8-3332] Sequential element (PmodAD2/i2c_master_0/FSM_onehot_state_reg[4]) is unused and will be removed from module EEBench.
+WARNING: [Synth 8-3332] Sequential element (i2c_unit/FSM_onehot_state_reg[7]) is unused and will be removed from module EEBench.
+WARNING: [Synth 8-3332] Sequential element (i2c_unit/FSM_onehot_state_reg[6]) is unused and will be removed from module EEBench.
 INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
 INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
 INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd:109]
@@ -997,7 +1231,7 @@ INFO: [Synth 8-6837] The timing for the instance myBuf/ram_reg_1_15 (implemented
 INFO: [Synth 8-6837] The timing for the instance myLut1/ram_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 INFO: [Synth 8-6837] The timing for the instance myLut1/ram_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1081.926 ; gain = 519.250
+Finished Technology Mapping : Time (s): cpu = 00:00:33 ; elapsed = 00:00:37 . Memory (MB): peak = 1097.023 ; gain = 534.293
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1024,7 +1258,7 @@ INFO: [Synth 8-6064] Net we_reg_rep__1_n_0 is driving 32 big block pins (URAM, B
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1083.734 ; gain = 521.059
+Finished IO Insertion : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 1099.812 ; gain = 537.082
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1037,7 +1271,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1083.734 ; gain = 521.059
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 1099.812 ; gain = 537.082
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1049,25 +1283,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.734 ; gain = 521.059
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1099.812 ; gain = 537.082
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.734 ; gain = 521.059
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1099.812 ; gain = 537.082
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1100.832 ; gain = 538.102
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1100.832 ; gain = 538.102
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -1086,84 +1320,92 @@ Report Cell Usage:
 +------+---------------+------+
 |1     |XADC_EE_bbox_0 |     1|
 |2     |BUFG           |     1|
-|3     |CARRY4         |   362|
+|3     |CARRY4         |   373|
 |4     |DSP48E1        |    28|
 |5     |DSP48E1_1      |    16|
 |6     |DSP48E1_2      |     8|
-|7     |LUT1           |    74|
-|8     |LUT2           |   872|
-|9     |LUT3           |   589|
-|10    |LUT4           |   324|
-|11    |LUT5           |   887|
-|12    |LUT6           |  1058|
-|13    |MUXF7          |     6|
+|7     |LUT1           |    83|
+|8     |LUT2           |   896|
+|9     |LUT3           |   667|
+|10    |LUT4           |   339|
+|11    |LUT5           |   927|
+|12    |LUT6           |  1208|
+|13    |MUXF7          |     8|
 |14    |MUXF8          |     3|
 |15    |RAMB36E1       |    16|
 |16    |RAMB36E1_1     |    16|
 |17    |RAMB36E1_2     |     2|
 |18    |FDCE           |   814|
 |19    |FDPE           |    53|
-|20    |FDRE           |   690|
-|21    |LDC            |    42|
-|22    |IBUF           |    30|
-|23    |OBUF           |    53|
+|20    |FDRE           |   997|
+|21    |FDSE           |     2|
+|22    |LDC            |    42|
+|23    |IBUF           |    30|
+|24    |IOBUF          |     3|
+|25    |OBUF           |    47|
+|26    |OBUFT          |     1|
 +------+---------------+------+
 
 Report Instance Areas: 
-+------+------------------+-----------------------------+------+
-|      |Instance          |Module                       |Cells |
-+------+------------------+-----------------------------+------+
-|1     |top               |                             |  5970|
-|2     |  Inst_sevensegDH |SevenSegDH                   |    63|
-|3     |  myBuf           |One_port_ram                 |    36|
-|4     |  myLut1          |One_port_ram__parameterized1 |     2|
-|5     |  sine_unit       |sineX                        |  3531|
-|6     |    mul1          |mul_com                      |   876|
-|7     |      pipe_mul1   |pipe_mul_10                  |   223|
-|8     |      pipe_mul2   |pipe_mul_11                  |   183|
-|9     |      pipe_mul3   |pipe_mul_12                  |   183|
-|10    |      pipe_mul4   |pipe_mul_13                  |   183|
-|11    |    mul2          |mul_com_0                    |   940|
-|12    |      pipe_mul1   |pipe_mul_6                   |   223|
-|13    |      pipe_mul2   |pipe_mul_7                   |   183|
-|14    |      pipe_mul3   |pipe_mul_8                   |   183|
-|15    |      pipe_mul4   |pipe_mul_9                   |   183|
-|16    |    mul3          |mul_com_1                    |   970|
-|17    |      pipe_mul1   |pipe_mul_2                   |   223|
-|18    |      pipe_mul2   |pipe_mul_3                   |   183|
-|19    |      pipe_mul3   |pipe_mul_4                   |   183|
-|20    |      pipe_mul4   |pipe_mul_5                   |   213|
-|21    |    myScale       |pipe_mul                     |   181|
-|22    |    phi1          |phi_export                   |    47|
-|23    |  tri_unit        |tri_counter                  |   368|
-|24    |  uart_unit       |uart_mem                     |  1416|
-|25    |    baud_gen_unit |mod_m_counter                |    27|
-|26    |    uart_rx_unit  |uart_rx                      |   432|
-|27    |    uart_tx_unit  |uart_tx                      |    51|
-+------+------------------+-----------------------------+------+
++------+--------------------+-----------------------------+------+
+|      |Instance            |Module                       |Cells |
++------+--------------------+-----------------------------+------+
+|1     |top                 |                             |  6606|
+|2     |  Inst_sevensegDH   |SevenSegDH                   |    63|
+|3     |  Int_Pmod_DA2_unit |Int_Pmod_DA2                 |    63|
+|4     |  PmodAD2           |pmod_adc_ad7991              |   366|
+|5     |    i2c_master_0    |i2c_master                   |   127|
+|6     |  i2c_unit          |i2c_master__parameterized1   |    99|
+|7     |  myBuf             |One_port_ram                 |    36|
+|8     |  myLut1            |One_port_ram__parameterized1 |     2|
+|9     |  sine_unit         |sineX                        |  3531|
+|10    |    mul1            |mul_com                      |   876|
+|11    |      pipe_mul1     |pipe_mul_10                  |   223|
+|12    |      pipe_mul2     |pipe_mul_11                  |   183|
+|13    |      pipe_mul3     |pipe_mul_12                  |   183|
+|14    |      pipe_mul4     |pipe_mul_13                  |   183|
+|15    |    mul2            |mul_com_0                    |   940|
+|16    |      pipe_mul1     |pipe_mul_6                   |   223|
+|17    |      pipe_mul2     |pipe_mul_7                   |   183|
+|18    |      pipe_mul3     |pipe_mul_8                   |   183|
+|19    |      pipe_mul4     |pipe_mul_9                   |   183|
+|20    |    mul3            |mul_com_1                    |   970|
+|21    |      pipe_mul1     |pipe_mul_2                   |   223|
+|22    |      pipe_mul2     |pipe_mul_3                   |   183|
+|23    |      pipe_mul3     |pipe_mul_4                   |   183|
+|24    |      pipe_mul4     |pipe_mul_5                   |   213|
+|25    |    myScale         |pipe_mul                     |   181|
+|26    |    phi1            |phi_export                   |    47|
+|27    |  tri_unit          |tri_counter                  |   368|
+|28    |  uart_unit         |uart_mem                     |  1440|
+|29    |    baud_gen_unit   |mod_m_counter                |    27|
+|30    |    uart_rx_unit    |uart_rx                      |   435|
+|31    |    uart_tx_unit    |uart_tx                      |    51|
++------+--------------------+-----------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1100.832 ; gain = 538.102
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:33 ; elapsed = 00:00:38 . Memory (MB): peak = 1083.762 ; gain = 374.871
-Synthesis Optimization Complete : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 1083.762 ; gain = 521.086
+Synthesis finished with 0 errors, 0 critical warnings and 9 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:30 ; elapsed = 00:00:38 . Memory (MB): peak = 1100.832 ; gain = 384.570
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 1100.832 ; gain = 538.102
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 499 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 515 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1083.762 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1105.250 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 42 instances were transformed.
+  A total of 45 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 3 instances
   LDC => LDCE: 42 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-301 Infos, 32 Warnings, 0 Critical Warnings and 0 Errors encountered.
+358 Infos, 44 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:42 ; elapsed = 00:00:45 . Memory (MB): peak = 1083.762 ; gain = 763.539
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1083.762 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:41 ; elapsed = 00:00:46 . Memory (MB): peak = 1105.250 ; gain = 785.375
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1105.250 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/synth_1/EEBench.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file EEBench_utilization_synth.rpt -pb EEBench_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Mar 25 13:19:26 2026...
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 26 12:24:49 2026...

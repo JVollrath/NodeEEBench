@@ -17,6 +17,8 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
+set_param chipscope.maxJobs 3
+set_param xicom.use_bs_reader 1
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -32,13 +34,16 @@ set_property ip_cache_permissions {read write} [current_project]
 read_vhdl -library xil_defaultlib {
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/ButtonD.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd
+  C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/XilinsSrc/Int_Pmod_DA2.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/new/One_port_ram.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/SevenSegDH.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/debouncer.vhd
+  C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/i2c_master.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/mod_m_counter.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/mul_com.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/phi_export.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/pipe_mul.vhd
+  C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/SS2026EI/pmod_adc_ad7991.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Sine_V02/sineX.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/DT/Tricount/Tricount.srcs/sources_1/imports/Tricount/tri_counter.vhd
   C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/UART/uart_mem.vhd

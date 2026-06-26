@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-| Date         : Wed Mar 25 13:20:10 2026
+| Date         : Fri Jun 26 12:25:38 2026
 | Host         : EL-NB-T219-JVO2 running 64-bit major release  (build 9200)
 | Command      : report_drc -file EEBench_drc_opted.rpt -pb EEBench_drc_opted.pb -rpx EEBench_drc_opted.rpx
 | Design       : EEBench
@@ -24,16 +24,17 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 205
-+-----------+----------+----------------------------+------------+
-| Rule      | Severity | Description                | Violations |
-+-----------+----------+----------------------------+------------+
-| CHECK-3   | Warning  | Report rule limit reached  | 1          |
-| DPIP-1    | Warning  | Input pipelining           | 80         |
-| DPOP-1    | Warning  | PREG Output pipelining     | 52         |
-| DPOP-2    | Warning  | MREG Output pipelining     | 52         |
-| REQP-1839 | Warning  | RAMB36 async control check | 20         |
-+-----------+----------+----------------------------+------------+
+             Violations found: 216
++-----------+----------+---------------------------------+------------+
+| Rule      | Severity | Description                     | Violations |
++-----------+----------+---------------------------------+------------+
+| CHECK-3   | Warning  | Report rule limit reached       | 1          |
+| DPIP-1    | Warning  | Input pipelining                | 80         |
+| DPOP-1    | Warning  | PREG Output pipelining          | 52         |
+| DPOP-2    | Warning  | MREG Output pipelining          | 52         |
+| REQP-1839 | Warning  | RAMB36 async control check      | 20         |
+| RPBF-3    | Warning  | IO port buffering is incomplete | 11         |
++-----------+----------+---------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
@@ -1060,6 +1061,61 @@ Related violations: <none>
 REQP-1839#20 Warning
 RAMB36 async control check  
 The RAMB36E1 myBuf/ram_reg_0_0 has an input control pin myBuf/ram_reg_0_0/ADDRARDADDR[9] (net: myBuf/ADDRARDADDR[9]) which is driven by a register (uart_unit/tx_active_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+RPBF-3#1 Warning
+IO port buffering is incomplete  
+Device port JA[0] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#2 Warning
+IO port buffering is incomplete  
+Device port JA[1] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#3 Warning
+IO port buffering is incomplete  
+Device port JA[4] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#4 Warning
+IO port buffering is incomplete  
+Device port JA[5] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#5 Warning
+IO port buffering is incomplete  
+Device port JA[6] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#6 Warning
+IO port buffering is incomplete  
+Device port JA[7] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#7 Warning
+IO port buffering is incomplete  
+Device port JC[2] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#8 Warning
+IO port buffering is incomplete  
+Device port JC[4] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#9 Warning
+IO port buffering is incomplete  
+Device port JC[5] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#10 Warning
+IO port buffering is incomplete  
+Device port JC[6] expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#11 Warning
+IO port buffering is incomplete  
+Device port JC[7] expects both input and output buffering but the buffers are incomplete.
 Related violations: <none>
 
 

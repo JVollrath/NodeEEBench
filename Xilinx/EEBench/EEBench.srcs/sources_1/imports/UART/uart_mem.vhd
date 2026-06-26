@@ -203,6 +203,10 @@ tx_busy <= tx_active;
                                                     -- Value 32k/4(Hex) 8k 16 bit values?
               rmAddress := to_unsigned(0,18);       -- Start at lut address 0
 			  rx_mem(7 downto 0) <= rx_data_out; 
+		   when "01010000" =>                     -- ASCII 53 P sine signal
+              numD := "0000000000100000";                 -- 32 Hex numbers, 4x V(4)I(4)
+              rmAddress := to_unsigned(304,18);    -- Start at index 304?? (16+4)
+			  rx_mem(7 downto 0) <= rx_data_out; 
 		   when "01010011" =>                     -- ASCII 53 S sine signal
               numD := "0000000000011000";                 -- 24 Hex numbers, (Step, amplitude, offset)x(8x4)
               rmAddress := to_unsigned(20,18);            -- Start at index 20 (16+4)

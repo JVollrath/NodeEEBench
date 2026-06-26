@@ -45,6 +45,8 @@
 #define DAC_C12          1
 #define DAC_Dx           2
 #define DAC_C3           3
+#define DAC_GND          A5
+
 
 #define DAC_PWM          7
 
@@ -187,11 +189,13 @@ void setup() {
   pinMode(DAC_C12, OUTPUT);
   pinMode(DAC_Dx, OUTPUT);
   pinMode(DAC_C3, OUTPUT);
+  pinMode(DAC_GND, OUTPUT);
 
  digitalWrite(DAC_INH, LOW); // INH low activates switches
  digitalWrite(DAC_C12, LOW); // CLK12 coonnects Dx with C3
  digitalWrite(DAC_Dx, LOW); // Data line low
  digitalWrite(DAC_C3, HIGH); // output disconnected from Voutx1
+ digitalWrite(DAC_GND, HIGH);
 
  // initialize serial communication at 115200
  Serial.begin(115200);
@@ -286,23 +290,27 @@ void digWrite(uint16_t sineValue){
 }
 */
 
-int activeS   =      60; // 1 tested Time switches are closed for charge redistribution 1 makes 30/2048 error at 10 pF 
-int nBits = 9;     // number of send bits
+int activeS   =  200; // 1 tested Time switches are closed for charge redistribution 1 makes 30/2048 error at 10 pF 
+int nBits = 5;     // number of send bits
 
 /* C serial digitalw rite */
 void digWrite(uint16_t sineValue){
 
-  digitalWrite(DAC_C12, LOW);
+  digitalWrite(DAC_GND, HIGH); // connect C1 to GND only if ay active
+  digitalWrite(DAC_C12, LOW);  // C1 control a connected to Din (HIGH) or C1/C3 (LOW) 
   digitalWrite(DAC_C3, HIGH);
-  digitalWrite(DAC_Dx, LOW);
+  digitalWrite(DAC_GND, LOW); // connect C1 to GND
   delayMicroseconds(activeS*5);
+  // digitalWrite(DAC_Dx, LOW);
+  // delayMicroseconds(activeS*5);
   // write zero
-  for (int i3 = 0; i3 < nBits; i3++) {
+  // for (int i3 = 0; i3 < nBits; i3++) {
         digitalWrite(DAC_C12, HIGH);    
         delayMicroseconds(activeS*5);   
         digitalWrite(DAC_C12, LOW);    
         delayMicroseconds(activeS*5);   
-  }   
+  // }  
+  digitalWrite(DAC_GND, HIGH); // disconnect C1 from GND 
     // shift nBits bits in  18ms??
   for (int i3 = 0; i3 < nBits; i3++) {
      if ((sineValue & bitsX[i3]) == bitsX[i3] ) {

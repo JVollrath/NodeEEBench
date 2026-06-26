@@ -1,0 +1,46 @@
+Vivado Simulator 2019.1
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2019.1/bin/unwrapped/win64.o/xelab.exe -wto 9f8b9f7a936d4439b2b9fafd7a1e63dd --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot tb_EEBench_behav xil_defaultlib.tb_EEBench -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package xil_defaultlib.txt_util
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_unsigned
+Compiling package ieee.math_real
+Compiling package unisim.vcomponents
+Compiling package ieee.std_logic_signed
+Compiling package ieee.vital_timing
+Compiling package ieee.vital_primitives
+Compiling package unisim.vpkg
+Compiling architecture behavioral of entity xil_defaultlib.One_port_ram [one_port_ram_default]
+Compiling architecture behavioral of entity xil_defaultlib.One_port_ram [\One_port_ram(addr_width=12)\]
+Compiling architecture behavioral of entity xil_defaultlib.SevenSegDH [sevensegdh_default]
+Compiling architecture behavioral of entity xil_defaultlib.debouncer [debouncer_default]
+Compiling architecture behavioral of entity xil_defaultlib.ButtonD [buttond_default]
+Compiling architecture xadc_v of entity unisim.XADC [\XADC(init_41="0010000110101111"...]
+Compiling architecture xilinx of entity xil_defaultlib.XADC_EE [xadc_ee_default]
+Compiling architecture logic of entity xil_defaultlib.i2c_master [\i2c_master(input_clk=100000000,...]
+Compiling architecture behavior of entity xil_defaultlib.pmod_adc_ad7991 [pmod_adc_ad7991_default]
+Compiling architecture arch of entity xil_defaultlib.mod_m_counter [\mod_m_counter(n=10,m=27)\]
+Compiling architecture arch of entity xil_defaultlib.uart_rx [uart_rx_default]
+Compiling architecture arch of entity xil_defaultlib.uart_tx [uart_tx_default]
+Compiling architecture arch of entity xil_defaultlib.uart_mem [uart_mem_default]
+Compiling architecture behavioral of entity xil_defaultlib.Int_Pmod_DA2 [int_pmod_da2_default]
+Compiling architecture logic of entity xil_defaultlib.i2c_master [\i2c_master(input_clk=100000000)...]
+Compiling architecture arch of entity xil_defaultlib.tri_counter [tri_counter_default]
+Compiling architecture behavioral of entity xil_defaultlib.phi_export [phi_export_default]
+Compiling architecture behavioral of entity xil_defaultlib.pipe_mul [pipe_mul_default]
+Compiling architecture behavioral of entity xil_defaultlib.mul_com [mul_com_default]
+Compiling architecture behavioral of entity xil_defaultlib.sineX [sinex_default]
+Compiling architecture behavioral of entity xil_defaultlib.CLK_DIV [clk_div_default]
+Compiling architecture behavioral of entity xil_defaultlib.EEBench [eebench_default]
+Compiling architecture behavioral of entity xil_defaultlib.tb_eebench
+Built simulation snapshot tb_EEBench_behav

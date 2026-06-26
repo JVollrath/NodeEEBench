@@ -94,10 +94,147 @@ April, 2024<br>
 <br>
 <h2> Overview</h2><br>
 
+<img src="ImagesS/System_V04.png" width="600"><br>
+Figure 1: Overview of the system<br>
+<br>
+The system provides an oscilloscope, arbitrary waveform generator (AWG), 
+power supply and digital IOs with a browser interface on different 
+hardware platforms using JavaScript and NodeJS.<br>
+It is low cost, open source and runs with minimum installation
+in a browser. It supports simulation, different hardware platforms and configurations.<br>
+Figure 1 shows on the left the PC or laptop running a nodeJS server and
+having a browser interface for operation. A tablet or mobile device
+could also connect to a raspberry Pi running the nodejs server providing
+the web interface.<br>
+The nodeJS server communicates via a serial interface to a BASYS3 FPGA or
+Arduino based system. These provide the hardware resources for the 
+oscilloscope, function (arbitrary waveform) generator, power supply and digital IOs.<br>
+Attaching data converter modules (PMOD) via I2C or SPI interface is
+supported. 
+It is possible to configure performance and cost of the whole system.<br> 
+Other Arduino compatible boards can be used, if the used pins are adjusted accordingly.<br> 
+<br>
+<table>
+<tr><td>Tabs</td><td>Websocket</td><td>Server</td><td>COM over USB</td><td>Hardware</td><td>Pins</td></tr>
+<tr><td>Projekte/NodeEEBench.html</td><td></td><td>ServerEEBench.js</td><td></td>
+    <td rowspan="3">Arduino: Arduino/EEBench.ino<br>
+	Program:<br>
+	void loop() {	  <br>
+       if (Serial.available() > 0) { // process received serial data<br>
+    if (myData[0] == 'P') {  // power set DAC MCP4728<br>
+          mcp.setChannelValue(MCP4728_CHANNEL_A, valP);<br>
+	}<br>
+    awgX = .. // sine data generation<br>
+    awgY = .. // triangle data generation<br>
+    awgZ = .. // written data<br>
+	}<br>
+	void sendData() { // send all buffer values in Hex<br>
+    void readAnalogX(){ // read Analog OSC values<br>
+    void writeDAC(uint16_t sineValue){ // 0..32k 15 bit to 12 bit PMOD DA2<br>
+    int readADC(void){ // Read PMOD AD2 via I2C<br>
+    void digWrite(uint16_t sineValue){ // write 8-bit digital outputs<br>
+	<br>
+    </td><td rowspan="3">Arduino:<br>
+	AWG Pin DAC0/A0<br>
+    OSC1 A1, OSC2 A2, OSC3 A3, OSC4 A4<br>
+	8 digital outpus DAC_Dx Pins 0..7<br>
+	SPI: SCL 12, SDA 11 (PMOD AD2 OSC4)<br>
+	I2C: CS A6, SCK, MOSI (PMOD DA2, AWG, MCP4728 Power)<br>
+	</td></tr>
+<tr><td>Configuration<br><img src="ImagesS/NEEBenchUserInterface.jpg" width="100"></td>
+    <td rowspan="5">Client web interface (Projekte/NEEBench.html):<br><br>
+	     socket.emit('cmd', { value: cmd });<br>
+	     socket.on('device', function (data) {..}<br>
+		 socket.on('newData', function (data) {..}<br>
+		 <br>
+		 Server (ServerEEBench.js):<br>
+		 <br>
+		 socket.on('cmd', function(data){..})<br>
+		 socket.emit('newData',{value: dataBufX});<br>
+         socket.emit('device',{value: devMan});<br>
+         socket.on('disconnect', function(data){..});<br>
+	    </td><td rowspan="4">
+		Simulator:<br> 
+		<br>
+		function simX(cmdName){..}<br>
+		- function genSine(){..}<br>
+        - function genTri(){..}<br>
+		<br>
+		Web server with web socket:<br>
+		<br>
+	    app.get('/', function(req,res){..}<br>
+		<br>	
+        io.on('connection', function(socket){..}<br>
+        <br>
+		http.listen(3000, function(err){..}<br>
+		<br>
+		<img src="ImagesS/cmdWindow.jpg" width="150">
+		</td><td rowspan="5">Commands:<br>
+		"X"	(length = 1) initialize<br>
+        "S" (length = 25) sine signal, followed by<br>
+		&nbsp; &nbsp; &nbsp; 24-hex numbers: step, amplitude,<br>
+		&nbsp; &nbsp; &nbsp; offset each 32 bit<br>
+		"T" 	(length = 21) triangle signal, followed by 
+		20-hex numbers: start, stop, step (16-bit each), repeat (32 bit)<br>
+		"U" 	(length = 1) start sending data<br>
+		"V"	Connect switches to output.<br>
+		"O" 	(length = 9) Oscilloscope block size 16 bit and sampling rate 16 Bit (V_06)<br>
+		"P" (length = 32)	command sets power supplies MCP4728<br>
+        "R" (length = 128k) command transfers 8k data 16 bit hex data to lookup table<br>
+        "Q"	command activates the lookup table<br>	
+        <br>
+        Communication can be monitored at the server console<br>		
+		
+		</td><td></td></tr>
+<tr><td>AWG<br><img src="ImagesS/AWGTab.jpg" width="100"></td><td></td><td></td><td></td></tr>
+<tr><td>Oscilloscope<br><img src="ImagesS/Oscilloscope_UI_V05.jpg" width="100"></td>
+    <td rowspan="2">BASYS3: Xilinx/EEBench with top EEBench.vhd <br>
+	mywave(15..0) has the AWG data (sine/triangle)<br>
+	mysine(30..15) has the sine data<br>
+	tout(15..0) has the triangle/step/clock data<br>
+	mywaveX(15..0) has mywave or dout0(mywave modified with lookup)<br>
+	<br>
+    storeMem: process(CLK, BTN(4), readyX, upSample) -- XADC data into tMem <br>
+    PmodAD2: pmod_adc_ad7991<br>
+   uart_unit: uart_mem -- receive and transmit data<br>
+   Int_Pmod_DA2_unit:  Int_Pmod_DA2<br>
+   i2c_tran: process(CLK)  -- MCP4728 data transfer SPI<br>
+   tri_unit: tri_counter -- Triangle and pulse<br>
+   sine_unit: sineX                 -- Sine generator<br>
+	</td><td rowspan="2">BASYS3 Pins:<br>
+	JB(7..0) digital outputs<br>
+	JC(3..0) MCP4728<br>
+	JC(7..4) PMOD DA2<br>
+	JA(3..2) SDA, SCL PMOD AD2<br>
+	JAX(7..0) XADC Oscilloscope<br>
+	</td></tr>
+<tr><td>FFT<br><img src="ImagesS/FFT_Tab.png" width="100"></td>
+    <td></td><td></td><td></td></tr>
+</table>
+Figure 2: Interfaces and functions<br>
+<br>
+Figure 2 shows the software components and the interfaces of the system.<br>
+Due to the limitations of the FPGA command processing simple text strings 
+starting with a character and having hexadecimal numbers are used for communication
+(interfaces). The available text strings are listed at the configuration tab of
+the web interface and can be observed in the nodejs server window for debugging.<br>
+<br>
+The html file includes some JavaScript helper libraries, has html sections for the tabs 
+and then JavaScript code for the tabs and for communication.<br>
+<br>
+<table  cellspacing="0" cellpadding="1" border="2" bordercolor="#FF0000">
+<tr><td>Attention:<br> 
+        The serial interface is used for programming (IDE) 
+        and communication (nodeJS). Only one process can be active!</td></tr>
+</table>
+Disable the nodeJS server while programming.<br>
+Disable the Vivado programming server before starting nodejs server.<br>
+
+
 <h3>Documentation</h3>
+<a href="Platform.html" class="blue">Platform (This file)</a><br>
 <a href="../Projekte/NEEBench.html" class="blue">HTML File NEEBench.html</a><br>
 <a href="Installation.html" class="blue">Installation</a><br>
-<a href="Platform.html" class="blue">Platform</a><br>
 <a href="INLDNLMeasurement.html" class="blue">INLDNLMeasurement</a><br>
 <a href="Github.html" class="blue">Github</a><br>
 <a href="DigitalIO.html" class="blue">DigitalIO</a><br>
@@ -105,6 +242,7 @@ April, 2024<br>
 <a href="BASYS3_Ramp.html" class="blue">BASYS3 Ramp</a><br>
 <a href="BASYS3_Lookup.html" class="blue">BASYS3 Lookup</a><br>
 <a href="AWGOSCFFTTiming.html" class="blue">AWG OSC FFT Timing</a><br>
+<a href="https://personalpages.hs-kempten.de/~vollratj/Microelectronics/Vollrath_Micro.html" class="blue">Research Summary</a><br>
 
 <h3>To Do List</h3>
 

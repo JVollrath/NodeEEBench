@@ -109,6 +109,7 @@ March, 2024<br>
 
 <h2> Hardware Installation BASYS3</h3><br>
 
+<h3>R2R Version</h3>
 The follwing picture shows the BASYS3 board using 4 XADC channels with a 16-bit R2R DAC.<br> 
 For debugging purpose an oscilloscope and waveform generator can be connected.<br>
 A 16 Bit R2R DAC is built on the breadboard to supply an analog test signal for the XADC channels.<br>
@@ -164,6 +165,13 @@ Then the board is ready for use.<br>
 8, 256, 512, 1k, 2k, 4k samples transfered via UART with Baud rate 230400<br>
 <br>
 The FPGA configuration is done using the VHDL files in subdirectory Xilinx/EEBench<bR>
+<br>
+<h3>PMOD DA2, PMOD AD2, MCP4278 I2C, SPI Support (26.06.2026)</h3>
+<br>
+(ongoing)PMOD AD2 with I2C is attached to: JA3 SCL, JA4 SDA, GND, VDD, 1kOhm resistors are used as pullup.<br>
+(working)PMOD DA2 with SPI is attached to: JC5..8.<br>
+(ongoing)MCP4728 with I2C is attached to: JC1..4 1kOhm rsistors as pullup are required.<br> 
+There are only 8 outputs left for the DAC upper bits.<br>
 <br>
 <h3>Software</h3><br>
 <br>

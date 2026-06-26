@@ -1610,12 +1610,15 @@ var divUnitLabel = isCurrentMath ? "A/div" : "V/div";
         // --- M1 Math extras (R + equation preview) ---
 if (baseId == 'M1') {
   objTxt += '<tr><td>R (Ohm):</td><td><input type="text" value="1000" size="6" id="m1RVal"></td><td></td></tr>';
-  objTxt += '<tr><td>Eq:</td><td colspan="2"><input type="text" value="(C1 - C2) / R" size="18" id="m1EqVal" readonly></td></tr>';
+  objTxt += '<tr><td>Eq1:</td><td colspan="2"><input type="text" value="(C1 - C2) / R" size="18" id="m1EqVal" readonly></td></tr>';
 }
 // --- M2 Math extras (R2 + equation preview) ---
 if (baseId == 'M2') {
   objTxt += '<tr><td>R2 (Ohm):</td><td><input type="text" value="1000" size="6" id="m2RVal"></td><td></td></tr>';
-  objTxt += '<tr><td>Eq:</td><td colspan="2"><input type="text" value="(C3 - C4) / R2" size="18" id="m2EqVal" readonly></td></tr>';
+  objTxt += '<tr><td>Eq2:</td><td colspan="2"><select id="m2EqVal">'
+           + '<option value="1">(C3 - C4) / R2</option>'
+           + '<option value="1">log(abs((C3 - C4)) / R2)</option>'
+		   + '</select></td></tr>';
 }
 
 		objTxt += '  </table>';
@@ -1799,22 +1802,25 @@ function updateMathM1() {
         var c4 = dataOSC2[j + 5 * dataMax2]; // C4 voltage
         var vR2 = c3 - c4;                    // voltage across resistor R2
 
-        if (R2 === 0) {
-          // Mathematically: nonzero voltage / 0 = infinity
-          if (vR2 > 0) {
-            dataOSC2[j + 7 * dataMax2] = Infinity;
-          } else if (vR2 < 0) {
-            dataOSC2[j + 7 * dataMax2] = -Infinity;
+          if (R2 === 0) {
+            // Mathematically: nonzero voltage / 0 = infinity
+            if (vR2 > 0) {
+              dataOSC2[j + 7 * dataMax2] = Infinity;
+            } else if (vR2 < 0) {
+              dataOSC2[j + 7 * dataMax2] = -Infinity;
+            } else {
+              // 0 / 0 is undefined, not infinity
+              dataOSC2[j + 7 * dataMax2] = NaN;
+            }
           } else {
-            // 0 / 0 is undefined, not infinity
-            dataOSC2[j + 7 * dataMax2] = NaN;
+            // Correct physical current in Ampere
+            dataOSC2[j + 7 * dataMax2] = vR2 / R2;
+            if (document.getElementById("m2EqVal").value == 2 ) {
+               dataOSC2[j +  7 * dataMax2] = Math.log10(math.abs(vR2 / R2));
+            } 
           }
-        } else {
-          // Correct physical current in Ampere
-          dataOSC2[j + 7 * dataMax2] = vR2 / R2;
-        }
 
-        // Code-like value for code table
+		  // Code-like value for code table
         if (isFinite(dataOSC2[j + 7 * dataMax2])) {
           dataOSC3[j + 7 * dataMax2] = Math.round(dataOSC2[j + 7 * dataMax2] * 1000);
         } else {

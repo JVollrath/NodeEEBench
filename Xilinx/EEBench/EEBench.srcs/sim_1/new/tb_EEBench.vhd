@@ -50,9 +50,9 @@ COMPONENT EEBench
            TX    		: out  STD_LOGIC;                      -- UART TX
            LED 			: out  STD_LOGIC_VECTOR (15 downto 0); -- 16 LEDs next to switches 
            JXA 			: in   STD_LOGIC_VECTOR (7 downto 0);  -- Analog Diff Inputs
-           JA 			: out  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD lower 8bit DAC
+           JA 			: inout  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD lower 8bit DAC
            JB 			: out  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD lower 8bit DAC
-           JC 			: out  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD upper 8bit DAC
+           JC 			: inout  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD upper 8bit DAC
            SSEG_CA 		: out  STD_LOGIC_VECTOR (7 downto 0);  -- 7 segment + dp
            SSEG_AN 		: out  STD_LOGIC_VECTOR (3 downto 0)   -- 4 digits 
 			  );

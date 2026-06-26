@@ -1,0 +1,36 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Mon Jun 22 15:43:00 2026
+# Process ID: 20356
+# Current directory: C:/temp/NodeEEBench/Xilinx/EEBench
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent12184 C:\temp\NodeEEBench\Xilinx\EEBench\EEBench.xpr
+# Log file: C:/temp/NodeEEBench/Xilinx/EEBench/vivado.log
+# Journal file: C:/temp/NodeEEBench/Xilinx/EEBench\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.xpr
+update_compile_order -fileset sources_1
+import_files -norecurse {C:/Xilinx/SS2026EI/i2c_master.vhd C:/Xilinx/SS2026EI/pmod_adc_ad7991.vhd}
+update_compile_order -fileset sources_1
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+import_files -fileset sim_1 -norecurse C:/Xilinx/SS2026EI/tb_i2c.vhd
+update_compile_order -fileset sim_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 7
+wait_on_run impl_1
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/impl_1/EEBench.bit} [get_hw_devices xc7a35t_0]
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+create_hw_cfgmem -hw_device [get_hw_devices xc7a35t_0] -mem_dev [lindex [get_cfgmem_parts {mx25l3233f-spi-x1_x2_x4}] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.runs/impl_1/EEBench.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
