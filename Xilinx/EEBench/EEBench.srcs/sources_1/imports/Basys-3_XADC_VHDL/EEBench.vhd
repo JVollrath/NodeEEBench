@@ -32,15 +32,15 @@ entity EEBench is
            CLK			: in  STD_LOGIC;
            vn_in		: in  STD_LOGIC;
            vp_in		: in  STD_LOGIC;
-           RX		    : in  STD_LOGIC;                       -- UART RX
-           TX    		: out  STD_LOGIC;                      -- UART TX
-           LED 			: out  STD_LOGIC_VECTOR (15 downto 0); -- 16 LEDs next to switches 
-           JXA 			: in   STD_LOGIC_VECTOR (7 downto 0);  -- Analog Diff Inputs
+           RX		    : in  STD_LOGIC;                         -- UART RX
+           TX    		: out  STD_LOGIC;                        -- UART TX
+           LED 			: out  STD_LOGIC_VECTOR (15 downto 0);   -- 16 LEDs next to switches 
+           JXA 			: in   STD_LOGIC_VECTOR (7 downto 0);    -- Analog Diff Inputs
            JA 			: inout  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD AD2
-           JB 			: out  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD upper 8bit DAC
+           JB 			: out  STD_LOGIC_VECTOR (7 downto 0);    -- PMOD upper 8bit DAC
            JC 			: inout  STD_LOGIC_VECTOR (7 downto 0);  -- PMOD DA2, MCP4728 DAC
-           SSEG_CA 		: out  STD_LOGIC_VECTOR (7 downto 0);  -- 7 segment + dp
-           SSEG_AN 		: out  STD_LOGIC_VECTOR (3 downto 0)   -- 4 digits 
+           SSEG_CA 		: out  STD_LOGIC_VECTOR (7 downto 0);    -- 7 segment + dp
+           SSEG_AN 		: out  STD_LOGIC_VECTOR (3 downto 0)     -- 4 digits 
 			  );
 end EEBench;
 
@@ -341,8 +341,8 @@ signal timeBase: STD_LOGIC_VECTOR(15 downto 0);   -- sampling frequency 1 maximu
 signal upSample: STD_LOGIC := '1';                       -- if valid save data at address
 
 -- PMOD JC connection 
-signal  RDY: STD_LOGIC; -- MCP4728 RDY 
-signal  LDAC: STD_LOGIC; -- MCP4728 RDY 
+signal  RDY: STD_LOGIC :='Z'; -- MCP4728 RDY 
+signal  LDAC: STD_LOGIC :='0'; -- MCP4728 RDY 
 signal  SDA_0: STD_LOGIC; -- MCP4728 RDY 
 signal  SCL_0: STD_LOGIC; -- MCP4728 RDY 
 
@@ -381,9 +381,9 @@ myBuf: One_port_ram
 
 -- address multiplexer write read
 with tx_busy select
-	addr <= addrUart   when '1',      -- uart addr for tx
+	addr <= addrUart when '1',      -- uart addr for tx
 		    addrGen  when '0',        -- generator address
-		    addrGen when others;      -- switches
+		    addrGen  when others;      -- switches
 
 ----------------------------------------------------------
 ------      LUT  memory                    -------
@@ -519,7 +519,8 @@ with source select
 	            "0011111"	when "100",  -- Hex1f
 			    "0010110" when others;
 
-JA <=	din(15 downto 12) & SCL_1 & SDA_1 & daddr_in(3) & daddr_in(0); 			 
+--JA <=	din(15 downto 12) & SDA_1 & SCL_1 & daddr_in(3) & daddr_in(0); 			 
+JA <=	din(15 downto 12) & SDA_1 & SCL_1 & EN_32 & EN_64; 			 
 -- PMOD AD2 SCL_1 SDA_1
 -- JA(2) <= SCL_1;
 -- JA(3) <= SDA_1;
@@ -746,7 +747,7 @@ i2c_unit: i2c_master
       sda => SDA_0,
       scl => SCL_0
    );
-   process(CLK)
+i2c_tickP: process(CLK)
    begin
       if rising_edge(CLK) then 
          if i2c_cnt = 99999 then
@@ -760,18 +761,22 @@ i2c_unit: i2c_master
  
  -- Fast write "00" & Pd1 & Pd0 & D11..D0
    -- single write (5)& channel(2) & udac '0' update imediately 
- -- mcp_A <= rMem(307 downto 304)&rMem(311 downto 308)
- --          &rMem(315 downto 312)&rMem(319 downto 316);
- mcp_A <= "0000" & mywave(15 downto 4);
- -- mcp_B <= rMem(339 downto 336)&rMem(343 downto 340)
- --          &rMem(347 downto 344)&rMem(351 downto 348);
- mcp_B <= "00000" & mywave(15 downto 5);  -- test 
- -- mcp_C <= rMem(371 downto 368)&rMem(375 downto 372)
- --          &rMem(379 downto 376)&rMem(383 downto 380);
- mcp_C <= "000000" & mywave(15 downto 6);
- -- mcp_D <= rMem(403 downto 400)&rMem(407 downto 404)
- --          &rMem(411 downto 408)&rMem(415 downto 412);
- mcp_D <= "0000000" & mywave(15 downto 7);
+ mcp_A <= rMem(307 downto 304)&rMem(311 downto 308)
+           &rMem(315 downto 312)&rMem(319 downto 316);
+ -- mcp_A <= "0000" & mywave(15 downto 4);
+ -- mcp_A <= "0000" & "0001" & "0110" & "1100";
+  mcp_B <= rMem(339 downto 336)&rMem(343 downto 340)
+           &rMem(347 downto 344)&rMem(351 downto 348);
+ --mcp_B <= "00000" & mywave(15 downto 5);  -- test 
+ -- mcp_B <= "0000" & "0010" & "1100" & "1001";
+  mcp_C <= rMem(371 downto 368)&rMem(375 downto 372)
+           &rMem(379 downto 376)&rMem(383 downto 380);
+ --mcp_C <= "000000" & mywave(15 downto 6);
+ -- mcp_C <= "0000" & "0010" & "0100" & "1011";
+  mcp_D <= rMem(403 downto 400)&rMem(407 downto 404)
+           &rMem(411 downto 408)&rMem(415 downto 412);
+ --mcp_D <= "0000000" & mywave(15 downto 7);
+ -- mcp_D <= "0000" & "0010" & "0111" & "1011";
    
 i2c_tran: process(CLK)  -- MCP4728 data transfer SPI
     begin
@@ -785,65 +790,65 @@ i2c_tran: process(CLK)  -- MCP4728 data transfer SPI
                 when send_byte2 => 
                    ena_sig <= '1';    -- continous data
                    if busy_sig = '1' then
-                      i2c_state <= wait_byte2;
+                     i2c_state <= wait_byte2;
+                     data_wr_sig <= mcp_A(7 downto 0);
                    end if;
                 when wait_byte2 => --  get byte 3
                   if busy_sig = '0' then
-                     data_wr_sig <= mcp_A(7 downto 0);
                      i2c_state <= send_byte3;
                    end if;   
                 when send_byte3 =>
                    if busy_sig = '1' then
                       i2c_state <= wait_byte3;
+                      data_wr_sig <= mcp_B(15 downto 8);
                    end if;
                 when wait_byte3 => --  chan b
                    if busy_sig = '0' then
-                     data_wr_sig <= mcp_B(15 downto 8);
                      i2c_state <= send_byte4; -- send byte 4
                    end if;
                 when send_byte4 =>
                    if busy_sig = '1' then
                       i2c_state <= wait_byte4;
+                     data_wr_sig <= mcp_B(7 downto 0);
                    end if;
                 when wait_byte4 => 
                    if busy_sig = '0' then
-                     data_wr_sig <= mcp_B(7 downto 0);
                      i2c_state <= send_byte5; 
                    end if;
                 when send_byte5 =>
                    if busy_sig = '1' then
                       i2c_state <= wait_byte5;
+                     data_wr_sig <= mcp_C(15 downto 8);
                    end if;
                 when wait_byte5 => 
                    if busy_sig = '0' then
-                     data_wr_sig <= mcp_C(15 downto 8);
                      i2c_state <= send_byte6; 
                    end if;
                 when send_byte6 =>
                    if busy_sig = '1' then
                       i2c_state <= wait_byte6;
+                     data_wr_sig <= mcp_C(7 downto 0);
                    end if;
                 when wait_byte6 => 
                    if busy_sig = '0' then
-                     data_wr_sig <= mcp_C(7 downto 0);
                      i2c_state <= send_byte7; 
                    end if;
                 when send_byte7 =>
                    if busy_sig = '1' then
                       i2c_state <= wait_byte7;
+                     data_wr_sig <= mcp_D(15 downto 8);
                    end if;
                 when wait_byte7 => -- chan D
                    if busy_sig = '0' then
-                     data_wr_sig <= mcp_D(15 downto 8);
                      i2c_state <= send_byte8; 
                    end if;
                 when send_byte8 =>
                    if busy_sig = '1' then
                       i2c_state <= wait_byte8;
+                     data_wr_sig <= mcp_D(7 downto 0);
                    end if;
                 when wait_byte8 => -- 
                    if busy_sig = '0' then
-                     data_wr_sig <= mcp_D(7 downto 0);
                      i2c_state <= send_byte9; 
                    end if;
                 when send_byte9 =>

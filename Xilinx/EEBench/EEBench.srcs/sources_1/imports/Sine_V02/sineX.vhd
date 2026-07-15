@@ -244,7 +244,7 @@ PORT Map(
     C => scale_multi
 );
 
-process(clk,RST)
+process(clk,scale_multi,scale_trunc,offset,RST)
 
 -- variable scale_multi : signed(31 downto 0);
 -- variable scale_trunc : signed(31 downto 0);

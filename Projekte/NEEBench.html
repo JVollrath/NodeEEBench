@@ -3463,7 +3463,7 @@ function rOp(cmd) {  // activate ramp test
 function mapPower(id) {
   var valX = unitToValue(document.getElementById(id).value);
   // Map range from -5..5 to 0.. 3.3V to 12-Bit 4096
-  return decToHex(Math.round((valX + 5)*4096/10),4);
+  return decToHex(Math.round((valX + 5)*4095/10),4); // 0V...10 V -> 0..4095 
 }
 
 function setPower() {

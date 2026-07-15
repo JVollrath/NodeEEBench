@@ -1,0 +1,252 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
+| Date         : Tue Jul  7 12:42:56 2026
+| Host         : EL-NB-T219-JVO2 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file EEBenchCA7_control_sets_placed.rpt
+| Design       : EEBenchCA7
+| Device       : xc7a35t
+---------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |   174 |
+|    Minimum number of control sets                        |   174 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   984 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |   174 |
+| >= 0 to < 4        |   127 |
+| >= 4 to < 6        |     8 |
+| >= 6 to < 8        |     5 |
+| >= 8 to < 10       |     8 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     1 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    24 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             268 |           85 |
+| No           | No                    | Yes                    |             376 |          163 |
+| No           | Yes                   | No                     |             491 |          159 |
+| Yes          | No                    | No                     |             258 |           80 |
+| Yes          | No                    | Yes                    |             759 |          335 |
+| Yes          | Yes                   | No                     |              32 |            8 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-------------------------------------+-------------------------------------------------------+------------------------------------------+------------------+----------------+
+|             Clock Signal            |                     Enable Signal                     |             Set/Reset Signal             | Slice Load Count | Bel Load Count |
++-------------------------------------+-------------------------------------------------------+------------------------------------------+------------------+----------------+
+|  my_dut/uart_unit/rx_mem_reg[14]_16 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_17       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_46 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_47       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_52 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_53       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_34 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_35       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_54 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_55       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_56 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_57       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_12 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_13       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_60 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_61       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_44 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_45       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_50 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_51       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_22 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_23       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_30 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_31       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_2  |                                                       | my_dut/uart_unit/rx_mem_reg[14]_3        |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_42 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_43       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_48 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_49       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_32 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_33       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_10 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_11       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_4  |                                                       | my_dut/uart_unit/rx_mem_reg[14]_5        |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_58 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_59       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_6  |                                                       | my_dut/uart_unit/rx_mem_reg[14]_7        |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_62 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_63       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_18 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_19       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_14 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_15       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_20 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_21       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_24 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_25       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_36 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_37       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_38 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_39       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_40 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_41       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_26 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_27       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_0  |                                                       | my_dut/uart_unit/rx_mem_reg[14]_1        |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_28 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_29       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_70 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_71       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_80 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_81       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_72 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_73       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_8  |                                                       | my_dut/uart_unit/rx_mem_reg[14]_9        |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_68 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_69       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_82 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_83       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_74 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_75       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_64 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_65       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_66 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_67       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_78 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_79       |                1 |              1 |
+|  my_dut/uart_unit/rx_mem_reg[14]_76 |                                                       | my_dut/uart_unit/rx_mem_reg[14]_77       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_53       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_63       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_36       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_38       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_3        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_21       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_33       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_17       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_1        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_5        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_19       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_27       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_11       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_13       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_31       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_29       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_23       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_25       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_15       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_9        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/rx_mem_reg[14]_7        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_40       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_70       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_69       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_22       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_81       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_80       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_72       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_71       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_67       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_68       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_73       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_65       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_82       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_74       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_79       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_64       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_83       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_66       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_78       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_75       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_77       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_76       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_16       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_12       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_46       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_30       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_2        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_32       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_10       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_4        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_6        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_18       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_14       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_20       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_24       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_26       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_28       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/rx_mem_reg[14]_8        |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/reset                   |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_47       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_49       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_52       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_34       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_54       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_56       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_57       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_39       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_37       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_41       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_55       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_60       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_43       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_44       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_50       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_59       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_61       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_42       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_35       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_48       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_45       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_51       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_58       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/val                                  | my_dut/uart_unit/rx_mem_reg[14]_62       |                1 |              1 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/flag0                                 | my_dut/uart_unit/rx_mem_reg[14]_0        |                1 |              2 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/busy_cnt_reg[0][1]        |                                          |                2 |              4 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/busy_reg_1[0]             |                                          |                1 |              4 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/E[1]                      |                                          |                1 |              4 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/tri_unit/r_reg0                                | my_dut/uart_unit/reset                   |                3 |              4 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_tx_unit/s_next                  | RGB0_Blue_OBUF                           |                2 |              4 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/busy_prev                              |                                          |                1 |              4 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_rx_unit/s_next                  | RGB0_Blue_OBUF                           |                2 |              4 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_tx_unit/tx_enable_reg[0]        | RGB0_Blue_OBUF                           |                2 |              5 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/busy_reg_0[1]             |                                          |                4 |              6 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/i2c_unit/busy1                                 |                                          |                2 |              7 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/Int_Pmod_DA2_unit/cnt[7]_i_1_n_0  |                3 |              7 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_tx_unit/b_next                  | RGB0_Blue_OBUF                           |                3 |              7 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/busy1                     |                                          |                3 |              7 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/E[0]                      |                                          |                1 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/busy_cnt_reg[0][0]        |                                          |                1 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/busy_reg_0[0]             |                                          |                1 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/i2c_unit/addr_rw0                              |                                          |                3 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/i2c_unit/FSM_onehot_i2c_state_reg[1][0]        |                                          |                2 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_rx_unit/b_next                  | RGB0_Blue_OBUF                           |                3 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/FSM_onehot_state_reg[1]_0 |                                          |                1 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/i2c_master_0/data_rd[7]_i_1_n_0        |                                          |                1 |              8 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/sine_unit/phi1/StepIm[30]_i_1_n_0 |                5 |             10 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_rx_unit/E[0]                    | RGB0_Blue_OBUF                           |                7 |             12 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_tx_unit/tx_enable_reg_0[0]      | RGB0_Blue_OBUF                           |                3 |             16 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_tx_unit/tx_active_reg[0]        | RGB0_Blue_OBUF                           |                4 |             16 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/iCnt0                                | RGB0_Blue_OBUF                           |                4 |             16 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/i2c_tick_i_1_n_0                  |                5 |             17 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/jCnt0                                          | RGB0_Blue_OBUF                           |                5 |             17 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/i2c_unit/E[0]                                  |                                          |                3 |             18 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_tx_unit/E[0]                    | RGB0_Blue_OBUF                           |                6 |             18 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/tx_active_reg_0[0]                   | RGB0_Blue_OBUF                           |               12 |             20 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/Int_Pmod_DA2_unit/reg2                         |                                          |                8 |             24 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/Int_Pmod_DA2_unit/E[0]                         |                                          |                8 |             24 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/counter                                |                                          |                6 |             24 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_rx_unit/s_reg_reg[3]_1[0]       |                                          |               11 |             28 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/uart_rx_unit/s_reg_reg[3]_2[0]       | RGB0_Blue_OBUF                           |               11 |             32 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/uart_unit/E[0]                                 | RGB0_Blue_OBUF                           |               21 |             32 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/my_adc/drdy_out                                | RGB0_Blue_OBUF                           |                8 |             32 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sCnt0                                          | my_dut/uart_unit/tx_active_reg_1         |                8 |             32 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/sel                                  | my_dut/uart_unit/reset                   |                9 |             41 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/PmodAD2/FSM_onehot_state_reg_n_0_[2]           |                                          |               20 |             48 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/curr_Re                              | my_dut/uart_unit/reset                   |               43 |            127 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/step_Re                              | my_dut/uart_unit/reset                   |               57 |            128 |
+|  clk_wiz_0_0/inst/clk_out1          | my_dut/sine_unit/currB_Re                             | my_dut/uart_unit/reset                   |               62 |            151 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       |                                          |               85 |            268 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | RGB0_Blue_OBUF                           |              135 |            320 |
+|  clk_wiz_0_0/inst/clk_out1          |                                                       | my_dut/uart_unit/reset                   |              115 |            454 |
++-------------------------------------+-------------------------------------------------------+------------------------------------------+------------------+----------------+
+
+

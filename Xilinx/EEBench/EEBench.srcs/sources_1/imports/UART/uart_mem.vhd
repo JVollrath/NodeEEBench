@@ -204,8 +204,8 @@ tx_busy <= tx_active;
               rmAddress := to_unsigned(0,18);       -- Start at lut address 0
 			  rx_mem(7 downto 0) <= rx_data_out; 
 		   when "01010000" =>                     -- ASCII 53 P sine signal
-              numD := "0000000000100000";                 -- 32 Hex numbers, 4x V(4)I(4)
-              rmAddress := to_unsigned(304,18);    -- Start at index 304?? (16+4)
+              numD := "0000000000100000";          -- 32 Hex numbers, 4x V(4)I(4)
+              rmAddress := to_unsigned(308,18);    -- Start at index 304?? (16+4) 308
 			  rx_mem(7 downto 0) <= rx_data_out; 
 		   when "01010011" =>                     -- ASCII 53 S sine signal
               numD := "0000000000011000";                 -- 24 Hex numbers, (Step, amplitude, offset)x(8x4)
@@ -269,7 +269,7 @@ tx_busy <= tx_active;
 dataMaxU <= unsigned(dataMax);   -- Block size adjustment
 
   -- FSMD state from memory to tx
-   process(clk,reset, tx_enable)
+   process(clk,reset, dtx, tx_enable)
    variable numTStartNr: unsigned(15 downto 0):= x"0015";          -- What initial value is correct? Fix sequence UYX ? 8.12.2022
    variable numT: unsigned(15 downto 0):= x"0015";          -- What initial value is correct? Fix sequence UYX ? 8.12.2022
    variable numB: unsigned(15 downto 0):= (others => '0');  -- X

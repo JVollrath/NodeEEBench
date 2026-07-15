@@ -44,7 +44,7 @@ begin
    r_regml <= signed(start&'0') - r_regm;  -- multiply start with 2
    
    -- register
-   process(clk,reset, start,stop)
+   process(clk,reset, en, start,stop)
    begin
       if (reset='1') then
          r_reg <= signed("0000"&start);

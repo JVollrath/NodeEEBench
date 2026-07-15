@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log EEBench.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source EEBench.tcl
+EAStep vivado -log EEBenchCA7.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source EEBenchCA7.tcl

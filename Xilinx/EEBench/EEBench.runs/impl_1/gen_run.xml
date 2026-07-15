@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1782469437">
-  <File Type="BITSTR-BMM" Name="EEBench_bd.bmm"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="EEBench_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="EEBench_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR" Name="EEBench_power_routed.rpt"/>
-  <File Type="PA-TCL" Name="EEBench.tcl"/>
-  <File Type="OPT-TIMING" Name="EEBench_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="EEBench_opt.dcp"/>
-  <File Type="ROUTE-PWR-SUM" Name="EEBench_power_summary_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="EEBench_reports.tcl"/>
-  <File Type="OPT-DRC" Name="EEBench_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="EEBench.hwdef"/>
-  <File Type="PWROPT-DCP" Name="EEBench_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="EEBench_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="EEBench_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="EEBench_placed.dcp"/>
-  <File Type="PLACE-IO" Name="EEBench_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="EEBench_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="EEBench_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="EEBench_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="EEBench_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="EEBench_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="EEBench_incremental_reuse_pre_placed.rpt"/>
-  <File Type="BG-BGN" Name="EEBench.bgn"/>
-  <File Type="PLACE-TIMING" Name="EEBench_timing_summary_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="EEBench_postplace_pwropt.dcp"/>
-  <File Type="BG-BIN" Name="EEBench.bin"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="EEBench_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="EEBench_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="EEBench_drc_physopted.rpt"/>
-  <File Type="BITSTR-MSK" Name="EEBench.msk"/>
-  <File Type="PHYSOPT-TIMING" Name="EEBench_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="EEBench_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="EEBench_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="EEBench_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="EEBench_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="EEBench_drc_routed.pb"/>
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1783420697">
+  <File Type="BITSTR-BMM" Name="EEBenchCA7_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="EEBenchCA7_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="EEBenchCA7_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="EEBenchCA7_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="EEBenchCA7.tcl"/>
+  <File Type="OPT-TIMING" Name="EEBenchCA7_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="EEBenchCA7_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="EEBenchCA7_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="EEBenchCA7_reports.tcl"/>
+  <File Type="OPT-DRC" Name="EEBenchCA7_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="EEBenchCA7.hwdef"/>
+  <File Type="PWROPT-DCP" Name="EEBenchCA7_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="EEBenchCA7_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="EEBenchCA7_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="EEBenchCA7_placed.dcp"/>
+  <File Type="PLACE-IO" Name="EEBenchCA7_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="EEBenchCA7_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="EEBenchCA7_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="EEBenchCA7_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="EEBenchCA7_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="EEBenchCA7_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="EEBenchCA7_incremental_reuse_pre_placed.rpt"/>
+  <File Type="BG-BGN" Name="EEBenchCA7.bgn"/>
+  <File Type="PLACE-TIMING" Name="EEBenchCA7_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="EEBenchCA7_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="EEBenchCA7.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="EEBenchCA7_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="EEBenchCA7_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="EEBenchCA7_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="EEBenchCA7.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="EEBenchCA7_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="EEBenchCA7_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="EEBenchCA7_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="EEBenchCA7_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="EEBenchCA7_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="EEBenchCA7_drc_routed.pb"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="EEBench.ltx"/>
-  <File Type="ROUTE-DRC-RPX" Name="EEBench_drc_routed.rpx"/>
-  <File Type="BITSTR-MMI" Name="EEBench.mmi"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="EEBench_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="EEBench_methodology_drc_routed.rpx"/>
-  <File Type="BITSTR-SYSDEF" Name="EEBench.sysdef"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="EEBench_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="EEBench_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="EEBench_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="EEBench_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="EEBench_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="EEBench_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="EEBench_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="EEBench_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="EEBench_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="EEBench_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="EEBench_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="EEBench_bus_skew_routed.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="EEBench_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="EEBench_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="EEBench_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="EEBench_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="EEBench_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="EEBench_bus_skew_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="EEBench_bus_skew_postroute_physopted.pb"/>
-  <File Type="BG-BIT" Name="EEBench.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="EEBench_bus_skew_postroute_physopted.rpx"/>
-  <File Type="BITSTR-RBT" Name="EEBench.rbt"/>
-  <File Type="BITSTR-NKY" Name="EEBench.nky"/>
-  <File Type="BG-DRC" Name="EEBench.drc"/>
-  <File Type="RDI-RDI" Name="EEBench.vdi"/>
+  <File Type="BITSTR-LTX" Name="EEBenchCA7.ltx"/>
+  <File Type="ROUTE-DRC-RPX" Name="EEBenchCA7_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="EEBenchCA7.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="EEBenchCA7_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="EEBenchCA7_methodology_drc_routed.rpx"/>
+  <File Type="BITSTR-SYSDEF" Name="EEBenchCA7.sysdef"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="EEBenchCA7_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="EEBenchCA7_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="EEBenchCA7_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="EEBenchCA7_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="EEBenchCA7_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="EEBenchCA7_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="EEBenchCA7_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="EEBenchCA7_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="EEBenchCA7_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="EEBenchCA7_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="EEBenchCA7_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="EEBenchCA7_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="EEBenchCA7_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="EEBenchCA7_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="EEBenchCA7_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="EEBenchCA7_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="EEBenchCA7_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="EEBenchCA7_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="EEBenchCA7_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="EEBenchCA7.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="EEBenchCA7_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="EEBenchCA7.rbt"/>
+  <File Type="BITSTR-NKY" Name="EEBenchCA7.nky"/>
+  <File Type="BG-DRC" Name="EEBenchCA7.drc"/>
+  <File Type="RDI-RDI" Name="EEBenchCA7.vdi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
@@ -83,6 +83,14 @@
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../../DT/Sine_Gen/Sine_Gen.srcs/sources_1/imports/Sine_V00/CLK_DIV.vhd"/>
         <Attr Name="ImportTime" Val="1544564284"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../DT/Basys-3_XADC_VHDL/EEBench.vhd"/>
+        <Attr Name="ImportTime" Val="1664964615"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
@@ -205,10 +213,8 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd">
+    <File Path="$PSRCDIR/sources_1/new/EEBenchCA7.vhd">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../../DT/Basys-3_XADC_VHDL/EEBench.vhd"/>
-        <Attr Name="ImportTime" Val="1664964615"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
@@ -242,15 +248,15 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="EEBench"/>
+      <Option Name="TopModule" Val="EEBenchCA7"/>
     </Config>
   </FileSet>
-  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/CMOD A7">
     <Filter Type="Constrs"/>
-    <File Path="$PSRCDIR/constrs_1/imports/V03/Basys3_Master.xdc">
+    <File Path="$PSRCDIR/constrs_1/imports/2026_07/CmodA7_Master.xdc">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../../DT/V03/Basys3_Master.xdc"/>
-        <Attr Name="ImportTime" Val="1664866580"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../EEBench_Old/2026_07/CmodA7_Master.xdc"/>
+        <Attr Name="ImportTime" Val="1782887422"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
       </FileInfo>
@@ -280,4 +286,5 @@
     </Step>
   </Strategy>
   <BlockFileSet Type="BlockSrcs" Name="XADC_EE"/>
+  <BlockFileSet Type="BlockSrcs" Name="clk_wiz_0"/>
 </GenRun>

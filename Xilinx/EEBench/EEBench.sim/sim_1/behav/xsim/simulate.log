@@ -6,5 +6,5 @@ Warning: *** Warning: The analog data file for XADC was not found. Use the SIM_M
 Time: 0 ps  Iteration: 0  Process: /tb_EEBench/my_dut/my_adc/U0/READFILE_P  File: /wrk/2019.1/continuous/2019_05_24_2552052/data/vhdl/src/unisims/primitive/XADC.vhd
 Warning: *** Warning: The analog data file for XADC was not found. Use the SIM_MONITOR_FILE generic to specify the input analog data file name or use default name: design.txt. 
 Time: 0 ps  Iteration: 0  Process: /tb_EEBench/my_dut/my_adc/U0/READFILE_P  File: /wrk/2019.1/continuous/2019_05_24_2552052/data/vhdl/src/unisims/primitive/XADC.vhd
-Stopped at time : 0 fs : File "C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd" Line 508
-Stopped at time : 50 ns : File "C:/temp/NodeEEBench/Xilinx/EEBench/EEBench.srcs/sources_1/imports/Basys-3_XADC_VHDL/EEBench.vhd" Line 508
+Warning: *** Warning: The analog data file for XADC was not found. Use the SIM_MONITOR_FILE generic to specify the input analog data file name or use default name: design.txt. 
+Time: 0 ps  Iteration: 0  Process: /tb_EEBench/my_dut/my_adc/U0/READFILE_P  File: /wrk/2019.1/continuous/2019_05_24_2552052/data/vhdl/src/unisims/primitive/XADC.vhd

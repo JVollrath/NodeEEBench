@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="description" content="A description of EEBench an open source, open access low cost
+   oscilloscope and arbitrary waveform generator based on FPGA BASYS3 and nodejs JavaScript" />
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<title> CMOD A7 NodeEEBench </title>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+ <style>
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+div.scrollX {
+  width: 400px;
+  height: 200px;
+  overflow: scroll;
+}
+th.norm {
+    background-color: #CCCCCC;
+    color: black;
+} 
+table.norm, th.norm, td.norm {
+   border-collapse: collapse;
+   border: 1px solid black;
+}
+th.clr {
+} 
+</style> 
+
+<!-- Prettify Google -->
+<link href="../google-code-prettify/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../google-code-prettify/src/prettify.js"></script>
+<script type="text/javascript" src="../google-code-prettify/src/lang-vhdl.js"></script>
+<!-- Chart -->
+<SCRIPT SRC="../Chart_2013_03_11/Chart_basic.js"></SCRIPT>
+<!-- JQuery -->
+<script type="text/javascript" src="../scripts/jquery.js"></script>
+<!-- LTSPICE -->
+<SCRIPT SRC="../SPICE_HTML_2018_02/LTSPICE.js"></SCRIPT>
+<!-- QR Code -->
+<script src="../QRCode/jsqr-1.0.2.js" type="text/javascript"></script>
+<!-- Usage Logging -->
+<SCRIPT SRC="../scripts/ToggleLog.js"></SCRIPT>
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}
+  });
+</script>
+<script type="text/javascript" src="../MathJax/MathJax.js"></script>
+
+</head>
+<body>
+<!--
+  BEGIN: Content of extension "ts_mit", plugin "tx_tsmit_pi1"
+ -->
+  <div id="headx">
+  <div id="nheader1" style="background-color:#0067a5;color:#FFFFFF" align="right" >
+     <a href="https://www.hochschule-kempten.de" style="color:#FFFFFF"> Hochschule Kempten &nbsp; &nbsp; &nbsp; </a>
+  </div>
+  <div id="nheader2" style="background-color:#05adb5;color:#FFFFFF" align="right" >
+     <a href="https://www.hs-kempten.de/fakultaet-elektrotechnik/" style="color:#FFFFFF">
+	 Fakultät Elektrotechnik &nbsp; &nbsp; &nbsp;
+  </div>
+  <div id="nheader3" style="background-color:#f18700;color:#FFFFFF" align="right">
+     <a href="https://www.hs-kempten.de/elektrotechnik/fakultaet/personen-detailansicht/joerg-vollrath?tx_hisconnect_personenlisting%5Bbacklink%5D=607&cHash=effe2c6873f6c8a9f79b55b636d3bde2" style="background-color:#f18700;color:#FFFFFF"> 
+	 Fachgebiet Elektronik, Prof. Vollrath &nbsp; &nbsp; &nbsp;</a>
+  </div>
+  </div>
+<br>
+<div> 
+<table>
+<tr><td style="width:70%">
+  <h1>NodeEEBench with Digilent CMOD A7 FPGA board</h1>
+
+Jörg Vollrath, University of Applied Science Kempten, Germany, Joerg.vollrath@hs-kempten.de<br>
+July, 2026<br>
+<br>
+<hr>
+<br>
+<!--------------------------------- ------------------------------>
+<h2> Overview</h2><br>
+
+<h3>Hardware</h3>
+<br>
+CMOD A7, PMOD AD2, PMOD DA2, R2R PMOD, MCP4728 DAC, MCP6022<br>
+<h3>Software</h3>
+<br>
+Configuration, AWG, Oscilloscope, Power supply<br>
+<h3>Operation</h3>
+<h3>Summary</h3>
+<h3>To Do List</h3>
+<br>
+Further Documentation: <a href="Installation.html" class="blue">Installation and Overview</a>
+<hr>
+<br>
+
+</td><td style="width:30%">  
+<canvas id="thisQR"></canvas></td>
+</tr>
+</table>
+
+<!--------------------------------- ------------------------------>
+<h2> Hardware Installation CMOD A7</h3><br>
+
+The CMOD A7 FPGA board provides 2 analog inputs with 845 Ohm input resistance 
+and 0..3.3V voltage range. These are not used due to their low input resistance.<br>
+The current configuration uses 4 analog inputs with 0..1V input range.<br>
+The PMOD can be used as digital output providing 8-Bit AWG values.
+These can be used for an R2R DAC converter.<br>
+Logic and control is provided for a PMOD AD2 (OSC), PMOD DA2 (AWG, Triangle) 
+and MCP4728 DAC (Power supply interface).<br>
+<br>
+<img src="ImagesS/CMODA7EEBench.jpg" width="400"><br>
+<img src="ImagesS/CMODA7EEBench_01.jpg" width="400"><br>
+Figure: CMOD A7 FPGA Board with PMOD AD2, DA2 and MCP4728 <br>
+<br>
+Additional circuitry can adjust the input and output range 
+<a href="InterfacePower.html" class="blue">( Interface and Power Documentation)</a>.<br>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>Connections</h3>
+<br>
+<table border="1">
+<tr><td>EEBench</td><td>BASYS3<br>EEBench.vhd</td><td>CMOD A7</td>
+    <td>XC7A35T-1CPG236C<br>Artix-7</td><td>CMOD A7</td>
+	<td>PMOD JB</td> 
+	<td>CMOD A7</td><td>XC7A35T-1CPG236C<br>Artix-7</td>
+	<td>CMOD A7</td><td>BASYS3<br>EEBench.vhd</td><td>EEBench</td></tr>
+<tr><td>OSC2 GND</td><td>ain_n[2]</td><td>ain_n2</td>
+    <td>M3</td><td>1</td>
+	<td rowspan="23"><img src="ImagesS/CMODA7.jpg" width="120"></td>
+	<td>48</td><td>V8</td>
+	<td>RDY MCP4728</td><td>JC(0)</td><td>Power</td></tr>
+<tr><td>OSC2 IN</td><td>ain_p[2]</td><td>ain_p2</td>
+    <td>L3</td><td>2</td>
+	<td>47</td><td>U8</td>
+	<td>LDAC MCP4728</td><td>JC(1)</td><td>Power</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>A16</td><td>3</td>
+	<td>46</td><td>W7 (1k Pullup)</td>
+	<td>SDA_0 MCP4728</td><td>JC(2)</td><td>Power</td></tr>
+<tr><td>OSC1 GND</td><td>ain_n[1]</td><td>ain_n1</td>
+    <td>K3</td><td>4</td>
+	<td>45</td><td>U7 (1k Pullup)</td>
+	<td>SCL_0 MCP4728</td><td>JC(3)</td><td>Power</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>C15</td><td>5</td>
+	<td>44</td><td>U3</td>
+	<td>CS_1 PMOD DA2</td><td>JC(4)</td><td>AWG2 Triangle</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>H1</td><td>6</td>
+	<td>43</td><td>W6</td>
+	<td>D1 PMOD DA2</td><td>JC(5)</td><td>AWG2 Triangle</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>A15</td><td>7</td>
+	<td>42</td><td>U2</td>
+	<td>D2 PMOD DA2</td><td>JC(6)</td><td>AWG2 Triangle</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>B15</td><td>8</td>
+	<td>41</td><td>U5</td>
+	<td>CLK_1 PMOD DA2</td><td>JC(7)</td><td>AWG2 Triangle</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>A14</td><td>9</td>
+	<td>40</td><td>W4 (1k Pullup)</td>
+	<td>SDA_1 PMOD AD2</td><td>JA(3)</td><td>OSC SW(0)='1'</td></tr>
+<tr><td>OSC1 IN</td><td>ain_p[1]</td><td>ain_p1</td>
+    <td>J3</td><td>10</td>
+	<td>39</td><td>V5 (1k Pullup)</td>
+	<td>SCL_1 PMOD Ad2</td><td>JA(2)</td><td>OSC SW(0)='1'</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>J1</td><td>11</td>
+	<td>38</td><td>U4</td>
+	<td>SW_0</td><td>SW[0]</td><td>SW(0)='1' PMOD AD2</td></tr>
+<tr><td></td><td></td><td></td>
+    <td>K2</td><td>12</td>
+	<td>37</td><td>V4</td>
+	<td>JA{3]</td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td>
+    <td>L1</td><td>13</td>
+	<td>36</td><td>W5</td>
+	<td>JA{2]</td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td>
+    <td>L2</td><td>14</td>
+	<td>35</td><td>V3</td>
+	<td>JA{1]</td><td></td><td></td></tr>
+<tr><td>Analog</td><td></td><td></td>
+    <td>G2/G3</td><td>15</td>
+	<td>34</td><td>W3</td>
+	<td>JA{0]</td><td></td><td></td></tr>
+<tr><td>Analog</td><td></td><td></td>
+    <td>J2/H2</td><td>16</td>
+	<td>33</td><td>V2</td>
+	<td></td><td></td><td></td></tr>
+<tr><td>OSC3 GND</td><td>ain_n[3]</td><td>ain_n3</td>
+    <td>M1</td><td>17</td>
+	<td>32</td><td>W2</td>
+	<td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td>
+    <td>N3</td><td>18</td>
+	<td>31</td><td>U1</td>
+	<td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td>
+    <td>P3</td><td>19</td>
+	<td>30</td><td>T2</td>
+	<td></td><td></td><td></td></tr>
+<tr><td>OSC3 GND</td><td>ain_p[3]</td><td>ain_p3</td>
+    <td>M2</td><td>20</td>
+	<td>29</td><td>T1</td>
+	<td></td><td></td><td></td></tr>
+<tr><td>OSC4 GND</td><td>ain_n[4]</td><td>ain_n4</td>
+    <td>N1</td><td>21</td>
+	<td>28</td><td>R2</td>
+	<td></td><td></td><td></td></tr>
+<tr><td>OSC4 IN</td><td>ain_p[4]</td><td>ain_p4</td>
+    <td>N2</td><td>22</td>
+	<td>27</td><td>T3</td>
+	<td>TX UART</td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td>
+    <td>P1</td><td>23</td>
+	<td>26</td><td>R3</td>
+	<td>RX UART</td><td></td><td></td></tr>
+<tr><td>VU</td><td></td><td></td>
+    <td></td><td>24</td>
+	<td>Micro USB</td>
+	<td>25</td><td></td>
+	<td></td><td></td><td>GND</td></tr>	
+</table>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>Connectivity list</h3><br>
+Pin 25 - GND, Pin 38 VDD (PMOD AD2), top-bottom VDD, top-bottom GND, 
+center bridge top GND, center bridge top VDD, center bridge bottom GND, center bridge bottom VDD<br>
+XADC:<br>
+Pin 1 GND, Pin 2 C2 in, Pin 4 GND, Pin 10 C1 in, 
+Pin 17 GND, Pin 20 C3, Pin 21 GND, Pin 22 C4 in<br>
+PMOD AD2 (Jumper Vref):<br>
+Pin 39 SCL, R=1kOhm SCL VDD, Pin 40 SDA, R=1kOhm SDA VDD, PMOD AD2 GND GND, PMOD AD2 VDD VDD<br>
+PMOD DA2:<br>
+Pin 41 CLK - PIN 4 PMOD, Pin 42 - PIN 3 DINB PMOD, Pin 43 - Pin 2 DINA PMOD, 
+Pin 44 - Pin 1  ~SYNC PMOD, GND - GND Pin 5 PMOD, VDD - VDD Pin 6 PMOD<br>
+MCP4728 4 chan DA:<br>
+VDD - VDD, GND - GND, Pin 45 - SCL, Pin 46 - SDA, LDAC - GND<br>
+Power supply:<br> 
+Pin 24 VDD<br>
+<br>
+<br>
+A low voltage rail-to-rail Operational amplifier like the MCP6022 can be used as a buffer amplifier.<br>
+MCP6022: f<sub>bw</sub> = 10 MHz, VDD = 2.5 .. 5.5 V<br> 
+<br>
+<img src="ImagesS/MCP6022Buffer.png" width="400"><br>
+Figure: MCP6022 Output buffer wiring  <br>
+<br>
+After connecting all parts and connecting the BASYS3/CMOD A7 via USB to a Windows PC a bit file can
+be loaded each time the board is powered via Vivado or a bin file can program 
+the onboard Flash memory. Vivado 2019.1 is used in this project.<br>
+The Xilinx project, .bit and .bin files are in the subdirectory Xilinx.<br>
+Then the board is ready for use.<br>
+<br>
+
+<!--------------------------------- ------------------------------>
+<h3>Hardware Features</h3>
+<br>
+4 channel, 12-Bit, 125 kSps, 0..1 V range ADC oscilloscope FPGA (XADC)<br>
+4 channel, 12-Bit, xx kSps, 0..3.3 V range ADC oscilloscope PMOD AD2<br>
+2 channel (AWG, Triangle), 12-Bit, xx kSps, 0..3.3 V range PMOD DA2 <br>
+4 channel (Power control output), 12-Bit, xx kSps, 0..3.3 V range MCP4728<br>
+8, 256, 512, 1k, 2k, 4k samples transfered via UART with Baud rate 230400<br>
+<br>
+<h3>Vivado FPGA configuration</h3>
+<br>
+The FPGA configuration is done using the VHDL files in subdirectory Xilinx/EEBench<bR>
+The main file for the CMOD A7 is "Xilinx\EEBench\EEBench.srcs\sources_1\new\EEBenchCA7.vhd"
+and for the BASYS3 FPGA "EEBench.vhd" (Select top module).<br>
+The "EEBenchCA7.vhd" is only a wrapper mapping the BASYS3 pins to the CMOD A7 module pins and
+synthesizing a 100 MHz internal clock from the 12.5 MHz clock of the CMOD A7.<br> 
+The constraints file: "Xilinx\EEBench\EEBench.srcs\constrs_1\imports\2026_07\CmodA7_Master.xdc" 
+has to be active for the CMOD A7 (Right click make active)!<br>
+The constraints file: "Xilinx/EEBench/EEBench.srcs/BASYS3/imports/2026_07/Basys3_Master.xdc" 
+has to be active for the BASYS3 (Right click make active)!<br>
+A list of the source files before CMOD A7 modification is shown below.
+<br>
+<img src="ImagesS/Sources_01.jpg" width="300"><br>
+Figure: EEBench design sources  <br>
+<br>
+<h3>PMOD DA2, PMOD AD2, MCP4278 I2C, SPI Support (26.06.2026)</h3>
+<br>
+CMOD A7, BASYS3:<br>
+(working)PMOD AD2 with I2C is attached to BASYS3: JA3 SCL, JA4 SDA, GND, VDD, 1kOhm resistors are used as pullup.<br>
+(working)PMOD DA2 with SPI is attached to BASYS3: JC5..8.<br>
+(working)MCP4728 with I2C is attached to BASYS3: JC1..4 1kOhm rsistors as pullup are required.<br> 
+There are only 8 outputs left for the DAC upper bits BASYS3: JB PMOD.<br>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>PMOD AD2</h3>
+<br>
+The PMOD AD2 utilizes the <a href="https://www.analog.com/en/products/ad7991.html" class="blue"> 
+Analog Devices AD7991</a> 4 channel, 12 bit, 
+1us conversion time (14 MHz bandwidth) and 1.7/3.4 MHz I2C interface device.<br>
+1 kOhm pull up resistors are connected between SCL, SDA and VDD to generate the 
+high level of the traces. The Figure shows SDA (C1 yellow) and SCL (C2 blue).<br>
+<br>
+<img src="ImagesS/PMOD_AD2_SCL_SDA.jpg" width="500" height="400"><br>
+Figure: Measurement of PMOD AD2 communication<br>
+<br>
+The clock runs at f = 1 MHz, T = 1 us ("pmod_adc_ad7991.vhd" instance 'i2c_master_0' bus_clk). 
+A full acquisition needs approximately T<sub>update</sub> =  80 us and a
+sampling frequency of f<sub>sample</sub> = 12.5 kHz.<br>
+Due to the vhdl code of data acquisition the data memory is filled 
+every T<sub>sample</sub> = 8/(1 MHz) = 8.32 us (?!).<br> 
+The <a href="https://forum.digikey.com/t/adc-ad7991-pmod-controller-vhdl/12895" class="blue">
+   pmod_adc_ad7991.vhd</a> module uses the i2c_master.vhd file for realization of
+data acquisition according to a DigiKey TechForum notice.<br>
+In the file "EEBench.vhd" in the process 'storeMem:' an if-statement with switch (0):<br> 
+<pre>
+           if (SW(0) = '0')then
+             -- XADC data transfer to memory
+           else
+             -- PMOD AD2 data transfer adc_ch&lt;i&gt;_data to memory
+           end if;
+</pre>
+controls the data acquisition. <br>
+For longer sample times the data acquisition time is changed with the "O" command
+automatically by the client side Javascript in the Projekt.html file.<br>
+The instance 'PmodAD2:' realizes the state machine to fill adc_ch&lt;i&gt;_data registers.<br>
+For the CMOD A7 sw(0) at pin 38 is connected to gnd or vdd.<br>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>PMOD DA2</h3>
+<br>
+The PMOD DA2 uses a TI DAC121S101 12-Bit DA converter with 8 us settling time.
+With a serial interface with clock rates up to 30 MHz.<br>
+<br>
+<img src="ImagesS/PMOD_DA2_C1_C2.jpg" width="500" height="300"><br>
+Figure: PMOD DA2 output voltage<br>
+<br>
+The <a href="https://github.com/amc18/VHDL-TestingTool/blob/master/Int_Pmod_DA2.vhd" class="blue">
+int_PMOD_DA2.vhd</a> module realizes the communication to the PMOD.<br> 
+The CLK runs at 12.5MHz and gives a Ts = 18 / (12.5 MHz) = 1.44 us update rate delivering 
+a frequency of fs =1/Ts = 690 kHz.<br>
+The waveforms show a visible 5us time until the voltage level is changed.<br> 
+<br>
+<!--------------------------------- ------------------------------>
+<h3>MCP4278 I2C</h3>
+<br>
+The <a href="https://ww1.microchip.com/downloads/en/devicedoc/22187e.pdf" class="blue">
+MCP4728</a> is a 12-Bit DAC with I2C (100 kbps, 400 kbps, 1.7 Mbps and 
+3.4 Mbps) interface and t<sub>settling</sub> = 6 us settling time. 
+Delivering a maximum current of 25 mA at the outputs.<br> 
+There are 2 pins SCL (C2 blue), SDA (C1 yellow) figure, which have to be 
+pulled up to VDD with a 1 kOhm resistance for the FPGA connection.<br>
+<img src="ImagesS/MCP4728_I2C_DAC.jpg" width="500" height="400"><br>
+Figure: I2C communication of a fast write<br>
+<br>
+Every 1 ms a new voltage setting for all 4 channels is sent via a fast write.<br>
+The detailed simulation of the fast write is shown in the next figure:<br>
+<br> 
+<img src="ImagesS/I2C_MCP4728_FASTWRITE.jpg" width="500" height="400"><br>
+Figure: Simulation of I2C communication of a fast write<br>
+<br>
+The simulation is based on the "tb_EEBench.vhd" file using the i2c_unit instance of 
+the "i2c_master.vhd" and a 'i2c_tran:' process in "EEBench.vhd" to transfer 
+the 9 bytes via i2c interface.<br>
+The I2C adress is followed by 4 times 2 bytes per channel. 
+SCL is running at f1=400 kHz (400 kbps), t1 = 2.5 us giving 9 bits 
+times 2.5us = 22.5 us per Byte and T<sub>total</sub> = 9 * 22.5 us = 212.5 us in total.<br>
+The 'i2c_tickP:' CLK process in "EEBench.vhd" initiates every 1 ms the data transfer.<br>
+Monitoring the SCL and SDA pins at the FPGA can help debugging and determining
+the real clock frequency of the FPGA.<br>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>Pmod R2R DAC</h3>
+<br>
+A PMOD R2R DAC can be attached to the CMOD A7 PMOD connector to convert 
+the digital outputs from the AWG to an analog voltage.<br>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>Software</h3><br>
+<br>
+A nodeJS server providing the user interface and serial communication is realized in 
+the top directory of this project with the following files:<br>
+<br>
+A batch file to start the node server: NodeEEBench.bat<br>
+<br>
+A nodeJS server application for communication with FPGA board and providing a user interface: ServerEEBench.js<br> 
+<br>
+The HTML user interface: Projekte/NEEBench.html<br>
+<br>
+Some modules are needed for this project:<br>
+<br>
+Chart_2013_03_11/Chart_basic.js for plotting the graphs in consistent colors<br>
+css/style.css for formatting the HTML page<br>
+FFT/dspFFT.js FFT functions<br>
+node_modules: socket.io, fs, path, express, serialport, http<br>
+<br>
+This provides a user interface in the browser at http:\\localhost:3000 with the following tabs.<br>
+<br>
+<img src="ImagesS/NEEBenchUserInterface.jpg" width="300" height="200">
+<img src="ImagesS/WaveHTML.png" width="300" height="200"><br>
+Figure: Configuration and signal generator user interface <br>
+<br>
+<img src="ImagesS/Oscilloscope_UI_V05.jpg" width="300" height="200">
+<img src="ImagesS/PowerSupply.jpg" width="300"  height="200"><br>
+Figure: Oscilloscope and Power Supply<br>
+<br>
+Software features:<br>
+Configuration is done with individual serial command transfer.<br>
+AWG: DC, stair, triangle and sine generator with frequency, amplitude and offset<br>
+OSC: 4 channel and AWG with 8..4096 sample selection, xy display,
+voltage and code selection, rising, falling single channel trigger,
+minimum, maximum, average, amplitude, period and frequency calculation.<br>
+There is voltage sample data and code data display available. A measured signal 
+can be directly compared to the golden AWG signal in voltage or code.<br> 
+FFT: AWG1, OSC1, OSC2, OSc3, OSC4 with highest magnitude frequencies and
+total noise magnitude for ENOB, SINAD, SFDR, SDR calculation.<br>
+Histogram with adjustable (16..256) number of bins.<br> 
+<br>
+
+<!--------------------------------- ------------------------------>
+<h3>Operation</h3>
+<br>
+Start: NodeEEBench.bat<br>
+Open localhost:3000 in the browser<br>
+Change to AWG1 tab and start AWG with "Run"<br>
+Watch the commands in the nodeJS command window and at the configuration tab.<br>
+Change to OSC tab and start acquisition with "Run"<br>
+A sine signal should be displayed.<br>
+Play around: Change number of samples, x-axis, unit, Trigger: source, condition and level,
+change Position, base, Offset and Range<br>
+Change to Power Supply tab and change the power settings.<br>
+ 
+<br>
+<!--------------------------------- ------------------------------>
+<h3>Summary</h3>
+<br>
+This system with an arbitrary waveform generator and an oscilloscope
+ with FFT and histogram is very low cost using a CMOD A7 system for 100.- Euro (2026),
+PMOD AD2 (20.-), PMOD DA2 (20.-), MCP4728 (10.-), R2R PMOD (5.-) and 
+open source with a nice user interface. <br>
+It is possible to show provided AWG and sampled OSC codes
+and compare them.<br>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>Changes</h3>
+<br>
+<ul>
+<li>First Version July 2027</li>
+</li>
+</ul>
+<br>
+<!--------------------------------- ------------------------------>
+<h3>To Do</h3>
+<br>
+<ul>
+<li>Implement Raspberry Pi and Raspberry Pi Zero WIFI version</li>
+</ul>
+<br>
+ <br><hr>
+ <div id="footer" style="background-color:#0067a5;color:#FFFFFF">
+<br>
+ &nbsp; Hochschule f&uuml;r angewandte Wissenschaften Kempten, J&ouml;rg Vollrath, Bahnhofstra&szlig;e 61 &middot; 87435 Kempten<br>
+ &nbsp; Tel. 0831/25 23-0 &middot; Fax 0831/25 23-104 &middot; E-Mail: joerg.vollrath(at)hs-kempten.de <br>
+ <a href="http://www.hochschule-kempten.de/metanavigation/impressum.html"> 
+  <div style="background-color:#0067a5;color:#FFFFFF"> Impressum </div> </a>
+ </div>
+       <script type="text/javascript"> 
+<!-- Begin
+
+
+	function myQR() {
+			var qr = new JSQR();							// Initialize a new JSQR object.
+			var code = new qr.Code();						// Initialize a new Code object.
+
+			code.encodeMode = code.ENCODE_MODE.BYTE;			// Set the code datatype.
+			code.version = code.DEFAULT;						// Set the code version
+														// (DEFAULT = use the smallest possible version).
+			code.errorCorrection = code.ERROR_CORRECTION.H;		// Set the error correction level (H = High).
+
+			var input = new qr.Input();						// Initialize a new Input object.
+			input.dataType = input.DATA_TYPE.TEXT;			 	// Specify the data type of 'data'.
+														// Here, 'data' contains only text.
+			var stX = window.location.pathname;					// Specify the data which should be encoded.
+            
+			// alert(stX);
+			if (stX.substr(0,3) == "/D:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(27,stX.length-27);
+			} else 	if (stX.substr(0,3) == "/C:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(52,stX.length-52);
+			} else{
+			   stX = "https://personalpages.hs-kempten.de"+stX;
+			}
+			// alert(stX);
+			input.data = stX
+			
+			var matrix = new qr.Matrix(input, code);			// Initialize a new Matrix object using the input
+														// and code, defined above.
+														// At this point, the QR Code get generated.
+
+			matrix.scale = 4;								// Specify the scaling for graphic output.
+			matrix.margin = 2;								// Specify the margin for graphic output.
+
+			var canvas = document.getElementById('thisQR');		// Create a new Canvas element.
+			canvas.setAttribute('width', matrix.pixelWidth);		// Set the canvas width to the size of the QR code.
+			canvas.setAttribute('height', matrix.pixelWidth);		// Set the canvas height to the size of the QR code.
+			canvas.getContext('2d').fillStyle = 'rgb(0,0,0)';		// Set the foreground color of the canvas to black.
+			matrix.draw(canvas, 0, 0);						// Draw the QR code into the canvas
+														// at position 0 (left), 0 (top).
+		};
+        myQR();
+		updateServerLog("EEBench","EEBench_Main");
+        document.addEventListener("load", prettyPrint());
+     document.addEventListener("load", findLT());
+
+ //  End -->
+	  </script>
+ </body>
+</html>
