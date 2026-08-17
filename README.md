@@ -17,6 +17,7 @@ Start: NodeEEBench.bat
 Open the Browser: http:\localhost:3000
 
 Play with waveform generator and oscilloscope.
+Video available at (https://www.youtube.com/watch?v=g1ZIYMuBYgM) and (https://www.youtube.com/watch?v=ipW4nA9dgC4)
 
 # Status
 
