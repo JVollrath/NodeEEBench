@@ -40,6 +40,7 @@
  var SerialPort = require('serialport').SerialPort;
  var serialPort;	
  var devMan ="Simulation";
+ // devMan = "Raspberry Pi Zero 2 W";
  // port.path manufacturer, pnpId locationId, friendlyName, vendorId, productId	
     SerialPort.list().then(
  //    console.log	   
@@ -118,7 +119,7 @@ function decToHex(x) {
 
  var awg1Type = "S";    // Current Waveform1 type S (sine),T (rest)
  var blockSize = 512;
- var dacTimeBase = 1E-6;      // DAC time base 
+ var dacTimeBase = 1E-8;      // DAC time base changed from 1E-6  RasPi 100us sampling 
  var absTimeBase = 1E-6;     // Absolute ADC time base 
  var ratio = Math.round(absTimeBase/dacTimeBase); // 
  var currTimeBase = 1E-6;    // Current time base modified with averaging O cmd

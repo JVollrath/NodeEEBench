@@ -113,7 +113,7 @@ td.top {vertical-align: top;}
 
 <!---------------------- Configuration ------------------------------------------->
 <div id="tab0" class="tabX" style="display:block">
-  <h2> Configuration (Version: NodeEEBenchV20260511.zip)</h2>
+  <h2> Configuration (Version: NodeEEBenchV20260817)</h2>
   <br>
   <table>
   <tr>
@@ -385,6 +385,8 @@ Number of periods per 64k? samples instead of frequency<br>
    <!--   <option value="1" > 1</option> <option value="2"> 2</option>
       <option value="4" > 4</option> <option value="8"> 8</option> -->
       <option value="16" > 8 of 16</option>
+      <option value="32" > 16 of 32</option>
+      <option value="64" > 32 of 64</option>
 	  <option selected value="512"> 256 of 512</option>
       <option value="1024" > 512 of 1024</option> 
 	  <option value="2048"> 1024 of 2048</option>
@@ -1617,7 +1619,7 @@ if (baseId == 'M2') {
   objTxt += '<tr><td>R2 (Ohm):</td><td><input type="text" value="1000" size="6" id="m2RVal"></td><td></td></tr>';
   objTxt += '<tr><td>Eq2:</td><td colspan="2"><select id="m2EqVal">'
            + '<option value="1">(C3 - C4) / R2</option>'
-           + '<option value="1">log(abs((C3 - C4)) / R2)</option>'
+           + '<option value="2">log(abs((C3 - C4)) / R2)</option>'
 		   + '</select></td></tr>';
 }
 
@@ -1815,8 +1817,8 @@ function updateMathM1() {
           } else {
             // Correct physical current in Ampere
             dataOSC2[j + 7 * dataMax2] = vR2 / R2;
-            if (document.getElementById("m2EqVal").value == 2 ) {
-               dataOSC2[j +  7 * dataMax2] = Math.log10(math.abs(vR2 / R2));
+			if (document.getElementById("m2EqVal").value == 2 ) {
+               dataOSC2[j +  7 * dataMax2] = Math.log10(Math.abs(vR2 / R2));
             } 
           }
 
@@ -2324,7 +2326,7 @@ function updateVerticalCursorTable() {
 
   var html = "<table border='1' style='border-collapse:collapse; font-size:13px; margin-top:4px;'>";
   html += "<tr>";
-  html += "<th>X: " + xName + "</th>";
+  html += "<th class='bo" + axisIndex + "'>X: " + xName + "</th>";
 
   // Header: selected channels only.
   for (var ch = 1; ch < channels.length; ch++) {
@@ -2347,7 +2349,7 @@ function updateVerticalCursorTable() {
       var displayVal = rawVal + channels[ch].offset;
 
       var unit = channels[ch].unit || "V";
-      html += "<td>" + valueToUnit(displayVal) + unit + "</td>";
+      html += "<td>" + valueToUnit(rawVal) + unit + "</td>";
     }
   }
 
@@ -3686,7 +3688,7 @@ var fullDataT = "";
 				 // if (currUnit == 0) { timestep = 1} 
                  if (boardX == 2) { // Arduino
 				    //                 .ino x1 1.65; DIV2 then 3.3
-                   factorX = [3.3, 1.65, 1.65, 1.65, 3.3];  // Arduino range with PMOD AD2
+                   factorX = [3.3, 3.3, 3.3, 3.3, 3.3];  // Arduino range with PMOD AD2 last value 3.3
 				   if (timeBase == 0) { timestep = timeSampling * (timeBase + 1);  //
                    } else {timestep = timeSampling * timeBase; } 				   
 				   // timestep = timestep / 2;

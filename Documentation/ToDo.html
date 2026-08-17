@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="description" content="A description of EEBench an open source, open access low cost
+   oscilloscope and arbitrary waveform generator based on FPGA BASYS3 and nodejs JavaScript" />
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<title> ToDo NodeEEBench </title>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+ <style>
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+div.scrollX {
+  width: 400px;
+  height: 200px;
+  overflow: scroll;
+}
+th.norm {
+    background-color: #CCCCCC;
+    color: black;
+} 
+table.norm, th.norm, td.norm {
+   border-collapse: collapse;
+   border: 1px solid black;
+}
+th.clr {
+} 
+</style> 
+
+<!-- Prettify Google -->
+<link href="../google-code-prettify/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../google-code-prettify/src/prettify.js"></script>
+<script type="text/javascript" src="../google-code-prettify/src/lang-vhdl.js"></script>
+<!-- Chart -->
+<SCRIPT SRC="../Chart_2013_03_11/Chart_basic.js"></SCRIPT>
+<!-- JQuery -->
+<script type="text/javascript" src="../scripts/jquery.js"></script>
+<!-- LTSPICE -->
+<SCRIPT SRC="../SPICE_HTML_2018_02/LTSPICE.js"></SCRIPT>
+<!-- QR Code -->
+<script src="../QRCode/jsqr-1.0.2.js" type="text/javascript"></script>
+<!-- Usage Logging -->
+<SCRIPT SRC="../scripts/ToggleLog.js"></SCRIPT>
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    tex2jax: {inlineMath: [["$$","$$"],["\\(","\\)"]]}
+  });
+</script>
+<script type="text/javascript" src="../MathJax/MathJax.js"></script>
+
+</head>
+<body>
+<!--
+  BEGIN: Content of extension "ts_mit", plugin "tx_tsmit_pi1"
+ -->
+  <div id="headx">
+  <div id="nheader1" style="background-color:#0067a5;color:#FFFFFF" align="right" >
+     <a href="https://www.hochschule-kempten.de" style="color:#FFFFFF"> Hochschule Kempten &nbsp; &nbsp; &nbsp; </a>
+  </div>
+  <div id="nheader2" style="background-color:#05adb5;color:#FFFFFF" align="right" >
+     <a href="https://www.hs-kempten.de/fakultaet-elektrotechnik/" style="color:#FFFFFF">
+	 Fakultät Elektrotechnik &nbsp; &nbsp; &nbsp;
+  </div>
+  <div id="nheader3" style="background-color:#f18700;color:#FFFFFF" align="right">
+     <a href="https://personalpages.hs-kempten.de/~vollratj/Publications/Vollrath_Work.html" style="background-color:#f18700;color:#FFFFFF"> 
+	 Publications &nbsp; &nbsp; &nbsp;</a>
+     <a href="https://personalpages.hs-kempten.de/~vollratj/Elektronik/Elektronik.html" style="background-color:#f18700;color:#FFFFFF"> 
+	 Elektronik &nbsp; &nbsp; &nbsp;</a>
+    <a href="https://www.hs-kempten.de/personen/joerg-vollrath" style="background-color:#f18700;color:#FFFFFF"> 
+	 Fachgebiet Elektronik, Prof. Vollrath &nbsp; &nbsp; &nbsp;</a>
+  </div>
+  </div>
+<br>
+<div> 
+<table>
+<tr><td style="width:70%">
+  <h1>NodeEEBench ToDo</h1>
+
+Jörg Vollrath, University of Applied Science Kempten, Germany, Joerg.vollrath@hs-kempten.de<br>
+August, 2026<br>
+<br>
+<hr>
+
+<h2>To Do Bugs</h2>
+
+<ul>
+<li>Arduino data acquisition 256 of 512 stops after 4 times<br>
+    Can be activated again with Stop, Run Buttons</li>
+<li>Power supply test flow results have no line break (InterfacePower.html) (10.08.2026)</li>
+<li>Simulation sine 20 Hz shows for some channels bleeding (10.08.2026)</li>
+<li>FPGA: uart_mem RX_Size ok?</li>
+</ul>
+
+<h2>To Do Features</h2>
+
+<ul>
+<li>BASYS3, CMOD A7 activate 8 or 16 digital IOs with switch (command?).</li>
+<li>Communication of hardware configuration via serial and websocket interface.</li>
+<li>Oscilloscope second Cursor (10.08.2026)<br>
+    Button to save curent values and then display delta, slope, y(x=0)</li>
+<li>How to get more users and interested people? (10.08.2026)</li>
+<li>Video starting NodeEEBench with Arduino Maker WIFI1010 (10.08.2026)</li>
+<li>Video starting NodeEEBench with Arduino Maker WIFI1010 + PMOD DA2, AD2 (10.08.2026)</li>
+<li>Video starting NodeEEBench with Arduino Maker WIFI1010 + Diode + MOSFET (10.08.2026)</li>
+<li>Use, debug and document the test flow (10.08.2026)</li>
+<li>Implement AWG2: new command like "S", "T" needed (lower case "s", "t"?)  (10.08.2026)<br>
+    Create user interface in tab AWG1<br>
+	Arduino: new commands can use PMOD DA2<br>
+	BASYS3 FPGA: implement PMOD DA2 control and new commands<br>
+	Simulation: new code with new commands </li>
+<li>Bode plot: Start frequency, stop frequency, number of steps (10.08.2026)<br>
+    User interface with value input, progress report and result output<br>
+	Use test flow feature to adjust frequency, amplitude and measure amplitude<br>
+    Gather and display data</li>
+<li>Application diode measurement (10.08.2026, SP started)<br>
+    Make select item for this task, display schematic with R and Diode and 
+	instruction how to use it<br>
+    Implement mathematical OSC function for current<br>
+    Implement simulation</li>
+<li>Implement digital IOs user interface and display output data<br>
+    Input, output, fast sequence serial data in, out<br>
+	Arduino, FPGA, Simulator</li>	
+<li>Application MOSFET measurement</li> 	
+<li>Application Operational amplifier measurement</li> 	
+<li>Application R2R DAC measurement</li> 	
+<li> MAX5216PMB 21.- DAC 16-Bit 14us 50kSps</li>
+<li> MAX11205PMB 50.- 16-Bit 80ms</li>
+<li>Raspberry Pi MCP4728 implementation  (10.08.2026)</li>
+</ul>
+<br>
+ <br><hr>
+<h2>Done</h2>
+
+<ul>
+<li>Youtube Video simulation mode (10.08.2026)</li>
+<li>Oscilloscope OSC (10.08.2026)<br>
+    Cursor implementation (Scientific project)<br>
+    Mathematical functions: M1 = I1 = (C1-C2)/R1, M2 = I2 = (C3-C4)/R2</li>
+<li>Power supply user interface and hardware  (10.08.2026)<br>
+    Fixed negative voltage with charge pump: TC7660 (LM27762)<br>
+	or negative and positive voltage using an USB-C power module<br>
+    MCP4728, 4 channel DAC and MCP6022 OPAmp for adjustable VP+, VP-, Vref1, Vref2</li>  	
+<li>CMOD A7 and PMODA DA2, AD2 implementation (10.08.2026 CMODA7.html)</li>
+<li>Raspberry Pi Zero 2 W and PMODA DA2, AD2 implementation (10.08.2026 Raspi.html)</li>
+</ul>
+
+ <br><hr>
+ <div id="footer" style="background-color:#0067a5;color:#FFFFFF">
+<br>
+ &nbsp; Hochschule f&uuml;r angewandte Wissenschaften Kempten, J&ouml;rg Vollrath, Bahnhofstra&szlig;e 61 &middot; 87435 Kempten<br>
+ &nbsp; Tel. 0831/25 23-0 &middot; Fax 0831/25 23-104 &middot; E-Mail: joerg.vollrath(at)hs-kempten.de <br>
+ <a href="http://www.hochschule-kempten.de/metanavigation/impressum.html"> 
+  <div style="background-color:#0067a5;color:#FFFFFF"> Impressum </div> </a>
+ </div>
+       <script type="text/javascript"> 
+<!-- Begin
+
+
+	function myQR() {
+			var qr = new JSQR();							// Initialize a new JSQR object.
+			var code = new qr.Code();						// Initialize a new Code object.
+
+			code.encodeMode = code.ENCODE_MODE.BYTE;			// Set the code datatype.
+			code.version = code.DEFAULT;						// Set the code version
+														// (DEFAULT = use the smallest possible version).
+			code.errorCorrection = code.ERROR_CORRECTION.H;		// Set the error correction level (H = High).
+
+			var input = new qr.Input();						// Initialize a new Input object.
+			input.dataType = input.DATA_TYPE.TEXT;			 	// Specify the data type of 'data'.
+														// Here, 'data' contains only text.
+			var stX = window.location.pathname;					// Specify the data which should be encoded.
+            
+			// alert(stX);
+			if (stX.substr(0,3) == "/D:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(27,stX.length-27);
+			} else 	if (stX.substr(0,3) == "/C:") {  // File name local transfer to https
+			   stX = "https://personalpages.hs-kempten.de/~vollratj/" 
+			        + stX.substr(52,stX.length-52);
+			} else{
+			   stX = "https://personalpages.hs-kempten.de"+stX;
+			}
+			// alert(stX);
+			input.data = stX
+			
+			var matrix = new qr.Matrix(input, code);			// Initialize a new Matrix object using the input
+														// and code, defined above.
+														// At this point, the QR Code get generated.
+
+			matrix.scale = 4;								// Specify the scaling for graphic output.
+			matrix.margin = 2;								// Specify the margin for graphic output.
+
+			var canvas = document.getElementById('thisQR');		// Create a new Canvas element.
+			canvas.setAttribute('width', matrix.pixelWidth);		// Set the canvas width to the size of the QR code.
+			canvas.setAttribute('height', matrix.pixelWidth);		// Set the canvas height to the size of the QR code.
+			canvas.getContext('2d').fillStyle = 'rgb(0,0,0)';		// Set the foreground color of the canvas to black.
+			matrix.draw(canvas, 0, 0);						// Draw the QR code into the canvas
+														// at position 0 (left), 0 (top).
+		};
+        myQR();
+		updateServerLog("EEBench","EEBench_Main");
+        document.addEventListener("load", prettyPrint());
+     document.addEventListener("load", findLT());
+
+ //  End -->
+	  </script>
+ </body>
+</html>

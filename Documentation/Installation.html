@@ -105,10 +105,12 @@ td.top {vertical-align: top;}
 <a href="DigitalIO.html" class="blue">DigitalIO</a><br>
 <a href="CMODA7.html" class="blue">CMOD A7</a><br>
 <a href="BASYS3.html" class="blue">BASYS3</a><br>
+<a href="Raspi.html" class="blue">Raspberry Pi Zero 2 W</a><br>
 <a href="BASYS3_Ramp.html" class="blue">BASYS3 Ramp</a><br>
 <a href="BASYS3_Lookup.html" class="blue">BASYS3 Lookup</a><br>
 <a href="AWGOSCFFTTiming.html" class="blue">AWG OSC FFT Timing</a><br>
 <a href="InterfacePower.html" class="blue">Interface and Power</a><br>
+<a href="ToDo.html" class="blue">ToDo</a><br>
 <a href="https://personalpages.hs-kempten.de/~vollratj/Projekte/2023_ResearchSummary.html" class="blue">Research Summary</a><br>
 <br>
 
@@ -140,13 +142,17 @@ instead of the .bat file.<br>
 	 Start the oscilloscope and look at the waveform</li>
 </ol><br>
 
-<h1>Installation FPGA BASYS 3</h1>
+<h1>Installation FPGA (BASYS3, CMOD A7, R2R, PMOD AD2, DA2, MCP4728)</h1>
 
 <ol>
-<li>Wire and connect BASYS3 FPGA board to your PC</li>
+<li>Wire and connect BASYS3 FPGA board to your PC
+    (<a href="BASYS3.html" class="blue">BASYS3</a>)</li>
 <li>(Download) Open Vivado 19.1 </li>
-<li>Open project in folder Xilinx/EEBench/EEBench.xpr compile and transfer bit file 
-    into FPGA or better into Flash memory.<br>
+<li>Open project in folder Xilinx/EEBench/EEBench.xpr.<br>
+    Project Manager, Settings, Bitstream activate -bin_file* for bin file creation for Flash memory start up<br> 
+    Activate constraints for CMOD A7 or BASYS3 (right click).<br>
+    Set as top EEBench or EEBenchCA7 (right click).<br>	
+    Compile and transfer bit file into FPGA or better bin file into Flash memory.<br>
 	<a href="https://digilent.com/reference/learn/programmable-logic/tutorials/basys-3-programming-guide/start" class="blue">
     The Basys 3 Programming Guide </a> can be used to do the Flash programming.<br>
    </li>
@@ -161,12 +167,12 @@ instead of the .bat file.<br>
 	 Start the oscilloscope and look at the waveform</li>
 </ol>
 <br>
-<h1>Installation Arduino MKR 1010 Wifi</h1>
+<h1>Installation Arduino MKR WiFi 1010</h1>
 
 <ol>
-<li>Wire and connect the Arduino MKR 1010 Wifi board to your PC</li>
+<li>Wire and connect the Arduino MKR WiFi 1010 board to your PC</li>
 <li>Open project in folder Arduino/EEBench/EEBench.ino compile and transfer program<br>
-    Library Arduino MKR Wifi 1010 for SAMD boards should be installed. (Tools, Board Manager, SAMD)<br>
+    Library Arduino MKR WiFi 1010 for SAMD boards should be installed. (Tools, Board Manager, SAMD)<br>
     Manage Libraries, "adafruit mcp4728"  (Tools, Manage Library, Adafruit)<br>
 	Select COM Port and Board. (Tools, Port, COMx (Arduino). Upload Sketch</li>
 <li>(Edit NodeEEBench.bat and adjust the path according to your installed node.exe)</li>
@@ -196,11 +202,11 @@ Arduino MKR 1010 WIFI pinout<br>
 <tr><td>A3</td><td class="bo4">C3</td><td></td><td>RST</td><td></td></tr>
 <tr><td>A4</td><td class="bo5">C4</td><td></td><td>14</td><td>TX</td></tr>
 <tr><td>A5</td><td class="boA"></td><td></td><td>13</td><td>RX</td></tr>
-<tr><td>A6</td><td class="boA"></td><td></td><td>12</td><td>SCL</td></tr>
-<tr><td>0</td><td class="boA">DIO0</td><td></td><td>11</td><td>SDA</td></tr>
+<tr><td>A6</td><td class="boA">CS</td><td>SC</td><td>12</td><td>SCL</td></tr>
+<tr><td>0</td><td class="boA">DIO0</td><td>SD</td><td>11</td><td>SDA</td></tr>
 <tr><td>1</td><td class="boA">DIO1</td><td></td><td>10</td><td>MISO</td></tr>
-<tr><td>2</td><td class="boA">DIO2</td><td></td><td>9</td><td>SCK</td></tr>
-<tr><td>3</td><td class="boA">DIO3</td><td></td><td>8</td><td>MOSI</td></tr>
+<tr><td>2</td><td class="boA">DIO2</td><td>SC</td><td>9</td><td>SCK</td></tr>
+<tr><td>3</td><td class="boA">DIO3</td><td>MI</td><td>8</td><td>MOSI</td></tr>
 <tr><td>4</td><td class="boA">DIO4</td><td>D7</td><td>7</td><td></td></tr>
 <tr><td>5</td><td class="boA">DIO5</td><td>D6</td><td>6</td><td></td></tr>
 </table>

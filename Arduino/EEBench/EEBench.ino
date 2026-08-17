@@ -124,7 +124,7 @@ void adc_init() {
   analogRead(ADC_OSC1);
   ADC->CTRLA.bit.ENABLE = 0;
   ADCsync();
-  ADC->INPUTCTRL.bit.GAIN = ADC_INPUTCTRL_GAIN_1X;  // 1X, 2X, 4X, 8X, 16X, DIV2
+  ADC->INPUTCTRL.bit.GAIN = ADC_INPUTCTRL_GAIN_DIV2;  // 1X, 2X , 4X, 8X, 16X, DIV2 (3.3V)
   ADC->REFCTRL.bit.REFSEL = ADC_REFCTRL_REFSEL_INTVCC1;
   ADCsync();
   ADC->INPUTCTRL.bit.MUXPOS = g_APinDescription[ADC_OSC1].ulADCChannelNumber;
@@ -269,6 +269,7 @@ void sendData() { // send all buffer values in Hex
 }
 
 void readAnalogX(){
+  analogReference(AR_DEFAULT);
     // read Analog in bufVal and scale up to 16 Bit
   bufVal[bufIndex] = analogRead(ADC_OSC1);
   bufIndex++;
@@ -277,7 +278,7 @@ void readAnalogX(){
   bufVal[bufIndex] = analogRead(ADC_OSC3);
   bufIndex++;
   bufVal[bufIndex] = analogRead(ADC_OSC4);
-  bufVal[bufIndex] = readADC();             // PMOD AD2
+  // bufVal[bufIndex] = readADC();             // PMOD AD2
 
 }
 

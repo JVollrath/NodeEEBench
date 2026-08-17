@@ -139,6 +139,9 @@ Pin 23, GPIO11, SCLK, DA2 4<br>
 Pin 24, GPIO8, CE0_n, DA2 1<br>
 GND, DA2 Pin 1, AD2 Pin 3, R2R R0<br>
 <br>
+<img src="ImagesS/RaspiZeroW2Real.jpg" width="400"><br>
+Figure: Raspberry Pi Zero 2 W with PMOD DA2, AD2 and R2R DAC<br>
+<br>
 <h2> Software Installation Raspberry Pi Zero W 2</h2><br>
 
 <h4>PC Tools:</h4>
@@ -229,7 +232,8 @@ Read 4 conversion values:<br>
 Link [<a href="https://www.robmiles.com/journal/2024/3/13/start-your-nodejs-applications-when-your-raspberry-pi-boots" class="blue">Boot up start</a>]
 <ul>
 <li>sudo nano /etc/systemd/system/ee-bench-server.service</li>
-<li>File content:</li>
+<li>File content:<br>
+    Replace &lt;pi&gt; with the chosen user name.</li>
 </ul>
 <pre>
 [Unit]
@@ -237,8 +241,8 @@ Description=EEBenchPi Node.js Server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/node /home/pi/Server/ServerEEBenchPi.js
-WorkingDirectory=/home/pi/Server
+ExecStart=/usr/bin/node /home/&lt;pi&gt;/Server/ServerEEBenchPi.js
+WorkingDirectory=/home/&lt;pi&gt;/Server
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
@@ -256,6 +260,8 @@ WantedBy=multi-user.target
 <li>Show log data of 'StandardOutput=inherit"<br>
     journaltcl -u ee-bench-server.service -n 50 -f</li>
 </ul>
+Now the Raspberry Pi automatically starts the server at power up.<br>
+<br>
 Using a desktop an autostart of the log file can be created 
 [<a href="https://wiki.archlinux.org/title/Desktop_entries" class="blue">Desktop-Einträge</a>]:<br>
 mkdir -p ~/.config/autostart<br>
@@ -270,12 +276,39 @@ hidden=true
 </pre>
 Save file<br>
 
+<h3>Timing</h3>
+
+The file 'ServerEEBenchPi.js' uses a loop:<br>
+<pre>
+function goodLoop() {
+  loopData();
+  return new Promise(resolve => {
+    setImmediate(() => {  // Yields to event loop between iterations
+      goodLoop();
+      resolve();
+    });
+  });
+}
+ goodLoop();
+</pre> 
+The function 'loopData()' sets the DAC and reads one sample of the ADC.<br>
+Signal measurement gave a 105us sampling time for ADC and DAC.<br>
+At the moment the simulation data table is used for generating the waveform.<br>
+The oscilloscope time base is not correct and there can be non continues sine signal waveforms.<br>
+This has to be fixed.<br>
+<img src="ImagesS/RaspiSine_00.jpg" width="600"><br>
+Figure: Sine oscilloscope picture<br>
+C1 shows the output of PMOD DA2 channel 1<br>
+C2 shows the output of the 8-Bit R2R DAC.<br>
+<br>
+
 <h3>To Do</h3>
 <ol>
-<li>Hot-Spot</li>
+<li>Identification of system</li>
 <li>Calibrate and adjust sampling</li>
+<li>How to disable autostart of server</li>
+<li>Hot-Spot</li>
 <li>Observe behaviour in other network</li>
-<li>Edit ServerEEBenchPI.js</li>
 <li>Measure installation time (2 h?)</li>
 <li>MCP4728 4 channel DA I2C for power tab</li>
 </ol>
