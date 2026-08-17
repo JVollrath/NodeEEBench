@@ -9,7 +9,7 @@ browser interface on different hardware platforms using JavaScript and NodeJS.
 Copy the contents of this repository to C:\temp\NodeEEBench on a Windows or Linux system.
 On a Linux system install NodeJS and packages and start: 'node ServerEEBench.js'. 
 
-Connect hardware and configure the hardware (see subdirectory Documentation/Installation.html) or use simulation.
+Connect hardware and configure the hardware (see subdirectory Documentation/Installation.html) for instructions or use simulation.
 (https://htmlpreview.github.io/?https://github.com/JVollrath/NodeEEBench/blob/master/Documentation/Installation.html)
 
 Start: NodeEEBench.bat
@@ -30,6 +30,12 @@ So far a BASYS3 board, Arduino Maker WIFI 1010 and a RaspberryPi Zero with Digil
 ![Arduino ADC DAC Setup](ImagesS/Arduino_MKR_WIFI_1010_ADCDAC.png "Arduino ADC DAC")
 
 ![BASYS3 ADC DAC Setup](ImagesS/BASYS3_V04.png "Basys3 ADC DAC")
+
+![BASYS3 PMOD Setup](Documentation/ImagesS/BASYS3_V04_03.png "Basys3 PMODs")
+
+![CMOD A7 PMOD Setup](Documentation/ImagesS/CMODA7EEBench.jpg "CMOD A7 PMODs")
+
+![Raspberry Pi Zero 2 W PMOD Setup](Documentation/ImagesS/RaspiZero_01.jpg "Raspberry Pi ero PMOD")
 
 ![Browser User Interface](ImagesS/NodeEEBenchUI01.png "NodeEEBench User Interface")
 
