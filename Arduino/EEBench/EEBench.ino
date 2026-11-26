@@ -33,6 +33,10 @@
 #define DAC_Dx           2
 #define DAC_C3           3
 
+/* cyclic R2R DAC*/
+#define DAC_A          6   // Pin 11
+#define DAC_B          5   // Pin 10
+#define DAC_C          4   // Pin 9
 
 // R2R DAC XMC4700
 /*
@@ -64,10 +68,11 @@ Adafruit_MCP4728 mcp;
 // buffer for values
 
 // Buffer size for acquisition
-int bufSize = 2048 * 5;  // Number of values * 5 channels
-uint16_t bufVal[2048 * 5];  // 2048*5 memory 70%
+int bufSize = 1024 * 5;  // Number of values * 5 channels
+uint16_t bufVal[1024 * 5];  // 2048*5 memory 70%
 // lookup for DAC
-uint16_t lookup8[] = {
+uint16_t lookup10[1024];
+/* uint16_t lookup8[] = {
   0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,
   32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,
   64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,
@@ -76,7 +81,7 @@ uint16_t lookup8[] = {
   160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,
   192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,
   224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255 
-};
+}; */
 // lookup for ADC
 
 
@@ -110,7 +115,7 @@ uint16_t cntBuf = 0;       // number of buffer readings
   uint16_t cntV = 0;   // number of oscilloscope readings
   uint16_t runX = 1;    // number of oscilloscope readings
 
-    uint16_t bitsX[] = {1,2,4,8,16,32,64,128};
+    uint16_t bitsX[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768};
 
 static void ADCsync() {
   while (ADC->STATUS.bit.SYNCBUSY == 1);
@@ -140,9 +145,11 @@ void adc_init() {
 
 void setup() {
   // put your setup code here, to run once:
-
+  for (int i = 0; i < 1024; i++) {
+    lookup10[i] = i*4;
+  }
  // initialize serial communication at 115200
- Serial.begin(115200);         // 230400 possible ??
+ Serial.begin(115200);         // 230400 possible ??  57600
  Serial.println("\r\nEEBench on Arduino Maker Wifi 1010");
 
  // Arduino DAC 
@@ -214,14 +221,6 @@ void setup() {
  */
 }
 
-
-void hex16(uint16_t data) // prints 16-bit data in 4 hex chars with leading zeroes
-{
-          char tmp[16];
-          sprintf(tmp, "%.4X",data); 
-          Serial.print(tmp);
-}
-
 // Converting from Hex to Decimal:
 
 // NOTE: This function can handle a positive hex value from 0 - 65,535 (a four digit hex string).
@@ -246,25 +245,35 @@ unsigned int hexToDec(String hexString) {
   
   return decValue;
 }
-
-
-// send all buffer values in Hex
-void sendData() { // send all buffer values in Hex
-  // get current time
+// AI Version sendData()
+void sendDataAI() {
   timeEnd = micros();
-  unsigned long totalDuration = (timeEnd - timeBegin)/cntBuf;
-  bufVal[1] = bufIndex; // current position * 5 
-  bufVal[2] = cntV; // current position 
-  bufVal[3] = (uint16_t)(totalDuration >> 16);     
-  bufVal[4] = (uint16_t)totalDuration;     
-  // send data
-  Serial.print("U");
-  for (int i1 = 0; i1 < (bufSize / 5) ; i1 += 1) {
-    for (int i2 = 0; i2 < 5 ; i2 += 1) {
-       hex16(bufVal[i1 * 5 + 4 - i2]);  // bring into right order
+  unsigned long totalDuration = (timeEnd - timeBegin) / cntBuf;
+  bufVal[0] = (uint16_t)(bufSize);
+  bufVal[1] = bufIndex;
+  bufVal[2] = cntV;
+  bufVal[3] = (uint16_t)(totalDuration >> 16);
+  bufVal[4] = (uint16_t)totalDuration;
+
+  Serial.write('U');
+  char lineBuf[24]; // 5 * 4 Hex-Zeichen + 'Y' + 'X' + '\0' = 23 Bytes
+
+  for (int i1 = 0; i1 < (bufSize / 5); i1++) {
+    int idx = 0;
+    for (int i2 = 0; i2 < 5; i2++) {
+      sprintf(&lineBuf[idx], "%.4X", bufVal[i1 * 5 + 4 - i2]);
+      idx += 4;
     }
-    Serial.print("Y");
-    if (i1 < (bufSize/5) -1) { Serial.print("X"); }
+    lineBuf[idx++] = 'Y';
+    if (i1 < (bufSize / 5) - 1) {
+      lineBuf[idx++] = 'X';
+    }
+    Serial.write((uint8_t*)lineBuf, idx);
+
+    // Alle 32 Samples (~700 Bytes) eine winzige Pause für den USB-Host (Node.js)
+    if ((i1 & 0x1F) == 0x1F) {
+      delay(1); 
+    }
   }
 }
 
@@ -277,8 +286,8 @@ void readAnalogX(){
   bufIndex++;
   bufVal[bufIndex] = analogRead(ADC_OSC3);
   bufIndex++;
-  bufVal[bufIndex] = analogRead(ADC_OSC4);
-  // bufVal[bufIndex] = readADC();             // PMOD AD2
+  // bufVal[bufIndex] = analogRead(ADC_OSC4);
+  bufVal[bufIndex] = readADC();             // PMOD AD2
 
 }
 
@@ -322,6 +331,7 @@ int readADC(void){
   return valeur;
 }
 
+/* 8 Bit R2R parallel D0..7 */
 void digWrite(uint16_t sineValue){
   if ((sineValue & bitsX[0]) == bitsX[0] ) {
     digitalWrite(DAC_D0, HIGH);
@@ -402,6 +412,109 @@ void digWriteC(uint16_t sineValue){
    
 }
 
+/* cyclic R2R write 4 bits 3 times */
+/*   */
+int actSX   =  4;
+int offSX   =  1;
+
+void r2rWrite(uint16_t sineValue){ // cyclic R2R DAC 12 Bit
+  digitalWrite(DAC_A, HIGH);    
+  digitalWrite(DAC_B, HIGH);
+  digitalWrite(DAC_C, HIGH);
+  // Apply first 4 bits
+  if ((sineValue & bitsX[0]) == bitsX[0] ) {
+    digitalWrite(DAC_D0, HIGH);
+  } else {
+    digitalWrite(DAC_D0, LOW);    
+  }
+  if ((sineValue & bitsX[1]) == bitsX[1] ) {
+    digitalWrite(DAC_D1, HIGH);
+  } else {
+    digitalWrite(DAC_D1, LOW);    
+  }
+  if ((sineValue & bitsX[2]) == bitsX[2] ) {
+    digitalWrite(DAC_D2, HIGH);
+  } else {
+    digitalWrite(DAC_D2, LOW);    
+  }
+  if ((sineValue & bitsX[3]) == bitsX[3] ) {
+    digitalWrite(DAC_D3, HIGH);
+  } else {
+    digitalWrite(DAC_D3, LOW);    
+  }
+  // cycle result ==============================
+  digitalWrite(DAC_B, LOW);
+  delayMicroseconds(actSX*5);   
+  digitalWrite(DAC_B, HIGH);
+  delayMicroseconds(offSX*5);   
+  digitalWrite(DAC_C, LOW);
+  delayMicroseconds(actSX*5);   
+  digitalWrite(DAC_C, HIGH);
+  delayMicroseconds(offSX*5);   
+ 
+  if ((sineValue & bitsX[4]) == bitsX[4] ) {
+    digitalWrite(DAC_D0, HIGH);
+  } else {
+    digitalWrite(DAC_D0, LOW);    
+  }
+  if ((sineValue & bitsX[5]) == bitsX[5] ) {
+    digitalWrite(DAC_D1, HIGH);
+  } else {
+    digitalWrite(DAC_D1, LOW);    
+  }
+  if ((sineValue & bitsX[6]) == bitsX[6] ) {
+    digitalWrite(DAC_D2, HIGH);
+  } else {
+    digitalWrite(DAC_D2, LOW);    
+  }
+  if ((sineValue & bitsX[7]) == bitsX[7] ) {
+    digitalWrite(DAC_D3, HIGH);
+  } else {
+    digitalWrite(DAC_D3, LOW);    
+  }
+  
+  // cycle result =====================================================
+  digitalWrite(DAC_B, LOW);
+  delayMicroseconds(actSX*5);   
+  digitalWrite(DAC_B, HIGH);
+  delayMicroseconds(offSX*5);   
+  digitalWrite(DAC_C, LOW);
+  delayMicroseconds(actSX*5);   
+  digitalWrite(DAC_C, HIGH);
+  delayMicroseconds(offSX*5);   
+
+  if ((sineValue & bitsX[8]) == bitsX[8] ) {
+    digitalWrite(DAC_D0, HIGH);
+  } else {
+    digitalWrite(DAC_D0, LOW);    
+  }
+  if ((sineValue & bitsX[9]) == bitsX[9] ) {
+    digitalWrite(DAC_D1, HIGH);
+  } else {
+    digitalWrite(DAC_D1, LOW);    
+  }
+  if ((sineValue & bitsX[10]) == bitsX[10] ) {
+    digitalWrite(DAC_D2, HIGH);
+  } else {
+    digitalWrite(DAC_D2, LOW);    
+  }
+  if ((sineValue & bitsX[11]) == bitsX[11] ) {
+    digitalWrite(DAC_D3, HIGH);
+  } else {
+    digitalWrite(DAC_D3, LOW);    
+  }
+  // finish update output ===================================================
+  digitalWrite(DAC_B, LOW);
+  delayMicroseconds(actSX*5);   
+  digitalWrite(DAC_B, HIGH);
+  delayMicroseconds(offSX*5);   
+  //digitalWrite(DAC_C, LOW);     // update output
+  digitalWrite(DAC_A, LOW);
+  delayMicroseconds(actSX*5);   
+  //digitalWrite(DAC_C, HIGH);
+  digitalWrite(DAC_A, HIGH);
+  delayMicroseconds(offSX*5);   
+}
 
 int waitSend = 0;
 int awgMode = 0;
@@ -410,25 +523,20 @@ int mulTime = 1;
 
 void loop() {
   uint16_t sine8 = 0;
+  uint16_t sine12 = 0;
 
   // Serial Interface input
   if (Serial.available() > 0) { // process received serial data 
     // get incoming byte:
     inChar = Serial.read();
     if (inChar == 'U') { // cmd 'U' send data 
-      if (cntV == bufSize) { 
-        sendData(); 
-        posChar = 0; expChar = 0; myData[posChar] = 'Z'; 
-        cntV = 0;
-      } else {
         waitSend = 1;
-      }
     } 
     if (inChar == 'X') { expChar = 1; posChar = 0; } // cmd 'X' reset
     if (inChar == 'O') { expChar = 9; posChar = 0; } // cmd 'O' set block size
     if (inChar == 'T') { expChar = 21; posChar = 0; } // cmd 'T' triangle
     if (inChar == 'S') { expChar = 25; posChar = 0; } // cmd 'S' sine
-    if (inChar == 'R') { expChar = 256*4 + 1; posChar = 0; } // cmd 'R' lookup table
+    if (inChar == 'R') { expChar = 1024*4 + 1; posChar = 0; } // cmd 'R' lookup table
     if (inChar == 'P') { expChar = 33; posChar = 0; } // cmd 'P' power 32 values
     
     if (expChar > 0 ) {                              // gather command string
@@ -443,12 +551,13 @@ void loop() {
         if (myData[0] == 'O') {
           String partString = myString.substring(1,5); // 4 hex chars
           bufSize = hexToDec(partString) * 5; //  0x0200 is 512 values * 5 channels each
+          if (bufSize > 1024 * 5) bufSize = 5 * 1024;
           partString = myString.substring(5,9);
           timeBase = hexToDec(partString);
           if (timeBase > 1 ) { timeBase -= 1; }
           Serial.print("Omd: "); Serial.print(bufSize); Serial.print(",");Serial.println(timeBase);
         }
-        if (myData[0] == 'T') {
+        if (myData[0] == 'T') {  // Triangle
           String partString = myString.substring(1,5);
           startT = hexToDec(partString);                // start Value
           stopT = hexToDec((String)myString.substring(5,9));
@@ -459,7 +568,7 @@ void loop() {
           Serial.print(stepT); Serial.print(","); Serial.println(repeatT);
           awgMode = 1;
         }
-        if (myData[0] == 'S') {
+        if (myData[0] == 'S') {  // Sine
           stepS = hexToDec(myString.substring(1,7)); // 24 bit, 6 hex; from 32 bit value, 8 hex 
           ampS = hexToDec(myString.substring(9,13))/8; // 12 bit, 3 hex; from 32 bit value, 8 hex    
           offS = hexToDec(myString.substring(17,21))/8; // 12 bit, 3 hex; from 32 bit value, 8 hex 
@@ -467,9 +576,9 @@ void loop() {
           Serial.println(offS);
           awgMode = 2;
         } 
-        if (myData[0] == 'R') {  // get lookup table 256 comma separated values
-           for (int i3 = 0; i3 < 256; i3++ ) {
-            lookup8[i3] = hexToDec(myString.substring(1 + i3 * 4, 4 + i3 * 4)); // char 1,2,3 8 bit only
+        if (myData[0] == 'R') {  // get lookup table 1024 comma separated values
+           for (int i3 = 0; i3 < 1024; i3++ ) {
+            lookup10[i3] = hexToDec(myString.substring(1 + i3 * 4, 4 + i3 * 4)); // char 1,2,3 8 bit only
            }
         }
         if (myData[0] == 'P') {  // power set DAC MCP4728
@@ -503,7 +612,8 @@ void loop() {
      awgX = (int)(offS) + (int)(ampS) * sin( TWO_PI * stepIndex * stepS / 1024 /1024 / 16 ); 
  // Generate Analog value Triangle
      int deltaX = (stopT - startT);
-     int posY = ((int)(stepT) * (stepIndex / repeatT) ) % ( deltaX * 2); 
+     int phase = deltaX * 3 / 2 ;
+     int posY = ((int)(stepT) * (stepIndex / repeatT)  + phase ) % ( deltaX * 2); 
      if (posY > deltaX) posY = 2 * deltaX - posY;
      if ( deltaX == stepT){                            // Pulse
       posY = ((stepIndex * 2 / repeatT) % 2) * deltaX;
@@ -513,7 +623,7 @@ void loop() {
   // writing Analog
   // if (awgX > 1024) { awgX = 100; }
   // else { awgX = 1200; }
-  if (awgMode == 0) { awgZ = 0;             // off
+  if (awgMode == 0) { awgZ = 0;                // off
   } else if (awgMode == 1) { awgZ = awgY;      // Triangle
   } else if (awgMode == 2) { awgZ = awgX; }    // Sine
   
@@ -521,9 +631,12 @@ void loop() {
   
   writeDAC(awgZ);                  // Write PMOD DA2
   
-  sine8 = lookup8[awgZ >> 4];
+  sine8 = awgZ >> 4; // lookup10[awgZ >> 4];
   digWrite(sine8);                  // 8 Bit R2R
   
+  // sine12 = lookup10[awgZ >> 2] + (awgZ % 4); // preserve lower bits
+  // r2rWrite(sine12);
+
   bufVal[bufIndex] = awgZ;         // write val in bufVal as AWG1
   bufIndex++;
 
@@ -540,14 +653,15 @@ void loop() {
   stepIndex++;                        // next value for output
   // stepIndex = stepIndex % 4096;
  
-  if (bufIndex >= bufSize) { bufIndex = 0; cntBuf++; } 
-  if (cntV > bufSize) { 
-    cntV = bufSize; 
-    if (waitSend == 1) {
-      sendData(); 
-      waitSend = 0;
-      stepIndex =0;
-    } 
-  }
- // }
+ if (bufIndex >= bufSize) { 
+     if (waitSend == 1) {
+        sendDataAI(); 
+        waitSend = 0;
+        stepIndex = 0;
+     } 
+     bufIndex = 0; 
+     cntBuf++; 
+  } 
+  
+   // }
 }

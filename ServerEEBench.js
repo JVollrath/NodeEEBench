@@ -49,7 +49,7 @@
 		     devMan = "Arduino";
 			 serialPort = new SerialPort({  //"\\.\COM22"
                 path: port.path,
-	            baudRate: 115200      //  Baud rate befor 19200, 52 us per bit
+	            baudRate: 115200 //      //  Baud rate befor 19200, 52 us per bit
              });
 			 // console.log("Arduino detected.");
            }			 
@@ -133,6 +133,7 @@ function decToHex(x) {
  var oscData = [];           // sampled data
  var dataReady = 0;          // data Ready to send?
  var dataBufX ="";
+ var dataBufT ="";
 
  function limitData(valX)  {
     var limitData = Math.round(valX);
@@ -274,8 +275,7 @@ function decToHex(x) {
 		var con = true;                             // connection still valid?
         console.log('An user is connected')
      
-        // get data from connected device via serial port
-		var dataBuf="";
+	     var dataBuf="";
          
          socket.on('cmd', function(data){     // get client event
         	var cmdName = data.value;        // cmd passed from client
@@ -305,7 +305,20 @@ function decToHex(x) {
     		// socket.emit('newData',{value: data });  // send data to client
         });
 
+	   	// Arduino gives sometimes bad incomplete data transfer
+    // Regularly check	(dataBuf.length >= 21 * (dataMax)
+	function checkHold(){
+	   if ( dataBuf.length > 21 * (dataMax)) {
+            console.log('check Hold write U' + dataBuf.length + "," + dataMax);
+	        if (serialPort) {
+    	       serialPort.write("U");  // Redo measurement
+			}
+	   }
 	   
+	}
+	
+	   setInterval(checkHold, 4000); 
+
 	   if (serialPort) {
         console.log(devMan + " serial Device detected!");
 	    serialPort.on('data',
@@ -314,15 +327,19 @@ function decToHex(x) {
 			var data1 = data.toString('utf-8');
 			// only U command to client
 			var position = data1.search("U");
-			if (position > -1) dataBuf = data1.substring(position);
+			console.log((dataBuf.length) + "," + (dataMax*22) + "," + position + "," + dataBuf[dataBuf.length-1]);
+			if (position > -1) { dataBuf = data1.substring(position);
+			  dataBufT = data1.substring(0,position);
+			}
 			else dataBuf += data1;
 			// you could for example, send this data now to the the client via socket.io
 			// io.emit('emit_data', data);
 			// send only data starting  
-			if ((dataBuf.length >= 22 * dataMax ) && (con)) {   // complete set
-			 console.log("Ser " + dataBuf.length/22 + "," + dataBuf.length + "," + dataBuf.substring(0,50));     // dataBuf
+			if ((dataBuf.length >= (22 * (dataMax)) ) && (con)) {   // complete set
+			 console.log("Ser " + dataMax + "," + dataBuf.length/22 + "," + dataBuf.length + "," + dataBuf.substring(0,50));     // dataBuf
 		     socket.emit('newData',{value: dataBuf});  // send data to client
-			 dataBuf = "";
+			 dataBuf = dataBufT;
+			 dataBufT = "";
 			};
 			console.log(data1);
  		 } );
@@ -338,6 +355,7 @@ function decToHex(x) {
 		
 	}); 	
      
+	 
     // Server Starting
     // Listening on port 3000
     http.listen(3000, function(err){
